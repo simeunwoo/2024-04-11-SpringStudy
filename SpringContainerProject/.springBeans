@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beansProjectDescription>
+	<version>1</version>
+	<pluginVersion><![CDATA[3.9.18.202109140629-RELEASE]]></pluginVersion>
+	<configSuffixes>
+		<configSuffix><![CDATA[xml]]></configSuffix>
+	</configSuffixes>
+	<enableImports><![CDATA[true]]></enableImports>
+	<configs>
+		<config>src/main/java/application.xml</config>
+		<config>src/main/java/db.xml</config>
+		<config>src/main/java/com/sist/spring5/mymember.xml</config>
+		<config>src/main/java/com/sist/spring5/mysawon.xml</config>
+		<config>src/main/java/app1.xml</config>
+		<config>src/main/java/app2.xml</config>
+		<config>src/main/java/app3.xml</config>
+		<config>src/main/java/app4.xml</config>
+		<config>src/main/java/app5.xml</config>
+	</configs>
+	<autoconfigs>
+	</autoconfigs>
+	<configSets>
+	</configSets>
+</beansProjectDescription>
