@@ -44,7 +44,7 @@ public class MainClass {
 		{
 			System.out.println("°î¸í : "+vo.getTitle());
 			System.out.println("°¡¼ö¸í : "+vo.getSinger());
-			System.out.println("¾Ù¹ü : "+vo.getAlbum());
+			System.out.println("¾Ù¹ü : "+vo.getAlbum()); 
 		}
 	}
 }
