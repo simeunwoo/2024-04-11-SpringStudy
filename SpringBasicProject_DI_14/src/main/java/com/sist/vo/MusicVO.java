@@ -1,4 +1,7 @@
 package com.sist.vo;
+
+import lombok.Data;
+
 /*
  MNO                                       NOT NULL NUMBER
  TITLE                                     NOT NULL VARCHAR2(2000)
@@ -8,6 +11,7 @@ package com.sist.vo;
  STATE                                              CHAR(12)
  IDCREMENT                                          NUMBER
  */
+@Data
 public class MusicVO {
 
 	private int mno,idcrement;
