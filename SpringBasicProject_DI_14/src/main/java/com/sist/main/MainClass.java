@@ -23,6 +23,27 @@ public class MainClass {
 					vo.getMno()+"."+vo.getTitle()
 					);
 		}
+		System.out.println("====================");
+		
+		Scanner scan=new Scanner(System.in);
+		System.out.print("1) 곡명 검색 / 2) 가수 검색 / 3) 앨범 검색 : ");
+		int no=scan.nextInt();
+		System.out.print("검색어 입력 : ");
+		String fd=scan.next();
+		List<MusicVO> fList=new ArrayList<MusicVO>();
+		if(no==1)
+			fList=dao.musicTitleFindData(fd);
+		else if(no==2)
+			fList=dao.musicSingerFindData(fd);
+		else if(no==3)
+			fList=dao.musicAlbumFindData(fd);
+		
+		System.out.println("======= 결과 출력 =======");
+		for(MusicVO vo:list)
+		{
+			System.out.println("곡명 : "+vo.getTitle());
+			System.out.println("가수명 : "+vo.getSinger());
+			System.out.println("앨범 : "+vo.getAlbum());
+		}
 	}
-
 }
