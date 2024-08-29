@@ -30,13 +30,14 @@ public class MainClass {
 		int no=scan.nextInt();
 		System.out.print("검색어 입력 : ");
 		String fd=scan.next();
-		List<MusicVO> fList=new ArrayList<MusicVO>();
+	/*	List<MusicVO> fList=new ArrayList<MusicVO>();
 		if(no==1)
 			fList=dao.musicTitleFindData(fd);
 		else if(no==2)
 			fList=dao.musicSingerFindData(fd);
 		else if(no==3)
-			fList=dao.musicAlbumFindData(fd);
+			fList=dao.musicAlbumFindData(fd); */
+		List<MusicVO> fList=dao.musicFindData(no, fd);
 		
 		System.out.println("======= 결과 출력 =======");
 		for(MusicVO vo:list)

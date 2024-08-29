@@ -1,6 +1,7 @@
 package com.sist.dao;
 import java.util.*;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -48,5 +49,23 @@ public class MusicDAO {
 	public List<MusicVO> musicAlbumFindData(String album)
 	{
 		return mapper.musicAlbumFindData(album);
+	}
+	
+	/*
+	통합 검색 => 동적 쿼리
+		<foreach> : IN
+		<trim> : 제거 / 추가 => OR / AND
+		<if> : 조건문
+		--------------------------
+		<choose>
+			<when></when>
+		</choose>
+		-------------------------- 다중 조건문
+		<resultMap> : 조인
+		<parameterMap> : 프로시저
+	 */
+	public List<MusicVO> musicFindData(int type,String fd)
+	{
+		return mapper.musicFindData(type, fd);
 	}
 }

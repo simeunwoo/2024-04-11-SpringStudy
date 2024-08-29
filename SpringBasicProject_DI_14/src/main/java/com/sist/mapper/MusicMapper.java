@@ -2,6 +2,7 @@ package com.sist.mapper;
 import java.util.*;
 import com.sist.vo.*;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
 public interface MusicMapper {
@@ -24,4 +25,22 @@ public interface MusicMapper {
 			+ "FROM genie_music "
 			+ "WHERE album LIKE '%'||#{album}||'%'")
 	public List<MusicVO> musicAlbumFindData(String album);
+	
+	@Select("<script>" // 이런 복잡한 코드 해결 방법 => XML로 구사 => 어노테이션 연결
+			+ "SELECT mno,title,singer,album,idcrement,state "
+			+ "FROM genie_music "
+			+ "WHERE "
+			+ "<choose>"
+			+ "<when test\"type==1\">"
+			+ "title LIKE '%'||#{fd}||'%"
+			+ "</when>"
+			+ "<when test\"type==2\">"
+			+ "singer LIKE '%'||#{fd}||'%"
+			+ "</when>"
+			+ "<when test\"type==3\">"
+			+ "album LIKE '%'||#{fd}||'%"
+			+ "</when>"
+			+ "</choose>"
+			+ "</script>")
+	public List<MusicVO> musicFindData(@Param("type") int type,@Param("fd") String fd);
 }
