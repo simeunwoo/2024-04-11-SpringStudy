@@ -86,8 +86,8 @@ public class FoodController {
 		return "food/list"; // 파일명만 지정
 	}
 	
-	@PostMapping("member/insert1.do")
-	public String member_insert1(HttpServletRequest request,HttpServletResponse response)
+	@PostMapping("insert1.do")
+	public String food_insert1(HttpServletRequest request,HttpServletResponse response)
 	{
 		String name=request.getParameter("name");
 		String sex=request.getParameter("sex");
@@ -104,10 +104,10 @@ public class FoodController {
 		
 		request.setAttribute("vo", vo);
 		
-		return "member/detail";
+		return "food/detail";
 	}
-	@PostMapping("member/insert2.do")
-	public String member_insert2(String name,String sex,String address,String phone,String email,Model model)
+	@PostMapping("insert2.do")
+	public String food_insert2(String name,String sex,String address,String phone,String email,Model model)
 	{
 		MemberVO vo=new MemberVO();
 		vo.setName(name);
@@ -118,14 +118,15 @@ public class FoodController {
 		
 		model.addAttribute("vo", vo);
 		
-		return "member/detail";
+		return "food/detail";
 	}
-	@PostMapping("member/insert3.do")
+	@PostMapping("insert3.do")
 	// ===> 커맨드 객체 : VO 단위로 값을 받아서 => 매개 변수로 넘겨준다
-	public String member_insert3(MemberVO vo,Model model)
+	// name="" => 멤버 변수명과 동일
+	public String food_insert3(MemberVO vo,Model model)
 	{
 		model.addAttribute("vo", vo);
 		
-		return "member/detail";
+		return "food/detail";
 	}
 }
