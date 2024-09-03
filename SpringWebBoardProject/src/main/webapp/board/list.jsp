@@ -18,7 +18,7 @@
 			= 메소드 적용 위치 확인 (JoinPoint)
 			~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Advice
 			# 적용 위치
-				beford / after / after-returning / after-throwing
+				before / after / after-returning / after-throwing
 				public void display()
 				{
 					=> 적용 : before
