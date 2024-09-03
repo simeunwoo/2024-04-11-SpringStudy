@@ -1,5 +1,9 @@
 package com.sist.commons;
 
+import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 
 @ControllerAdvice // 예외 처리를 공통으로 사용

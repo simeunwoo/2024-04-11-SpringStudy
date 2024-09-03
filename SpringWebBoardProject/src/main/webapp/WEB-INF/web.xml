@@ -66,12 +66,7 @@
 			2. 재사용 굿
 			3. 보안 굿
 	-->
-	<servlet>
-		<servlet-name>dispatcher</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		<init-param>
-			<param-name>contextConfigLocation</param-name>
-			<!--
+	<!--
 				public class DispatcherServlet extends HttpServlet
 				{
 					public void init(ServletConfig config)
@@ -91,7 +86,27 @@
 					}
 				}
 			-->
+	<servlet>
+		<servlet-name>dispatcher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+	<!--
+		XML로 환경 설정이 된 경우에 사용
+		
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
 			<param-value>/WEB-INF/config/application-*.xml</param-value>
+		</init-param>
+	-->
+	<!-- 스프링 5 : 자바로 환경 설정 -->
+		<init-param>
+			<param-name>contextClass</param-name>
+			<param-value>
+				org.springframework.web.context.support.AnnotationConfigWebApplicationContext
+			</param-value>
+		</init-param>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>com.sist.config.MvcConfig</param-value>
 		</init-param>
 	</servlet>
 		
