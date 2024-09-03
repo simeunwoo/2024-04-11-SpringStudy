@@ -2,6 +2,8 @@ package com.sist.dao;
 import java.util.*;
 
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -50,5 +52,15 @@ public class BoardDAO {
 	public int boardRowCount()
 	{
 		return mapper.boardRowCount();
+	}
+	
+	public void hitIncrement(int no)
+	{
+		mapper.hitIncrement(no);
+	}
+	
+	public BoardVO boardDetailData(int no)
+	{
+		return mapper.boardDetailData(no);
 	}
 }
