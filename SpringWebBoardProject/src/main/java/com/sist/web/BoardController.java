@@ -141,4 +141,42 @@ public class BoardController {
 		
 		return js;
 	}
+	
+	@GetMapping("board/delete.do")
+	public String board_delete(int no,Model model)
+	{
+		model.addAttribute("no", no);
+		
+		return "board/delete";
+	}
+	
+	/*
+	 * 	405 - 허용되지 않는 메소드
+	 * 	400 - 잘못된 요청 (Bad Request) => 매개 변수의 데이터형이 틀리다
+	 */
+	
+	@PostMapping("board/delete_ok.do")
+	@ResponseBody
+	public String board_delete_ok(int no,String pwd) // no, pwd => 매개 변수이지만 getParameter()에도 해당
+	// getParameter() => 스프링 (DispatcherServlet)
+	{
+		String js="";
+		
+		boolean bCheck=dao.boardDelete(no, pwd);
+		if(bCheck==false)
+		{
+			js="<script>"
+					+ "alert(\"Password Fail\");"
+					+ "history.back();"
+					+ "</script>";
+		}
+		else
+		{
+			js="<script>"
+					+ "location.href=\"list.do\";"
+					+ "</script>";
+		}
+		
+		return js;
+	}
 }

@@ -1,6 +1,7 @@
 package com.sist.mapper;
 import java.util.*;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -92,6 +93,8 @@ public interface BoardMapper {
 	public void boardUpdate(BoardVO vo);
 	
 	// 삭제
+	@Delete("DELETE FROM spring_board WHERE no=#{no}")
+	public void boardDelete(int no);
 	
 	// 검색
 }

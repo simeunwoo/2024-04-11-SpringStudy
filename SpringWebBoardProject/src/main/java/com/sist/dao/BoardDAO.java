@@ -81,4 +81,18 @@ public class BoardDAO {
 		return bCheck;
 	}
 	
+	// 사용자 정의 매개 변수는 자유롭게 사용 가능
+	public boolean boardDelete(int no,String pwd)
+	{
+		boolean bCheck=false;
+		String db_pwd=mapper.boardGetPassword(no);
+		if(pwd.equals(db_pwd))
+		{
+			bCheck=true;
+			mapper.boardDelete(no);
+		}
+		
+		return bCheck;
+	}
+	
 }
