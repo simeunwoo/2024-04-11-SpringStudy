@@ -54,13 +54,31 @@ public class BoardDAO {
 		return mapper.boardRowCount();
 	}
 	
-	public void hitIncrement(int no)
+	public BoardVO boardDetailData(int no)
 	{
 		mapper.hitIncrement(no);
+		return mapper.boardDetailData(no);
 	}
-	
-	public BoardVO boardDetailData(int no)
+
+	public BoardVO boardUpdateData(int no)
 	{
 		return mapper.boardDetailData(no);
 	}
+	
+	
+	public boolean boardUpdate(BoardVO vo)
+	{
+		boolean bCheck=false;
+		String db_pwd=mapper.boardGetPassword(vo.getNo());
+		if(db_pwd.equals(vo.getPwd()))
+		{
+			bCheck=true;
+			
+			// 수정
+			mapper.boardUpdate(vo);
+		}
+		
+		return bCheck;
+	}
+	
 }

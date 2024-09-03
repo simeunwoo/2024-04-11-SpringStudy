@@ -81,9 +81,17 @@ public interface BoardMapper {
 	@Select("SELECT no,name,subject,content,TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS') as dbday,hit "
 			+ "FROM spring_board "
 			+ "WHERE no=#{no}")
-	public BoardVO boardDetailData(int no);
+	public BoardVO boardDetailData(int no); // 비밀 번호 가지고 오기
 	
 	// 수정
+	@Select("SELECT pwd FROM spring_board WHERE no=#{no}")
+	public String boardGetPassword(int no);
+	
+	@Update("UPDATE spring_board SET name=#{name},subject=#{subject},content=#{content} "
+			+ "WHERE no=#{no}")
+	public void boardUpdate(BoardVO vo);
+	
 	// 삭제
+	
 	// 검색
 }

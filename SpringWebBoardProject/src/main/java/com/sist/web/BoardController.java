@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller // 모델 클래스 => HandlerMapping에서 처리
 public class BoardController {
@@ -87,7 +88,55 @@ public class BoardController {
 	public String board_detail(int no,Model model) // 여기서는 request는 model에 해당
 	{
 		// 데이터 읽기 상세 보기
+		BoardVO vo=dao.boardDetailData(no);
+		
+		model.addAttribute("vo", vo);
 		
 		return "board/detail";
+	}
+	
+	@GetMapping("board/update.do")
+	public String board_update(int no,Model model)
+	{
+		// 데이터베이스 연동
+		BoardVO vo=dao.boardUpdateData(no);
+		
+		// 결과값 전송
+		model.addAttribute("vo", vo);
+		
+		return "board/update";
+	}
+	
+	@PostMapping("board/update_ok.do")
+	@ResponseBody // 자바스크립트나 JSON을 전송 시에 사용 => 진화 : @RestController
+	public String board_update_ok(BoardVO vo,Model model)
+	{
+		// 데이터베이스 연동
+		boolean bCheck=dao.boardUpdate(vo);
+		
+		// 결과값 전송 => @ResponseBody를 사용하면 따로 보낼 필요 없음
+	//	model.addAttribute("bCheck", bCheck);
+	//	model.addAttribute("no", vo.getNo());
+		
+		// 이동 화면이 2가지 => 이전 (자바스크립트), 상세 보기
+		// @Controller => 무조건 => return은 파일명이나 .do
+		// 자바스크립트를 전송 => 실행 @ResponseBody, @RestController
+		// @ResponseBody는 한글이 깨진다 => 영문으로 전송
+		
+		if(bCheck==true)
+		{
+			js="<script>"
+					+ "location.href=\"detail.do?no="+vo.getNo()+"\";"
+							+ "</script>";
+		}
+		else
+		{
+			js="<script>"
+					+ "alert(\"비밀 번호가 잘못됐습니다\");"
+					+ "history.back();"
+					+ "</script>";
+		}
+		
+		return js;
 	}
 }
