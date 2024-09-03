@@ -107,7 +107,7 @@ public class BoardController {
 		return "board/update";
 	}
 	
-	@PostMapping("board/update_ok.do")
+/*	@PostMapping("board/update_ok.do")
 	@ResponseBody // 자바스크립트나 JSON을 전송 시에 사용 => 진화 : @RestController
 	public String board_update_ok(BoardVO vo,Model model)
 	{
@@ -140,7 +140,7 @@ public class BoardController {
 		}
 		
 		return js;
-	}
+	} */
 	
 	@GetMapping("board/delete.do")
 	public String board_delete(int no,Model model)
@@ -155,7 +155,7 @@ public class BoardController {
 	 * 	400 - 잘못된 요청 (Bad Request) => 매개 변수의 데이터형이 틀리다
 	 */
 	
-	@PostMapping("board/delete_ok.do")
+/*	@PostMapping("board/delete_ok.do")
 	@ResponseBody
 	public String board_delete_ok(int no,String pwd) // no, pwd => 매개 변수이지만 getParameter()에도 해당
 	// getParameter() => 스프링 (DispatcherServlet)
@@ -178,5 +178,5 @@ public class BoardController {
 		}
 		
 		return js;
-	}
+	} */
 }
