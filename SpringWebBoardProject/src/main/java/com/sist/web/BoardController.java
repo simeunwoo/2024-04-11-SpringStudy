@@ -111,6 +111,8 @@ public class BoardController {
 	@ResponseBody // 자바스크립트나 JSON을 전송 시에 사용 => 진화 : @RestController
 	public String board_update_ok(BoardVO vo,Model model)
 	{
+		String js="";
+		
 		// 데이터베이스 연동
 		boolean bCheck=dao.boardUpdate(vo);
 		
@@ -132,7 +134,7 @@ public class BoardController {
 		else
 		{
 			js="<script>"
-					+ "alert(\"비밀 번호가 잘못됐습니다\");"
+					+ "alert(\"Password Fail\");"
 					+ "history.back();"
 					+ "</script>";
 		}
