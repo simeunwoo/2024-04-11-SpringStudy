@@ -20,6 +20,11 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
+p{
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
 </style>
 </head>
 <body>
@@ -32,6 +37,7 @@
 						<a href="#">
 							<img src="http://menupan.com${vo.poster }" style="height:200px;width:180px" title="${vo.name }">
 							<div class="caption">
+					          <p>${vo.name }</p>
 					          <p>${vo.address }</p>
 					        </div>
 						</a>

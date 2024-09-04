@@ -9,13 +9,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-@Controller("food/")
+@Controller
 public class FoodController {
 
 	@Autowired
 	private FoodDAO dao;
 	
-	@GetMapping("list.do")
+	@GetMapping("food/list.do")
 	public String food_list(String page,Model model)
 	{
 		if(page==null)
