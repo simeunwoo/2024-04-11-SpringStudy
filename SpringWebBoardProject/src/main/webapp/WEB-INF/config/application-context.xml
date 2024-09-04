@@ -38,4 +38,11 @@
 		p:prefix="/"
 		p:suffix=".jsp"
 	/>
+	<!--
+		id="multipartResolver" => 스프링에서 사용하는 ID
+			================= 이미 지정된 ID
+	-->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+	/>
 </beans>
