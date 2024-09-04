@@ -270,4 +270,37 @@ public class DataBoardController {
 			bos.close();
 		}catch(Exception ex) {}
 	}
+	
+	@GetMapping("delete.do")
+	public String databoard_delete(int no,Model model)
+	{
+		model.addAttribute("no", no);
+		
+		return "databoard/delete";
+	}
+	
+	@PostMapping("delete_ok.do")
+	public String databoard_delete_ok(int no,String pwd,Model model)
+	{
+		DataBoardVO vo=dao.dataBoardFileInfoData(no);
+		boolean bCheck=dao.databoardDelete(no, pwd);
+		
+		model.addAttribute("bCheck", bCheck);
+		
+		try
+		{
+			String files=vo.getFilename();
+			if(vo.getFilecount()!=0) // 파일이 있는 경우
+			{
+				StringTokenizer st=new StringTokenizer(files,",");
+				while(st.hasMoreTokens())
+				{
+					File file=new File("c:\\spring_upload\\"+st.nextToken());
+					file.delete();
+				}
+			}
+		}catch(Exception ex) {}
+		
+		return "databoard/delete_ok";
+	}
 }

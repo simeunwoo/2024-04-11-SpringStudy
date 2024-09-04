@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import com.sist.vo.*;
@@ -17,6 +18,9 @@ public class DataBoardDAO {
 
 	@Autowired
 	private DataBoardMapper mapper;
+	
+	@Autowired
+	private BCryptPasswordEncoder encoder;
 	
 	/*
 	@Select("SELECT no,subject,name,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,hit,num "
@@ -89,6 +93,17 @@ public class DataBoardDAO {
 		String db_pwd=mapper.dataBoardGetPassword(no);
 		
 		// 복호화 => 원상 복귀
+		// encode() : 암호화, matches() : 비교하는 메소드
+		if(encoder.matches(pwd, db_pwd)) // (,) = (원래 것,암호화된 것)
+		{
+			// 복호화 => 비밀 번호 검색
+			bCheck=true;
+			mapper.dataBoardDelete(no);
+		}
+		else
+		{
+			bCheck=false;
+		}
 		
 		return bCheck;
 	}
