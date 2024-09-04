@@ -32,7 +32,7 @@
 			<c:forEach var="vo" items="${list }">
 				 <div class="col-md-3">
 				    <div class="thumbnail">
-				      <a href="#">
+				      <a href="detail.do?no=${vo.no }">
 				        <img src="${vo.poster }" title="${vo.title }" style="width:230px;height:150px">
 				        <div class="caption">
 				          <p>${vo.chef }</p>

@@ -7,6 +7,7 @@ import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 /*
 	JSP => RecipeController와 연결
 	오라클 => RecipeDAO와 연결
@@ -56,6 +57,16 @@ public class RecipeController {
 		model.addAttribute("endPage", endPage);
 		
 		return "recipe/list";
+	}
+	
+	@GetMapping("recipe/detail.do")
+	public String recipe_detail(int no,Model model)
+	{
+		// 데이터베이스 연결 => 상세 보기
+		
+		// 상세 보기에서 출력할 데이터 전송 => Model
+		
+		return "recipe/detail";
 	}
 	
 }
