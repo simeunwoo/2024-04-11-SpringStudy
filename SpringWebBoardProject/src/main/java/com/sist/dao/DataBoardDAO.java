@@ -66,7 +66,7 @@ public class DataBoardDAO {
 	 */
 	public DataBoardVO dataBoardDetailData(int no)
 	{
-		mapper.hitIncrement(no);
+		mapper.dataBoardHitIncrement(no);
 		return mapper.dataBoardDetailData(no);
 	}
 	

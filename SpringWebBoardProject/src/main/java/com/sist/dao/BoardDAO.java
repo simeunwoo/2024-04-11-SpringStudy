@@ -56,7 +56,7 @@ public class BoardDAO {
 	
 	public BoardVO boardDetailData(int no)
 	{
-		mapper.hitIncrement(no);
+		mapper.boardHitIncrement(no);
 		return mapper.boardDetailData(no);
 	}
 

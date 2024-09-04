@@ -31,7 +31,7 @@ public interface DataBoardMapper {
 	@Update("UPDATE spring_databoard SET "
 			+ "hit=hit+1 "
 			+ "WHERE no=#{no}")
-	public void hitIncrement(int no);
+	public void dataBoardHitIncrement(int no);
 	
 	@Select("SELECT no,name,subject,content,TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS') as dbday,hit,"
 			+ "filename,filesize,filecount "
