@@ -39,4 +39,24 @@ public class RecipeDAO {
 		mapper.recipeHitIncrement(no);
 		return mapper.recipeDetailData(no);
 	}
+	
+	/*
+	@Select("SELECT chef,poster,men_cont1,men_cont3,men_cont7,men_cont2,num "
+			+ "FROM (SELECT chef,poster,men_cont1,men_cont3,men_cont7,men_cont2,rownum as num "
+			+ "FROM (SELECT chef,poster,men_cont1,men_cont3,men_cont7,men_cont2 "
+			+ "FROM chef)) "
+			+ "WHERE num BETWEEN #{start} AND #{end}")
+	public List<ChefVO> chefListData(Map map);
+	
+	@Select("SELECT CEIL(COUNT(*)/50.0) FROM chef")
+	public int chefTotalPage();
+	 */
+	public List<ChefVO> chefListData(Map map)
+	{
+		return mapper.chefListData(map);
+	}
+	public int chefTotalPage()
+	{
+		return mapper.chefTotalPage();
+	}
 }

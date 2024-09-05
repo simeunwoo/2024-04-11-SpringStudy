@@ -29,4 +29,19 @@ public interface RecipeMapper {
 	@Select("SELECT * FROM recipedetail "
 			+ "WHERE no=#{no}")
 	public RecipeDetailVO recipeDetailData(int no);
+	
+	// 셰프 목록 출력
+	@Select("SELECT chef,poster,men_cont1,men_cont3,men_cont7,men_cont2,num "
+			+ "FROM (SELECT chef,poster,men_cont1,men_cont3,men_cont7,men_cont2,rownum as num "
+			+ "FROM (SELECT chef,poster,men_cont1,men_cont3,men_cont7,men_cont2 "
+			+ "FROM chef)) "
+			+ "WHERE num BETWEEN #{start} AND #{end}")
+	public List<ChefVO> chefListData(Map map);
+	
+	@Select("SELECT CEIL(COUNT(*)/50.0) FROM chef")
+	public int chefTotalPage();
+	
+	// 셰프 상세 보기
+	
+	// 레시피 찾기
 }

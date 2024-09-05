@@ -10,16 +10,16 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">SpringMVC</a>
+      <a class="navbar-brand" href="../main/main.do">SpringMVC</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
+      <li class="active"><a href="../main/main.do">Home</a></li>
       <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">레시피
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="#">셰프</a></li>
-          <li><a href="#">레시피 검색</a></li>
+          <li><a href="../recipe/chef_list.do">셰프</a></li>
+          <li><a href="../recipe/find.do">레시피 찾기</a></li>
         </ul>
       </li>
       <li class="dropdown">
