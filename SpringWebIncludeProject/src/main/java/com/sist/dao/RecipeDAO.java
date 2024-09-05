@@ -41,9 +41,9 @@ public class RecipeDAO {
 	}
 	
 	/*
-	@Select("SELECT chef,poster,men_cont1,men_cont3,men_cont7,men_cont2,num "
-			+ "FROM (SELECT chef,poster,men_cont1,men_cont3,men_cont7,men_cont2,rownum as num "
-			+ "FROM (SELECT chef,poster,men_cont1,men_cont3,men_cont7,men_cont2 "
+	@Select("SELECT chef,poster,mem_cont1,mem_cont3,mem_cont7,mem_cont2,num "
+			+ "FROM (SELECT chef,poster,mem_cont1,mem_cont3,mem_cont7,mem_cont2,rownum as num "
+			+ "FROM (SELECT chef,poster,mem_cont1,mem_cont3,mem_cont7,mem_cont2 "
 			+ "FROM chef)) "
 			+ "WHERE num BETWEEN #{start} AND #{end}")
 	public List<ChefVO> chefListData(Map map);
@@ -58,5 +58,28 @@ public class RecipeDAO {
 	public int chefTotalPage()
 	{
 		return mapper.chefTotalPage();
+	}
+	
+	/*
+	@Select("SELECT no,title,poster,chef,num "
+			+ "FROM (SELECT no,title,poster,chef,rownum as num "
+			+ "FROM (SELECT no,title,poster,chef "
+			+ "FROM recipe "
+			+ "WHERE chef=#{chef} "
+			+ "ORDER BY no ASC)) "
+			+ "WHERE num BETWEEN #{start} AND #{end}")
+	public List<RecipeVO> chefMakeRecipeData(Map map);
+	
+	@Select("SELECT CEIL(COUNT(*)/12.0) FROM recipe "
+			+ "WHERE chef=#{chef}")
+	public int chefMakeRecipeTotalPage(String chef);
+	 */
+	public List<RecipeVO> chefMakeRecipeData(Map map)
+	{
+		return mapper.chefMakeRecipeData(map);
+	}
+	public int chefMakeRecipeTotalPage(String chef)
+	{
+		return mapper.chefMakeRecipeTotalPage(chef);
 	}
 }

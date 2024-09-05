@@ -65,7 +65,7 @@ public class MainController {
 		if(page==null)
 			page="1";
 		int curpage=Integer.parseInt(page);
-		Map map=new HashedMap();
+		Map map=new HashMap();
 		map.put("start", (curpage*20)-19);
 		map.put("end", curpage*20);
 		

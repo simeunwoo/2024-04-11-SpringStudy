@@ -42,6 +42,16 @@ public class RecipeServiceImpl implements RecipeService {
 		// TODO Auto-generated method stub
 		return dao.chefTotalPage();
 	}
-	
-	
+
+	@Override
+	public List<RecipeVO> chefMakeRecipeData(Map map) {
+		// TODO Auto-generated method stub
+		return dao.chefMakeRecipeData(map);
+	}
+
+	@Override
+	public int chefMakeRecipeTotalPage(String chef) {
+		// TODO Auto-generated method stub
+		return dao.chefMakeRecipeTotalPage(chef);
+	}
 }

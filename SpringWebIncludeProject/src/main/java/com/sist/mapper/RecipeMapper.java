@@ -31,9 +31,9 @@ public interface RecipeMapper {
 	public RecipeDetailVO recipeDetailData(int no);
 	
 	// 셰프 목록 출력
-	@Select("SELECT chef,poster,men_cont1,men_cont3,men_cont7,men_cont2,num "
-			+ "FROM (SELECT chef,poster,men_cont1,men_cont3,men_cont7,men_cont2,rownum as num "
-			+ "FROM (SELECT chef,poster,men_cont1,men_cont3,men_cont7,men_cont2 "
+	@Select("SELECT chef,poster,mem_cont1,mem_cont3,mem_cont7,mem_cont2,num "
+			+ "FROM (SELECT chef,poster,mem_cont1,mem_cont3,mem_cont7,mem_cont2,rownum as num "
+			+ "FROM (SELECT chef,poster,mem_cont1,mem_cont3,mem_cont7,mem_cont2 "
 			+ "FROM chef)) "
 			+ "WHERE num BETWEEN #{start} AND #{end}")
 	public List<ChefVO> chefListData(Map map);
@@ -42,6 +42,18 @@ public interface RecipeMapper {
 	public int chefTotalPage();
 	
 	// 셰프 상세 보기
+	@Select("SELECT no,title,poster,chef,num "
+			+ "FROM (SELECT no,title,poster,chef,rownum as num "
+			+ "FROM (SELECT no,title,poster,chef "
+			+ "FROM recipe "
+			+ "WHERE chef=#{chef} "
+			+ "ORDER BY no ASC)) "
+			+ "WHERE num BETWEEN #{start} AND #{end}")
+	public List<RecipeVO> chefMakeRecipeData(Map map);
+	
+	@Select("SELECT CEIL(COUNT(*)/12.0) FROM recipe "
+			+ "WHERE chef=#{chef}")
+	public int chefMakeRecipeTotalPage(String chef);
 	
 	// 레시피 찾기
 }

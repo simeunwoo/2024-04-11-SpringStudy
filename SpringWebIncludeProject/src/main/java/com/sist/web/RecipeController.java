@@ -5,8 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.*;
+
+import javax.servlet.http.HttpServletResponse;
+
 import com.sist.service.*;
 import com.sist.vo.*;
 
@@ -21,6 +25,18 @@ public class RecipeController {
 	
 	@Autowired
 	private RecipeService rService;
+	
+	@GetMapping("recipe/detail_before.do")
+	public String recipe_detail_before(int no,HttpServletResponse response,RedirectAttributes ra)
+	{
+		// Cookie 제작 => 저장 => 브라우저 전송 (반드시 매개 변수는 HttpServletResponse response로 받아야 한다)
+		
+		// 전송 객체 => Model : forward 방식
+		// 전송 객체 => RedirectAttributes : sendRedirect 방식
+		ra.addAttribute("no", no);
+	//	ra.addFlashAttribute("no", no);
+		return "redirect:../recipe/detail.do";
+	}
 	
 	@GetMapping("recipe/detail.do")
 	public String recipe_detail(int no,Model model) // Model(결과값)은 JSP로 전송 시에 사용 : forward
@@ -64,6 +80,8 @@ public class RecipeController {
 		int rowSize=50;
 		int start=(rowSize*curpage)-(rowSize-1);
 		int end=rowSize*curpage;
+		map.put("start", start);
+		map.put("end", end);
 		
 		List<ChefVO> list=rService.chefListData(map);
 		int totalpage=rService.chefTotalPage();
@@ -100,4 +118,32 @@ public class RecipeController {
 		}
 		
 	*/
+	
+	// 셰프 상세
+	@GetMapping("recipe/chef_detail.do")
+	public String recipe_chef_detail(String page,String chef,Model model)
+	{
+		if(page==null)
+			page="1";
+		int curpage=Integer.parseInt(page);
+		int rowSize=12;
+		int start=(rowSize*curpage)-(rowSize-1);
+		int end=rowSize*curpage;
+		
+		Map map=new HashMap();
+		map.put("chef", chef);
+		map.put("start", start);
+		map.put("end", end);
+		
+		List<RecipeVO> list=rService.chefMakeRecipeData(map);
+		int totalpage=rService.chefMakeRecipeTotalPage(chef);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("curpage", curpage);
+		model.addAttribute("totalpage", totalpage);
+		model.addAttribute("chef", chef);
+		
+		model.addAttribute("main_jsp", "../recipe/chef_detail.jsp");
+		return "main/main";
+	}
 }

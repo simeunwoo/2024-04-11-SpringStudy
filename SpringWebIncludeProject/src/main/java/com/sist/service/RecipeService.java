@@ -13,4 +13,6 @@ public interface RecipeService {
 	public RecipeDetailVO recipeDetailData(int no);
 	public List<ChefVO> chefListData(Map map);
 	public int chefTotalPage();
+	public List<RecipeVO> chefMakeRecipeData(Map map);
+	public int chefMakeRecipeTotalPage(String chef);
 }

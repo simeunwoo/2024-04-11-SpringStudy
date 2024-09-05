@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class ChefVO {
 
-	private String chef,poster,men_cont1,men_cont3,men_cont7,men_cont2;
+	private String chef,poster,mem_cont1,mem_cont3,mem_cont7,mem_cont2;
 }
