@@ -1,9 +1,12 @@
 package com.sist.web;
 import java.util.*;
+
+import javax.servlet.http.HttpServletRequest;
+
 import com.sist.service.*;
 import com.sist.vo.*;
 
-import org.apache.commons.collections.map.HashedMap;
+import org.openqa.selenium.devtools.v119.network.model.Cookie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -60,7 +63,7 @@ public class MainController {
 	private RecipeService rService; // DAO 동시 처리 => BI (관련된 기능을 통합)
 	
 	@GetMapping("main/main.do")
-	public String main_main(String page,Model model)
+	public String main_main(String page,Model model,HttpServletRequest request)
 	{
 		if(page==null)
 			page="1";
@@ -85,7 +88,27 @@ public class MainController {
 		model.addAttribute("totalpage", totalpage);
 		model.addAttribute("startPage", startPage);
 		model.addAttribute("endPage", endPage);
+		
+		// 쿠키 출력
+		javax.servlet.http.Cookie[] cookies=request.getCookies();
+		List<RecipeVO> cList=new ArrayList<RecipeVO>();
+		if(cookies!=null)
+		{
+			// 최신부터 담는다
+			for(int i=cookies.length-1;i>=0;i--)
+			{
+				if(cookies[i].getName().startsWith("recipe_"))
+				{
+					String no=cookies[i].getValue();
+					RecipeVO vo=rService.recipeCookieInfoData(Integer.parseInt(no));
+					cList.add(vo);
+				}
+			}
+		}
 				
+		model.addAttribute("cList", cList);
+		model.addAttribute("size", cList.size());
+		
 		// include할 JSP를 지정
 		model.addAttribute("main_jsp", "../main/home.jsp");
 		return "main/main";

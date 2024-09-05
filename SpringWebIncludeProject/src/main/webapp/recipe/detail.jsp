@@ -75,6 +75,7 @@
 					<input type="button" class="btn-sm btn-warning" value="굿">
 					<input type="button" class="btn-sm btn-success" value="찜">
 					<input type="button" class="btn-sm btn-info" value="이전" onclick="javascript:history.go(-1)">
+					<a href="../main/main.do"></a>
 				</td>
 			</tr>
 		</table>

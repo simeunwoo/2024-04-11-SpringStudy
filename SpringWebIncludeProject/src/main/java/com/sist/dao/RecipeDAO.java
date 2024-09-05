@@ -82,4 +82,15 @@ public class RecipeDAO {
 	{
 		return mapper.chefMakeRecipeTotalPage(chef);
 	}
+	
+	/*
+	@Select("SELECT no,title,poster "
+			+ "FROM recipe "
+			+ "WHERE no=#{no}")
+	public RecipeVO recipeCookieInfoData(int no);
+	 */
+	public RecipeVO recipeCookieInfoData(int no)
+	{
+		return mapper.recipeCookieInfoData(no);
+	}
 }

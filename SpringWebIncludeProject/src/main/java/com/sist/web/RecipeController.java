@@ -1,6 +1,5 @@
 package com.sist.web;
 
-import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,7 +8,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.*;
 
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 
 import com.sist.service.*;
 import com.sist.vo.*;
@@ -30,6 +29,17 @@ public class RecipeController {
 	public String recipe_detail_before(int no,HttpServletResponse response,RedirectAttributes ra)
 	{
 		// Cookie 제작 => 저장 => 브라우저 전송 (반드시 매개 변수는 HttpServletResponse response로 받아야 한다)
+//		Cookie cookie=new Cookie("recipe_"+no, String.valueOf(no));
+		Cookie cookie=new Cookie("recipe_"+no, String.valueOf(no));
+		/*
+			쿠키는 저장 위치 : 브라우저, 문자열만 저장 가능
+				"recipe_"+no : 키 => getName()
+				String.valueOf(no) : 값 => getValue()
+		 */
+		cookie.setMaxAge(60*60*24); // 초 단위 저장 => 저장 기간
+		cookie.setPath("/"); // 저장 위치
+		// 브라우저로 전송
+		response.addCookie(cookie);
 		
 		// 전송 객체 => Model : forward 방식
 		// 전송 객체 => RedirectAttributes : sendRedirect 방식
@@ -145,5 +155,53 @@ public class RecipeController {
 		
 		model.addAttribute("main_jsp", "../recipe/chef_detail.jsp");
 		return "main/main";
+	}
+	
+	@GetMapping("recipe/cookie_all.do")
+	public String recipe_cookie_all(HttpServletRequest request,Model model)
+	{
+		// 쿠키 출력
+				Cookie[] cookies=request.getCookies();
+				List<RecipeVO> cList=new ArrayList<RecipeVO>();
+				if(cookies!=null)
+				{
+					// 최신부터 담는다
+					for(int i=cookies.length-1;i>=0;i--)
+					{
+						if(cookies[i].getName().startsWith("recipe_"))
+						{
+							String no=cookies[i].getValue();
+							RecipeVO vo=rService.recipeCookieInfoData(Integer.parseInt(no));
+							cList.add(vo);
+						}
+					}
+				}
+						
+				model.addAttribute("cList", cList);
+				model.addAttribute("size", cList.size());
+		
+		model.addAttribute("main_jsp", "../recipe/cookie_all.jsp");
+		return "main/main";
+	}
+	
+	@GetMapping("recipe/cookie_delete.do")
+	public String recipe_cookie_delete(HttpServletRequest request,HttpServletResponse response)
+	{
+		Cookie[] cookies=request.getCookies();
+		if(cookies!=null)
+		{
+			for(int i=0;i<cookies.length;i++)
+			{
+				if(cookies[i].getName().startsWith("recipe_"))
+				{
+					cookies[i].setPath("/");
+					cookies[i].setMaxAge(0); // 쿠키 삭제
+					response.addCookie(cookies[i]); // 브라우저에 알림
+				}
+			}
+		}
+	
+		
+		return "redirect:../main/main.do";
 	}
 }

@@ -22,7 +22,7 @@
 						<table class="table">
 							<tr>
 								<td width="30%" class="text-center" rowspan="2">
-									<a href="../recipe/chef_detail.do?chef=${vo.chef }">
+									<a href="../recipe/detail.do?chef=${vo.chef }">
 										<img src="${vo.poster }" style="width:100px;height:100px" class="img-circle">
 									</a>
 								</td>
@@ -52,10 +52,6 @@
 				</td>
 			</tr>
 		</table>
-	</div>
-	<h3>본 레시피</h3>
-	<hr>
-	<div class="row">
 	</div>
 </body>
 </html>
