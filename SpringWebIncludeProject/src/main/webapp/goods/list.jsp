@@ -6,6 +6,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+.col-md-3{
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+</style>
 </head>
 <body>
 	<div class="container">
@@ -29,7 +36,7 @@
 					<c:if test="${startPage>1 }">
 						<li><a href="../goods/list.do?page=${startPage-1 }">이전</a></li>
 					</c:if>
-					<c:forEach var="i" start="1" end="10">
+					<c:forEach var="i" begin="${startPage }" end="${endPage }">
 						<li ${i==curpage?"class=active":"" }>
 							<a href="../goods/list.do?page=${i }">${i }</a>
 						</li>
@@ -40,10 +47,24 @@
 				</ul>
 			</div>
 		</div>
+		<h3>최근 둘러본 상품</h3>
+		<a href="../goods/cookie_all.do" class="btn btn-sm btn-primary">더보기</a>
 		<div class="row">
-			<div class="text-center">
-				
-			</div>
+			
+				<c:if test="${size==0 }">
+					<h3 class="text-center">아직 본 상품이 없어요</h3>
+				</c:if>
+				<c:if test="${size>0 }">
+					<c:forEach var="vo" items="${cList }" varStatus="s">
+						<c:if test="${s.index<9 }">
+							<a href="../goods/detail.do?no=${vo.no }">
+								<img src="${vo.goods_poster }" style="width:100px;height:100px"
+									title="${vo.goods_name }">
+							</a>
+						</c:if>
+					</c:forEach>
+				</c:if>
+			
 		</div>
 	</div>
 </body>

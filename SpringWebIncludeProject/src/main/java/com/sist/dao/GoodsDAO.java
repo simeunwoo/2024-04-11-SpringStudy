@@ -30,4 +30,9 @@ public class GoodsDAO {
 		mapper.goodsHitIncrement(no);
 		return mapper.goodsDetailData(no);
 	}
+	
+	public GoodsVO goodsCookieData(int no)
+	{
+		return mapper.goodsCookieData(no);
+	}
 }

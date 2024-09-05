@@ -28,4 +28,10 @@ public interface GoodsMapper {
 			+ "FROM goods_all "
 			+ "WHERE no=#{no}")
 	public GoodsVO goodsDetailData(int no);
+	
+	// 쿠키 정보 데이터
+	@Select("SELECT no,goods_name,goods_poster "
+			+ "FROM goods_all "
+			+ "WHERE no=#{no}")
+	public GoodsVO goodsCookieData(int no);
 }

@@ -14,4 +14,5 @@ public interface GoodsService {
 	public int goodsTotalPage();
 	public void goodsHitIncrement(int no);
 	public GoodsVO goodsDetailData(int no);
+	public GoodsVO goodsCookieData(int no);
 }

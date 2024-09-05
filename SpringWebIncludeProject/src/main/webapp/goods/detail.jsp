@@ -12,7 +12,7 @@
 			<table class="table">
 				<tr>
 					<td colspan="4">
-						${vo.goods_poster }
+						<img src="${vo.goods_poster }" style="width:800px;height:580px">
 					</td>
 				</tr>
 				<tr>
@@ -45,7 +45,7 @@ ${vo.goods_sub }
 		<div class="row">
 			<tr>
 				<td class="text-right">
-					<input type="button" class="btn btn-sm btn-primary" value="목록">
+					<a href="../goods/list.do" class="btn-sm btn-info">목록</a>
 				</td>
 			</tr>
 		</div>

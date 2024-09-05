@@ -29,7 +29,6 @@ public class RecipeController {
 	public String recipe_detail_before(int no,HttpServletResponse response,RedirectAttributes ra)
 	{
 		// Cookie 제작 => 저장 => 브라우저 전송 (반드시 매개 변수는 HttpServletResponse response로 받아야 한다)
-//		Cookie cookie=new Cookie("recipe_"+no, String.valueOf(no));
 		Cookie cookie=new Cookie("recipe_"+no, String.valueOf(no));
 		/*
 			쿠키는 저장 위치 : 브라우저, 문자열만 저장 가능
