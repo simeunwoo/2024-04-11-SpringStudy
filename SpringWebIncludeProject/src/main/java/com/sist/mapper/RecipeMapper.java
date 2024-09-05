@@ -1,13 +1,13 @@
 package com.sist.mapper;
 import java.util.*;
 
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import com.sist.vo.*;
 
 public interface RecipeMapper {
 
+	// 목록 출력
 	@Select("SELECT no,poster,title,chef,num "
 			+ "FROM (SELECT no,poster,title,chef,rownum as num "
 			+ "FROM (SELECT /*+ INDEX_ASC(recipe recipe_no_pk)*/no,poster,title,chef "
@@ -19,4 +19,14 @@ public interface RecipeMapper {
 	@Select("SELECT COUNT(*) FROM recipe "
 			+ "WHERE no IN(SELECT no FROM recipe INTERSECT SELECT no FROM recipedetail)")
 	public int recipeRowCount();
+	
+	// 상세 보기
+	@Update("UPDATE recipe SET "
+			+ "hit=hit+1 "
+			+ "WHERE no=#{no}")
+	public void recipeHitIncrement(int no);
+	
+	@Select("SELECT * FROM recipedetail "
+			+ "WHERE no=#{no}")
+	public RecipeDetailVO recipeDetailData(int no);
 }

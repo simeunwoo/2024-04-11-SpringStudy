@@ -10,13 +10,13 @@ import org.springframework.stereotype.Service;
 	Oracle => Repository => Service => Controller => JSP
  */
 @Service
-public class RecipeServiceImpl {
+public class RecipeServiceImpl implements RecipeService {
 
 	@Autowired
 	private RecipeDAO dao;
 	
 	@Override
-	public List<RecipeVO> recipeListData(Map map){
+	public List<RecipeVO> recipeListData(Map map) {
 		return dao.recipeListData(map);
 	}
 	
@@ -24,4 +24,12 @@ public class RecipeServiceImpl {
 	public int recipeRowCount() {
 		return dao.recipeRowCount();
 	}
+
+	@Override
+	public RecipeDetailVO recipeDetailData(int no) {
+		// TODO Auto-generated method stub
+		return dao.recipeDetailData(no);
+	}
+	
+	
 }

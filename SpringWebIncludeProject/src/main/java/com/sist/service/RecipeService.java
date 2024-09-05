@@ -10,4 +10,5 @@ public interface RecipeService {
 
 	public List<RecipeVO> recipeListData(Map map);
 	public int recipeRowCount();
+	public RecipeDetailVO recipeDetailData(int no);
 }

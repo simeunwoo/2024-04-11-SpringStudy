@@ -3,6 +3,7 @@ import java.util.*;
 import com.sist.service.*;
 import com.sist.vo.*;
 
+import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -61,6 +62,30 @@ public class MainController {
 	@GetMapping("main/main.do")
 	public String main_main(String page,Model model)
 	{
+		if(page==null)
+			page="1";
+		int curpage=Integer.parseInt(page);
+		Map map=new HashedMap();
+		map.put("start", (curpage*20)-19);
+		map.put("end", curpage*20);
+		
+		List<RecipeVO> list=rService.recipeListData(map);
+		int count=rService.recipeRowCount();
+		int totalpage=(int)(Math.ceil(count/20.0));
+		
+		final int BLOCK=10;
+		int startPage=((curpage-1)/BLOCK*BLOCK)+1;
+		int endPage=((curpage-1)/BLOCK*BLOCK)+BLOCK;
+		if(endPage>totalpage)
+			endPage=totalpage;
+		
+		model.addAttribute("list", list);
+		model.addAttribute("count", count);
+		model.addAttribute("curpage", curpage);
+		model.addAttribute("totalpage", totalpage);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("endPage", endPage);
+				
 		// include할 JSP를 지정
 		model.addAttribute("main_jsp", "../main/home.jsp");
 		return "main/main";
