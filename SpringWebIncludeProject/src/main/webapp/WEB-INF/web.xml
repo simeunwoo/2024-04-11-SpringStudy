@@ -91,11 +91,27 @@
 		       |
 		       HandlerMapping
 		       |
-		       GetMapping / PostMapping / RequsetMapping을 찾아서 메소드 호출
+		       *** GetMapping / PostMapping / RequsetMapping을 찾아서 메소드 호출
 		       | 결과값 => model
 		       ViewResolver
 		       | model => request 변환
-		       JSP => 데이터를 받아서 화면 출력
+		       *** JSP => 데이터를 받아서 화면 출력
+		       
+		       *** => 내가 다루는 영역
+		       
+		       결과값 : 오라클 : 데이터베이스 연동 (내가 지우기 전까진 절대 안 지워짐) => MyBatis / JPA
+		
+		Spring : 약간의 개념 (DI / AOP / MVC)
+			Spring 형식
+			========== 표준화 (모든 개발자 동일 코딩) => 여기까지가 입문
+		Middle
+			Tiles (include) / Transaction / Validation / Security
+			Task / Batch
+		High
+			Spring-Data / SI
+	-->
+	<!--
+		Error / Security
 	-->
 	<servlet>
 		<servlet-name>dispatcher</servlet-name>
