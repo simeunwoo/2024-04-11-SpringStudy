@@ -56,6 +56,20 @@ public interface RecipeMapper {
 	public int chefMakeRecipeTotalPage(String chef);
 	
 	// 레시피 찾기
+	@Select("SELECT no,title,poster,chef,num "
+			+ "FROM (SELECT no,title,poster,chef,rownum as num "
+			+ "FROM (SELECT no,title,poster,chef "
+			+ "FROM recipe "
+			+ "WHERE title LIKE '%'||#{fd}||'%' "
+			+ "AND no IN(SELECT no FROM recipe INTERSECT SELECT no FROM recipedetail) "
+			+ "ORDER BY no ASC)) "
+			+ "WHERE num BETWEEN #{start} AND #{end}")
+	public List<RecipeVO> recipeFindData(Map map);
+	
+	@Select("SELECT CEIL(COUNT(*)/20.0) FROM recipe "
+			+ "WHERE title LIKE '%'||#{fd}||'%' "
+			+ "AND no IN(SELECT no FROM recipe INTERSECT SELECT no FROM recipedetail)")
+	public int recipeFindTotalPage(Map map);
 	
 	// 쿠키 정보 데이터
 	@Select("SELECT no,title,poster "

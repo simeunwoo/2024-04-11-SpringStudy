@@ -19,6 +19,19 @@
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li><a href="../recipe/chef_list.do">셰프</a></li>
+          <!--
+          	순서
+          	1. .do 링크 => 요청
+          	2. @Controller
+          		=> .do가 들어오면 처리
+          	3. 처리 => Mapper => DAO => Service => ServiceImpl
+          	4. @Controller => DAO 연동
+          	5. JSP에서 화면 출력
+          	==================================================
+          	1) 동작 방식 => 실제 동작 확인
+          	2) 코딩 순서
+          	3) 검색
+          -->
           <li><a href="../recipe/find.do">레시피 찾기</a></li>
         </ul>
       </li>

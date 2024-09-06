@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.*;
@@ -202,5 +203,33 @@ public class RecipeController {
 	
 		
 		return "redirect:../main/main.do";
+	}
+	
+	// recipe/find.do => URL이라면 => 조건문 : 어노테이션 => 찾기
+	@RequestMapping("recipe/find.do")
+	// 검색에서 페이지가 나눠지는 경우 => GET/POST를 동시에 처리하는 @RequestMapping을 주로 사용
+	public String recipe_find(String fd,String page,Model model)
+	{
+		if(fd==null)
+			fd="감자";
+		if(page==null)
+			page="1";
+		int curpage=Integer.parseInt(page);
+		Map map=new HashMap();
+		map.put("start", curpage*20-19);
+		map.put("end", curpage*20);
+		map.put("fd", fd);
+		
+		// DAO 연동
+		List<RecipeVO> list=rService.recipeFindData(map);
+		int totalpage=rService.recipeFindTotalPage(map);
+		
+		model.addAttribute("fd", fd);
+		model.addAttribute("list", list);
+		model.addAttribute("curpage", curpage);
+		model.addAttribute("totalpage", totalpage);
+		
+		model.addAttribute("main_jsp", "../recipe/find.jsp");
+		return "main/main";
 	}
 }
