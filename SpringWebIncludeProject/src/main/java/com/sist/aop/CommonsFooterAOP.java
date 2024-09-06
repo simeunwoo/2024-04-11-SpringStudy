@@ -1,4 +1,19 @@
 package com.sist.aop;
+import java.util.*;
+
+import javax.servlet.http.HttpServletRequest;
+
+import com.sist.service.*;
+import com.sist.vo.*;
+
+import org.apache.commons.fileupload.RequestContext;
+import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.Aspect;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
 /*
 	스프링 = Framework (프레임워크)
 		= 라이브러리 : 자주 사용되는 기능들을 모아서 미리 구현한 클래스의 집합
@@ -113,6 +128,24 @@ package com.sist.aop;
 		
 		= 데이터베이스 : ORM (MyBatis)
  */
+@Aspect // 공통 모듈 => 반복 제거 => 메모리 할당이 아니다
+@Component // 메모리 할당
 public class CommonsFooterAOP {
 
+	@Autowired
+	private RecipeService rService;
+	
+	@After("execution(* com.sist.web.*Controller.*(..))")
+	// 수행되는 위치 => finally{메소드 수행} 부분 => 오류와 상관 없이 무조건 수행
+	public void commonsFooterData()
+	{
+		List<FoodVO> foodList=rService.foodTop5Data();
+		List<RecipeVO> recipeList=rService.recipeTop5Data();
+		
+		// 전송 => request
+		HttpServletRequest request=
+				((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getRequest();
+		request.setAttribute("foodList", foodList);
+		request.setAttribute("recipeList", recipeList);
+	}
 }
