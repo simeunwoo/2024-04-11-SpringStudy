@@ -1,4 +1,5 @@
 package com.sist.web;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import com.sist.vo.*;
 import com.sist.commons.CommonsPage;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller // 조립기 => Service + VO + DAO => 결과값 추출 => JSP로 전송
 // DispatcherServlet과 연결
@@ -27,10 +29,45 @@ public class BoardController {
 	// 찾기 => 스프링에서 찾아서 처리
 	public String board_list(String page,Model model)
 	{
-		Map map=CommonsPage.pageConfig(page, 10);
-		// CommonsPage 참고 => pageConfig(String page,int rowSize) => pageConfig(page,10)
+		// Map map=CommonsPage.pageConfig(page, 10);
+			// => CommonsPage 참고 => pageConfig(String page,int rowSize) => pageConfig(page,10)
+		
+		if(page==null)
+			page="1";
+		int curpage=Integer.parseInt(page);
+		Map map=new HashMap();
+		int rowSize=10;
+		// CommonsPage 설정 시 => rowSize 개수 설정은 X => 언제든지 바뀔 수 있으므로
+		int start=(rowSize*curpage)-(rowSize-1);
+		int end=rowSize*curpage;
+		
+		List<ReplyBoardVO> list=bService.boardListData(start, end);
+		int count=bService.boardRowCount();
+		int totalpage=(int)(Math.ceil(count/(double)rowSize));
+		count=count-((curpage*rowSize)-rowSize);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("count", count);
+		model.addAttribute("curpage", curpage);
+		model.addAttribute("totalpage", totalpage);
+		model.addAttribute("today", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
 		
 		model.addAttribute("main_jsp", "../board/list.jsp");
 		return "main/main";
+	}
+	
+	@GetMapping("board/insert.do")
+	public String board_insert(Model model)
+	{
+		model.addAttribute("main_jsp", "../board/insert.jsp");
+		return "main/main";
+	}
+	
+	@PostMapping("board/insert_ok.do")
+	public String board_insert_ok(ReplyBoardVO vo)
+	{
+		bService.boardInsert(vo);
+		
+		return "redirect:./board/list.do";
 	}
 }
