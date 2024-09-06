@@ -20,4 +20,6 @@ public interface RecipeService {
 	public RecipeVO recipeCookieInfoData(int no);
 	public List<RecipeVO> recipeFindData(Map map);
 	public int recipeFindTotalPage(Map map);
+	public List<FoodVO> foodTop5Data();
+	public List<RecipeVO> recipeTop5Data();
 }

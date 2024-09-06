@@ -118,4 +118,24 @@ public class RecipeDAO {
 	{
 		return mapper.recipeFindTotalPage(map);
 	}
+	
+	/*
+	@Select("SELECT fno,name,rownum "
+			+ "FROM (SELECT fno,name FROM project_food_house ORDER BY hit DESC) "
+			+ "WHERE rownum<=5")
+	public List<FoodVO> foodTop5Data();
+		
+	@Select("SELECT no,title,rownum "
+			+ "FROM (SELECT no,title FROM recipe ORDER BY hit DESC) "
+			+ "WHERE rownum<=5")
+	public List<RecipeVO> recipeTop5Data();
+	*/
+	public List<FoodVO> foodTop5Data()
+	{
+		return mapper.foodTop5Data();
+	}
+	public List<RecipeVO> recipeTop5Data()
+	{
+		return mapper.recipeTop5Data();
+	}
 }
