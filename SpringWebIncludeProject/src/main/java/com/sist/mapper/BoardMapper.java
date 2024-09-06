@@ -4,6 +4,7 @@ import java.util.*;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.sist.vo.*;
 
@@ -23,4 +24,23 @@ public interface BoardMapper {
 	@Insert("INSERT INTO spring_replyboard(no,name,subject,content,pwd,group_id) "
 			+ "VALUES(srb_no_seq.nextval,#{name},#{subject},#{content},#{pwd},(SELECT NVL(MAX(group_id)+1,1) FROM spring_replyboard))")
 	public void boardInsert(ReplyBoardVO vo);
+	
+	// 상세 보기
+	@Update("UPDATE spring_replyboard SET "
+			+ "hit=hit+1"
+			+ "WHERE no=#{no}")
+	public void boardHitIncrement(int no);
+	
+	@Select("SELECT no,name,subject,content,hit,TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS') as dbday "
+			+ "FROM spring_replyboard "
+			+ "WHERE no=#{no}")
+	public ReplyBoardVO boardDetailData(int no);
+	
+	// 수정
+	
+	// 삭제
+	
+	// 답변
+	
+	// 검색 = 동적 쿼리
 }
