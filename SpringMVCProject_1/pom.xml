@@ -26,6 +26,15 @@
 		    <artifactId>selenium-java</artifactId>
 		    <version>4.17.0</version>
 		</dependency>
+		
+		<!-- 지원하지 않는 라이브러리 : 형태소 분석 -->
+		<dependency>
+			<groupId>org.snu</groupId>
+			<artifactId>kokoma</artifactId>
+			<version>1.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/org.snu.ids.ha.jar</systemPath>
+		</dependency>
 	    
 	    <!-- security -->
 	    <dependency>
