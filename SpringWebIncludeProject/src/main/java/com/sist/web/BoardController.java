@@ -156,6 +156,7 @@ public class BoardController {
 	public String board_reply_ok(int pno,ReplyBoardVO vo)
 	{
 		// 처리(만 하면 되지 않겠는가)
+		bService.boardReplyInsert(pno, vo);
 		
 		return "redirect:../board/list.do";
 	}

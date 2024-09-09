@@ -20,6 +20,12 @@
 		p:maxIdle="#{db['maxIdle']}"
 		p:maxWait="#{db['maxWait']}"
 	/>
+	<!-- 트랜잭션 설정 -->
+	<tx:annotation-driven/>
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+		p:dataSource-ref="ds"
+	/>
 	<!-- 데이터베이스 정보를 MyBatis 전송 -->
 	<bean id="ssf" class="org.mybatis.spring.SqlSessionFactoryBean"
 		p:dataSource-ref="ds"

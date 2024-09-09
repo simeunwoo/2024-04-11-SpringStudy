@@ -63,7 +63,7 @@ public interface BoardMapper {
 	@Insert("INSERT INTO spring_replyboard(no,name,subject,content,pwd,"
 			+ "group_id,group_step,group_tab,root) "
 			+ "VALUES(srb_no_seq.nextval,#{name},#{subject},#{content},#{pwd},"
-			+ "#{group_id},#{group_step},#{group_tab},#{root}")
+			+ "#{group_id},#{group_step},#{group_tab},#{root})")
 	public void boardReplyInsert(ReplyBoardVO vo);
 	
 	@Update("UPDATE spring_replyboard SET "

@@ -104,8 +104,13 @@ public class BoardDAO {
 		group_tab : 답변 이미지 위치 지정
 	 */
 	@Transactional(propagation=Propagation.REQUIRED,rollbackFor=Exception.class) // 트랜잭션
-	// => 일괄 처리
+	// => SQL 일괄 처리
 	// => before, around 등을 생략할 수 있게 해준다
+	// 금융권 => 카드 결제, 포인트 등록
+	// => SQL 문장의 핵심
+	// DML(INSERT, UPDATE, DELETE) 여러개가 동시에 수행
+	// AOP 기반으로 만들어져 있다
+	// Transaction / Security => AOP가 포함
 	public void boardReplyInsert(int pno,ReplyBoardVO vo)
 	{
 	//	try

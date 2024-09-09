@@ -15,4 +15,5 @@ public interface BoardService {
 	public ReplyBoardVO boardDetailData(int no);
 	public ReplyBoardVO boardUpdateData(int no);
 	public String boardUpdate(ReplyBoardVO vo);
+	public void boardReplyInsert(int pno,ReplyBoardVO vo);
 }

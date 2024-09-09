@@ -87,6 +87,12 @@
 					<tr>
 						<td width="10%" class="text-center">${count }</td>
 						<td width="45%">
+							<c:if test="${vo.group_tab>0 }">
+								<c:forEach var="i" begin="1" end="${vo.group_tab }">
+									&nbsp;&nbsp;
+								</c:forEach>
+								<img src="../board/images/re_icon.png">
+							</c:if>
 							<a href="../board/detail.do?no=${vo.no }">${vo.subject }</a>
 							&nbsp;
 							<c:if test="${today==vo.dbday }">
