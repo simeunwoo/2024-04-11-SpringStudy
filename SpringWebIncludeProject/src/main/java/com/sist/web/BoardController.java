@@ -131,4 +131,15 @@ public class BoardController {
 		 */
 		return "main/main"; // forward => request 전송 => class화 시킨 것이 Model
 	}
+	
+	@GetMapping("board/update.do")
+	public String board_update(int no,Model model)
+	{
+		ReplyBoardVO vo=bService.boardUpdateData(no);
+		
+		model.addAttribute("vo", vo);
+		
+		model.addAttribute("main_jsp", "../board/update.jsp");
+		return "main/main";
+	}
 }

@@ -35,4 +35,10 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return dao.boardDetailData(no);
 	}
+
+	@Override
+	public ReplyBoardVO boardUpdateData(int no) {
+		// TODO Auto-generated method stub
+		return dao.boardUpdateData(no);
+	}
 }

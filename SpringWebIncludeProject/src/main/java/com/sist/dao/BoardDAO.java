@@ -35,4 +35,9 @@ public class BoardDAO {
 		mapper.boardHitIncrement(no);
 		return mapper.boardDetailData(no);
 	}
+
+	public ReplyBoardVO boardUpdateData(int no)
+	{
+		return mapper.boardDetailData(no);
+	}
 }
