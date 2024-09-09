@@ -37,6 +37,14 @@ public interface BoardMapper {
 	public ReplyBoardVO boardDetailData(int no);
 	
 	// 수정
+	@Select("SELECT pwd FROM spring_replyboard "
+			+ "WHERE no=#{no}")
+	public String boardGetPassword(int no);
+	
+	@Update("UPDATE spring_replyboard SET "
+			+ "name=#{name},subject=#{subject},content=#{content} "
+			+ "WHERE no=#{no}")
+	public void boardUpdate(ReplyBoardVO vo);
 	
 	// 삭제
 	

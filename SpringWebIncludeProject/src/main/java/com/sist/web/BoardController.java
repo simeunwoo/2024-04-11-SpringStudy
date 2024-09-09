@@ -142,13 +142,4 @@ public class BoardController {
 		model.addAttribute("main_jsp", "../board/update.jsp");
 		return "main/main";
 	}
-	
-	@PostMapping("board/update_ok.do")
-	public void board_update_ok(ReplyBoardVO vo)
-	{
-		System.out.println("이름 : "+vo.getName());
-		System.out.println("제목 : "+vo.getSubject());
-		System.out.println("내용 : "+vo.getContent());
-		System.out.println("비밀 번호 : "+vo.getPwd());
-	}
 }
