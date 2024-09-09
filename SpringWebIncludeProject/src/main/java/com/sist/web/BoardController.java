@@ -142,4 +142,13 @@ public class BoardController {
 		model.addAttribute("main_jsp", "../board/update.jsp");
 		return "main/main";
 	}
+	
+	@GetMapping("board/reply.do")
+	public String board_reply(int no,Model model)
+	{
+		model.addAttribute("no", no);
+		
+		model.addAttribute("main_jsp", "../board/reply.jsp");
+		return "main/main";
+	}
 }
