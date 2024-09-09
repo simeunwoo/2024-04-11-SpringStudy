@@ -24,4 +24,14 @@ public class BoardRestController {
 		
 		return result;
 	}
+	
+	@PostMapping("board/delete_ok.do")
+	public String board_delete_ok(int no,String pwd)
+	{
+		String result="no";
+		
+		result=b.boardDelete(no, pwd);
+		
+		return result;
+	}
 }

@@ -93,7 +93,12 @@
 								</c:forEach>
 								<img src="../board/images/re_icon.png">
 							</c:if>
-							<a href="../board/detail.do?no=${vo.no }">${vo.subject }</a>
+							<c:if test="${vo.subject!=type }">
+								<a href="../board/detail.do?no=${vo.no }">${vo.subject }</a>
+							</c:if>
+							<c:if test="${vo.subject==type }">
+								<span style="color:gray">${vo.subject }</span>
+							</c:if>
 							&nbsp;
 							<c:if test="${today==vo.dbday }">
 								<sup><img src="../board/images/new.gif"></sup>

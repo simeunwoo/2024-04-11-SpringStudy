@@ -15,11 +15,39 @@
 	width: 300px;
 }
 </style>
+<!--
+	DI / AOP / MVC / ORM => 입문 요구 사항
+	                  = Transaction
+	Tiles / Validation
+-->
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 $(function(){
 	$('#delBtn').click(function(){
-		
+		let no=$('#no').val()
+		let pwd=$('#pwd').val()
+		$.ajax({
+			type:'post',
+			url:'../board/delete_ok.do',
+			data:{"no":no,"pwd":pwd},
+			success:function(result)
+			{
+				if(result==='yes')
+				{
+					location.href="../board/list.do"
+				}
+				else
+				{
+					alert("잘못된 비밀 번호입니다")
+					$('#pwd').val("")
+					$('#pwd').focus()
+				}
+			},
+			error:function(request,status,error)
+			{
+				console.log(error)
+			}
+		})
 	})
 })
 </script>
