@@ -14,7 +14,7 @@ public interface BoardMapper {
 			+ "FROM (SELECT no,subject,name,regdate,hit,group_tab,rownum as num "
 			+ "FROM (SELECT no,subject,name,regdate,hit,group_tab "
 			+ "FROM spring_replyboard "
-			+ "ORDER BY no DESC)) "
+			+ "ORDER BY group_id DESC,group_step ASC)) "
 			+ "WHERE num BETWEEN #{start} AND #{end}")
 	public List<ReplyBoardVO> boardListData(@Param("start") int start,@Param("end") int end);
 	
@@ -49,6 +49,27 @@ public interface BoardMapper {
 	// 삭제
 	
 	// 답변
+	@Select("SELECT group_id,group_step,group_tab "
+			+ "FROM spring_replyboard "
+			+ "WHERE no=#{no}")
+	public ReplyBoardVO boardGroupData(int no);
+	
+	@Update("UPDATE spring_replyboard SET "
+			+ "group_step=group_step+1 "
+			+ "WHERE group_id=#{group_id} "
+			+ "AND group_step>#{group_step}")
+	public void boardGroupStepIncrement(ReplyBoardVO vo);
+	
+	@Insert("INSERT INTO spring_replyboard(no,name,subject,content,pwd,"
+			+ "group_id,group_step,group_tab,root) "
+			+ "VALUES(srb_no_seq.nextval,#{name},#{subject},#{content},#{pwd},"
+			+ "#{group_id},#{group_step},#{group_tab},#{root}")
+	public void boardReplyInsert(ReplyBoardVO vo);
+	
+	@Update("UPDATE spring_replyboard SET "
+			+ "depth=depth+1 "
+			+ "WHERE no=#{no}")
+	public void boardDepthIncrement(int no);
 	
 	// 검색 = 동적 쿼리
 }

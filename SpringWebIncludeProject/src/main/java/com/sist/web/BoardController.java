@@ -151,4 +151,12 @@ public class BoardController {
 		model.addAttribute("main_jsp", "../board/reply.jsp");
 		return "main/main";
 	}
+	
+	@PostMapping("board/reply_ok.do")
+	public String board_reply_ok(int pno,ReplyBoardVO vo)
+	{
+		// 처리(만 하면 되지 않겠는가)
+		
+		return "redirect:../board/list.do";
+	}
 }
