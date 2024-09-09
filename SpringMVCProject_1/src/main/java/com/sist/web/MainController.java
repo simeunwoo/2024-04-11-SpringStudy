@@ -92,6 +92,19 @@ package com.sist.web;
 	= security : 보안
 	= batch : 스케줄러
 	= data : 분석
+	
+	### 1. 라이브러리 추가 : pom.xml / gradle : boot에서 주로 사용
+		pom.xml : maven
+		gradle : properties
+	### 2. 버전 변경 : 기본 1.6 ===> 1.8 이상
+	### 3. web.xml 변경
+	4. 패키지 => 클래스
+	### 5. 메모리 할당 요청
+		=> application.xml
+	6. 클래스마다 어노테이션 올리기
+	7. DB 연동
+	8. JSP에서 화면 출력
+	(### : 실무에서 이미 세팅되어 있을 부분)
  */
 public class MainController {
 
