@@ -27,6 +27,10 @@
 						<td width="80%">
 							<input type="text" name="name" size="20" class="input-sm" required>
 							<input type="hidden" name="pno" value="${no }">
+							<!--
+								답변 대상 번호 : pno
+								답변은 insert
+							-->
 						</td>
 					</tr>
 					<tr>
