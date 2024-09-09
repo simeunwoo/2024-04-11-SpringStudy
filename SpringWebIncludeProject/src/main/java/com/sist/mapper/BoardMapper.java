@@ -1,6 +1,7 @@
 package com.sist.mapper;
 import java.util.*;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -47,6 +48,29 @@ public interface BoardMapper {
 	public void boardUpdate(ReplyBoardVO vo);
 	
 	// 삭제
+	// 1. 비밀 번호 확인 => 수정 구문과 같다
+	
+	// 2. root, depth 읽기 => 삭제 대상
+	@Select("SELECT root,depth FROM spring_replyboard "
+			+ "WHERE no=#{no}")
+	public ReplyBoardVO boardDeleteInfoData(int no);
+	
+	// 3. depth==0 => 삭제
+	@Delete("DELETE FROM spring_replyboard "
+			+ "WHERE no=#{no}")
+	public void boardDelete(int no);
+	
+	// 4. depth!=0 => 수정 => "관리자가 삭제한 게시물입니다"
+	@Update("UPDATE spring_replyboard SET "
+			+ "subject='관리자가 삭제한 게시물입니다',content='관리자가 삭제한 게시물입니다' "
+			+ "WHERE no=#{no}")
+	public void boardSubjectUpdate(int no);
+	
+	// 5. 삭제 시에 depth를 감소
+	@Update("UPDATE spring_replyboard SET "
+			+ "depth=depth-1 "
+			+ "WHERE no=#{no}")
+	public void boardDepthDecrement(int no);
 	
 	// 답변
 	@Select("SELECT group_id,group_step,group_tab "

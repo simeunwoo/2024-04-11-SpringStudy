@@ -3,6 +3,7 @@ import java.util.*;
 import com.sist.mapper.*;
 import com.sist.vo.*;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -133,5 +134,57 @@ public class BoardDAO {
 		{
 			conn.setAutoCommit(true); // after
 		} */
+	}
+	
+	/*
+	@Select("SELECT pwd FROM spring_replyboard "
+			+ "WHERE no=#{no}")
+	public String boardGetPassword(int no);
+	
+	@Select("SELECT root,depth FROM spring_replyboard "
+			+ "WHERE no=#{no}")
+	public ReplyBoardVO boardDeleteInfoData(int no);
+	
+	@Delete("DELETE FROM spring_replyboard "
+			+ "WHERE no=#{no}")
+	public void boardDelete(int no);
+	
+	@Update("UPDATE spring_replyboard SET "
+			+ "subject='관리자가 삭제한 게시물입니다',content='관리자가 삭제한 게시물입니다' "
+			+ "WHERE no=#{no}")
+	public void boardSubjectUpdate(int no);
+	
+	@Update("UPDATE spring_replyboard SET "
+			+ "depth=depth-1 "
+			+ "WHERE no=#{no}")
+	public void boardDepthDecrement(int no);
+	 */
+	@Transactional(propagation=Propagation.REQUIRED,rollbackFor=Exception.class)
+	public String boardDelete(int no,String pwd)
+	{
+		String result="no";
+		
+		// 1) 비밀 번호 검색
+		String db_pwd=mapper.boardGetPassword(no);
+		if(db_pwd.equals(pwd))
+		{
+			result="yes";
+			
+			// 2) root, depth 읽어오기
+			ReplyBoardVO vo=mapper.boardDeleteInfoData(no);
+			if(vo.getDepth()==0) // 답변이 없는 경우 => 삭제 처리
+			{
+				mapper.boardDelete(no);
+			}
+			else // 답변이 있는 경우
+			{
+				mapper.boardSubjectUpdate(no);
+			}
+			
+			// depth 감소
+			mapper.boardDepthDecrement(vo.getRoot());		
+		}
+		
+		return result;
 	}
 }
