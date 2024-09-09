@@ -89,9 +89,9 @@ package com.sist.web;
                                                 개발자 : JSP
                                              ===============
 	------------------------------------------------------------- SpringFramework
-	= security
-	= batch
-	= data
+	= security : 보안
+	= batch : 스케줄러
+	= data : 분석
  */
 public class MainController {
 
