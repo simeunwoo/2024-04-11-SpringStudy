@@ -13,6 +13,46 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller // 조립기 => Service + VO + DAO => 결과값 추출 => JSP로 전송
 // DispatcherServlet과 연결
+/*
+	1) 요청 받기 => DispatcherServlet
+	2) Model을 조회 => HandlerMapping
+		2-1) Model 메소드 호출 => HandlerMapping
+	3) JSP를 찾는다 => ViewResolver
+		3-1) JSP로 request를 전송 => ViewResolver
+	4) JSP에 request를 받아서 화면에 출력
+	5) 브라우저에서 읽기
+	
+	=> 스프링 : Model, JSP, DAO, VO, Service
+	
+	Model
+		화면 제어 : @Controller (JSP)
+		데이터 제어 : @RestController (JavaScript, Kotlin ...)
+		@GetMapping / @PostMapping
+		리턴형 : void / String
+		매개 변수 : getParameter를 대체
+	
+	JSP
+		화면을 유지 : JavaScript (Ajax => Vue => React)
+		다른 화면으로 변경 : <a> / <form>
+	
+	DAO
+		SQL 문장 제어 : Mapper
+		
+	VO
+	
+	Service
+	
+	                          유지 보수
+	                             |
+	Model =====> Service =====> DAO =====> 오라클
+	=====> DAO =====> Service =====> Model
+	
+	스프링의 기조 : 결합성이 낮은 프로그램
+	            ----------------
+	            수정 시에 다른 클래스에 영향이 없게 만든다
+	            ===============================
+	            POJO => 독립적인 클래스
+ */
 public class BoardController {
 	// 객체를 이용하여 @Autowired를 사용하여 주소값을 받으면 => 속도가 늦다
 	// 가급적이면 생성자를 이용한다 (객체보다는 생성자 선호)
