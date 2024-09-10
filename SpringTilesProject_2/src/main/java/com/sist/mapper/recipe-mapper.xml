@@ -7,7 +7,9 @@
  		SELECT no,title,poster,chef,num
  		FROM (SELECT no,title,poster,chef,rownum as num
  		FROM (SELECT no,title,poster,chef
- 		FROM recipe ORDER BY no ASC))
+ 		FROM recipe
+ 		WHERE no IN(SELECT no FROM recipe INTERSECT (SELECT no FROM recipeDetail))
+ 		ORDER BY no ASC))
  		WHERE num BETWEEN #{start} AND #{end}
  	</select>
  </mapper>
