@@ -128,4 +128,13 @@ public class RecipeController {
 		
 		return "recipe/chef_list";
 	}
+	
+	@GetMapping("recipe/chef_make.do")
+	public String recipe_chef_make(String chef,Model model)
+	{
+		// DB 연동
+		
+		
+		return "recipe/chef_make";
+	}
 }
