@@ -16,6 +16,19 @@ public class RecipeController {
 	private RecipeDAO rDao;
 	
 	@GetMapping("recipe/detail.do")
+	// recipe/detail.do?no=548 => 매개 변수 => DispatcherServlet
+	/*
+	 * 	1) int
+	 * 	2) String
+	 * 	3) String[]
+	 * 	4) ~VO
+	 * 	============
+	 * 	1. Model : 전송할 데이터가 있는 경우
+	 * 	2. HttpSession
+	 * 	3. HttpServletRequest / HttpServletResponse
+	 * 		=> Cookie / 업로드
+	 * 	4. RedirectAttributes : sendRedirect 시에 데이터 전송
+	 */
 	public String recipe_detail(int no,Model model)
 	{
 		// DB 연동
