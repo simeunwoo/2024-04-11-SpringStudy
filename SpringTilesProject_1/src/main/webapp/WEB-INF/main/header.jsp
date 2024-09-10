@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<center>
+		<h1>Header : 로그, 검색창</h1>
+	</center>
 </body>
 </html>

@@ -5,11 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+location.href="main/main.do"
+</script>
 </head>
 <body>
-	<ul>
-		<li><a href="../board/list.do">게시판</a></li>
-		<li><a href="../notice/list.do">공지 사항</a></li>
-	</ul>
+
 </body>
 </html>
