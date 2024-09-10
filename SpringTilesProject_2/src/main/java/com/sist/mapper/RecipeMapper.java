@@ -2,6 +2,7 @@ package com.sist.mapper;
 import java.util.*;
 
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.sist.vo.*;
 
@@ -22,4 +23,13 @@ public interface RecipeMapper {
 	
 	@Select("SELECT CEIL(COUNT(*)/20.0) FROM recipe")
 	public int recipeTotalPage();
+	
+	@Select("SELECT * FROM recipe "
+			+ "WHERE no=#{no}")
+	public RecipeDetailVO recipeDetailData(int no);
+	
+	@Update("UPDATE recipe SET "
+			+ "hit=hit+1 "
+			+ "WHERE no=#{no}")
+	public void recipeHitIncrement(int no);
 }
