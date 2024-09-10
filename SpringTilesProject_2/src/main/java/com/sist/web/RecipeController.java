@@ -11,12 +11,13 @@ import com.sist.vo.*;
 import java.util.*;
 
 @Controller
+@RequestMapping("recipe/") // 중복 제거는 @RequestMapping만 가능
 public class RecipeController {
 
 	@Autowired
 	private RecipeDAO rDao;
 	
-	@GetMapping("recipe/detail.do")
+	@GetMapping("detail.do")
 	// recipe/detail.do?no=548 => 매개 변수 => DispatcherServlet
 	/*
 	 * 	1) int
@@ -58,7 +59,7 @@ public class RecipeController {
 	}
 	
 	// 실제 검색 : POST / 페이지 : GET => POST와 GET을 동시에 사용
-	@RequestMapping("recipe/find.do")
+	@RequestMapping("find.do")
 	public String recipe_find(String fd,String page,Model model)
 	{
 		if(fd==null)
@@ -97,7 +98,7 @@ public class RecipeController {
 		// ../main/main.jsp (X)
 	}
 	
-	@GetMapping("recipe/chef_list.do")
+	@GetMapping("chef_list.do")
 	public String recipe_chef_list(String page,Model model)
 	{
 		if(page==null)
@@ -129,7 +130,7 @@ public class RecipeController {
 		return "recipe/chef_list";
 	}
 	
-	@GetMapping("recipe/chef_make.do")
+	@GetMapping("chef_make.do")
 	public String recipe_chef_make(String page,String chef,Model model)
 	{
 		// DB 연동
