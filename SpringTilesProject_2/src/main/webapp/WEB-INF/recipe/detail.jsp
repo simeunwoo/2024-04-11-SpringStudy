@@ -70,7 +70,7 @@
 			</tr>
 			<tr>
 				<td class="text-right">
-					<a href="../main/main.do" class="btn btn-sm btn-danger">목록</a>
+					<a href="javascript:history.back()" class="btn btn-sm btn-danger">목록</a>
 				</td>
 			</tr>
 		</table>

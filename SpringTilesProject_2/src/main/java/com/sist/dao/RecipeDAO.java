@@ -27,4 +27,24 @@ public class RecipeDAO {
 		mapper.recipeHitIncrement(no);
 		return mapper.recipeDetailData(no);
 	}
+	
+	public List<RecipeVO> recipeFindData(Map map)
+	{
+		return mapper.recipeFindData(map); // 동적 쿼리
+	}
+	
+	public int recipeFindTotalPage(Map map)
+	{
+		return mapper.recipeFindTotalPage(map);
+	}
+	
+	public List<ChefVO> chefListData(Map map)
+	{
+		return mapper.chefListData(map);
+	}
+	
+	public int chefTotalPage()
+	{
+		return mapper.chefTotalPage();
+	}
 }
