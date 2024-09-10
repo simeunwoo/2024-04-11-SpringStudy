@@ -44,7 +44,7 @@ public class RecipeController {
 		String[] foodMake=vo.getFoodmake().split("\n");
 		for(String fm:foodMake)
 		{
-			StringTokenizer st=new StringTokenizer(fm, "^");
+			StringTokenizer st=new StringTokenizer(fm,"^");
 			mList.add(st.nextToken());
 			iList.add(st.nextToken());
 		}

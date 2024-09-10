@@ -25,7 +25,7 @@ public interface RecipeMapper {
 			+ "WHERE no IN(SELECT no FROM recipe INTERSECT (SELECT no FROM recipeDetail))")
 	public int recipeTotalPage();
 	
-	@Select("SELECT * FROM recipe "
+	@Select("SELECT * FROM recipeDetail "
 			+ "WHERE no=#{no}")
 	public RecipeDetailVO recipeDetailData(int no);
 	
