@@ -47,4 +47,14 @@ public class RecipeDAO {
 	{
 		return mapper.chefTotalPage();
 	}
+	
+	public List<RecipeVO> chefMakeData(Map map)
+	{
+		return mapper.chefMakeData(map);
+	}
+	
+	public int chefMakeTotalPage(Map map)
+	{
+		return mapper.chefMakeTotalPage(map);
+	}
 }
