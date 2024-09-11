@@ -33,7 +33,7 @@
 
     <!-- Background Pattern Swither -->
     <div id="pattern-switcher">
-        Bg Pattern
+        Siuuuuuuuuuuuuuuuu
     </div>
     <div id="patter-close">
         <i class="fa fa-times" aria-hidden="true"></i>
