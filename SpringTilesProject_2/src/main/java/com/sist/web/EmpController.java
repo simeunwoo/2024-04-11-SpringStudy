@@ -5,6 +5,8 @@ import com.sist.dao.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class EmpController {
@@ -16,4 +18,15 @@ public class EmpController {
 	
 	// 사용자 요청별로 처리 => @GetMapping / @PostMapping / @RequestMapping
 	// 스프링 6 => @RequestMapping, Tiles 사라짐
+	@GetMapping("emp/list.do")
+	// <form>, ajax => @PostMapping => 보안 (로그인, 회원 가입) => 데이터를 많이 전송하는 경우
+	public String emp_list(Model model)
+	{
+		// 데이터베이스 연동 => Mapper (선언 = 자동 구현) => DAO (스프링에서 구현해준 메소드 모음)
+		List<EmpVO> list=eDao.empListData();
+		
+		model.addAttribute("list", list);
+		
+		return "emp/list";
+	}
 }
