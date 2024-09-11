@@ -8,7 +8,7 @@
 </head>
 <body>
 	<div class="row">
-		<h3 class="text-center">마이 페이지</h3>
+		<h3 class="text-center">관리자 페이지</h3>
 	</div>
 </body>
 </html>

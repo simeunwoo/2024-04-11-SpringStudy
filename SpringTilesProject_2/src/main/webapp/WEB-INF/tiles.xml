@@ -15,6 +15,22 @@
 		       ...
 		       "recipe/chef/list" => (X) => */*/* 에 해당
 	-->
+	<definition name="mypage" template="/WEB-INF/mypage/mypage_main.jsp">
+		<put-attribute name="header" value="/WEB-INF/main/header.jsp"/>
+		<put-attribute name="menu" value="/WEB-INF/mypage/mypage_menu.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/mypage/mypage_content.jsp"/>		
+	</definition>
+	<definition name="mypage/*" extends="mypage">
+		<put-attribute name="content" value="/WEB-INF/mypage/{1}.jsp"/>
+	</definition>
+	<definition name="adminpage" template="/WEB-INF/adminpage/adminpage_main.jsp">
+		<put-attribute name="header" value="/WEB-INF/main/header.jsp"/>
+		<put-attribute name="menu" value="/WEB-INF/adminpage/adminpage_menu.jsp"/>
+		<put-attribute name="content" value="/WEB-INF/adminpage/adminpage_content.jsp"/>		
+	</definition>
+	<definition name="adminpage/*" extends="adminpage">
+		<put-attribute name="content" value="/WEB-INF/adminpage/{1}.jsp"/>
+	</definition>
 	<definition name="*/*" extends="main">
 		<put-attribute name="home" value="/WEB-INF/{1}/{2}.jsp"/>
 	</definition>
