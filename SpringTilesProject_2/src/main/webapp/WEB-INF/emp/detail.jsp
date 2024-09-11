@@ -44,7 +44,7 @@
 			</tr>
 			<tr>
 				<td colspan="2" class="text-center">
-					<a href="javascript.history.back()" class="btn btn-sm btn-danger">목록</a>
+					<a href="javascript:history.back()" class="btn btn-sm btn-danger">목록</a>
 				</td>
 			</tr>
 		</table>
