@@ -29,4 +29,14 @@ public class EmpController {
 		
 		return "emp/list";
 	}
+	
+	@GetMapping("emp/detail.do")
+	public String emp_detail(int empno,Model model)
+	{
+		EmpVO vo=eDao.empDetailData(empno);
+		
+		model.addAttribute("vo", vo);
+		
+		return "emp/detail";
+	}
 }

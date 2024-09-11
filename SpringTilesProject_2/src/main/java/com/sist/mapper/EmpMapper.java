@@ -21,7 +21,9 @@ public interface EmpMapper {
 	 */
 	public List<EmpVO> empListData();
 	
-//	@ResultMap("empMap") // => XML (id)
+	// 방법 (1)
+//	@ResultMap("empMap") // => XML에 등록된 <resultMap> => 매개 변수 : id명
+	// 방법 (2)
 	@Results({ // <resultMap ~>와 같다
 		@Result(property="dvo.dname",column="dname"), // <result ~>와 같다
 		@Result(property="dvo.loc",column="loc"),

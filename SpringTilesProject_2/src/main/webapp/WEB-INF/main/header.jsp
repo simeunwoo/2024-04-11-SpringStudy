@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Siuuuuuuuuuuuuuuuuuuuuuu</title>
 </head>
 <body>
 	<nav class="navbar navbar-inverse">
@@ -16,7 +16,8 @@
 	      <li class="active"><a href="..main/main.do">Home</a></li>
 	      <li><a href="../recipe/find.do">레시피 검색</a></li>
 	      <li><a href="../recipe/chef_list.do">셰프</a></li>
-	      <li><a href="../emp/list.do">사원(조인)</a></li>
+	      <li><a href="../emp/list.do">사원 (조인)</a></li>
+	      <li><a href="../board/list.do">Front 연습 (게시판)</a></li>
 	    </ul>
 	  </div>
 	</nav>
