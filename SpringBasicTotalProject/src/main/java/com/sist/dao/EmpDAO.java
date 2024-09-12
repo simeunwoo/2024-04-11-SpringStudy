@@ -46,4 +46,9 @@ public class EmpDAO {
 		return mapper.empEnameList();
 		
 	}
+	
+	public List<EmpVO> empNameFindData(Map map)
+	{
+		return mapper.empNameFindData(map);
+	}
 }
