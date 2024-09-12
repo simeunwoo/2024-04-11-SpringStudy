@@ -44,4 +44,21 @@ public interface EmpMapper {
 			
 			===> WHERE ename IN
 	 */
+	
+	@Select({"<script>"
+			+ "SELECT empno,ename,job,TO_CHAR(hiredate,'YYYY-MM-DD') as dbday,sal,deptno "
+			+ "FROM emp "
+			+ "<if test=\"fd!='all'\">"
+			+ "WHERE ${fd} LIKE '%'||#{ss}||'%'"
+			+ "</if>"
+			+ "</script>"})
+	/*
+	 * 	fd = ename, ss = king
+	 * 	${fd} => ename (컬럼명/테이블명 => ''을 붙이지 않는다)
+	 * 	#{ss} => 'king'
+	 * 
+	 * 	${} => table_name, column_name
+	 * 	#{} => 나머지 경우 ...
+	 */
+	public List<EmpVO> empFindData(Map map);
 }

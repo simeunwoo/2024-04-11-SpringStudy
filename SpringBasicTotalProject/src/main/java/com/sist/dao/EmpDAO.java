@@ -51,4 +51,9 @@ public class EmpDAO {
 	{
 		return mapper.empNameFindData(map);
 	}
+	
+	public List<EmpVO> empFindData(Map map)
+	{
+		return mapper.empFindData(map);
+	}
 }

@@ -55,12 +55,21 @@ public class MainController {
 		return "main/name_find_ok";
 	}
 	
-	@GetMapping("main/find.do")
+	@RequestMapping("main/find.do")
 	public String main_find(String fd,String ss,Model model)
 	{
+		if(fd==null)
+			fd="all";
+		
 		// 데이터베이스 연동
+		Map map=new HashMap();
+		map.put("fd", fd);
+		map.put("ss", ss.toUpperCase());
+		
+		List<EmpVO> list=eDao.empFindData(map);
 		
 		// 데이터 전송
+		model.addAttribute("list", list);
 		
 		return "main/find";
 	}
