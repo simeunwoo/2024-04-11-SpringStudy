@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.*;
 import com.sist.vo.*;
@@ -52,5 +53,15 @@ public class MainController {
 		model.addAttribute("list", list);
 		
 		return "main/name_find_ok";
+	}
+	
+	@GetMapping("main/find.do")
+	public String main_find(String fd,String ss,Model model)
+	{
+		// 데이터베이스 연동
+		
+		// 데이터 전송
+		
+		return "main/find";
 	}
 }

@@ -19,7 +19,7 @@ public interface EmpMapper {
 	@Select("SELECT DISTINCT ename FROM emp")
 	public List<String> empEnameList();
 	
-	@Select({"<script>"
+/*	@Select({"<script>"
 			+ "SELECT empno,ename,job,TO_CHAR(hiredate,'YYYY-MM-DD DY') as dbday,sal,deptno "
 			+ "FROM emp "
 			+ "<trim prefix=\"WHERE ename IN(\" suffix=\")\" suffixOverrides\")\" "
@@ -28,7 +28,7 @@ public interface EmpMapper {
 			+ "#{name}"
 			+ "</foreach>"
 			+ "</trim>"
-			+ "</script>"})
+			+ "</script>"}) */
 	public List<EmpVO> empNameFindData(Map map);
 	/*
 	 * 	trim : 추가, 삭제
