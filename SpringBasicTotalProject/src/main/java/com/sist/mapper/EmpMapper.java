@@ -61,4 +61,20 @@ public interface EmpMapper {
 	 * 	#{} => 나머지 경우 ...
 	 */
 	public List<EmpVO> empFindData(Map map);
+	
+	// 다중 조건 => HRD, 시청, 잡포털 ...
+	/*
+	 * 	동적 쿼리
+	 * 
+	 * 		<foreach> => IN
+	 * 
+	 * 		<trim> => 제거, 추가
+	 * 
+	 * 		<if> => 단일 조건문
+	 * 
+	 * 		<choose> => 다중 조건문
+	 * 			<when>
+	 * 			<otherwise>
+	 * 		</choose>
+	 */
 }
