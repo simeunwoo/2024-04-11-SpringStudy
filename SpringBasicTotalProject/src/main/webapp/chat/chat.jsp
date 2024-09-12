@@ -39,14 +39,14 @@ function connection(){
    websocket.onmessage=onMessage
 }
 function onOpen(event){
-   alert("서버 연결 완")
+   alert("서버 연결 완료")
 }
 function onClose(event) {
    alert("서버 연결 종료")   
 }
 function onMessage(event){
    let data=event.data;
-   if(data.substring(0,4)==="msg:") {// 100 200 300 
+   if(data.substring(0,4)==="msg:") { // 100 200 300 
        appendMessage(data.substring(4))
    }
 }
