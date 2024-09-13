@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.sist.vo.RecipeDetailVO;
 import com.sist.vo.RecipeVO;
 import com.sist.dao.*;
 
@@ -24,6 +25,12 @@ public class RecipeServiceImpl implements RecipeService {
 	public int recipeTotalPage() {
 		// TODO Auto-generated method stub
 		return dao.recipeTotalPage();
+	}
+
+	@Override
+	public RecipeDetailVO recipeDetailData(int no) {
+		// TODO Auto-generated method stub
+		return dao.recipeDetailData(no);
 	}
 
 }
