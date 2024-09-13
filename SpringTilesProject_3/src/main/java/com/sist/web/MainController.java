@@ -1,7 +1,7 @@
 package com.sist.web;
 import java.util.*;
-import com.sist.vo.*;
-import com.sist.dao.*;
+// import com.sist.vo.*;
+// import com.sist.dao.*;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
