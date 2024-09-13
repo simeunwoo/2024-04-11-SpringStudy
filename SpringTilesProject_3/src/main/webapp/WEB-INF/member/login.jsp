@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <style type="text/css">
 .container{
-	margin-top: 300px;
+	margin-top: 100px;
 }
 .row{
 	margin: 0px auto;
@@ -24,13 +24,13 @@
 				<table class="table">
 					<tr>
 						<th width="30%" class="text-right">ID</th>
-						<td width="70%" >
+						<td width="70%">
 							<input type="text" name="id" size="20" class="input-sm">
 						</td>
 					</tr>
 					<tr>
 						<th width="30%" class="text-right">PWD</th>
-						<td width="70%" >
+						<td width="70%">
 							<input type="password" name="pwd" size="20" class="input-sm">
 						</td>
 					</tr>
