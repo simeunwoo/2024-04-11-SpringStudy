@@ -27,6 +27,11 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
  * 		| request
  * 		| ------------------------------- afterCompletion() : 권한별 처리
  * 		JSP
+ * 
+ * 	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * 
+ * 	AOP : 트랜잭션 / 보안
+ * 		=> 사용자 정의 : 로그 파일
  */
 public class MainInterceptor extends HandlerInterceptorAdapter {
 
