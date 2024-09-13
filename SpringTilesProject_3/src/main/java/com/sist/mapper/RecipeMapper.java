@@ -17,7 +17,7 @@ public interface RecipeMapper {
 	// rownum => Top-N : 중간의 데이터를 읽을 수 없다
 	public List<RecipeVO> recipeListData(@Param("start") int start,@Param("end") int end);
 	
-	@Select("SELECT CEIL(COUNT(*)/20.0) FROM recipe "
+	@Select("SELECT CEIL(COUNT(*)/12.0) FROM recipe "
 			+ "WHERE no IN(SELECT no FROM recipe INTERSECT SELECT no FROM recipeDetail)")
 	public int recipeTotalPage();
 	/*
