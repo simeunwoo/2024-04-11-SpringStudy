@@ -3,14 +3,15 @@ import java.util.*;
 
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.sist.vo.*;
 
 public interface RecipeMapper {
 
-	@Select("SELECT no,title,chef,poster,num "
-			+ "FROM (SELECT no,title,chef,poster,rownum as num "
-			+ "FROM (SELECT /*+ INDEX_ASC(recipe recipe_no_pk)*/no,title,chef,poster "
+	@Select("SELECT no,title,chef,poster,hit,num "
+			+ "FROM (SELECT no,title,chef,poster,hit,rownum as num "
+			+ "FROM (SELECT /*+ INDEX_ASC(recipe recipe_no_pk)*/no,title,chef,poster,hit "
 			+ "FROM recipe "
 			+ "WHERE no IN(SELECT no FROM recipe INTERSECT SELECT no FROM recipeDetail))) "
 			+ "WHERE num BETWEEN #{start} AND #{end}")
@@ -26,4 +27,14 @@ public interface RecipeMapper {
 	 * 	MINUS : 차집합
 	 * 	UNION ALL : 합집합 (중복 데이터 포함)
 	 */
+	
+	// 상세 보기 / make => like / jjim
+	@Update("UPDATE recipe SET "
+			+ "hit=hit+1 "
+			+ "WHERE no=#{no}")
+	public void recipeHitIncrement(int no);
+	
+	@Select("SELECT * FROM recipeDetail "
+			+ "WHERE no=#{no}")
+	public RecipeDetailVO recipeDetailData(int no);
 }
