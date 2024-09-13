@@ -15,12 +15,15 @@ WAR                NUMBER(4,2)
 TEAM               VARCHAR2(20)  
 LOGO               VARCHAR2(200) 
 CAREER             VARCHAR2(200) 
-AGE                NUMBER 
+AGE                NUMBER
+INNING             NUMBER        
+SAVE               NUMBER        
+HOLD               NUMBER  
  */
 @Data
 public class PitcherVO {
 
-	private int pno,game,win,lose,hit,strikeout,ball,age;
+	private int pno,game,win,lose,hit,strikeout,ball,age,inning,save,hold;
 	private double era,war;
 	private String name,team,logo,career;
 }

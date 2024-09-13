@@ -50,7 +50,7 @@ public class BatterDAO {
 		   {
 			   getConnection();
 			   String sql="INSERT INTO batter(bno,age,game,h1,h2,h3,homerun,rbi,sb,ball,strikeout,war,name,team,position,career,logo) "
-						     +"VALUES(batter_bno_seq.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+						     +"VALUES(batter_bno_seq.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			   ps=conn.prepareStatement(sql);
 			   ps.setInt(1, vo.getBno());
 			   ps.setInt(2, vo.getAge());
@@ -60,15 +60,16 @@ public class BatterDAO {
 			   ps.setInt(6, vo.getH3());
 			   ps.setInt(7, vo.getHomerun());
 			   ps.setInt(8, vo.getRbi());
-			   ps.setInt(9, vo.getSb());
-			   ps.setInt(10, vo.getBall());
-			   ps.setInt(11, vo.getStrikeout());
-			   ps.setDouble(12, vo.getWar());
-			   ps.setString(13, vo.getName());
-			   ps.setString(14, vo.getTeam());
-			   ps.setString(15, vo.getPosition());
-			   ps.setString(16, vo.getCareer());
-			   ps.setString(17, vo.getLogo());
+			   ps.setInt(9, vo.getBall());
+			   ps.setInt(10, vo.getStrikeout());
+			   ps.setDouble(11, vo.getWar());
+			   ps.setString(12, vo.getName());
+			   ps.setString(13, vo.getTeam());
+			   ps.setString(14, vo.getPosition());
+			   ps.setString(15, vo.getCareer());
+			   ps.setString(16, vo.getLogo());
+			   ps.setInt(17, vo.getRun());
+			   ps.setInt(18, vo.getTasoo());
 			   ps.executeUpdate();
 		   }catch(Exception ex)
 		   {

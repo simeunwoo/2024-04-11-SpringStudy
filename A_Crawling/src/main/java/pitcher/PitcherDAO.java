@@ -50,7 +50,7 @@ public class PitcherDAO {
 		   {
 			   getConnection();
 			   String sql="INSERT INTO pitcher(pno,name,game,win,lose,hit,strikeout,ball,era,war,team,logo,career,age) "
-						     +"VALUES(pitcher_pno_seq.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+						     +"VALUES(pitcher_pno_seq.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			   ps=conn.prepareStatement(sql);
 			   ps.setInt(1, vo.getPno());
 			   ps.setString(2, vo.getName());
@@ -66,6 +66,9 @@ public class PitcherDAO {
 			   ps.setString(12, vo.getLogo());
 			   ps.setString(13, vo.getCareer());
 			   ps.setInt(14, vo.getAge());
+			   ps.setInt(15, vo.getInning());
+			   ps.setInt(16, vo.getSave());
+			   ps.setInt(17, vo.getHold());
 			   ps.executeUpdate();
 		   }catch(Exception ex)
 		   {
