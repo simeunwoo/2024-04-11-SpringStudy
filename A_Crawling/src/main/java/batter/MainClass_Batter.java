@@ -6,11 +6,11 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import java.io.IOException;
 
-public class MainClass {
+public class MainClass_Batter {
 
     public static void main(String[] args) {
         // MainClass 인스턴스 생성 및 메서드 호출
-        MainClass mc = new MainClass();
+        MainClass_Batter mc = new MainClass_Batter();
         mc.batterData();
     }
     
