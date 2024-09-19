@@ -26,93 +26,50 @@ public class MainClass_Batter {
                     Element pitcherCheck = doc.selectFirst("div.pitcherInfo");
                     if (pitcherCheck != null) {
                         System.out.println("투수 정보가 포함되어 있어 크롤링을 중지합니다.");
-                        continue; // 다음 URL로 넘어갑니다.
+                        continue;
                     }
 
                     // 데이터 추출
-                    Element nameElement = doc.selectFirst("div.playerName");
-                    String name = (nameElement != null) ? nameElement.text() : "해당 사항 없음";
-                    
-                    // 다른 데이터 추출 (예: 나이, 팀, 포지션 등)
-                    Element ageElement = doc.selectFirst("div.age");
-                    String age = (ageElement != null) ? ageElement.text() : "해당 사항 없음";
-
-                    Element gameElement = doc.selectFirst("div.game");
-                    String game = (gameElement != null) ? gameElement.text() : "해당 사항 없음";
-
-                    Element h1Element = doc.selectFirst("div.h1");
-                    String h1 = (h1Element != null) ? h1Element.text() : "해당 사항 없음";
-
-                    Element h2Element = doc.selectFirst("div.h2");
-                    String h2 = (h2Element != null) ? h2Element.text() : "해당 사항 없음";
-
-                    Element h3Element = doc.selectFirst("div.h3");
-                    String h3 = (h3Element != null) ? h3Element.text() : "해당 사항 없음";
-
-                    Element homerunElement = doc.selectFirst("div.homerun");
-                    String homerun = (homerunElement != null) ? homerunElement.text() : "해당 사항 없음";
-
-                    Element rbiElement = doc.selectFirst("div.rbi");
-                    String rbi = (rbiElement != null) ? rbiElement.text() : "해당 사항 없음";
-
-                    Element runElement = doc.selectFirst("div.run");
-                    String run = (runElement != null) ? runElement.text() : "해당 사항 없음";
-
-                    Element ballElement = doc.selectFirst("div.ball");
-                    String ball = (ballElement != null) ? ballElement.text() : "해당 사항 없음";
-
-                    Element strikeoutElement = doc.selectFirst("div.strikeout");
-                    String strikeout = (strikeoutElement != null) ? strikeoutElement.text() : "해당 사항 없음";
-
-                    Element warElement = doc.selectFirst("div.war");
-                    String war = (warElement != null) ? warElement.text() : "해당 사항 없음";
-
-                    Element teamElement = doc.selectFirst("div.team");
-                    String team = (teamElement != null) ? teamElement.text() : "해당 사항 없음";
-
-                    Element positionElement = doc.selectFirst("div.position");
-                    String position = (positionElement != null) ? positionElement.text() : "해당 사항 없음";
-
-                    Element tasooElement = doc.selectFirst("div.tasoo");
-                    String tasoo = (tasooElement != null) ? tasooElement.text() : "해당 사항 없음";
+                    String name = getTextOrDefault(doc, "div.playerName", "해당 사항 없음");
+                    String age = getTextOrDefault(doc, "div.age", "0");
+                    String game = getTextOrDefault(doc, "div.game", "0");
+                    String h1 = getTextOrDefault(doc, "div.h1", "0");
+                    String h2 = getTextOrDefault(doc, "div.h2", "0");
+                    String h3 = getTextOrDefault(doc, "div.h3", "0");
+                    String homerun = getTextOrDefault(doc, "div.homerun", "0");
+                    String rbi = getTextOrDefault(doc, "div.rbi", "0");
+                    String run = getTextOrDefault(doc, "div.run", "0");
+                    String ball = getTextOrDefault(doc, "div.ball", "0");
+                    String strikeout = getTextOrDefault(doc, "div.strikeout", "0");
+                    String war = getTextOrDefault(doc, "div.war", "0.0");
+                    String team = getTextOrDefault(doc, "div.team", "해당 사항 없음");
+                    String position = getTextOrDefault(doc, "div.position", "해당 사항 없음");
+                    String tasoo = getTextOrDefault(doc, "div.tasoo", "0");
 
                     // 데이터베이스에 저장
                     BatterVO vo = new BatterVO();
                     vo.setBno(k++);
-                    vo.setAge(age);
-                    vo.setGame(game);
-                    vo.setH1(h1);
-                    vo.setH2(h2);
-                    vo.setH3(h3);
-                    vo.setHomerun(homerun);
-                    vo.setRbi(rbi);
-                    vo.setRun(run);
-                    vo.setBall(ball);
-                    vo.setStrikeout(strikeout);
-                    vo.setWar(war);
+                    vo.setAge(Integer.parseInt(age));
+                    vo.setGame(Integer.parseInt(game));
+                    vo.setH1(Integer.parseInt(h1));
+                    vo.setH2(Integer.parseInt(h2));
+                    vo.setH3(Integer.parseInt(h3));
+                    vo.setHomerun(Integer.parseInt(homerun));
+                    vo.setRbi(Integer.parseInt(rbi));
+                    vo.setRun(Integer.parseInt(run));
+                    vo.setBall(Integer.parseInt(ball));
+                    vo.setStrikeout(Integer.parseInt(strikeout));
+                    vo.setWar(Double.parseDouble(war));
                     vo.setName(name);
                     vo.setTeam(team);
                     vo.setPosition(position);
-                    vo.setTasoo(tasoo);
+                    vo.setTasoo(Integer.parseInt(tasoo));
 
                     dao.batterInsert(vo);
 
                     System.out.println("번호: " + k);
                     System.out.println("이름: " + name);
                     System.out.println("나이: " + age);
-                    System.out.println("출장: " + game);
-                    System.out.println("안타: " + h1);
-                    System.out.println("2루타: " + h2);
-                    System.out.println("3루타: " + h3);
-                    System.out.println("홈런: " + homerun);
-                    System.out.println("타점: " + rbi);
-                    System.out.println("도루: " + run);
-                    System.out.println("4구: " + ball);
-                    System.out.println("삼진: " + strikeout);
-                    System.out.println("WAR: " + war);
-                    System.out.println("팀: " + team);
-                    System.out.println("포지션: " + position);
-                    System.out.println("타수: " + tasoo);
                     System.out.println("==============================================");
 
                 } catch (IOException e) {
@@ -126,4 +83,11 @@ public class MainClass_Batter {
             ex.printStackTrace();
         }
     }
+
+    // 유틸리티 메서드: 값을 추출하거나 기본값을 반환
+    private String getTextOrDefault(Document doc, String selector, String defaultValue) {
+        Element element = doc.selectFirst(selector);
+        return (element != null) ? element.text().replace(",", "").trim() : defaultValue;
+    }
+
 }
