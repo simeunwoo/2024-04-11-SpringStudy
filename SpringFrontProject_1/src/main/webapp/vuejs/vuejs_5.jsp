@@ -130,6 +130,8 @@
 				detail_data(vo){
 					this.isShow=true
 					this.movie_detail=vo
+				}
+					
 			}
 		}).mount('.container')
 	</script>
