@@ -14,37 +14,47 @@
 	margin: 0px auto;
 	width: 960px;
 }
-p{
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
-.thumbnail:hover{
+.movieTr:hover{
 	cursor: pointer;
 }
 </style>
 <script src="https://unpkg.com/vue@3"></script>
-</head>
-<body>
+<script src="http://code.jquery.com/jquery.js"></script>
 </head>
 <body>
 	<div class="container">
-		<h3 class="text-center">실시간 박스 오피스</h3>
 		<div class="row">
 			<div class="col-sm-7">
-				<div class="col-md-6" v-for="vo in movie_list" v-on:click="detail_data(vo)">
-				    <div class="thumbnail">
-				      	<%--
-					      	속성에 값을 첨부할 때
-					      		=> :속성명="출력 변수명"
-				      	--%>
-				        <img :src="'https://www.kobis.or.kr'+vo.thumbUrl" :title="vo.movieNm" style="width:350px;height:150px">
-				        <div class="caption">
-				          <p>{{vo.movieNm}}</p>
-				        </div>
-				      </a>
-				    </div>
-				</div>
+				<table class="table">
+					<thead>
+						<tr>
+							<th>순위</th>
+							<th></th>
+							<th>영화명</th>
+							<th>장르</th>
+							<th>등급</th>
+						</tr>
+					</thead>
+					<tbody>
+					<%--
+						vo={"rank":1,"movieNm":"aaa"} => JSON
+						
+						{
+							int rank;
+							String movieNm;
+						}
+					--%>
+						<tr v-for="vo in movie_list" class="movieTr" v-on:mouseover="detail_data(vo)">
+							<td>{{vo.rank}}</td>
+							<td>
+								<img :src="'https://www.kobis.or.kr'+vo.thumbUrl" style="width:35px;height:35px">
+							</td>
+							<td>{{vo.movieNm}}</td>
+							<td>{{vo.genre}}</td>
+							<td>{{vo.watchGradeNm}}</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 			<div class="col-sm-5" v-show="isShow">
 				<table class="table">
@@ -88,6 +98,7 @@ p{
 		let movieApp=Vue.createApp({
 			data(){
 				return{
+					// 멤버 변수 => HTML에 출력할 데이터 설정
 					movie_list:[{"startYearDate":"2024.09.18","endYearDate":"2024.09.18","startDate":"2024년 09월 18일(수)","endDate":"2024년 09월 18일(수)",
 						"movieCd":"20239670","showDt":"20240918","thumbUrl":"/common/mast/movie/2024/08/thumb/thn_886a61eb398d4cedb346d9ffbf3345c3.jpg",
 						"movieNm":"베테랑2","movieNmEn":"I, THE EXECUTIONER","synop":"가족들도 못 챙기고 밤낮없이 범죄들과 싸우는 베테랑 형사 '서도철'(황정민)과 강력범죄수사대 형사들.\r\n\r\n어느 날, 한 교수의 죽음이 이전에 발생했던 살인 사건들과 연관성이 있는 것으로 밝혀지며 전국은 연쇄살인범으로 인해 떠들썩해진다. 이에 단서를 추적하며 수사를 시작한 형사들. 하지만 이들을 비웃기라도 하듯, 연쇄살인범은 다음 살인 대상을 지목하는 예고편을 인터넷에 공개하며 또 한 번 전 국민을 흔들어 놓는다.\r\n\r\n강력범죄수사대는 서도철의 눈에 든 정의감 넘치는 막내 형사 '박선우' (정해인)를 투입한다. 그리고 사건은 새로운 방향으로 흐르게 되는데...","prdtYear":"2024","indieYn":null,"artmovieYn":null,"multmovieYn":null,"showTm":"118","showTs":"3","director":"류승완","prNm":"(주)외유내강","dtNm":"(주)씨제이이엔엠","repNationCd":"한국",
@@ -111,23 +122,23 @@ p{
 				}
 			},
 			mounted(){
-				// 서버에서 데이터를 멤버 변수에 초기화
-				// jQuery 연동
+				// 서버에서 값을 읽어서 멤버 변수 초기화 => axios
+				// 다른 라이브러리 연동 => jQuery 라이브러리 연결 / 지도 출력
 			},
 			methods:{
-				// 사용자 정의 함수 => 이벤트 발생 시에 주로 처리
+				// 사용자 정의 => 이벤트 ex) 페이지 나누기, 상세보기 읽기 ...
 				detail_data(vo){
 					this.isShow=true
 					this.movie_detail=vo
-				}
-			},
-			updated(){
-				// 데이터 변경 시마다 처리
 			}
-		}).mount(".container")
+		}).mount('.container')
 	</script>
 </body>
 </html>
+
+
+
+
 
 
 
