@@ -21,51 +21,57 @@ public class MainClass {
                 try {
                     Document doc = Jsoup.connect("https://statiz.sporki.com/player/?m=playerinfo&p_no=" + i).get();
 
-                    // '베스트'가 있는 행을 선택
-                    Element bestRow = doc.select("tr:contains(베스트)").first();
-                    if (bestRow != null) {
-                        Elements tds = bestRow.select("td");
+                    // 'P'인지 확인
+                    Element positionElement = doc.select("div.con span").get(1);
+                    if (positionElement != null && positionElement.text().equals("P")) {
+                        // '베스트'가 있는 행을 선택
+                        Element bestRow = doc.select("tr:contains(베스트)").first();
+                        if (bestRow != null) {
+                            Elements tds = bestRow.select("td");
 
-                        // 데이터 추출
-                        String name = safeGetText(doc.selectFirst("div.name"));
-                        String team = safeGetText(tds.get(2));
-                        int age = safeGetInt(tds, 3);
-                        int game = safeGetInt(tds, 7);
-                        int win = safeGetInt(tds, 8);
-                        int lose = safeGetInt(tds, 9);
-                        int hit = safeGetInt(tds, 10);
-                        int strikeout = safeGetInt(tds, 11);
-                        int ball = safeGetInt(tds, 12);
-                        double era = safeGetDouble(tds, 13);
-                        double war = safeGetDouble(tds, 14);
-                        int inning = safeGetInt(tds, 15);
-                        int save = safeGetInt(tds, 16);
-                        int hold = safeGetInt(tds, 17);
+                            // 데이터 추출
+                            String name = safeGetText(doc.selectFirst("div.name"));
+                            String team = safeGetText(tds.get(2));
+                            int age = safeGetInt(tds, 3);
+                            int game = safeGetInt(tds, 7);
+                            int win = safeGetInt(tds, 8);
+                            int lose = safeGetInt(tds, 9);
+                            int hit = safeGetInt(tds, 10);
+                            int strikeout = safeGetInt(tds, 11);
+                            int ball = safeGetInt(tds, 12);
+                            double era = safeGetDouble(tds, 13);
+                            double war = safeGetDouble(tds, 14);
+                            int inning = safeGetInt(tds, 15);
+                            int save = safeGetInt(tds, 16);
+                            int hold = safeGetInt(tds, 17);
 
-                        // 데이터 저장
-                        PitcherVO vo = new PitcherVO();
-                        vo.setPno(k++);
-                        vo.setName(name);
-                        vo.setTeam(team);
-                        vo.setAge(age);
-                        vo.setGame(game);
-                        vo.setWin(win);
-                        vo.setLose(lose);
-                        vo.setHit(hit);
-                        vo.setStrikeout(strikeout);
-                        vo.setBall(ball);
-                        vo.setEra(era);
-                        vo.setWar(war);
-                        vo.setInning(inning);
-                        vo.setSave(save);
-                        vo.setHold(hold);
+                            // 데이터 저장
+                            PitcherVO vo = new PitcherVO();
+                            vo.setPno(k++);
+                            vo.setName(name);
+                            vo.setTeam(team);
+                            vo.setAge(age);
+                            vo.setGame(game);
+                            vo.setWin(win);
+                            vo.setLose(lose);
+                            vo.setHit(hit);
+                            vo.setStrikeout(strikeout);
+                            vo.setBall(ball);
+                            vo.setEra(era);
+                            vo.setWar(war);
+                            vo.setInning(inning);
+                            vo.setSave(save);
+                            vo.setHold(hold);
 
-                        dao.pitcherInsert(vo);
+                            dao.pitcherInsert(vo);
 
-                        // 데이터 출력
-                        printPitcherInfo(k, name, team, age, game, win, lose, hit, strikeout, ball, era, war, inning, save, hold);
+                            // 데이터 출력
+                            printPitcherInfo(k, name, team, age, game, win, lose, hit, strikeout, ball, era, war, inning, save, hold);
+                        } else {
+                            System.out.println("베스트 기록이 없습니다.");
+                        }
                     } else {
-                        System.out.println("베스트 기록이 없습니다.");
+                        System.out.println("투수가 아닙니다: " + i);
                     }
                 } catch (IOException e) {
                     System.err.println("IO 오류: " + e.getMessage());
