@@ -17,7 +17,7 @@ public class MainClass {
         BatterDAO dao = BatterDAO.newInstance();
         try {
             int k = 1;
-            for (int i = 10000; i <= 20000; i++) {
+            for (int i = 10400; i <= 10600; i++) {
                 try {
                     Document doc = Jsoup.connect("https://statiz.sporki.com/player/?m=playerinfo&p_no=" + i).get();
 
