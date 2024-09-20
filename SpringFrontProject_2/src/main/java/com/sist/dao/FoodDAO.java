@@ -41,10 +41,19 @@ public class FoodDAO {
 	{
 		return mapper.foodListData(start, end); 
 	}
-	// 여러개의 매개 변수 => @Param, Map, VO
 	
 	public int foodTotalPage()
 	{
 		return mapper.foodTotalPage();
+	}
+	
+	public List<FoodVO> foodFindListData(Map map)
+	{
+		return mapper.foodFindListData(map);
+	}
+	
+	public int foodFindTotalPage(Map map)
+	{
+		return mapper.foodFindTotalPage(map);
 	}
 }

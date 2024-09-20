@@ -18,4 +18,18 @@ public interface FoodMapper {
 	
 	@Select("SELECT CEIL(COUNT(*)/20.0) FROM project_food_house")
 	public int foodTotalPage();
+
+	@Select("SELECT fno,name,address,poster,num "
+			+ "FROM (SELECT fno,name,address,poster,rownum as num "
+			+ "FROM (SELECT fno,name,address,poster "
+			+ "FROM project_food_house "
+			+ "WHERE address LIKE '%'||#{address}||'%' "
+			+ "ORDER BY fno ASC)) "
+			+ "WHERE num BETWEEN #{start} AND #{end}")
+	public List<FoodVO> foodFindListData(Map map);
+	// 여러개의 매개 변수 => @Param, Map, VO
+	
+	@Select("SELECT CEIL(COUNT(*)/20.0) FROM project_food_house "
+			+ "WHERE address LIKE '%'||#{address}||'%'")
+	public int foodFindTotalPage(Map map);
 }
