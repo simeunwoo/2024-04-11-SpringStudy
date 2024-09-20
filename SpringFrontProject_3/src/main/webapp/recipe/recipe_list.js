@@ -20,7 +20,7 @@ let recipeApp=Vue.createApp({
 					this.curpage=this.endPage+1
 					this.dataRecv()
 				},
-				pageChange(){
+				pageChange(page){
 					this.curpage=page
 					this.dataRecv()
 				},
