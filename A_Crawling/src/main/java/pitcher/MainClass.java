@@ -19,7 +19,7 @@ public class MainClass {
             int pno = 1;  // pno 값 1부터 시작
 
             // 크롤링할 페이지 반복
-            for (int i = 1; i <= 20; i++) {
+            for (int i = 10000; i <= 20000; i++) {
                 // 각 선수의 정보를 가져올 URL
                 Document doc = Jsoup.connect("https://statiz.sporki.com/player/?m=playerinfo&p_no=" + i).get();
                 
