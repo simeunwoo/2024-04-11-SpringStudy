@@ -48,4 +48,30 @@ public class RecipeRestController {
 		return json;
 	}
 	
+	@GetMapping(value="recipe/detail_vue.do",produces="text/plain;charset=UTF-8")
+	public String recipe_detail(int no) throws Exception
+	{
+		RecipeDetailVO vo=dao.recipeDetailData(no);
+		List<String> mList=new ArrayList<String>();
+		List<String> iList=new ArrayList<String>();
+		
+		String foodmake=vo.getFoodmake();
+		String[] fm=foodmake.split("\n");
+		for(String s:fm)
+		{
+			StringTokenizer st=new StringTokenizer(s,"^"); // '~~~^이미지' => 분리 작업
+			mList.add(st.nextToken());
+			iList.add(st.nextToken());
+		}
+		
+		Map map=new HashMap();
+		map.put("vo", vo);
+		map.put("mList", mList);
+		map.put("iList", iList);
+		
+		ObjectMapper mapper=new ObjectMapper();
+		String json=mapper.writeValueAsString(map);
+		
+		return json;
+	}
 }

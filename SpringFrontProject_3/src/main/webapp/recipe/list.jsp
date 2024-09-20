@@ -28,32 +28,33 @@ p{
 </head>
 <body>
 	<div class="container">
-	
+		<div class="container">
+		<div class="row">
+			<div class="col-md-3" v-for="vo in recipe_list">
+				    <div class="thumbnail">
+				      <a :href="'detail.do?no='+vo.no">
+				        <img :src="vo.poster" style="width:230px;height:150px">
+				        <div class="caption">
+				          <p>{{vo.title}}</p>
+				        </div>
+				      </a>
+				    </div>
+				 </div>
+		</div>
+		<div style="height:10px"></div>
+		<div class="row">
+			<div class="text-center">
+				<ul class="pagination">
+					<li v-if="startPage>1"><a class="link" @click="prev()">&lt;&lt;&lt;</a></li>
+					<li v-for="i in range(startPage,endPage)" :class="i===curpage?'active':''">
+						<a class="link" @click="pageChange(i)">{{i}}</a>
+					</li>
+					<li v-if="endPage<totalpage"><a class="link" @click="next()">&gt;&gt;&gt;</a></li>
+				</ul>
+			</div>
+		</div>
 	</div>
-	<script>
-	/*
-		(Ajax 방식)
-		$.ajax({
-			type:'get',
-			url:'',
-			data:{},
-			success:function(res)
-			{
-				
-			}
-		})
-	*/
-		let recipeApp=Vue.createApp({
-			mounted(){
-				axios.get('http://localhost:8080/web/recipe/list_vue.do',{ // get : type 부분 / http:// ~ : url 부분 
-					params:{ // params : data 부분
-						page:1
-					}
-				}).then(response=>{ // ''.then(response=>' : success 부분
-					// 결과값 받는 곳 => response.data
-				})
-			}
-		}).mount('.container')
-	</script>
+	</div>
+	<script src="recipe_list.js"></script>
 </body>
 </html>

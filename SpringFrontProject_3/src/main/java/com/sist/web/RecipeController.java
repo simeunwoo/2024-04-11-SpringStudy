@@ -24,6 +24,6 @@ public class RecipeController {
 	{
 		model.addAttribute("no", no);
 		
-		return "recipe/list";
+		return "recipe/detail";
 	}
 }
