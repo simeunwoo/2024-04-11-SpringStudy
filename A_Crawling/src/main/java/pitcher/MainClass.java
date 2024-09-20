@@ -17,7 +17,7 @@ public class MainClass {
         PitcherDAO dao = PitcherDAO.newInstance();
         try {
             int k = 1;
-            for (int i = 10000; i <= 10200; i++) { // pitcher 번호 범위
+            for (int i = 11001; i <= 11200; i++) { // pitcher 번호 범위
                 try {
                     Document doc = Jsoup.connect("https://statiz.sporki.com/player/?m=playerinfo&p_no=" + i).get();
 
