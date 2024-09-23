@@ -75,4 +75,25 @@ public class BoardRestController {
 		
 		return json;
 	}
+	
+	@GetMapping(value="board/delete_vue.do",produces="text/plain;charset=UTF-8")
+	public String board_delete(int no,String pwd)
+	{
+		String result=dao.boardDelete(no, pwd);
+		
+		return result;
+	}
+	
+	// EntityResponse<BoardVO> => 정상 수행 때 데이터 넘김, 비정상 수행 때 에러
+	@GetMapping(value="board/update_vue.do",produces="text/plain;charset=UTF-8")
+	public String board_update(int no) throws Exception
+	{
+		BoardVO vo=dao.boardUpdateData(no);
+		
+		ObjectMapper mapper=new ObjectMapper();
+		String json=mapper.writeValueAsString(vo);
+		
+		return json;
+		
+	}
 }

@@ -3,6 +3,7 @@ import java.util.*;
 import com.sist.vo.*;
 import com.sist.mapper.*;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,5 +38,23 @@ public class BoardDAO {
 	{
 		mapper.boardHitIncrement(no);
 		return mapper.boardDetailData(no);
+	}
+	
+	public String boardDelete(int no,String pwd)
+	{
+		String result="no";
+		String db_pwd=mapper.boardGetPassword(no);
+		if(db_pwd.equals(pwd))
+		{
+			result="yes";
+			mapper.boardDelete(no);
+		}
+		
+		return result;
+	}
+	
+	public BoardVO boardUpdateData(int no)
+	{
+		return mapper.boardUpdateData(no);
 	}
 }
