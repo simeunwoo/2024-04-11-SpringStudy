@@ -79,6 +79,7 @@
 						no:this.no
 					}
 				}).then(response=>{
+					// v-model로 연결이 된 경우에만 사용 가능
 					this.name=response.data.name
 					this.subject=response.data.subject
 					this.content=response.data.content
@@ -109,7 +110,7 @@
 						return
 					}
 					// Spring에서 데이터가 POST 방식일 경우 => 3번째 매개 변수를 데이터로 인식
-					axios.post('http://localhost:8080/web/board/udpate_vue.do',null,{
+					axios.post('http://localhost:8080/web/board/update_ok_vue.do',null,{
 						params:{
 							name:this.name,
 							subject:this.subject,

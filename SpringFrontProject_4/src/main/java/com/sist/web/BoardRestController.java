@@ -94,6 +94,13 @@ public class BoardRestController {
 		String json=mapper.writeValueAsString(vo);
 		
 		return json;
+	}
+	
+	@PostMapping(value="board/update_ok_vue.do",produces="text/plain;charset=UTF-8")
+	public String board_update_ok(BoardVO vo) // throws Exception
+	{
+		String result="no";
 		
+		return result;
 	}
 }

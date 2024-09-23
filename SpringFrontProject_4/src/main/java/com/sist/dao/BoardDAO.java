@@ -57,4 +57,11 @@ public class BoardDAO {
 	{
 		return mapper.boardUpdateData(no);
 	}
+	
+	public String boardUpdate(BoardVO vo)
+	{
+		String result="no";
+		
+		return result;
+	}
 }
