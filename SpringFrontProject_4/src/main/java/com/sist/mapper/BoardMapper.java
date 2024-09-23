@@ -1,6 +1,7 @@
 package com.sist.mapper;
 import java.util.*;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
@@ -36,4 +37,9 @@ public interface BoardMapper {
 	
 	@Select("SELECT COUNT(*) FROM vue_board") // 게시판, 댓글 등은 CEIL보다는 COUNT가 더 좋다
 	public int boardTotalPage();
+	
+	// 글 쓰기
+	@Insert("INSERT INTO vue_board(no,name,subject,content,pwd) "
+			+ "VALUES(vb_no_seq.nextval,#{name},#{subject},#{content},#{pwd})")
+	public void boardInsert(BoardVO vo);
 }

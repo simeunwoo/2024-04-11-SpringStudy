@@ -43,7 +43,11 @@
 				</tr>
 				<tr v-for="vo in board_list">
 					<td width="10%" class="text-center">{{vo.no}}</td>
-					<td width="45%">{{vo.subject}}</td>
+					<td width="45%">
+						<a :href="'detail.do?no='+vo.no">
+							{{vo.subject}}&nbsp;<su v-if="today===vo.dbday"><img src="new.gif"></sup>
+						</a>
+					</td>
 					<td width="15%" class="text-center">{{vo.name}}</td>
 					<td width="20%" class="text-center">{{vo.dbday}}</td>
 					<td width="10%" class="text-center">{{vo.hit}}</td>
@@ -75,10 +79,11 @@
 					board_list:[],
 					count:0,
 					curpage:1,
-					totalpage:0
+					totalpage:0,
+					today:''
 				}
 			},
-			mounted(){ // onload => 브라우저에 실행 전에 서버에서 데이터를 받는다
+			mounted(){ // 시작과 동시에 처리 / onload => 브라우저에 실행 전에 서버에서 데이터를 받는다
 				// Model에 설정된 데이터를 변경 => ViewModel
 				// MVVM 패턴을 이용
 				// 서버에서 전송한 데이터 읽기 => 멤버 변수에 저장
@@ -99,6 +104,7 @@
 						this.curpage=response.data.curpage
 						this.totalpage=response.data.totalpage
 						this.count=response.data.count
+						this.today=response.data.today
 					})
 				},
 				prev(){

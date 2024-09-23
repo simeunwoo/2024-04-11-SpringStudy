@@ -27,4 +27,9 @@ public class BoardDAO {
 	{
 		return mapper.boardTotalPage();
 	}
+	
+	public void boardInsert(BoardVO vo)
+	{
+		mapper.boardInsert(vo);
+	}
 }

@@ -1,4 +1,5 @@
 package com.sist.web;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -8,6 +9,7 @@ import com.sist.mapper.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController // JSON, 일반 문자열, 숫자
@@ -37,10 +39,28 @@ public class BoardRestController {
 		map.put("count", count);
 		map.put("curpage", page);
 		map.put("totalpage", totalpage);
+		map.put("today", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
 		
 		ObjectMapper mapper=new ObjectMapper();
 		String json=mapper.writeValueAsString(map);
 		
 		return json;
+	}
+	
+	@PostMapping(value="board/insert_vue.do",produces="text/plain;charset=UTF-8")
+	public String board_insert(BoardVO vo) throws Exception
+	{
+		String result="yes";
+		try
+		{
+			result="yes";
+			dao.boardInsert(vo);
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+			result="no";
+		}
+		
+		return result;
 	}
 }
