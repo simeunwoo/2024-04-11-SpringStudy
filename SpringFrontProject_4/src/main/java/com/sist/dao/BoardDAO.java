@@ -61,6 +61,12 @@ public class BoardDAO {
 	public String boardUpdate(BoardVO vo)
 	{
 		String result="no";
+		String db_pwd=mapper.boardGetPassword(vo.getNo());
+		if(db_pwd.equals(vo.getPwd()))
+		{
+			result="yes";
+			mapper.boardUpdate(vo);
+		}
 		
 		return result;
 	}

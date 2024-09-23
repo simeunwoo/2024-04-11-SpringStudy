@@ -96,10 +96,12 @@ public class BoardRestController {
 		return json;
 	}
 	
+	// 자바스크립트 = 자바 연동
+	// 일반 데이터 (자바와 동일), List : [], VO : {}
 	@PostMapping(value="board/update_ok_vue.do",produces="text/plain;charset=UTF-8")
 	public String board_update_ok(BoardVO vo) // throws Exception
 	{
-		String result="no";
+		String result=dao.boardUpdate(vo);
 		
 		return result;
 	}
