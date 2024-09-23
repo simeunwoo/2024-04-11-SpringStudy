@@ -42,7 +42,7 @@
 					<th width="10%" class="text-center">조회수</th>
 				</tr>
 				<tr v-for="vo in board_list">
-					<td width="10%" class="text-center">{{count}}</td>
+					<td width="10%" class="text-center">{{vo.no}}</td>
 					<td width="45%">{{vo.subject}}</td>
 					<td width="15%" class="text-center">{{vo.name}}</td>
 					<td width="20%" class="text-center">{{vo.dbday}}</td>
@@ -50,9 +50,9 @@
 				</tr>
 				<tr>
 					<td colspan="5" class="text-center">
-						<a href="#" class="btn-sm btn-success btn">이전</a>
+						<input type="button" class="btn btn-sm btn-success" value="이전" @click="prev()">
 							{{curpage}} 페이지 / {{totalpage}} 페이지
-						<a href="#" class="btn-sm btn btn-info">다음</a>
+						<input type="button" class="btn btn-sm btn-success" value="다음" @click="next()">
 					</td>
 				</tr>
 			</table>
@@ -101,8 +101,13 @@
 						this.count=response.data.count
 					})
 				},
-				countChange(count){
-					
+				prev(){
+					this.curpage=this.curpage>1?this.curpage-1:this.curpage
+					this.dataRecv()
+				},
+				next(){
+					this.curpage=this.curpage<this.totalpage?this.curpage+1:this.curpage
+					this.dataRecv()
 				}
 			}
 		}).mount('.container')
