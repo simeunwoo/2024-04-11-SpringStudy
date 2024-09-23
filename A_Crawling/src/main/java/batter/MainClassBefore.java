@@ -17,7 +17,7 @@ public class MainClassBefore {
         BatterDAO dao = BatterDAO.newInstance();
         try {
             int k = 1;
-            for (int i = 10000; i <= 12000; i++) {
+            for (int i = 15056; i <= 15060; i++) {
                 try {
                     Document doc = Jsoup.connect("https://statiz.sporki.com/player/?m=playerinfo&p_no=" + i).get();
 
@@ -26,6 +26,24 @@ public class MainClassBefore {
                     if (bestRow != null) {
                         Elements tds = bestRow.select("td");
 
+                        // 이름은 div.name에서 추출
+                        String name = doc.selectFirst("div.name").text();  // 이름
+                        String team = tds.get(2).text();                   // 팀명
+                        String position = tds.get(4).text();               // 포지션
+                        int age = Integer.parseInt(tds.get(3).text());      // 나이
+                        int game = Integer.parseInt(tds.get(7).text());     // 출장
+                        int h1 = Integer.parseInt(tds.get(12).text());      // 안타
+                        int h2 = Integer.parseInt(tds.get(13).text());      // 2루타
+                        int h3 = Integer.parseInt(tds.get(14).text());      // 3루타
+                        int homerun = Integer.parseInt(tds.get(15).text()); // 홈런
+                        int rbi = Integer.parseInt(tds.get(17).text());     // 타점
+                        int ball = Integer.parseInt(tds.get(20).text());    // 4구 (볼넷)
+                        int strikeout = Integer.parseInt(tds.get(23).text());// 삼진
+                        int run = Integer.parseInt(tds.get(18).text());     // 도루 (SB)
+                        int tasoo = Integer.parseInt(tds.get(10).text());     // 타수
+                        double war = Double.parseDouble(tds.get(33).text());// WAR
+                        
+                        /*
                         // 이름은 div.name에서 추출
                         String name = doc.selectFirst("div.name").text();  // 이름
                         String team = tds.get(2).text();                   // 팀명
@@ -38,7 +56,9 @@ public class MainClassBefore {
                         int rbi = Integer.parseInt(tds.get(16).text());     // 타점
                         int ball = Integer.parseInt(tds.get(19).text());    // 4구 (볼넷)
                         int strikeout = Integer.parseInt(tds.get(24).text());// 삼진
-                        double war = Double.parseDouble(tds.get(31).text());// WAR
+                        int run = Integer.parseInt(tds.get(18).text());     // 도루 (SB)
+                        double war = Double.parseDouble(tds.get(33).text());// WAR
+                         */
 
                         // 데이터 저장
                         BatterVO vo = new BatterVO();
@@ -55,6 +75,9 @@ public class MainClassBefore {
                         vo.setBall(ball);
                         vo.setStrikeout(strikeout);
                         vo.setWar(war);
+                        vo.setTasoo(tasoo);
+                        vo.setPosition(position);
+                        vo.setRun(run);
 
                         dao.batterInsert(vo);
 
@@ -71,6 +94,8 @@ public class MainClassBefore {
                         System.out.printf("타점: %d%n", rbi);
                         System.out.printf("4구: %d%n", ball);
                         System.out.printf("삼진: %d%n", strikeout);
+                        System.out.printf("타수: %d%n", tasoo);
+                        System.out.printf("포지션: %s%n", position);
                         System.out.printf("WAR: %.2f%n", war);
                         System.out.println("==============================================");
                     } else {

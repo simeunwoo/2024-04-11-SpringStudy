@@ -37,31 +37,31 @@ public class MainClass {
                             int win = safeGetInt(tds, 11); // 승리
                             int lose = safeGetInt(tds, 12); // 패배
                             int hit = safeGetInt(tds, 20); // 피안타
-                            int strikeout = safeGetInt(tds, 26); // 삼진
-                            int ball = safeGetInt(tds, 25); // 볼넷
+                            int strikeout = safeGetInt(tds, 27); // 삼진
+                            int ball = safeGetInt(tds, 24); // 볼넷
                             double era = safeGetDouble(tds, 29); // ERA
-                            double war = safeGetDouble(tds, 30); // WAR
+                            double war = safeGetDouble(tds, 31); // WAR
                             double inning = safeGetDouble(tds, 15); // 이닝
                             int save = safeGetInt(tds, 13); // 세이브 (두 번째 0)
                             int hold = safeGetInt(tds, 14); // 홀드 (세 번째 0)
 
                             // 데이터 저장
                             PitcherVO vo = new PitcherVO();
-                            vo.setPno(k++);
-                            vo.setName(name);
-                            vo.setTeam(team);
-                            vo.setAge(age);
-                            vo.setGame(game);
-                            vo.setWin(win);
-                            vo.setLose(lose);
-                            vo.setHit(hit);
-                            vo.setStrikeout(strikeout);
-                            vo.setBall(ball);
-                            vo.setEra(era);
-                            vo.setWar(war);
-                            vo.setInning(inning);
-                            vo.setSave(save);
-                            vo.setHold(hold);
+                            vo.setPno(k++); // 자동 증가 번호
+                            vo.setName(name); // 이름
+                            vo.setTeam(team); // 팀
+                            vo.setAge(age); // 나이
+                            vo.setGame(game); // 출장 수
+                            vo.setWin(win); // 승리
+                            vo.setLose(lose); // 패배
+                            vo.setHit(hit); // 피안타
+                            vo.setStrikeout(strikeout); // 삼진
+                            vo.setBall(ball); // 볼넷
+                            vo.setEra(era); // ERA
+                            vo.setWar(war); // WAR
+                            vo.setInning(inning); // 이닝
+                            vo.setSave(save); // 세이브
+                            vo.setHold(hold); // 홀드
 
                             dao.pitcherInsert(vo);
 

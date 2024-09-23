@@ -48,10 +48,9 @@ public class PitcherDAO {
 	   {
 		   try
 		   {
-			   ////////////////////// 다시
 			   getConnection();
 			   String sql="INSERT INTO pitcher(pno,name,game,win,lose,hit,strikeout,ball,era,war,team,age,inning,save,hold) "
-						     +"VALUES(pitcher_pno_seq.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+					     +"VALUES(pitcher_pno_seq.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			   ps=conn.prepareStatement(sql);
 			   ps.setString(1, vo.getName());
 			   ps.setInt(2, vo.getGame());
