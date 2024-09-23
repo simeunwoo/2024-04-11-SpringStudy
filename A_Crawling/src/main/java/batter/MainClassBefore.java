@@ -6,10 +6,10 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import java.io.IOException;
 
-public class MainClass {
+public class MainClassBefore {
 
     public static void main(String[] args) {
-        MainClass mc = new MainClass();
+        MainClassBefore mc = new MainClassBefore();
         mc.batterData();
     }
 
@@ -30,13 +30,15 @@ public class MainClass {
                         String name = doc.selectFirst("div.name").text();  // 이름
                         String team = tds.get(2).text();                   // 팀명
                         int age = Integer.parseInt(tds.get(3).text());      // 나이
-                        int game = Integer.parseInt(tds.get(7).text());     // 출장 (G)
-                        int rbi = Integer.parseInt(tds.get(16).text());     // 타점 (RBI)
-                        int ball = Integer.parseInt(tds.get(20).text());    // 4구 (볼넷, BB)
-                        int strikeout = Integer.parseInt(tds.get(24).text());// 삼진 (SO)
+                        int game = Integer.parseInt(tds.get(8).text());     // 출장
+                        int h1 = Integer.parseInt(tds.get(11).text());      // 안타
+                        int h2 = Integer.parseInt(tds.get(12).text());      // 2루타
+                        int h3 = Integer.parseInt(tds.get(13).text());      // 3루타
+                        int homerun = Integer.parseInt(tds.get(14).text()); // 홈런
+                        int rbi = Integer.parseInt(tds.get(16).text());     // 타점
+                        int ball = Integer.parseInt(tds.get(19).text());    // 4구 (볼넷)
+                        int strikeout = Integer.parseInt(tds.get(24).text());// 삼진
                         double war = Double.parseDouble(tds.get(31).text());// WAR
-                        int run = Integer.parseInt(tds.get(11).text());     // 득점 (R)
-                        int tasoo = Integer.parseInt(tds.get(9).text());    // 타수 (AB)
 
                         // 데이터 저장
                         BatterVO vo = new BatterVO();
@@ -45,12 +47,14 @@ public class MainClass {
                         vo.setTeam(team);
                         vo.setAge(age);
                         vo.setGame(game);
+                        vo.setH1(h1);
+                        vo.setH2(h2);
+                        vo.setH3(h3);
+                        vo.setHomerun(homerun);
                         vo.setRbi(rbi);
                         vo.setBall(ball);
                         vo.setStrikeout(strikeout);
                         vo.setWar(war);
-                        vo.setRun(run);
-                        vo.setTasoo(tasoo);
 
                         dao.batterInsert(vo);
 
@@ -60,12 +64,14 @@ public class MainClass {
                         System.out.printf("팀: %s%n", team);
                         System.out.printf("나이: %d%n", age);
                         System.out.printf("출장: %d%n", game);
+                        System.out.printf("안타: %d%n", h1);
+                        System.out.printf("2루타: %d%n", h2);
+                        System.out.printf("3루타: %d%n", h3);
+                        System.out.printf("홈런: %d%n", homerun);
                         System.out.printf("타점: %d%n", rbi);
                         System.out.printf("4구: %d%n", ball);
                         System.out.printf("삼진: %d%n", strikeout);
                         System.out.printf("WAR: %.2f%n", war);
-                        System.out.printf("득점: %d%n", run);
-                        System.out.printf("타수: %d%n", tasoo);
                         System.out.println("==============================================");
                     } else {
                         System.out.println("베스트 기록이 없습니다.");
