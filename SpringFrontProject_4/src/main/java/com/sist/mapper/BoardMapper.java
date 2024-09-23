@@ -1,9 +1,11 @@
 package com.sist.mapper;
 import java.util.*;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.sist.vo.*;
 // VO => Mapper => DAO => Controller => JSP
@@ -42,4 +44,27 @@ public interface BoardMapper {
 	@Insert("INSERT INTO vue_board(no,name,subject,content,pwd) "
 			+ "VALUES(vb_no_seq.nextval,#{name},#{subject},#{content},#{pwd})")
 	public void boardInsert(BoardVO vo);
+	
+	// 내용 보기
+	@Update("UPDATE vue_board SET "
+			+ "hit=hit+1 "
+			+ "WHERE no=#{no}")
+	public void boardHitIncrement(int no);
+	
+	@Select("SELECT no,name,subject,content,TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS') as dbday,hit "
+			+ "FROM vue_board "
+			+ "WHERE no=#{no}")
+	public BoardVO boardDetailData(int no);
+	
+	// 삭제
+	
+	// 비밀 번호 검색
+	@Select("SELECT pwd FROM vue_board "
+			+ "WHERE no=#{no}")
+	public String boardGetPassword(int no);
+	
+	// 실제 삭제
+	@Delete("DELETE FROM vue_board "
+			+ "WHERE no=#{no}")
+	public void boardDelete(int no);
 }

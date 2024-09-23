@@ -63,4 +63,16 @@ public class BoardRestController {
 		
 		return result;
 	}
+	
+	@GetMapping(value="board/detail_vue.do",produces="text/plain;charset=UTF-8")
+	public String board_detail(int no) throws Exception
+	{
+		BoardVO vo=dao.boardDetailData(no);
+		
+		// JSON
+		ObjectMapper mapper=new ObjectMapper();
+		String json=mapper.writeValueAsString(vo);
+		
+		return json;
+	}
 }

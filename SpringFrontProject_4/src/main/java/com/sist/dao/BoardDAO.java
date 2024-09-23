@@ -32,4 +32,10 @@ public class BoardDAO {
 	{
 		mapper.boardInsert(vo);
 	}
+	
+	public BoardVO boardDetailData(int no)
+	{
+		mapper.boardHitIncrement(no);
+		return mapper.boardDetailData(no);
+	}
 }

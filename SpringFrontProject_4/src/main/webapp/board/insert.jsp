@@ -111,7 +111,7 @@
 						{
 							alert("error 발생")
 						}
-					}).catch(error=>{ // ajax의 error 느낌
+					}).catch(error=>{ // Ajax의 error 느낌
 						console.log(error.response)
 					})
 				}
