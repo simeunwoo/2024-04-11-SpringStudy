@@ -64,7 +64,7 @@ public class PitcherDAO {
 			   ps.setDouble(9, vo.getWar());
 			   ps.setString(10, vo.getTeam());
 			   ps.setInt(11, vo.getAge());
-			   ps.setInt(12, vo.getInning());
+			   ps.setDouble(12, vo.getInning());
 			   ps.setInt(13, vo.getSave());
 			   ps.setInt(14, vo.getHold());
 			   ps.executeUpdate();

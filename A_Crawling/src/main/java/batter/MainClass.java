@@ -17,7 +17,7 @@ public class MainClass {
         BatterDAO dao = BatterDAO.newInstance();
         try {
             int k = 1;
-            for (int i = 15056; i <= 16500; i++) {
+            for (int i = 10000; i <= 12000; i++) {
                 try {
                     Document doc = Jsoup.connect("https://statiz.sporki.com/player/?m=playerinfo&p_no=" + i).get();
 
@@ -26,60 +26,52 @@ public class MainClass {
                     if (bestRow != null) {
                         Elements tds = bestRow.select("td");
 
+                        // 이름은 div.name에서 추출
                         String name = doc.selectFirst("div.name").text();  // 이름
-                        String team = tds.get(2).text();  // 팀
-                        int age = Integer.parseInt(tds.get(3).text());  // 나이
-                        String position = tds.get(4).text();  // 포지션
-                        int game = Integer.parseInt(tds.get(7).text());  // 경기수
-                        int tasoo = Integer.parseInt(tds.get(10).text());  // 타수
-                        int h1 = Integer.parseInt(tds.get(11).text());  // 안타
-                        int h2 = Integer.parseInt(tds.get(12).text());  // 2루타
-                        int h3 = Integer.parseInt(tds.get(13).text());  // 3루타
-                        int homerun = Integer.parseInt(tds.get(14).text());  // 홈런
-                        int rbi = Integer.parseInt(tds.get(16).text());  // 타점
-                        int run = Integer.parseInt(tds.get(17).text());  // 도루 (Run)
-                        int ball = Integer.parseInt(tds.get(19).text());  // 볼넷 (Ball)
-                        int strikeout = Integer.parseInt(tds.get(21).text());  // 삼진 (Strikeout)
-                        double war = Double.parseDouble(tds.get(33).text());  // WAR
+                        String team = tds.get(2).text();                   // 팀명
+                        int age = Integer.parseInt(tds.get(3).text());      // 나이
+                        int game = Integer.parseInt(tds.get(8).text());     // 출장
+                        int h1 = Integer.parseInt(tds.get(11).text());      // 안타
+                        int h2 = Integer.parseInt(tds.get(12).text());      // 2루타
+                        int h3 = Integer.parseInt(tds.get(13).text());      // 3루타
+                        int homerun = Integer.parseInt(tds.get(14).text()); // 홈런
+                        int rbi = Integer.parseInt(tds.get(16).text());     // 타점
+                        int ball = Integer.parseInt(tds.get(19).text());    // 4구 (볼넷)
+                        int strikeout = Integer.parseInt(tds.get(24).text());// 삼진
+                        double war = Double.parseDouble(tds.get(31).text());// WAR
 
                         // 데이터 저장
                         BatterVO vo = new BatterVO();
-                        vo.setBno(k++);  // 고유 번호
+                        vo.setBno(k++);
                         vo.setName(name);
                         vo.setTeam(team);
                         vo.setAge(age);
-                        vo.setPosition(position);
                         vo.setGame(game);
-                        vo.setTasoo(tasoo);  // 타수
-                        vo.setH1(h1);  // 안타
-                        vo.setH2(h2);  // 2루타
-                        vo.setH3(h3);  // 3루타
-                        vo.setHomerun(homerun);  // 홈런
-                        vo.setRbi(rbi);  // 타점
-                        vo.setRun(run);  // 도루
-                        vo.setBall(ball);  // 볼넷
-                        vo.setStrikeout(strikeout);  // 삼진
-                        vo.setWar(war);  // WAR
+                        vo.setH1(h1);
+                        vo.setH2(h2);
+                        vo.setH3(h3);
+                        vo.setHomerun(homerun);
+                        vo.setRbi(rbi);
+                        vo.setBall(ball);
+                        vo.setStrikeout(strikeout);
+                        vo.setWar(war);
 
-                        dao.batterInsert(vo);  // 데이터베이스에 저장
+                        dao.batterInsert(vo);
 
-                        // 출력 (테스트용)
-                        System.out.println("번호: " + k);
-                        System.out.println("이름: " + name);
-                        System.out.println("팀: " + team);
-                        System.out.println("나이: " + age);
-                        System.out.println("포지션: " + position);
-                        System.out.println("출장: " + game);
-                        System.out.println("타수: " + tasoo);
-                        System.out.println("안타: " + h1);
-                        System.out.println("2루타: " + h2);
-                        System.out.println("3루타: " + h3);
-                        System.out.println("홈런: " + homerun);
-                        System.out.println("타점: " + rbi);
-                        System.out.println("도루: " + run);
-                        System.out.println("볼넷: " + ball);
-                        System.out.println("삼진: " + strikeout);
-                        System.out.println("WAR: " + war);
+                        // 출력
+                        System.out.printf("번호: %d%n", k - 1); // 번호 수정
+                        System.out.printf("이름: %s%n", name);
+                        System.out.printf("팀: %s%n", team);
+                        System.out.printf("나이: %d%n", age);
+                        System.out.printf("출장: %d%n", game);
+                        System.out.printf("안타: %d%n", h1);
+                        System.out.printf("2루타: %d%n", h2);
+                        System.out.printf("3루타: %d%n", h3);
+                        System.out.printf("홈런: %d%n", homerun);
+                        System.out.printf("타점: %d%n", rbi);
+                        System.out.printf("4구: %d%n", ball);
+                        System.out.printf("삼진: %d%n", strikeout);
+                        System.out.printf("WAR: %.2f%n", war);
                         System.out.println("==============================================");
                     } else {
                         System.out.println("베스트 기록이 없습니다.");

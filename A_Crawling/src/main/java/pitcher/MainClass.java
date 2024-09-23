@@ -17,7 +17,7 @@ public class MainClass {
         PitcherDAO dao = PitcherDAO.newInstance();
         try {
             int k = 1;
-            for (int i = 11001; i <= 11200; i++) { // pitcher 번호 범위
+            for (int i = 13001; i <= 14000; i++) { // pitcher 번호 범위
                 try {
                     Document doc = Jsoup.connect("https://statiz.sporki.com/player/?m=playerinfo&p_no=" + i).get();
 
@@ -30,20 +30,20 @@ public class MainClass {
                             Elements tds = bestRow.select("td");
 
                             // 데이터 추출
-                            String name = safeGetText(doc.selectFirst("div.name"));
-                            String team = safeGetText(tds.get(2));
-                            int age = safeGetInt(tds, 3);
-                            int game = safeGetInt(tds, 7);
-                            int win = safeGetInt(tds, 8);
-                            int lose = safeGetInt(tds, 9);
-                            int hit = safeGetInt(tds, 10);
-                            int strikeout = safeGetInt(tds, 11);
-                            int ball = safeGetInt(tds, 12);
-                            double era = safeGetDouble(tds, 13);
-                            double war = safeGetDouble(tds, 14);
-                            int inning = safeGetInt(tds, 15);
-                            int save = safeGetInt(tds, 16);
-                            int hold = safeGetInt(tds, 17);
+                            String name = safeGetText(doc.selectFirst("div.name")); // 이름
+                            String team = safeGetText(tds.get(2)); // 팀
+                            int age = safeGetInt(tds, 3); // 나이
+                            int game = safeGetInt(tds, 5); // 출장 수 (앞의 값)
+                            int win = safeGetInt(tds, 11); // 승리
+                            int lose = safeGetInt(tds, 12); // 패배
+                            int hit = safeGetInt(tds, 20); // 피안타
+                            int strikeout = safeGetInt(tds, 26); // 삼진
+                            int ball = safeGetInt(tds, 25); // 볼넷
+                            double era = safeGetDouble(tds, 29); // ERA
+                            double war = safeGetDouble(tds, 30); // WAR
+                            double inning = safeGetDouble(tds, 15); // 이닝
+                            int save = safeGetInt(tds, 13); // 세이브 (두 번째 0)
+                            int hold = safeGetInt(tds, 14); // 홀드 (세 번째 0)
 
                             // 데이터 저장
                             PitcherVO vo = new PitcherVO();
@@ -105,7 +105,7 @@ public class MainClass {
         }
     }
 
-    private void printPitcherInfo(int k, String name, String team, int age, int game, int win, int lose, int hit, int strikeout, int ball, double era, double war, int inning, int save, int hold) {
+    private void printPitcherInfo(int k, String name, String team, int age, int game, int win, int lose, int hit, int strikeout, int ball, double era, double war, double inning, int save, int hold) {
         System.out.println("번호: " + k);
         System.out.println("이름: " + name);
         System.out.println("팀: " + team);
