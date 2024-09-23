@@ -45,7 +45,7 @@
 					<td width="10%" class="text-center">{{vo.no}}</td>
 					<td width="45%">
 						<a :href="'detail.do?no='+vo.no">
-							{{vo.subject}}&nbsp;<su v-if="today===vo.dbday"><img src="new.gif"></sup>
+							{{vo.subject}}&nbsp;<sup v-if="today===vo.dbday"><img src="new.gif"></sup>
 						</a>
 					</td>
 					<td width="15%" class="text-center">{{vo.name}}</td>
