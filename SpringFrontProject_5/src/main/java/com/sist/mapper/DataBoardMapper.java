@@ -1,6 +1,7 @@
 package com.sist.mapper;
 import java.util.*;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -41,4 +42,26 @@ public interface DataBoardMapper {
 			+ "FROM vue_databoard "
 			+ "WHERE no=#{no}")
 	public DataBoardVO databoardDetailData(int no);
+	
+	// 삭제
+	// 1. 비밀 번호 처리
+	@Select("SELECT pwd FROM vue_databoard "
+			+ "WHERE no=#{no}")
+	public String databoardGetPassword(int no);
+	
+	// 2. 파일 정보 읽기
+	@Select("SELECT filename,,filecount FROM vue_databoard "
+			+ "WHERE no=#{no}")
+	public DataBoardVO databoardFileInfoData(int no);
+	
+	// 3. 삭제하기
+	@Delete("DELETE FROM vue_databoard "
+			+ "WHERE no=#{no}")
+	public void databoardDelete(int no);
+	
+	// 수정
+	@Update("UPDATE vue_databoard SET "
+			+ "name=#{name},subject=#{subject},content=#{content},filename=#{filename},filesize=#{filesize},filecount=#{filecount} "
+			+ "WHERE no=#{no}")
+	public void databoardUpdate(DataBoardVO vo);
 }

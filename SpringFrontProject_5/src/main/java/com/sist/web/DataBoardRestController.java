@@ -160,4 +160,41 @@ public class DataBoardRestController {
 			bos.close();
 		}catch(Exception ex) {}
 	}
+	
+	@GetMapping(value="databoard/delete.do",produces="text/plain;charset=UTF-8")
+	public String databoard_delete(int no,String pwd,HttpServletRequest request)
+	{
+		DataBoardVO vo=dao.databoardFileInfoData(no);
+		String result=dao.databoardDelete(no, pwd);
+		
+		// 파일 삭제
+		if(result.equals("yes"))
+		{
+			String path=request.getSession().getServletContext().getRealPath("/")+"upload\\";
+			path=path.replace("\\", File.separator);
+			
+			if(vo.getFilecount()>0) // 파일이 존재 시
+			{
+				StringTokenizer st=new StringTokenizer(vo.getFilename(),",");
+				while(st.hasMoreTokens()) // 파일명만큼
+				{
+					File file=new File(path+st.nextToken());
+					file.delete(); // 파일 삭제
+				}
+			}
+		}
+		
+		return result;
+	}
+	
+	@GetMapping(value="databoard/update_vue.do",produces="text/plain;charset=UTF-8")
+	public String databoard_update(int no) throws Exception
+	{
+		DataBoardVO vo=dao.databoardUpdateData(no);
+		
+		ObjectMapper mapper=new ObjectMapper();
+		String json=mapper.writeValueAsString(vo);
+		
+		return json;
+	}
 }

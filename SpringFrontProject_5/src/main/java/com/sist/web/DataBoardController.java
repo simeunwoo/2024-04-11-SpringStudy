@@ -40,4 +40,12 @@ public class DataBoardController {
 		
 		return "databoard/detail";
 	}
+	
+	@GetMapping("databoard/update.do")
+	public String databoard_update(int no,Model model)
+	{
+		model.addAttribute("no", no);
+		
+		return "databoard/update";
+	}
 }

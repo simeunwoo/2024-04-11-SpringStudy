@@ -57,7 +57,7 @@
 				</tr>
 				<tr>
 					<td colspan="4" class="text-right">
-						<a href="#" class="btn btn-xs btn-warning">수정</a>
+						<a :href="'update.do?no='+vo.no" class="btn btn-xs btn-warning">수정</a>
 						<input type="button" class="btn btn-xs btn-info" value="삭제" @click="del" ref="delBtn">
 						<a href="list.do" class="btn btn-xs btn-success">목록</a>
 					</td>
@@ -114,13 +114,35 @@
 						this.$refs.delBtn.value="수정"
 					}
 				},
-				databoardDelete(){ // 삭제 요청
+				databoardDelete(){
 					if(this.pwd==="")
 					{
 						alert("비밀 번호를 입력하세요")
 						this.$refs.pwd.focus()
 						return
 					}
+				
+					// 삭제 요청
+					axios.get('delete_vue.do',{
+						params:{
+							no:this.no,
+							pwd:this.pwd
+						}
+					// 결과값 읽기 => 요청 => 응답을 받는다
+					}).then(response=>{
+						if(response.data==='yes')
+						{
+							location.href="list.do"
+						}
+						else
+						{
+							alert("잘못된 비밀 번호입니다")
+							this.pwd=""
+							this.$refs.pwd.focus()
+						}
+					}).catch(error=>{
+						console.log(error.response)
+					})
 				}
 			}
 		}).mount('.container')
