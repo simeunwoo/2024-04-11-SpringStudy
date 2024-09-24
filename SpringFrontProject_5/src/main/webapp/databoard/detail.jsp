@@ -91,7 +91,7 @@
 				}).then(response=>{
 					// JSON을 받는 위치 => return
 					this.vo=response.data
-					let count=response.data.count
+					let count=response.data.filecount
 					if(count>0)
 					{
 						this.filename=response.data.filename.split(",")
