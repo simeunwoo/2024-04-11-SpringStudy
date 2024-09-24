@@ -44,17 +44,30 @@ public class BatterDAOAfter {
 	   }
 	   // 기능 
 	   
-	   public void batterafterInsert(BatterVO vo)
+	   public void batterAfterInsert(BatterVO vo)
 	   {
 		   try
 		   {
 			   getConnection();
-			   String sql="UPDATE batter SET "
-			   		+ "image=? "
-			   		+ "WHERE bno=?";
+			   String sql="INSERT INTO batter(bno,age,game,h1,h2,h3,homerun,rbi,ball,strikeout,war,name,team,position,steel,tasoo,image) "
+			   		+ "VALUES(batter_bno_seq.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			   ps=conn.prepareStatement(sql);
-			   ps.setString(1, vo.getImage());
-			   ps.setInt(2, vo.getBno());
+			   ps.setInt(1, vo.getBno());
+			   ps.setInt(2, vo.getGame());
+			   ps.setInt(3, vo.getH1());
+			   ps.setInt(4, vo.getH2());
+			   ps.setInt(5, vo.getH3());
+			   ps.setInt(6, vo.getHomerun());
+			   ps.setInt(7, vo.getRbi());
+			   ps.setInt(8, vo.getBall());
+			   ps.setInt(9, vo.getStrikeout());
+			   ps.setDouble(10, vo.getWar());
+			   ps.setString(11, vo.getName());
+			   ps.setString(12, vo.getTeam());
+			   ps.setString(13, vo.getPosition());
+			   ps.setInt(14, vo.getSteel());
+			   ps.setInt(15, vo.getTasoo());
+			   ps.setString(16, vo.getImage());
 			   ps.executeUpdate();
 		   }catch(Exception ex)
 		   {
@@ -65,6 +78,32 @@ public class BatterDAOAfter {
 			   disConnection();
 		   }
 	   }
+	   
+	   /*
+	   public BatterVO getBatterByBno(int bno) {
+		    BatterVO vo = null;
+		    try {
+		        getConnection();
+		        String sql = "SELECT * FROM batter WHERE bno=?";
+		        ps = conn.prepareStatement(sql);
+		        ps.setInt(1, bno);
+		        ResultSet rs = ps.executeQuery();
+		        if (rs.next()) {
+		            vo = new BatterVO();
+		            vo.setBno(rs.getInt("bno"));
+		            vo.setName(rs.getString("name"));
+		            vo.setTeam(rs.getString("team"));
+		            // 필요한 다른 필드도 여기에 추가
+		        }
+		    } catch (Exception ex) {
+		        ex.printStackTrace();
+		    } finally {
+		        disConnection();
+		    }
+		    return vo;
+		}
+		*/
+
 	}
 
 

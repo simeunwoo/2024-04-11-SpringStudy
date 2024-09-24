@@ -24,7 +24,7 @@ TASOO              NUMBER
 @Data
 public class BatterVO {
 
-	private int bno,age,game,h1,h2,h3,homerun,rbi,ball,strikeout,run,tasoo;
+	private int bno,age,game,h1,h2,h3,homerun,rbi,ball,strikeout,steel,tasoo;
 	private double war;
 	private String name,team,position,logo,image;
 }
