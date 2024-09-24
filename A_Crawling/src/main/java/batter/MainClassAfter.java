@@ -6,10 +6,10 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import java.io.IOException;
 
-public class MainClass {
+public class MainClassAfter {
 
     public static void main(String[] args) {
-        MainClass mc = new MainClass();
+        MainClassAfter mc = new MainClassAfter();
         mc.batterData();
     }
 

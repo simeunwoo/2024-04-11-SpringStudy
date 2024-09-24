@@ -26,5 +26,5 @@ public class BatterVO {
 
 	private int bno,age,game,h1,h2,h3,homerun,rbi,ball,strikeout,run,tasoo;
 	private double war;
-	private String name,team,position,logo;
+	private String name,team,position,logo,image;
 }

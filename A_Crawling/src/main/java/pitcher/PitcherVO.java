@@ -25,5 +25,5 @@ public class PitcherVO {
 
 	private int pno,game,win,lose,hit,strikeout,ball,age,save,hold;
 	private double era,war,inning;
-	private String name,team,logo;
+	private String name,team,logo,image;
 }
