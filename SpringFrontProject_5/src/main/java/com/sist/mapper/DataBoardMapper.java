@@ -1,8 +1,10 @@
 package com.sist.mapper;
 import java.util.*;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.SelectKey;
 
 import com.sist.vo.*;
 /*
@@ -19,4 +21,11 @@ public interface DataBoardMapper {
 	
 	@Select("SELECT COUNT(*) FROM vue_databoard") // 게시판, 댓글 등은 CEIL보다는 COUNT가 더 좋다
 	public int databoardCount();
+	
+	// MyBatis에서 sequence
+	@SelectKey(keyProperty="no",resultType=int.class,before=true,
+			statement="SELECT NVL(MAX(no)+1,1) as no FROM vue_databoard")
+	@Insert("INSERT INTO vue_databoard(no,name,subject,content,pwd,filename,filesize,filecount) "
+			+ "VALUES(#{no},#{name},#{subject},#{content},#{pwd},#{filename},#{filesize},#{filecount})")
+	public void databoardInsert(DataBoardVO vo);
 }

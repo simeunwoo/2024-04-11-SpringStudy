@@ -22,49 +22,55 @@
 	<div class="container">
 		<h3 class="text-center">글 쓰기</h3>
 		<div class="row">
-			<table class="table">
-				<tr>
-					<th width="20%" class="text-right">이름</th>
-					<td width="80%">
-						<input type="text" size="15" v-model="name" ref="name" class="input-sm">
-					</td>
-				</tr>
-				<tr>
-					<th width="20%" class="text-right">제목</th>
-					<td width="80%">
-						<input type="text" size="50" v-model="subject" ref="subject" class="input-sm">
-					</td>
-				</tr>
-				<tr>
-					<th width="20%" class="text-right">내용</th>
-					<td width="80%">
-						<textarea rows="10" cols="52" v-model="content" ref="content"></textarea>
-					</td>
-				</tr>
-				<tr>
-					<th width="20%" class="text-right">첨부 파일</th>
-					<td width="80%">
-						<input type="file" ref="upfiles" class="input-sm"
-						  v-model="upfiles"
-						  multiple="multiple"
-						  accept="upload/*"
-						  >
-					</td>
-				</tr>
-				<tr>
-					<th width="20%" class="text-right">비밀 번호</th>
-					<td width="80%">
-						<input type="password" size="10" v-model="pwd" ref="pwd" class="input-sm">
-					</td>
-				</tr>
-				<tr>
-					<td colspan="2" class="text-center">
-						<input type="submit" class="btn btn-sm btn-info" value="글 쓰기">
-						<input type="button" class="btn btn-sm btn-warning" value="취소"
-						  onclick="javascript:history.back()">
-					</td>
-				</tr>
-			</table>
+			<form @submit.prevent="submitForm()">
+			<%--
+				기능 수행 (이벤트 방지) : defaultPrevent()
+				FormData
+			--%>
+				<table class="table">
+					<tr>
+						<th width="20%" class="text-right">이름</th>
+						<td width="80%">
+							<input type="text" size="15" v-model="name" ref="name" class="input-sm">
+						</td>
+					</tr>
+					<tr>
+						<th width="20%" class="text-right">제목</th>
+						<td width="80%">
+							<input type="text" size="50" v-model="subject" ref="subject" class="input-sm">
+						</td>
+					</tr>
+					<tr>
+						<th width="20%" class="text-right">내용</th>
+						<td width="80%">
+							<textarea rows="10" cols="52" v-model="content" ref="content"></textarea>
+						</td>
+					</tr>
+					<tr>
+						<th width="20%" class="text-right">첨부 파일</th>
+						<td width="80%">
+							<input type="file" ref="upfiles" class="input-sm"
+							  v-model="upfiles"
+							  multiple="multiple"
+							  accept="upload/*"
+							  >
+						</td>
+					</tr>
+					<tr>
+						<th width="20%" class="text-right">비밀 번호</th>
+						<td width="80%">
+							<input type="password" size="10" v-model="pwd" ref="pwd" class="input-sm">
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" class="text-center">
+							<input type="submit" class="btn btn-sm btn-info" value="글 쓰기">
+							<input type="button" class="btn btn-sm btn-warning" value="취소"
+							  onclick="javascript:history.back()">
+						</td>
+					</tr>
+				</table>
+			</form>
 		</div>
 	</div>
 	<script>
@@ -88,7 +94,60 @@
 				
 			},
 			methods:{ // 사용자 정의 함수 : 멤버 함수
-				
+				submitForm(){
+					if(this.name==="")
+					{
+						this.$refs.name.focus()
+						return
+					}
+					if(this.subject==="")
+					{
+						this.$refs.subject.focus()
+						return
+					}
+					if(this.content==="")
+					{
+						this.$refs.content.focus()
+						return
+					}
+					if(this.pwd==="")
+					{
+						this.$refs.pwd.focus()
+						return
+					}
+					
+					let formData=new FormData()
+					formData.append("name",this.name)
+					formData.append("subject",this.subject)
+					formData.append("content",this.content)
+					formData.append("pwd",this.pwd)
+					
+					let len=this.$refs.upfiles.files.length
+					// alert("업로드 개수 : "+len+"개")
+					if(len>0) // 업로드 파일이 있는 경우
+					{
+						for(let i=0;i<len;i++)
+						{
+							formData.append("files["+i+"]",this.$refs.upfiles.files[i])
+						}
+					}
+					axios.post('insert_vue.do',formData,{
+						header:{
+							'Content-Type':'multipart/form-data'
+						}
+					}).then(response=>{
+						if(response.data==='yes')
+						{
+							location.href='list.do'
+						}
+						else
+						{
+							alert(response.data)
+						}
+					}).catch(error=>{
+						console.log(error.response)
+					})
+				}
 			}
 			// 그 외 => components: / computed: / filter: / watch: ...
 		}).mount('.container')
