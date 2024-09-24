@@ -72,6 +72,13 @@
 			</form>
 		</div>
 	</div>
+	<%--
+		CRUD
+		=> 1. 게시판
+		=> 2. 파일 업로드/다운로드
+		=> 3. 댓글
+		=> 4. 예약 / 장바구니 / 결제
+	--%>
 	<script>
 		let updateApp=Vue.createApp({
 			data(){
@@ -128,6 +135,7 @@
 					formData.append("subject",this.subject)
 					formData.append("content",this.content)
 					formData.append("pwd",this.pwd)
+					formData.append("no",this.no)
 					
 					let len=this.$refs.upfiles.files.length
 					if(len>0)

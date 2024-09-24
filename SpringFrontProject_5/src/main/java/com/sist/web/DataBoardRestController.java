@@ -197,4 +197,65 @@ public class DataBoardRestController {
 		
 		return json;
 	}
+	
+	@PostMapping(value="databoard/update_ok_vue.do",produces="text/plain;charset=UTF-8")
+	public String databoard_update_ok(DataBoardVO vo,HttpServletRequest request)
+	{
+		String result="";
+		
+		try
+		{
+			System.out.println("비밀 번호 : "+vo.getPwd());
+			System.out.println("이름 : "+vo.getName());
+			
+			// 수정 전에 파일 정보 읽기
+			DataBoardVO fvo=dao.databoardFileInfoData(vo.getNo());
+			String path=request.getSession().getServletContext().getRealPath("/")+"upload\\";
+			path=path.replace("\\", File.separator);
+			
+			if(fvo.getFilecount()>0)
+			{
+				StringTokenizer st=new StringTokenizer(fvo.getFilename(),",");
+				while(st.hasMoreTokens())
+				{
+					File file=new File(path+st.nextToken());
+					file.delete();
+				}
+			}
+			
+			List<MultipartFile> list=vo.getFiles();
+			if(list==null)
+			{
+				vo.setFilename("");
+				vo.setFilesize("");
+				vo.setFilecount(0);
+			}
+			else
+			{
+				String filenames="";
+				String filesizes="";
+				
+				for(MultipartFile mf:list)
+				{
+					String name=mf.getOriginalFilename();
+					File file=new File(path+name);
+					mf.transferTo(file); // 파일 업로드
+					
+					filenames+=name+",";
+					filesizes+=file.length()+",";
+				}
+				
+				filenames=filenames.substring(0, filenames.lastIndexOf(","));
+				filesizes=filesizes.substring(0, filesizes.lastIndexOf(","));				
+				
+				vo.setFilename(filenames);
+				vo.setFilesize(filesizes);
+				vo.setFilecount(list.size());
+			}
+			
+			result=dao.databoardUpdate(vo);
+		}catch(Exception ex) {}
+		
+		return result;
+	}
 }

@@ -106,6 +106,13 @@ public class DataBoardDAO {
 	{
 		String result="no";
 		
+		String db_pwd=mapper.databoardGetPassword(vo.getNo());
+		if(db_pwd.equals(vo.getPwd()))
+		{
+			result="yes";
+			mapper.databoardUpdate(vo);
+		}
+		
 		return result;
 	}
 }
