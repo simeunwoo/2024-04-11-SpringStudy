@@ -55,12 +55,12 @@
 					기반 => 자바스크립트 이용
 				--%>
 				<tbody>
-					<tr>
-						<td width="10%" class="text-center"></td>
-						<td width="45%"></td>
-						<td width="15%" class="text-center"></td>
-						<td width="20%" class="text-center"></td>
-						<td width="10%" class="text-center"></td>
+					<tr v-for="(vo,index) in list">
+						<td width="10%" class="text-center">{{count-index}}</td>
+						<td width="45%">{{vo.subject}}</td>
+						<td width="15%" class="text-center">{{vo.name}}</td>
+						<td width="20%" class="text-center">{{vo.dbday}}</td>
+						<td width="10%" class="text-center">{{vo.hit}}</td>
 					</tr>
 				</tbody>
 				<tfoot>
@@ -108,6 +108,9 @@
 						}
 					}).then(response=>{
 						console.log(response.data)
+						/*
+							response={data:{list:[],curpage:1,totalpage:0,count:0}}
+						*/
 						this.list=response.data.list
 						this.curpage=response.data.curpage
 						this.totalpage=response.data.totalpage

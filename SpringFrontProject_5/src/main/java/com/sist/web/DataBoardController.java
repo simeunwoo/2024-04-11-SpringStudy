@@ -13,9 +13,22 @@ public class DataBoardController {
 //	@Autowired
 //	private DataBoardDAO dao;
 	
+	// Vue, React => 자체 처리 가능 => Route
+	// CDN => 브라우저에서 제어 => 서버
+	/*
+	 * 	Spring-Boot : ThymeLeaf:HTML
+	 *  ----------- 순수하게 서버로만 탑재
+	 */
+	
 	@GetMapping("databoard/list.do")
 	public String databoard_list()
 	{
 		return "databoard/list";
+	}
+
+	@GetMapping("databoard/insert.do")
+	public String databoard_insert()
+	{
+		return "databoard/insert";
 	}
 }
