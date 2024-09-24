@@ -80,21 +80,42 @@
 			// 변수 설정 => state
 			data(){
 				return{
-					
+					list:[],
+					curpage:1,
+					totalpage:0,
+					count:0
 				}
 			},
 			// 생명 주기 함수 => onload (시작과 동시에 값 가져 오기)
 			// => 브라우저 출력 전에 서버로부터 데이터를 받는 경우
 			mounted(){
-				
+				// dataRecv() => 오류
+				this.dataRecv() // => this를 붙여야 한다
 			},
 			// 멤버 변수의 값이 변경된 경우 => Component 제작
+			// Callback => Vue에 의하여 자동 호출되는 함수
 			update(){
 				
 			},
-			// 사용자 정의 메소드 => 이벤트
+			// 사용자 정의 메소드 => 이벤트 => 멤버 메소드
 			methods:{
-				
+				// 서버에서 데이터를 읽어 온다 => 이전/다음/시작 => 반복 제거의 방법 : 메소드
+				dataRecv(){
+					alert("dataRecv() Call")
+					axios.get('http://localhost:8080/web/databoard/list.do',{
+						params:{
+							page:this.curpage
+						}
+					}).then(response=>{
+						console.log(response.data)
+						this.list=response.data.list
+						this.curpage=response.data.curpage
+						this.totalpage=response.data.totalpage
+						this.count=response.data.count
+					}).catch(error=>{
+						console.log(error.response)
+					})
+				}
 			}
 			// components / filter / computed
 		}).mount('.container')

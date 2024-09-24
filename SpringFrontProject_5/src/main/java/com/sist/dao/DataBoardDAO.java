@@ -19,8 +19,8 @@ public class DataBoardDAO {
 		return mapper.databoardListData(start, end);
 	}
 
-	public int databoardTotalPage()
+	public int databoardCount()
 	{
-		return mapper.databoardTotalPage();
+		return mapper.databoardCount();
 	}
 }

@@ -17,6 +17,6 @@ public interface DataBoardMapper {
 			+ "WHERE num BETWEEN #{start} AND #{end}")
 	public List<DataBoardVO> databoardListData(@Param("start") int start,@Param("end") int end);
 	
-	@Select("SELECT CEIL(COUNT(*)/10.0) FROM vue_databoard") // 게시판, 댓글 등은 CEIL보다는 COUNT가 더 좋다
-	public int databoardTotalPage();
+	@Select("SELECT COUNT(*) FROM vue_databoard") // 게시판, 댓글 등은 CEIL보다는 COUNT가 더 좋다
+	public int databoardCount();
 }
