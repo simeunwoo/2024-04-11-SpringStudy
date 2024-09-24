@@ -216,8 +216,8 @@
 			methods:{
 				// 서버에서 데이터를 읽어 온다 => 이전/다음/시작 => 반복 제거의 방법 : 메소드
 				dataRecv(){
-					alert("dataRecv() Call")
-					axios.get('http://localhost:8080/web/databoard/list.do',{
+					// alert("dataRecv() Call")
+					axios.get('http://localhost:8080/web/databoard/list_vue.do',{
 						params:{
 							page:this.curpage
 						}

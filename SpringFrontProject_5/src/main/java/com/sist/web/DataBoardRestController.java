@@ -3,10 +3,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sist.dao.*;
 import com.sist.vo.*;
 
-import java.io.File;
+import java.io.*;
 import java.util.*;
+import java.net.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +23,7 @@ public class DataBoardRestController {
 	@Autowired
 	private DataBoardDAO dao;
 	
-	@GetMapping("databoard/list_vue.do")
+	@GetMapping(value="databoard/list_vue.do",produces="text/plain;charset=UTF-8")
 	public String databoard_list(int page) throws Exception
 	{
 		int rowSize=10;
@@ -118,5 +120,44 @@ public class DataBoardRestController {
 		}
 		
 		return result;
+	}
+	
+	@GetMapping(value="databoard/detail_vue.do",produces="text/plain;charset=UTF-8")
+	public String databoard_detail(int no) throws Exception
+	{
+		DataBoardVO vo=dao.databoardDetailData(no);
+		
+		ObjectMapper mapper=new ObjectMapper();
+		String json=mapper.writeValueAsString(vo);
+		
+		return json;
+	}
+	
+	@GetMapping(value="databoard/download.do",produces="text/plain;charset=UTF-8")
+	public void databoard_download(String fn,HttpServletRequest request,HttpServletResponse response)
+	{
+		try
+		{
+			String path=request.getSession().getServletContext().getRealPath("/")+"upload\\";
+			path=path.replace("\\", File.separator);
+			File file=new File(path+fn);
+			
+			response.setHeader("Content-Disposition", "attachment;filename="+URLEncoder.encode(fn,"UTF-8"));
+			response.setContentLength((int)file.length());
+			
+			// 서버에서 값을 읽는다
+			BufferedInputStream bis=new BufferedInputStream(new FileInputStream(file));
+			// 사용자에게 데이터 전송
+			BufferedOutputStream bos=new BufferedOutputStream(response.getOutputStream());
+			
+			int i=0; // 읽은 바이트 수
+			byte[] buffer=new byte[1024];
+			while((i=bis.read(buffer, 0, 1024))!=-1)
+			{
+				bos.write(buffer, 0, i);
+			}
+			bis.close();
+			bos.close();
+		}catch(Exception ex) {}
 	}
 }
