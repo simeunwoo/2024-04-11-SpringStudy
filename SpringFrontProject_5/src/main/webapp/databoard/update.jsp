@@ -147,7 +147,7 @@
 					}
 					
 					axios.post('update_ok_vue.do',formData,{
-						header:{
+						headers:{
 							'Content-Type':'multipart/form-data'
 						}
 					}).then(response=>{
