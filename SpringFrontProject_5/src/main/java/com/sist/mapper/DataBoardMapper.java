@@ -28,4 +28,10 @@ public interface DataBoardMapper {
 	@Insert("INSERT INTO vue_databoard(no,name,subject,content,pwd,filename,filesize,filecount) "
 			+ "VALUES(#{no},#{name},#{subject},#{content},#{pwd},#{filename},#{filesize},#{filecount})")
 	public void databoardInsert(DataBoardVO vo);
+	
+	// 상세 보기
+	
+	// 조회수 증가
+	
+	// 게시물의 모든 데이터를 읽기
 }
