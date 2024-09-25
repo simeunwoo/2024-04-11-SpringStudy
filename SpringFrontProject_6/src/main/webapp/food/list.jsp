@@ -37,8 +37,31 @@ input[type="button"]{
 				<input type="button" class="btn-sm btn-danger" value="분식" @click="typeChange('분식')">
 			</div>
 		</div>
+		<%--
+			일반 속성에 값을 첨부 => :을 사용하지 않으면 Vue 변수를 사용할 수 없다
+		--%>
+		<div style="height:10px"></div>
 		<div class="row">
-			
+			<div class="col-md-3" v-for="vo in food_list">
+				<div class="thumbnail">::::::::::::::::::::::::::::::::::::::::::::::::::::
+					<a :href="'detail.do?fno='+vo.fno+'&page='+curpage">
+						<img :src="'http://www.menupan.com'+vo.poster" :title="vo.type" style="width:230px;height:130px">
+						<div class="caption">
+							<p>{{vo.name}}</p>
+						</div>::::::::::::::::::::::::::::::::::::::::::::::::::::
+					</a>
+				</div>
+			</div>
+		</div>
+		<div style="height:10px"></div>
+		<div class="row">
+			<div class="text-center">
+				<input type="button" class="btn-sm btn-primary" value="이전"
+				  @click="prev()">
+					{{curpage}} / {{totalpage}}
+				<input type="button" class="btn-sm btn-primary" value="다음"
+				  @click="next()">
+			</div>
 		</div>
 	</div>
 	<script>
@@ -95,6 +118,19 @@ input[type="button"]{
 					}).catch(error=>{
 						console.log(error.response)
 					})	
+				},
+				typeChange(type){
+					this.type=type
+					this.curpage=1
+					this.dataRecv()
+				},
+				prev(){
+					this.curpage=this.curpage>1?this.curpage-1:this.curpage
+					this.dataRecv()
+				},
+				next(){
+					this.curpage=this.curpage<this.totalpage?this.curpage+1:this.curpage
+					this.dataRecv()
 				}
 			}
 			/*

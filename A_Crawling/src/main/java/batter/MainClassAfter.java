@@ -17,7 +17,7 @@ public class MainClassAfter {
         BatterDAOAfter dao = BatterDAOAfter.newInstance();
         try {
             int k = 1;
-            for (int i = 12001; i <= 14000; i++) {
+            for (int i = 10001; i <= 10200; i++) {
                 try {
                     Document doc = Jsoup.connect("https://statiz.sporki.com/player/?m=playerinfo&p_no=" + i).get();
 
