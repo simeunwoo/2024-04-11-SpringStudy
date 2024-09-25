@@ -14,6 +14,6 @@ public class MainController {
 	@GetMapping("main.do")
 	public String main_main()
 	{
-		return "main/main";
+		return "main";
 	}
 }
