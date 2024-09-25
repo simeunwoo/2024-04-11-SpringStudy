@@ -57,7 +57,7 @@
 	                <!-- Logo Area Start -->
 	                <div class="col-12">
 	                    <div class="logo_area text-center">
-	                        <a href="index.html" class="yummy-logo">예약 & 추천</a>
+	                        <a href="index.html" class="yummy-logo">Food & Recipe & Goods</a>
 	                    </div>
 	                </div>
 	            </div>
