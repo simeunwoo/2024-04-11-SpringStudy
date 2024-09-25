@@ -58,6 +58,17 @@ public class FoodRestController {
 	{
 		FoodVO vo=dao.foodDetailData(fno);
 		
+		// 서울 은평구 대조동
+		String addr1=vo.getAddress();
+		addr1=addr1.substring(addr1.indexOf(" ")+1);
+		String addr2=addr1.trim();
+		addr2=addr2.substring(0,addr2.indexOf(" ")+1);
+	//	String addr3=addr2.trim();
+	//	addr3=addr3.substring(0,addr3.indexOf(" "));
+		System.out.println("address : "+addr2);
+		
+		List<FoodVO> list=dao.foodNearHouseData(addr2);
+		
 		ObjectMapper mapper=new ObjectMapper();
 		
 		Map map=new HashMap();
@@ -65,6 +76,7 @@ public class FoodRestController {
 		map.put("fno", fno);
 		map.put("page", page);
 		map.put("address", vo.getAddress());
+		map.put("list", list);
 		
 		String json=mapper.writeValueAsString(map);
 		

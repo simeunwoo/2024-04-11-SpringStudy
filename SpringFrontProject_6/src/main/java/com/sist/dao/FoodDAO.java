@@ -27,4 +27,9 @@ public class FoodDAO {
 		mapper.foodHitIncrement(fno);
 		return mapper.foodDetailData(fno);
 	}
+	
+	public List<FoodVO> foodNearHouseData(String address)
+	{
+		return mapper.foodNearHouseData(address);
+	}
 }

@@ -17,24 +17,25 @@
 </style>
 <script src="https://unpkg.com/vue@3"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 </head>
 <body>
 	<div class="container">
 		<div class="row">
-			<table class="table">
-				<tr>
-					<td class="text-center" v-for="img in images">
-						<img :src="'http://www.menupan.com'+img" style="width:185px;height:100px">
-					</td>
-				</tr>
-			</table>
+				<table class="table">
+		        <tr>
+		          <td class="text-center" v-for="img in images">
+		           <img :src="'http://www.menupan.com'+img" style="width:150px;height: 100px">
+		          </td>
+		        </tr>
+		      </table>
 			<table class="table">
 				<tr>
 					<td width="30%" class="text-center" rowspan="7">
 						<img :src="'http://www.menupan.com'+vo.poster" style="width:100%">
 					</td>
 					<td colspan="2">
-						<h3>{{vo.name}}&nbsp;<span style="color:orange">{{vo.score}}</span></h3>
+						<h3 id="name">{{vo.name}}&nbsp;<span style="color:orange">{{vo.score}}</span></h3>
 					</td>
 				</tr>
 				<tr>
@@ -75,19 +76,43 @@
 		</div>
 		<div style="height:10px"></div>
 		<div class="row">
-			<div id="map" style="width:100%;height:350px;"></div>
-			<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=6051fd0240c1e74e12904150ec495217&libraries=services"></script>
+			<div id="map" style="width:100%;height:350px"></div>
+		</div>
+		<div style="height:10px"></div>
+		<div class="row">
+			<h3>인근 맛집</h3>
+			<hr>
+			<table class="table">
+				<tr>
+					<td class="text-center" v-for="vo in house_images">
+						<a :href="'detail.do?fno='+vo.fno+'&page='+page">
+							<table class="table">
+								<tr>
+									<td class="text-center">
+										<img :src="'http://www.menupan.com'+vo.poster" style="width:150px;height:100px" :title="vo.address">
+									</td>
+								</tr>
+								<tr>
+									<td class="text-center">{{vo.name}}</td>
+								</tr>
+							</table>
+						</a>
+					</td>
+				</tr>
+			</table>
 		</div>
 	</div>
+	<%-- Model에서 부르면 ${}로 받는다 (밑에 Vue 얘기하는 것임) --%>
 	<script>
 		let detailApp=Vue.createApp({
 			data(){
 				return{
 					vo:{},
-					page:${page}, // Model로 보내면 ${}로 받아야 한다
-					fno:${fno}, // Model로 보내면 ${}로 받아야 한다
+					page:${page},
+					fno:${fno},
 					address:'',
-					images:[]
+					images:[],
+					house_images:[]
 				}
 			},
 			mounted(){
@@ -103,9 +128,11 @@
 					this.fno=response.data.fno
 					this.address=response.data.address
 					this.images=response.data.vo.images.split("^")
+					this.house_images=response.data.list
 					
 					if(window.kakao && window.kakao.map)
 					{
+						console.log("initMap")
 						this.initMap()
 					}
 					else
@@ -119,8 +146,9 @@
 			methods:{
 				addScript(){
 					const script=document.createElement("script")
+					/* global kakao */
 					script.onload=()=>kakao.maps.load(this.initMap)
-					script.src="http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=c92cce7f98515e5037c15639a221102b&libraries=services"
+					script.src="http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=6051fd0240c1e74e12904150ec495217&libraries=services"
 					document.head.appendChild(script)
 				},
 				initMap(){
@@ -137,8 +165,8 @@
 						var geocoder = new kakao.maps.services.Geocoder();
 		
 						// 주소로 좌표를 검색합니다
-						geocoder.addressSearch('제주특별자치도 제주시 첨단로 242', function(result, status) {
-													// this.address
+						geocoder.addressSearch(this.address, function(result, status) {
+													
 						    // 정상적으로 검색이 완료됐으면 
 						     if (status === kakao.maps.services.Status.OK) {
 		
@@ -152,7 +180,7 @@
 		
 						        // 인포윈도우로 장소에 대한 설명을 표시합니다
 						        var infowindow = new kakao.maps.InfoWindow({
-						            content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+						            content: '<div style="width:150px;text-align:center;padding:6px 0;">'+$('#name').text()+'</div>'
 						        });
 						        infowindow.open(map, marker);
 		

@@ -30,4 +30,13 @@ public interface FoodMapper {
 			+ "FROM project_food_house "
 			+ "WHERE fno=#{fno}")
 	public FoodVO foodDetailData(int fno);
+	
+	@Select("SELECT fno,name,poster,address,rownum "
+			+ "FROM (SELECT fno,name,poster,address "
+			+ "FROM project_food_house "
+			+ "WHERE address LIKE '%'||#{address}||'%' "
+			+ "ORDER BY hit DESC) "
+			+ "WHERE rownum<=5")
+	public List<FoodVO> foodNearHouseData(String address);
+	
 }
