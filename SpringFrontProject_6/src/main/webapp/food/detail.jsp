@@ -148,7 +148,7 @@
 					const script=document.createElement("script")
 					/* global kakao */
 					script.onload=()=>kakao.maps.load(this.initMap)
-					script.src="http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=6051fd0240c1e74e12904150ec495217&libraries=services"
+					script.src="http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=7afa4d414b029c6c74c3e45d6d3e8214&libraries=services"
 					document.head.appendChild(script)
 				},
 				initMap(){

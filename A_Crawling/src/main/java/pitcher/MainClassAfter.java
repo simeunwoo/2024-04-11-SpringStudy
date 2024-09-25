@@ -10,11 +10,11 @@ public class MainClassAfter {
 
     public static void main(String[] args) {
         MainClassAfter mc = new MainClassAfter();
-        mc.pitcherData();
+        mc.pitcherAfterData();
     }
 
-    public void pitcherData() {
-        PitcherDAO dao = PitcherDAO.newInstance();
+    public void pitcherAfterData() {
+        PitcherDAOAfter dao = PitcherDAOAfter.newInstance();
         try {
             int k = 1;
             for (int i = 10001; i <= 15000
@@ -74,7 +74,7 @@ public class MainClassAfter {
                         vo.setHold(hold);
                         vo.setImage(image);
 
-                        dao.pitcherInsert(vo);
+                        dao.pitcherAfterInsert(vo);
 
                         // 출력
                         System.out.printf("번호: %d%n", k - 1); // 번호 수정
