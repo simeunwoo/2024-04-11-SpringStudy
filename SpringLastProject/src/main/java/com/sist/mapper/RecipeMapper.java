@@ -15,9 +15,9 @@ public interface RecipeMapper {
 	public RecipeVO recipeMaxHitData();
 	
 	@Select("SELECT no,title,poster,chef,hit,content,rownum "
-			+ "FROM (SELECT no,title,poster,chef,hit,"
-			+ "(SELECT content FROM recipedetail WHERE no=recipe.no) as content "
-			+ "FROM recipe ORDER BY hit DESC) "
+			+ "FROM (SELECT r.no,r.title,r.poster,r.chef,r.hit,rd.content "
+			+ "FROM recipe r,recipedetail rd "
+			+ "WHERE r.no=rd.no ORDER BY hit DESC) "
 			+ "WHERE rownum<=8 AND hit!=(SELECT MAX(hit) FROM recipe)")
 	public List<RecipeVO> recipeHitTop8();
 }
