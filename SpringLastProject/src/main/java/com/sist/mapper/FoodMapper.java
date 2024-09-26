@@ -15,9 +15,9 @@ public interface FoodMapper {
 	public List<FoodVO> foodHitTop5();
 	
 	// *** 목록
-	@Select("SELECT fno,name,poster,phone,type,hit,num "
-			+ "FROM (SELECT fno,name,poster,phone,type,hit,rownum as num "
-			+ "FROM (SELECT fno,name,poster,phone,type,hit "
+	@Select("SELECT fno,name,poster,score,type,hit,num "
+			+ "FROM (SELECT fno,name,poster,score,type,hit,rownum as num "
+			+ "FROM (SELECT fno,name,poster,score,type,hit "
 			+ "FROM project_food_house ORDER BY fno ASC)) "
 			+ "WHERE num BETWEEN #{start} AND #{end}")
 	public List<FoodVO> foodListData(@Param("start") int start,@Param("end") int end);

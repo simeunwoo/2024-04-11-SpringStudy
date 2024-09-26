@@ -5,6 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+.page-link:hover{
+	cursor: pointer;
+}
+</style>
 </head>
 <body>
 	<!-- ****** Breadcumb Area Start ****** -->
@@ -45,7 +50,9 @@
                     <div class="single-post wow fadeInUp" data-wow-delay="0.1s">
                         <!-- Post Thumb -->
                         <div class="post-thumb">
-                            <img :src="'http://www.menupan.com'+vo.poster" style="width:350px;height:200px">
+                        	<a :href="'../food/detail_before.do?fno='+vo.fno">
+                            	<img :src="'http://www.menupan.com'+vo.poster" style="width:350px;height:200px">
+                            </a>
                         </div>
                         <!-- Post Content -->
                         <div class="post-content">
@@ -57,7 +64,7 @@
                                     </div>
                                     <!-- Post Date -->
                                     <div class="post-date">
-                                        <a href="#">{{vo.phone}}</a>
+                                        <a href="#" style="color:orange">{{vo.score}}</a>
                                     </div>
                                 </div>
                                 <!-- Post Comment & Share Area -->
@@ -76,7 +83,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="#">
+                            <a :href="'../food/detail_before.do?fno='+vo.fno">
                                 <h4 class="post-headline">{{vo.name}}</h4>
                             </a>
                         </div>
@@ -87,13 +94,14 @@
                     <div class="pagination-area d-sm-flex mt-15">
                         <nav aria-label="#">
                             <ul class="pagination">
-                                <li class="page-item active">
-                                    <a class="page-link" href="#">1 <span class="sr-only">(current)</span></a>
+                            	<li class="page-item" v-if="startPage>1">
+                                    <a class="page-link" @click="prev()"><i class="fa fa-angle-double-left" aria-hidden="true"></i> 이전</a>
                                 </li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+                                <li :class="i===curpage?'page-item active':'page-item'" v-for="i in range(startPage,endPage)">
+                                    <a class="page-link" @click="pageChange(i)">{{i}}</a>
+                                </li>
+                                <li class="page-item" v-if="endPage<totalpage">
+                                    <a class="page-link" @click="next()">다음 <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
                                 </li>
                             </ul>
                         </nav>
@@ -122,6 +130,28 @@
     			this.dataRecv()
     		},
     		methods:{
+    			prev(){
+    				this.curpage=this.startPage-1
+    				this.dataRecv()
+    			},
+    			next(){
+    				this.curpage=this.endPage+1
+    				this.dataRecv()
+    			},
+    			pageChange(page){
+    				this.curpage=page
+    				this.dataRecv()
+    			},
+    			range(start,end){
+    				let arr=[]
+    				let len=end-start
+    				for(let i=0;i<=len;i++)
+    				{
+    					arr[i]=start
+    					start++
+    				}
+    				return arr
+    			},
     			dataRecv(){
     				axios.get('../food/list_vue.do',{
     					params:{
