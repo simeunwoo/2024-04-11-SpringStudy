@@ -97,17 +97,25 @@ public class MainController {
 
 	// 필요한 클래스 => 스프링에서 가져 온다 (객체 주소)
 	@Autowired
-	private RecipeService service;
+	private RecipeService rService;
+	@Autowired
+	private FoodService fService;
 	
 	// 사용자 요청에 따라 => 처리
 	@GetMapping("main.do")
 	public String main_main(Model model)
 	{
-		RecipeVO rvo=service.recipeMaxHitData();
-		List<RecipeVO> rList=service.recipeHitTop8();
+		RecipeVO rvo=rService.recipeMaxHitData();
+		List<RecipeVO> rList=rService.recipeHitTop8();
+		
+		List<FoodVO> fList=fService.foodHitTop5();
+		
+		ChefVO cvo=rService.chefToday();
 		
 		model.addAttribute("rvo", rvo);
 		model.addAttribute("rList", rList);
+		model.addAttribute("fList", fList);
+		model.addAttribute("cvo", cvo);
 		
 		return "main";
 	}

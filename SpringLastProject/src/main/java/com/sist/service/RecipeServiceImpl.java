@@ -10,17 +10,25 @@ import org.springframework.stereotype.Service;
 public class RecipeServiceImpl implements RecipeService {
 
 	@Autowired
-	private RecipeDAO dao;
+	private RecipeDAO rDao;
+	@Autowired
+	private ChefDAO cDao;
 
 	@Override
 	public RecipeVO recipeMaxHitData() {
 		// TODO Auto-generated method stub
-		return dao.recipeMaxHitData();
+		return rDao.recipeMaxHitData();
 	}
 
 	@Override
 	public List<RecipeVO> recipeHitTop8() {
 		// TODO Auto-generated method stub
-		return dao.recipeHitTop8();
+		return rDao.recipeHitTop8();
+	}
+
+	@Override
+	public ChefVO chefToday() {
+		// TODO Auto-generated method stub
+		return cDao.chefToday();
 	}
 }

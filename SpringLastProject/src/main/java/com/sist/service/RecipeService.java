@@ -9,4 +9,5 @@ public interface RecipeService {
 
 	public RecipeVO recipeMaxHitData();
 	public List<RecipeVO> recipeHitTop8();
+	public ChefVO chefToday();
 }
