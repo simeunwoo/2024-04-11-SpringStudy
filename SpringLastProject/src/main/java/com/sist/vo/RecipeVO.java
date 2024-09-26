@@ -14,4 +14,6 @@ public class RecipeVO {
 
 	private int no,hit;
 	private String title,poster,chef;
+	
+	private String content;
 }

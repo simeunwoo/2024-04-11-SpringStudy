@@ -1,5 +1,9 @@
 package com.sist.web;
+import java.util.*;
+import com.sist.vo.*;
+import com.sist.service.*;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -92,10 +96,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MainController {
 
 	// 필요한 클래스 => 스프링에서 가져 온다 (객체 주소)
+	@Autowired
+	private RecipeService service;
+	
 	// 사용자 요청에 따라 => 처리
 	@GetMapping("main.do")
 	public String main_main(Model model)
 	{
+		RecipeVO rvo=service.recipeMaxHitData();
+		List<RecipeVO> rList=service.recipeHitTop8();
+		
+		model.addAttribute("rvo", rvo);
+		model.addAttribute("rList", rList);
+		
 		return "main";
 	}
 }
