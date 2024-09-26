@@ -53,8 +53,8 @@ public class GameScheduleDAO {
             ps.setString(1, vo.getGamedate());
             ps.setString(2, vo.getHome());
             ps.setString(3, vo.getAway());
-            ps.setInt(4, vo.getHomescore());
-            ps.setInt(5, vo.getAwayscore());
+            ps.setString(4, vo.getHomescore());
+            ps.setString(5, vo.getAwayscore());
             ps.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();
