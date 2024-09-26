@@ -3,6 +3,7 @@ import java.util.*;
 
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.sist.vo.*;
 
@@ -27,6 +28,15 @@ public interface FoodMapper {
 	public int foodTotalPage();
 	
 	// 상세 보기 => Cookie
+	@Update("UPDATE project_food_house SET "
+			+ "hit=hit+1 "
+			+ "WHERE fno=#{fno}")
+	public void foodHitIncrement(int fno);
+	
+	@Select("SELECT * FROM project_food_house "
+			+ "WHERE fno=#{fno}")
+	public FoodVO foodDetailData(int fno);
+	
 	// *** 예약
 	// 추천 => 네이버 카페
 }

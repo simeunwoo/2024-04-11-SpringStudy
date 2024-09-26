@@ -32,6 +32,8 @@ public class FoodController {
 		
 		return "redirect:../food/detail.do";
 	}
+	// response는 한 가지 일만 수행
+	// => HTML / Cookie
 	
 	@GetMapping("food/detail.do")
 	public String food_detail(int fno,Model model)

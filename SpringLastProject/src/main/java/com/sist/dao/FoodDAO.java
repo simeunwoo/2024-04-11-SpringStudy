@@ -5,6 +5,7 @@ import com.sist.mapper.*;
 
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -27,5 +28,16 @@ public class FoodDAO {
 	public int foodTotalPage()
 	{
 		return mapper.foodTotalPage();
+	}
+	
+	public FoodVO foodDetailData(int fno)
+	{
+		mapper.foodHitIncrement(fno);
+		return mapper.foodDetailData(fno);
+	}
+
+	public FoodVO foodInfoData(int fno)
+	{
+		return mapper.foodDetailData(fno);
 	}
 }
