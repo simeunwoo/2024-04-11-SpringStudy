@@ -47,17 +47,14 @@ public class GameScheduleDAO {
     public void insertGameSchedule(GameScheduleVO vo) {
         try {
             getConnection();
-            String sql = "INSERT INTO game_schedule(sno, game_date, game_time, home, away, stadium, home_score, away_score) "
-                       + "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO schedule(sno,gamedate,home,away,homescore,awayscore) "
+                       + "VALUES(schedule_sno_seq.nextval,?,?,?,?,?)";
             ps = conn.prepareStatement(sql);
-            ps.setInt(1, vo.getSno());
-            ps.setString(2, vo.getGameDate());
-            ps.setString(3, vo.getGameTime());
-            ps.setString(4, vo.getHome());
-            ps.setString(5, vo.getAway());
-            ps.setString(6, vo.getStadium());
-            ps.setInt(7, vo.getHomeScore());
-            ps.setInt(8, vo.getAwayScore());
+            ps.setString(1, vo.getGamedate());
+            ps.setString(2, vo.getHome());
+            ps.setString(3, vo.getAway());
+            ps.setInt(4, vo.getHomescore());
+            ps.setInt(5, vo.getAwayscore());
             ps.executeUpdate();
         } catch (Exception ex) {
             ex.printStackTrace();
