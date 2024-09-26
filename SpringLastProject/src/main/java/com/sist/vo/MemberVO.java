@@ -1,4 +1,5 @@
 package com.sist.vo;
+import java.util.*;
 
 import lombok.Data;
 /*
@@ -21,4 +22,14 @@ import lombok.Data;
 @Data
 public class MemberVO {
 
+	private String userId,userName,userPwd,sex,birthday,email,post,addr1,addr2,phone,content;
+	private int enabled;
+	private Date regdate,modifydate,lastlogin;
+	
+	private String msg,authority; // msg : 로그인 확인 변수, authority : 권한 변수
+	/*
+	 * 	보안 : userName, userPwd
+	 * 	     =========
+	 *        id
+	 */
 }
