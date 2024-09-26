@@ -255,10 +255,8 @@
 	                            </div>
 	                            <p>Subscribe our newsletter gor get notification about new updates, information discount, etc.</p>
 	                            <div class="newsletter-form">
-	                                <form action="#" method="post">
-	                                    <input type="email" name="newsletter-email" id="email" placeholder="Your email">
-	                                    <button type="submit"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
-	                                </form>
+	                                <input type="text" name="newsletter-email" id="nd" placeholder="Your email">
+	                                <button type="submit"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
 	                            </div>
 	                        </div>
 	                    </div>
