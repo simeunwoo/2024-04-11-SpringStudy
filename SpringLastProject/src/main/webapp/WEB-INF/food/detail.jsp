@@ -15,7 +15,7 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="bradcumb-title text-center">
-                        <h2>맛집 상세보기</h2>
+                        <h2>맛집 상세 보기</h2>
                     </div>
                 </div>
             </div>
