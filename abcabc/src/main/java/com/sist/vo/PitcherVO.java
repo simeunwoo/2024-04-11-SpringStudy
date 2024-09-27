@@ -23,7 +23,7 @@ IMAGE              VARCHAR2(4000)
 @Data
 public class PitcherVO {
 
-	private int pno,game,win,lose,hit,strikeout,ball,number,save,hold;
+	private int pno,game,win,lose,hit,strikeout,ball,age,save,hold;
 	private double era,war,inning;
 	private String name,team,logo,image;
 }
