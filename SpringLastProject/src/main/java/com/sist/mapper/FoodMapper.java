@@ -39,4 +39,17 @@ public interface FoodMapper {
 	
 	// *** 예약
 	// 추천 => 네이버 카페
+	// 검색
+	@Select("SELECT fno,name,poster,score,type,hit,num "
+			+ "FROM (SELECT fno,name,poster,score,type,hit,rownum as num "
+			+ "FROM (SELECT fno,name,poster,score,type,hit "
+			+ "FROM project_food_house "
+			+ "WHERE address LIKE '%'||#{fd}||'%' "
+			+ "ORDER BY fno ASC)) "
+			+ "WHERE num BETWEEN #{start} AND #{end}")
+	public List<FoodVO> foodFindListData(Map map);
+	
+	@Select("SELECT CEIL(COUNT(*)/12.0) FROM project_food_house "
+			+ "WHERE address LIKE '%'||#{fd}||'%'")
+	public int foodFindTotalPage(Map map);
 }

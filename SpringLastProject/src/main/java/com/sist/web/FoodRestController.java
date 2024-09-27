@@ -45,4 +45,14 @@ public class FoodRestController {
 		
 		return json;
 	}
+	
+	// 검색
+	@GetMapping(value="food/find_vue.do",produces="text/plain;charset=UTF-8")
+	public String food_find(int page,String fd)
+	{
+		// Service 연동
+		
+		return "";
+	}
+	
 }

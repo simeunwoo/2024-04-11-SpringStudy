@@ -51,4 +51,10 @@ public class FoodController {
 		
 		return "food/detail";
 	}
+	
+	@GetMapping("food/find.do")
+	public String food_find()
+	{
+		return "food/find";
+	}
 }
