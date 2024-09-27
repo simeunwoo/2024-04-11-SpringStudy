@@ -36,4 +36,14 @@ public class RecipeDAO {
 	{
 		return mapper.recipeHitTop8();
 	}
+	
+	public List<RecipeVO> recipeListData(Map map)
+	{
+		return mapper.recipeListData(map);
+	}
+	
+	public int recipeTotalPage()
+	{
+		return mapper.recipeTotalPage();
+	}
 }

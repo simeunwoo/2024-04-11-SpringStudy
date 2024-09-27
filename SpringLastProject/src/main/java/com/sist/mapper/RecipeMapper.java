@@ -20,4 +20,16 @@ public interface RecipeMapper {
 			+ "WHERE r.no=rd.no ORDER BY hit DESC) "
 			+ "WHERE rownum<=8 AND hit!=(SELECT MAX(hit) FROM recipe)")
 	public List<RecipeVO> recipeHitTop8();
+	
+	@Select("SELECT no,poster,title,chef,hit,num "
+			+ "FROM (SELECT no,poster,title,chef,hit,rownum as num "
+			+ "FROM (SELECT /*+ INDEX_ASC(recipe recipe_no_pk)*/no,poster,title,chef,hit "
+			+ "FROM recipe WHERE no IN(SELECT no FROM recipe "
+			+ "INTERSECT SELECT no FROM recipedetail))) "
+			+ "WHERE num BETWEEN #{start} AND #{end}")
+	public List<RecipeVO> recipeListData(Map map);
+	
+	@Select("SELECT CEIL(COUNT(*)/12.0) FROM recipe "
+			+ "WHERE no IN(SELECT no FROM recipe INTERSECT SELECT no FROM recipedetail)")
+	public int recipeTotalPage();
 }
