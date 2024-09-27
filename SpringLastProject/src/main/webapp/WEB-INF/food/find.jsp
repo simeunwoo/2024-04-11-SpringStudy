@@ -132,6 +132,15 @@
     		},
     		// 사용자 정의 함수 => 이벤트 처리, 공통으로 적용
     		methods:{
+    			prev(){
+    				
+    			},
+    			next(){
+    				
+    			},
+    			pageChange(){
+    				
+    			},
     			// 공통으로 사용되는 함수 => 서버 연결 후에 데이터 읽기
     			dataRecv(){
     				axios.get('../food/find_vue.do',{
@@ -142,6 +151,11 @@
     				}).then(response=>{
     					// 정상 수행 시 => 데이터를 읽어 온다
     					console.log(response.data)
+    					this.food_list=response.data.list
+    					this.curpage=response.data.curpage
+    					this.totalpage=response.data.totalpage
+    					this.startPage=response.data.startPage
+    					this.endPage=response.data.endPage
     				}).catch(error=>{
     					// 서버에서 에러 발생 시 사용
     					console.log(error.response)
@@ -154,7 +168,7 @@
     		},
     		// components, computed, watch, filter
     		// components => Chef, Seoul / filter => Goods
-    	})
+    	}).mount('#listApp')
     </script>
     <!-- ****** Archive Area End ****** -->
 </body>
