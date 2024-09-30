@@ -38,6 +38,11 @@ public interface FoodMapper {
 	public FoodVO foodDetailData(int fno);
 	
 	// *** 예약
+	@Select("SELECT fno,name,poster "
+			+ "FROM project_food_house "
+			+ "WHERE type LIKE '%'||#{type}||'%'")
+	public List<FoodVO> foodTypeData(String type);
+	
 	// 추천 => 네이버 카페
 	// 검색
 	@Select("SELECT fno,name,poster,score,type,hit,num "

@@ -23,6 +23,8 @@ p{
 	text-overflow: ellipsis;
 }
 </style>
+<script src="https://unpkg.com/vue@3"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="image.js"></script>
 <script src="page.js"></script>
 </head>
@@ -38,8 +40,6 @@ p{
 			</div>
 		</div>
 	</div>
-	<script src="vue_list.js">
-		
-	</script>
+	<script src="vue_list.js"></script>
 </body>
 </html>
