@@ -79,12 +79,21 @@ p{
 								<td width="70%" class="text-left">{{food_detail.name}}</td>
 							</tr>
 							<tr>
-								<th class="text-left" width="30%">예악일</th>
+								<th class="text-left" width="30%">예약일</th>
 								<td width="70%" class="text-left">{{rday}}</td>
 							</tr>
 							<tr>
-								<th class="text-left" width="30%">예악 시간</th>
+								<th class="text-left" width="30%">예약 시간</th>
 								<td width="70%" class="text-left">{{ts}}</td>
+							</tr>
+							<tr>
+								<th class="text-left" width="30%">인원</th>
+								<td width="70%" class="text-left">{{is}}</td>
+							</tr>
+							<tr v-show="reserveBtn">
+								<td colspan="2" class="text-center">
+									<button class="btn-primary btn-lg">예약</button>
+								</td>
 							</tr>
 						</table>
 					</td>					
@@ -104,6 +113,12 @@ p{
 					<td class="text-center" width="30%" height="200">
 						<table class="table" v-show="isInwon">
 							<caption><h3>인원 정보</h3></caption>
+							<tr>
+								<td class="text-center">
+									<span class="btn btn-xs btn-success" v-for="i in inwon"
+									  @click="inwonSelect(i)">{{i}}</span>
+								</td>
+							</tr>
 						</table>
 					</td>
 				</tr>
@@ -124,7 +139,10 @@ p{
 					rtime:['10:00','11:00','12:00','13:00','14:00',
 						'15:00','16:00','17:00','18:00','19:00',
 						'20:00','21:00'],
-					ts:''
+					ts:'',
+					inwon:['1명','2명','3명','4명','5명','6명','7명','8명','9명','10명','단체'],
+					is:'',
+					reserveBtn:false
 				}
 			},
 			mounted(){
@@ -165,6 +183,10 @@ p{
 				this.dataRecv()
 			},
 			methods:{
+				inwonSelect(i){
+					this.is=i
+					this.reserveBtn=true
+				},
 				timeSelect(time){
 					this.isInwon=true
 					this.ts=time
@@ -197,7 +219,7 @@ p{
 			},
 			components:{
 				// 등록하는 구간 (components => 메소드가 X)
-			}
+			}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
 		}).mount('.container')
 	</script>
 </body>
