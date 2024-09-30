@@ -31,9 +31,7 @@ p{
 <body>
 	<div class="container">
 		<div class="row">
-			<!-- 목록 (이미지) : component : image-card -->
-			<image-card v-bind:list="list"></image-card>
-			<!-- 페이지 출력 : component : page-card -->
+			<poster-card></poster-card>
 		</div>
 		<div style="height:10px"></div>
 		<div class="row">
@@ -43,8 +41,7 @@ p{
 		</div>
 	</div>
 	<script>
-		// .js => 재사용 목적 => 다이얼로그 창
-		let listApp=Vue.createApp({
+		let recipeApp=Vue.createApp({
 			data(){
 				return{
 					list:[],
@@ -58,20 +55,8 @@ p{
 				this.dataRecv()
 			},
 			methods:{
-				prev(){
-					this.curpage=this.startPage-1
-					this.dataRecv()
-				},
-				next(){
-					this.curpage=this.endPage+1
-					this.dataRecv()
-				},
-				pageChange(page){
-					this.curpage=page
-					this.dataRecv()
-				},
 				dataRecv(){
-					axios.get('../food/list_vue.do',{
+					axios.get('../recipe/list_vue.do',{
 						params:{
 							page:this.curpage
 						}
@@ -86,6 +71,18 @@ p{
 						console.log(error.response)
 					})
 				},
+				prev(){
+					this.curpage=this.startPage-1
+					this.dataRecv()
+				},
+				next(){
+					this.curpage=this.endPage+1
+					this.dataRecv()
+				},
+				pageChange(page){
+					this.curpage=page
+					this.dataRecv()
+				},
 				range(start,end){
 					let arr=[]
 					let len=end-start
@@ -98,7 +95,7 @@ p{
 				}
 			},
 			components:{
-				'image-card':image_card,
+				'poster-card':image_card,
 				'page-card':page_card
 			}
 		}).mount('.container')

@@ -23,6 +23,10 @@ public class FoodRestController {
 		int end=rowSize*page;
 		
 		List<FoodVO> list=fService.foodListData(start, end);
+		for(FoodVO vo:list)
+		{
+			vo.setPoster("http://www.menupan.com"+vo.getPoster());
+		}
 		int totalpage=fService.foodTotalPage();
 		
 		final int BLOCK=10;
