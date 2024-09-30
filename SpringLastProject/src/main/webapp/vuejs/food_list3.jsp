@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <style type="text/css">
-.container{
+.container-fluid{
 	margin-top: 50px;
 }
 .row{
@@ -23,8 +23,6 @@ p{
 	text-overflow: ellipsis;
 }
 </style>
-<script src="https://unpkg.com/vue@3"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="image.js"></script>
 <script src="page.js"></script>
 </head>
@@ -40,6 +38,8 @@ p{
 			</div>
 		</div>
 	</div>
-	<script src="vue_list.js"></script>
+	<script src="vue_list.js">
+		
+	</script>
 </body>
 </html>
