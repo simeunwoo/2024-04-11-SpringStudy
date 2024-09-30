@@ -29,9 +29,9 @@ public interface PlayerMapper {
 			+ "WHERE num BETWEEN #{start} AND #{end}")
 	public List<BatterVO> batterListData(@Param("start") int start,@Param("end") int end);
 	
-	@Select("SELECT pno,age,game,win,lose,save,hold,era,war,name,tea,logo,image,num "
-			+ "FROM (SELECT pno,age,game,win,lose,save,hold,era,war,name,tea,logo,image,rownum as num "
-			+ "FROM (SELECT pno,age,game,win,lose,save,hold,era,war,name,tea,logo,image "
+	@Select("SELECT pno,age,game,win,lose,save,hold,era,war,name,team,logo,image,num "
+			+ "FROM (SELECT pno,age,game,win,lose,save,hold,era,war,name,team,logo,image,rownum as num "
+			+ "FROM (SELECT pno,age,game,win,lose,save,hold,era,war,name,team,logo,image "
 			+ "FROM pitcher ORDER BY pno ASC)) "
 			+ "WHERE num BETWEEN #{start} AND #{end}")
 	public List<PitcherVO> pitcherListData(@Param("start") int start,@Param("end") int end);
