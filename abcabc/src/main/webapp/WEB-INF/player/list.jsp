@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 <script src="https://cdn.jsdelivr.net/npm/vue@3.2.45/dist/vue.global.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue@3"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
 <div style="height:500px"></div>
@@ -84,10 +86,10 @@
                               </tr>
                            </thead>
                            <tbody>
-                              <tr v-for="vo in bList">
-                                 <td>{{vo.bno}}</td>
+                              <tr v-for="vo in pList">
+                                 <td>{{vo.pno}}</td>
                                  <td>
-                                 	<a :href="'../player/detail.do?bno='+vo.bno">{{vo.name}}</a>
+                                 	<a :href="'../player/detail.do?pno='+vo.pno">{{vo.name}}</a>
                                  </td>
                                  <td><img :src="vo.logo">{{vo.team}}</td>
                                  <td>{{vo.age}}</td>
@@ -100,16 +102,17 @@
                                  <td>{{vo.war}}</td>
                               </tr>
                            </tbody>
-                           <tfoot>
-                           		<tr>
+                        </table>
+                        </div>
+                        <div class="text-center">
+                        	<tr>
 									<td colspan="5" class="text-center">
-										<input type="button" class="btn btn-sm btn-success" value="이전" @click="bPrev()">
-											{{bCurpage}} 페이지 / {{bTotalpage}} 페이지
-										<input type="button" class="btn btn-sm btn-success" value="다음" @click="bNext()">
+										<input type="button" class="btn btn-sm btn-success" value="이전" @click="pPrev()">
+											{{pCurpage}} 페이지 / {{pTotalpage}} 페이지
+										<input type="button" class="btn btn-sm btn-success" value="다음" @click="pNext()">
 									</td>
 								</tr>
-                           </tfoot>
-                        </table>
+                       
                      </div>
                   </aside></div></div></div>
 	<script>
@@ -121,7 +124,7 @@
 					bCurpage:1,
 					pCurpage:1,
 					bTotalpage:0,
-					pTotalpage:0,
+					pTotalpage:0
 				}
 			},
 			mounted(){
@@ -142,6 +145,8 @@
 						this.pCurpage=response.data.pCurpage
 						this.bTotalpage=response.data.bTotalpage
 						this.pTotalpage=response.data.pTotalpage
+					}).catch(error=>{
+						console.log(error.response)
 					})
 				},
 				bPrev(){
