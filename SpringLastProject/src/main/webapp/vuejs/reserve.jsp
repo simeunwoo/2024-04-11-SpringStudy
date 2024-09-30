@@ -47,7 +47,7 @@ p{
 										<button class="btn-xs" @click="typeChange('분식')">분식</button>
 									</td>
 								</tr>
-								<tr v-for="vo in food_list">
+								<tr v-for="(vo,index) in food_list" class="nav-link" @click="foodSelect(index)">
 									<td class="text-center" width="30%">
 										<img :src="'http://www.menupan.com'+vo.poster" style="width:30px;height:30px">
 									</td>
@@ -69,6 +69,23 @@ p{
 					<td class="text-center" width="25%" rowspan="2">
 						<table class="table">
 							<caption><h3>예약 정보</h3></caption>
+							<tr>
+								<td class="text-center" colspan="2">
+									<img :src="'http://www.menupan.com'+food_detail.poster" style="width:200px;height:150px">
+								</td>
+							</tr>
+							<tr>
+								<th class="text-left" width="30%">업체명</th>
+								<td width="70%" class="text-left">{{food_detail.name}}</td>
+							</tr>
+							<tr>
+								<th class="text-left" width="30%">예악일</th>
+								<td width="70%" class="text-left">{{rday}}</td>
+							</tr>
+							<tr>
+								<th class="text-left" width="30%">예악 시간</th>
+								<td width="70%" class="text-left">{{ts}}</td>
+							</tr>
 						</table>
 					</td>					
 				</tr>
@@ -76,6 +93,12 @@ p{
 					<td class="text-center" width="40%" height="200">
 						<table class="table" v-show="isTime">
 							<caption><h3>시간 정보</h3></caption>
+							<tr>
+								<td>
+									<span class="btn btn-xs btn-danger" style="margin-left:2px" v-for="t in rtime"
+									  @click="timeSelect(t)">{{t}}</span>
+								</td>
+							</tr>
 						</table>
 					</td>
 					<td class="text-center" width="30%" height="200">
@@ -95,14 +118,57 @@ p{
 					isTime:false,
 					isInwon:false,
 					food_list:[],
-					type:'한식'
+					type:'한식',
+					food_detail:{},
+					rday:'',
+					rtime:['10:00','11:00','12:00','13:00','14:00',
+						'15:00','16:00','17:00','18:00','19:00',
+						'20:00','21:00'],
+					ts:''
 				}
 			},
 			mounted(){
+				let date=new Date()
+				let year=date.getFullYear()
+				// let month=("0"+(1+date.getMonth())).slice(-2)
+				let month=date.getMonth()+1
+				// let day=("0"+date.getDate()).slice(-1)
+				let day=date.getDate()
 				// 시작과 동시에 변수 초기화
+				let _this=this
+				document.addEventListener('DOMContentLoaded',function(){
+					let calendarEl=document.getElementById('calendar')
+					let calendar=new FullCalendar.Calendar(calendarEl,{
+						initialView:'dayGridMonth',
+						height:450,
+						headerToolbar:{
+							left:'prev,next',
+							center:'title'
+						},
+						validRange:{
+							start:year+"-"+month+"-"+day
+						},
+						themeSystem:'bootstrap',
+						editable:true,
+						dropable:true,
+						dateClick:((info)=>{
+							// alert('click date:'+info.dateStr)
+							_this.isTime=true
+							_this.rday=info.dateStr
+							// this => FullCalendar
+							// _this => Vue
+							// 모든 클래스는 this를 가지고 있다
+						})
+					})
+					calendar.render()
+				})
 				this.dataRecv()
 			},
 			methods:{
+				timeSelect(time){
+					this.isInwon=true
+					this.ts=time
+				},
 				// 사용자 정의 메소드
 				typeChange(type){
 					this.type=type
@@ -119,6 +185,11 @@ p{
 					}).catch(error=>{
 						console.log(error.response)
 					})
+				},
+				foodSelect(index){
+					this.isDay=true
+					this.food_detail=this.food_list[index]
+					console.log(this.food_detail)
 				}
 			},
 			updated(){
