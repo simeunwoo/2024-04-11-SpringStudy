@@ -49,4 +49,35 @@ public class RecipeRestController {
 		   
 		   return json;
 	}
+	
+	@GetMapping(value="recipe/detail_vue.do",produces="text/plain;charset=UTF-8")
+	public String recipe_detail(int no) throws Exception
+	{
+		RecipeDetailVO vo=rDao.recipeDetailData(no);
+		
+		String s=vo.getData();
+		s=s.replace("구매", "");
+		vo.setData(s.trim());
+		
+		String[] makes=vo.getFoodmake().split("\n");
+		List<String> mList=new ArrayList<String>();
+		List<String> iList=new ArrayList<String>();
+		
+		for(String m:makes)
+		{
+			StringTokenizer st=new StringTokenizer(m, "^");
+			mList.add(st.nextToken());
+			iList.add(st.nextToken());
+		}
+		
+		Map map=new HashMap();
+		map.put("vo", vo);
+		map.put("mList", mList);
+		map.put("iList", iList);
+		
+		ObjectMapper mapper=new ObjectMapper();
+		String json=mapper.writeValueAsString(vo);
+		
+		return json;
+	}
 }
