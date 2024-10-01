@@ -5,10 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- 
 <script src="https://cdn.jsdelivr.net/npm/vue@3.2.45/dist/vue.global.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> -->
     <script src="https://unpkg.com/vue@3"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 <body>
 <div style="height:500px"></div>
@@ -69,8 +72,9 @@
 				<h4>Points Table</h4>
                   <aside id="sidebar" class="left-bar">
                      <div class="feature-matchs">
+                     
                         <table class="table table-bordered table-hover">
-                           <thead>
+                           
                               <tr>
                                  <th></th>
                                  <th>이름</th>
@@ -84,12 +88,11 @@
                                  <th>ERA</th>
                                  <th>WAR</th>
                               </tr>
-                           </thead>
-                           <tbody>
-                              <tr v-for="vo in pList">
+                          
+                              <tr v-for="vo in list">
                                  <td>{{vo.pno}}</td>
                                  <td>
-                                 	<a :href="'../player/detail.do?pno='+vo.pno">{{vo.name}}</a>
+                                 	<a :href="'../player/pitcher_detail.do?pno='+vo.pno">{{vo.name}}</a>
                                  </td>
                                  <td><img :src="vo.logo">{{vo.team}}</td>
                                  <td>{{vo.age}}</td>
@@ -101,30 +104,28 @@
                                  <td>{{vo.era}}</td>
                                  <td>{{vo.war}}</td>
                               </tr>
-                           </tbody>
+                          
                         </table>
-                        </div>
+                        
                         <div class="text-center">
                         	<tr>
 									<td colspan="5" class="text-center">
-										<input type="button" class="btn btn-sm btn-success" value="이전" @click="pPrev()">
-											{{pCurpage}} 페이지 / {{pTotalpage}} 페이지
-										<input type="button" class="btn btn-sm btn-success" value="다음" @click="pNext()">
+										<input type="button" class="btn btn-sm btn-success" value="이전" @click="prev()">
+											{{curpage}} 페이지 / {{totalpage}} 페이지
+										<input type="button" class="btn btn-sm btn-success" value="다음" @click="next()">
 									</td>
 								</tr>
                        
                      </div>
-                  </aside></div></div></div>
+                  </div></div></div>
+                  </aside></div>
 	<script>
-		let PlayerApp=Vue.createApp({
+		let playerApp=Vue.createApp({
 			data(){
 				return{
-					bList:[],
-					pList:[],
-					bCurpage:1,
-					pCurpage:1,
-					bTotalpage:0,
-					pTotalpage:0
+					list:[],
+					curpage:1,
+					totalpage:0
 				}
 			},
 			mounted(){
@@ -132,37 +133,25 @@
 			},
 			methods:{
 				dataRecv(){
-					axios.get('../player/list_vue.do',{
+					axios.get('../player/pitcher_list_vue.do',{
 						params:{
-							bPage:this.bCurpage,
-							pPage:this.pCurpage
+							page:this.curpage
 						}
 					}).then(response=>{
 						console.log(response.data)
-						this.bList=response.data.bList
-						this.pList=response.data.pList
-						this.bCurpage=response.data.bCurpage
-						this.pCurpage=response.data.pCurpage
-						this.bTotalpage=response.data.bTotalpage
-						this.pTotalpage=response.data.pTotalpage
+						this.list=response.data.list
+						this.curpage=response.data.curpage
+						this.totalpage=response.data.totalpage
 					}).catch(error=>{
 						console.log(error.response)
 					})
 				},
-				bPrev(){
-					this.bCurpage=this.bCurpage>1?this.bCurpage-1:this.bCurpage
+				prev(){
+					this.curpage=this.curpage>1?this.curpage-1:this.curpage
 					this.dataRecv()
 				},
-				bNext(){
-					this.bCurpage=this.bCurpage<this.bTotalpage?this.bCurpage+1:this.bCurpage
-					this.dataRecv()
-				},
-				pPrev(){
-					this.pCurpage=this.pCurpage>1?this.pCurpage-1:this.pCurpage
-					this.dataRecv()
-				},
-				pNext(){
-					this.pCurpage=this.pCurpage<this.pTotalpage?this.pCurpage+1:this.pCurpage
+				next(){
+					this.curpage=this.curpage<this.totalpage?this.curpage+1:this.curpage
 					this.dataRecv()
 				}
 			}

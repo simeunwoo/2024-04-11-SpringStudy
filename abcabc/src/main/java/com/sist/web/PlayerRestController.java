@@ -15,28 +15,44 @@ public class PlayerRestController {
 	@Autowired
 	private PlayerService pService;
 	
-	@GetMapping(value="player/list_vue.do",produces="text/plain;charset=UTF-8")
-	public String player_list(int bPage,int pPage) throws Exception
+	@GetMapping(value="player/batter_list_vue.do",produces="text/plain;charset=UTF-8")
+	public String batter_list(int page) throws Exception
 	{
 		int rowSize=20;
-		int bStart=(rowSize*bPage)-(rowSize-1);
-		int bEnd=rowSize*bPage;
-		int pStart=(rowSize*pPage)-(rowSize-1);
-		int pEnd=rowSize*pPage;
+		int start=(rowSize*page)-(rowSize-1);
+		int end=rowSize*page;
 		
-		List<BatterVO> bList=pService.batterListData(bStart, bEnd);
-		List<PitcherVO> pList=pService.pitcherListData(pStart, pEnd);
-		int bTotalpage=pService.batterTotalPage();
-		int pTotalpage=pService.pitcherTotalPage();
+		List<BatterVO> list=pService.batterListData(start, end);
+		int totalpage=pService.batterTotalPage();
 		
 		// Vue로 데이터 전송
 		Map map=new HashMap();
-		map.put("bList", bList);
-		map.put("pList", pList);
-		map.put("bCurpage", bPage);
-		map.put("pCurpage", pPage);
-		map.put("bTotalpage", bTotalpage);
-		map.put("pTotalpage", pTotalpage);
+		map.put("list", list);
+		map.put("curpage", page);
+		map.put("totalpage", totalpage);
+		
+		// 자바스크립트 연결 => Map을 JSON으로 => Kotlin, Flutter
+		ObjectMapper mapper=new ObjectMapper();
+		String json=mapper.writeValueAsString(map);
+		
+		return json;
+	}
+	
+	@GetMapping(value="player/pitcher_list_vue.do",produces="text/plain;charset=UTF-8")
+	public String pitcher_list(int page) throws Exception
+	{
+		int rowSize=20;
+		int start=(rowSize*page)-(rowSize-1);
+		int end=rowSize*page;
+		
+		List<PitcherVO> list=pService.pitcherListData(start, end);
+		int totalpage=pService.pitcherTotalPage();
+		
+		// Vue로 데이터 전송
+		Map map=new HashMap();
+		map.put("list", list);
+		map.put("curpage", page);
+		map.put("totalpage", totalpage);
 		
 		// 자바스크립트 연결 => Map을 JSON으로 => Kotlin, Flutter
 		ObjectMapper mapper=new ObjectMapper();
