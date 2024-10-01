@@ -26,4 +26,9 @@ public class ReplyDAO {
 	{
 		mapper.replyDelete(rno);
 	}
+	
+	public void replyUpdate(ReplyVO vo)
+	{
+		mapper.replyUpdate(vo);
+	}
 }

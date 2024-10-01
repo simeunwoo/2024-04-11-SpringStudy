@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectKey;
+import org.apache.ibatis.annotations.Update;
 
 import com.sist.vo.*;
 public interface ReplyMapper {
@@ -19,7 +20,11 @@ public interface ReplyMapper {
   @Insert("INSERT INTO spring_reply VALUES("
 		 +"#{rno},#{fno},#{id},#{name},#{msg},SYSDATE)")
   public void replyInsert(ReplyVO vo);
-  // 수정 
+  // 수정
+  @Update("UPDATE spring_reply SET "
+  		+ "msg=#{msg} "
+  		+ "WHERE rno=#{rno}")
+  public void replyUpdate(ReplyVO vo);
   // 삭제 
   @Delete("DELETE FROM spring_reply "
 		 +"WHERE rno=#{rno}")
