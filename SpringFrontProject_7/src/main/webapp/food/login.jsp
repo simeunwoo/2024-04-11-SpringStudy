@@ -25,14 +25,85 @@
 			<table class="table">
 				<tr>
 					<th width="30%">ID</th>
-					<td width="70%"></td>
+					<td width="70%">
+						<input type="text" ref="id" v-model="id" size="15" class="input-sm">
+					</td>
 				</tr>
 				<tr>
 					<th width="30%">PWD</th>
-					<td width="70%"></td>
+					<td width="70%">
+						<input type="password" ref="pwd" v-model="pwd" size="15" class="input-sm">
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" class="text-center">
+						<input type="button" class="btn-sm btn-primary" value="로그인" @click="login()">
+					</td>
 				</tr>
 			</table>
 		</div>
 	</div>
+	<script>
+		let logApp=Vue.createApp({
+			data(){
+				return{
+					id:'',
+					pwd:'',
+					msg:''
+				}
+			},
+			methods:{
+				login(){
+					// 유효성 검사 => 반드시 입력이 가능
+					if(this.id==="")
+					{
+						this.$refs.id.focus() // 태그를 제어
+						return
+					}
+					if(this.pwd==="")
+					{
+						this.$refs.pwd.focus()
+						return
+					}
+					// 서버에서 로그인 요청 => 결과값을 받는다
+					// 요청, 응답 => AJAX => axios => get / then
+					//                      | vue / react (axios / fetch)
+					// login_vue.do?id=aaa&pwd=1234
+					// ===> params 관련 = @~Mapping의 매개 변수 관련 : id, pwd
+					axios.post('../food/login_vue.do',{
+						params:{
+							id:this.id,
+							pwd:this.pwd
+						}
+					}).then(response=>{
+						console.log(response.data)
+						if(response.data==="NOID")
+						{
+							alert("아이디가 존재하지 않습니다")
+							this.id=''
+							this.pwd=''
+							this.$refs.id.focus()
+						}
+						else if(response.data==="NOPWD")
+						{
+							alert("비밀 번호가 존재하지 않습니다")
+							this.pwd=''
+							this.$refs.pwd.focus()
+						}
+						else if(response.data==="OK")
+						{
+							location.href="../food/list.do"
+						}
+						else
+						{
+							alert("서버 연결 실패")
+						}
+					}).catch(error=>{
+						console.log(error.response)
+					})
+				}
+			}
+		}).mount('.container')
+	</script>
 </body>
 </html>
