@@ -66,4 +66,15 @@ public class FoodRestController {
 		
 		return json;
 	}
+	
+	@GetMapping(value="food/detail_vue.do",produces="text/plain;charset=UTF-8")
+	public String food_detail(int fno) throws Exception
+	{
+		FoodVO vo=fDao.foodDetailData(fno);
+		
+		ObjectMapper mapper=new ObjectMapper();
+		String json=mapper.writeValueAsString(vo);
+		
+		return json;
+	}
 }
