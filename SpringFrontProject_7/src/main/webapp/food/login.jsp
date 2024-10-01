@@ -71,10 +71,8 @@
 					// login_vue.do?id=aaa&pwd=1234
 					// ===> params 관련 = @~Mapping의 매개 변수 관련 : id, pwd
 					axios.post('../food/login_vue.do',{
-						params:{
-							id:this.id,
-							pwd:this.pwd
-						}
+						id:this.id,
+						pwd:this.pwd
 					}).then(response=>{
 						console.log(response.data)
 						if(response.data==="NOID")
