@@ -47,4 +47,12 @@ public class ReplyRestController {
 		
 		return commonsListData(vo.getFno());
 	}
+	
+	@GetMapping(value="food/reply_delete_vue.do",produces="text/plain;charset=UTF-8")
+	public String reply_delete(int rno,int fno) throws Exception
+	{
+		rDao.replyDelete(rno);
+		
+		return commonsListData(fno);
+	}
 }

@@ -1,6 +1,7 @@
 package com.sist.mapper;
 import java.util.*;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.SelectKey;
@@ -24,4 +25,7 @@ public interface ReplyMapper {
 	// 수정
 	
 	// 삭제
+	@Delete("DELETE FROM spring_reply "
+			+ "WHERE rno=#{rno}")
+	public void replyDelete(int rno);
 }
