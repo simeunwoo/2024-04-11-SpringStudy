@@ -35,19 +35,29 @@
 	margin: 0px auto;
 	width: 960px;
 }
+.nav-link{
+	cursor: pointer;
+}
+p{
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
 </style>
 <script src="https://unpkg.com/vue@3"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="image.js"></script>
+<script src="page.js"></script>
 </head>
 <body>
 	<div class="container">
 		<h1 class="text-center">맛집 목록</h1>
 		<div class="row">
-			
+			<image-card></image-card>
 		</div>
 		<div style="height:10px"></div>
-		<div class="row">
-			
+		<div class="row text-center">
+			<page-card></page-card>
 		</div>
 	</div>
 	<script>
@@ -79,13 +89,50 @@
 				// => 공통으로 사용하는 함수
 				dataRecv(){
 					axios.get('../food/list_vue.do',{
-						page:this.curpage
+						params:{
+							page:this.curpage
+						}
 					}).then(response=>{
-						
+						console.log(response.data)
+						this.list=response.data.list
+						this.curpage=response.data.curpage
+						this.totalpage=response.data.totalpage
+						this.startPage=response.data.startPage
+						this.endPage=response.data.endPage
+						/*
+							response={config:{},data:{curpage:1,totalpage:100,list:[{},{}...]}}
+							Vue/React => 값이 변경되면 자동으로 HTML을 변경한다
+						*/
 					}).catch(error=>{
-						
+						console.log(error.response)
 					})
+				},
+				prev(){
+					this.curpage=this.startPage-1
+					this.dataRecv()
+				},
+				next(){
+					this.curpage=this.endPage+1
+					this.dataRecv()
+				},
+				pageChange(page){
+					this.curpage=page
+					this.dataRecv()
+				},
+				range(start,end){
+					let arr=[]
+					let len=end-start
+					for(let i=0;i<=len;i++)
+					{
+						arr[i]=start
+						start++
+					}
+					return arr
 				}
+			},
+			components:{
+				'image-card':image_card,
+				'page-card':page_card
 			}
 		}).mount('.container')
 	</script>
