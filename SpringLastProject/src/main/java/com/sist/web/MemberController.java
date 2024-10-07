@@ -40,4 +40,10 @@ public class MemberController {
 		
 		return "redirect:../main/main.do";
 	}
+	
+	@GetMapping("member/login.do")
+	public String member_login()
+	{
+		return "member/login";
+	}
 }
