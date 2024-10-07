@@ -16,7 +16,7 @@
                     <div class="single_catagory wow fadeInUp" data-wow-delay=".3s">
                         <img src="../img/catagory-img/1.jpg" alt="">
                         <div class="catagory-title">
-                            <a href="#">
+                            <a href="../food/list.do">
                                 <h5>맛집</h5>
                             </a>
                         </div>
@@ -26,7 +26,7 @@
                     <div class="single_catagory wow fadeInUp" data-wow-delay=".6s">
                         <img src="../img/catagory-img/2.jpg" alt="">
                         <div class="catagory-title">
-                            <a href="#">
+                            <a href="../recipe/list.do">
                                 <h5>레시피</h5>
                             </a>
                         </div>
@@ -37,7 +37,7 @@
                         <img src="../img/catagory-img/3.jpg" alt="">
                         <div class="catagory-title">
                             <a href="#">
-                                <h5>서울 여행</h5>
+                                <h5>서울여행</h5>
                             </a>
                         </div>
                     </div>
@@ -82,7 +82,7 @@
                                             </div>
                                             <!-- Post Comments -->
                                             <div class="post-comments">
-                                                <a href="#"><i class="fa fa-comment-o" aria-hidden="true"></i> 17</a>
+                                                <a href="#"><i class="fa fa-comment-o" aria-hidden="true"></i> 12</a>
                                             </div>
                                             <!-- Post Share -->
                                             <div class="post-share">
@@ -126,7 +126,7 @@
                                             </div>
                                             <!-- Post Comments -->
                                             <div class="post-comments">
-                                                <a href="#"><i class="fa fa-comment-o" aria-hidden="true"></i> 17</a>
+                                                <a href="#"><i class="fa fa-comment-o" aria-hidden="true"></i> 12</a>
                                             </div>
                                             <!-- Post Share -->
                                             <div class="post-share">
@@ -171,7 +171,7 @@
                                             </div>
                                             <!-- Post Comments -->
                                             <div class="post-comments">
-                                                <a href="#"><i class="fa fa-comment-o" aria-hidden="true"></i> 17</a>
+                                                <a href="#"><i class="fa fa-comment-o" aria-hidden="true"></i> 12</a>
                                             </div>
                                             <!-- Post Share -->
                                             <div class="post-share">
@@ -217,7 +217,7 @@
                             <!-- Single Popular Post -->
                             <c:forEach var="vo" items="${fList }">
                             <div class="single-populer-post d-flex">
-                                <img src="http://www.menupan.com${vo.poster }" alt="">
+                                <img src="http://www.menupan.com${vo.poster }" style="width: 200px;height: 120px">
                                 <div class="post-content">
                                     <a href="#">
                                         <h6>${vo.name }</h6>
@@ -235,8 +235,8 @@
                                 <div class="add-text">
                                     <div class="yummy-table">
                                         <div class="yummy-table-cell">
-                                            <h2>Cooking Book</h2>
-                                            <p>Buy Book Online Now!</p>
+                                            <h2>Goods By</h2>
+                                            <p>Buy Goods Online Now!</p>
                                             <a href="#" class="add-btn">Buy Now</a>
                                         </div>
                                     </div>
@@ -254,7 +254,7 @@
                
                                     <input type="text" name="newsletter-email" id="nd" placeholder="검색어 입력">
                                     <button type=button><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
-                               
+                                    
                             </div>
                         </div>
                     </div>
