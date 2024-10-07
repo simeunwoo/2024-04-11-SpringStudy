@@ -48,75 +48,80 @@
 			     <tr>
 			      <th class="text-right" width="20%">비밀번호</th>
 			      <td width="80%">
-			       <input type="password" size=15 class="input-sm" name="pwd" id="pwd">
-			       &nbsp;재입력:<input type="password" size=15 class="input-sm" id="pwd1">
+			       <input type="password" size=15 class="input-sm" name="userPwd" ref="userPwd" v-model="userPwd"
+			         @keyup="pwdValidate()">
+			       &nbsp;재입력:<input type="password" size=15 class="input-sm" ref="userPwd2" v-model="userPwd2"
+			         @keyup="pwdValidate2()">
+			       <p>{{pwdOk}}</p>
 			      </td>
 			     </tr>
 			     <tr>
 			      <th class="text-right" width="20%">이름</th>
 			      <td width="80%">
-			       <input type="text" size=15 class="input-sm" name="name" id="name">
+			       <input type="text" size=15 class="input-sm" name="userName" ref="userName"
+			         v-model="userName">
 			      </td>
 			     </tr>
 			     <tr>
 			      <th class="text-right" width="20%">성별</th>
 			      <td width="80%">
-			       <input type="radio" name="sex" value="남자" checked>남자
-			       <input type="radio" name="sex" value="여자">여자
+			       <input type="radio" name="sex" value="남자" checked v-model="sex">남자
+			       <input type="radio" name="sex" value="여자" v-model="sex">여자
 			      </td>
 			     </tr>
 			     <tr>
 			      <th class="text-right" width="20%">생년월일</th>
 			      <td width="80%">
-			       <input type="date" size=20 class="input-sm" name="birthday" id="day">
+			       <input type="date" size=20 class="input-sm" name="birthday" v-model="day"
+			         ref="birthday">
 			      </td>
 			     </tr>
 			     <tr>
 			      <th class="text-right" width="20%">이메일</th>
 			      <td width="80%">
-			       <input type="text" size=50 class="input-sm" name="email" id="email">
+			       <input type="text" size=50 class="input-sm" name="email" ref="email"
+			         v-model="email">
 			      </td>
 			     </tr>
 			     <tr>
 			      <th class="text-right" width="20%">우편번호</th>
 			      <td width="80%">
-			       <input type="text" size=7 class="input-sm" name="post1" readonly id="post1">-
-			       <input type="text" size=7 class="input-sm" name="post2" readonly id="post2">
+			       <input type="text" size=10 class="input-sm" name="post" readonly ref="post" v-model="post">
 			       <input type=button value="우편번호검색"
-			         class="btn btn-sm btn-primary" id="postBtn">
+			         class="btn btn-sm btn-primary" @click="postFind()">
 			      </td>
 			     </tr>
 			     <tr>
 			      <th class="text-right" width="20%">주소</th>
 			      <td width="80%">
-			       <input type="text" size=50 class="input-sm" name="addr1" readonly id="addr1">
+			       <input type="text" size=50 class="input-sm" name="addr1" readonly ref="addr1" v-model="addr1">
 			      </td>
 			     </tr>
 			     <tr>
 			      <th class="text-right" width="20%">상세주소</th>
 			      <td width="80%">
-			       <input type="text" size=50 class="input-sm" name="addr2">
+			       <input type="text" size=50 class="input-sm" name="addr2" ref="addr2" v-model="addr2">
 			      </td>
 			     </tr>
 			     <tr>
 			      <th class="text-right" width="20%">전화번호</th>
 			      <td width="80%">
-			       <select class="input-sm" name="phone1">
+			       <select class="input-sm" name="phone1" v-model="phone1">
 			        <option>010</option>
 			       </select>
-			       <input type="text" size=20 class="input-sm" name="phone2" id="phone2">
+			       <input type="text" size=20 class="input-sm" name="phone2" ref="phone2" v-model="phone2">
 			      </td>
 			     </tr>
 			     <tr>
 			      <th class="text-right" width="20%">소개</th>
 			      <td width="80%">
-			       <textarea rows="5" cols="50" name="content"></textarea>
+			       <textarea rows="5" cols="50" name="content" ref="content" v-model="content"></textarea>
 			      </td>
 			     </tr>
 			     <tr>
 			       <td colspan="2" class="text-center">
 			        <input type="submit" value="회원가입"
-			         class="btn-sm btn-info" id="joinBtn"
+			         class="btn-sm btn-info"
 			        >
 			        <input type=button value="취소"
 			         class="btn-sm btn-warning"
@@ -135,10 +140,78 @@
 				return{
 					userId:'',
 					idOk:'',
-					isReadOnly:false
+					isReadOnly:false,
+					post:'',
+					addr1:'',
+					addr2:'',
+					userName:'',
+					phone1:'',
+					phone2:'',
+					birthday:'',
+					userPwd:'',
+					userPwd2:'',
+					content:'',
+					email:'',
+					sex:'',
+					pwdOk:''
 				}
 			},
 			methods:{
+				pwdValidate(){
+					let pwd=String(this.userPwd)
+					let num=pwd.search(/[0-9]/g)
+					let eng=pwd.search(/[a-z]/g)
+					if(pwd==='')
+					{
+						this.pwdOk=''
+						return
+					}
+					if(pwd.length<8 || pwd.length>20)
+					{
+						this.pwdOk='비밀 번호는 8~20자리 이내로 정하세요'
+						return
+					}
+					// \s : 공백
+					else if(pwd.search(/\s/)!=-1)
+					{
+						this.pwdOk="비밀 번호는 공백 없이 입력하세요"
+						return
+					}
+					else if(num<0 || eng>0)
+					{
+						this.pwdOk="비밀 번호는 영문, 숫자를 혼합하여 입력해야 됩니다"
+						return
+					}
+					else
+					{
+						this.pwdOk=''
+						return
+					}
+				},
+				pwdValidate2(){
+					
+				},
+				submitForm(e){
+					alert("submit call ...")
+					if(this.userId && this.userName && this.userPwd && this.sex
+							&& this.userPwd2 && this.birthday && this.poster
+							&& this.addr1 && this.addr2 && this.content && this.email
+							&& this.idOk!='' && this.pwdOk!='')
+					{
+						alert("정상 수행")
+						return true
+					}
+				},
+				postFind(){
+					let _this=this
+					new daum.Postcode({
+						oncomplete:function(data)
+						{
+							_this.post=data.zonecode
+							_this.addr1=data.address
+						}
+					}).open()
+				},
 				idCheck(){
 					if(this.userId==='')
 					{
@@ -151,7 +224,7 @@
 						}
 					}).then(response=>{
 						console.log(response.data)
-						if(response.data==='0')
+						if(response.data===0)
 						{
 							this.idOk='사용 가능한 아이디입니다'
 							this.isReadOnly=true
@@ -160,6 +233,7 @@
 						{
 							this.idOk='이미 사용 중인 아이디입니다'
 							this.userId=''
+							this.$refs.userId.focus()
 						}
 					}).catch(error=>{
 						console.log(error.response)
