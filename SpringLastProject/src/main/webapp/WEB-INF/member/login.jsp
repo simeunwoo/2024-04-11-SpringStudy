@@ -32,14 +32,14 @@
             <div class="row justify-content-center">
             	<table class="table">
             		<tr>
-            			<th class="text-center" width="15%">아이디</th>
-            			<td width="85%">
+            			<th class="text-center" width="20%">아이디</th>
+            			<td width="80%">
             				<input type="text" name="userId" ref="userId" v-model="userId">
             			</td>
             		</tr>
             		<tr>
-            			<th class="text-center" width="15%">비밀 번호</th>
-            			<td width="85%">
+            			<th class="text-center" width="20%">비밀 번호</th>
+            			<td width="80%">
             				<input type="password" name="userPwd" ref="userPwd" v-model="userPwd">
             			</td>
             		</tr>
