@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="">
@@ -13,20 +12,15 @@
 
     <!-- Title -->
     <title>SpringLastProject</title>
-
     <!-- Favicon -->
     <link rel="icon" href="../img/core-img/favicon.ico">
-
     <!-- Core Stylesheet -->
     <link href="../css/style.css" rel="stylesheet">
-
     <!-- Responsive CSS -->
     <link href="../css/responsive/responsive.css" rel="stylesheet">
-    
     <!-- VueJS -->
     <script src="https://unpkg.com/vue@3"></script>
-	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
@@ -36,25 +30,23 @@
     </div>
 
     <!-- Background Pattern Swither -->
-    <!--
     <div id="pattern-switcher">
         Bg Pattern
     </div>
     <div id="patter-close">
         <i class="fa fa-times" aria-hidden="true"></i>
     </div>
-    -->
 
     <!-- ****** Header Start ****** -->
     <tiles:insertAttribute name="header"/>
     <!-- ****** Header End ****** -->
-    
+
     <!-- ****** Home Start ****** -->
     <tiles:insertAttribute name="home"/>
-	<!-- ****** Home End ****** -->
-	
+    <!-- ****** Home End ****** -->
+
     <!-- ****** Footer Start ****** -->
-	<tiles:insertAttribute name="footer"/>
+    <tiles:insertAttribute name="footer"/>
     <!-- ****** Footer End ****** -->
 
     <!-- Jquery-2.2.4 js -->
@@ -68,3 +60,4 @@
     <!-- Active JS -->
     <script src="../js/active.js"></script>
 </body>
+    
