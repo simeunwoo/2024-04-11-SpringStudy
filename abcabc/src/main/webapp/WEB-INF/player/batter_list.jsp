@@ -24,7 +24,7 @@
 <div class="container">
     <!-- 고정 이미지 -->
     <div class="text-center" style="text-align: center;">
-        <img src="../player/m1.jpg" style="width:1200px;height:720px">
+        <img src="m1.jpg" style="width:1200px;height:720px">
         <div class="carousel-caption">
             <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12"></div>
             <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
@@ -151,8 +151,9 @@
                         this.startPage=response.data.startPage
                         this.endPage=response.data.endPage
                         
-                        for(let i = 0; i < this.list.length; i++) {
-                            this.list[i].bno = i + 1;
+                        for(let i=0;i<this.list.length;i++)
+                        {
+                        	this.list[i].bno=i+1
                         }
                     }).catch(error => {
                         console.log(error.response)
