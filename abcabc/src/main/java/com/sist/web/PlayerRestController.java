@@ -56,11 +56,19 @@ public class PlayerRestController {
 		List<PitcherVO> list=pService.pitcherListData(start, end);
 		int totalpage=pService.pitcherTotalPage();
 		
+		final int BLOCK=5;
+		int startPage=((page-1)/BLOCK*BLOCK)+1;
+		int endPage=((page-1)/BLOCK*BLOCK)+BLOCK;
+		if(endPage>totalpage)
+			endPage=totalpage;
+		
 		// Vue로 데이터 전송
 		Map map=new HashMap();
 		map.put("list", list);
 		map.put("curpage", page);
 		map.put("totalpage", totalpage);
+		map.put("startPage", startPage);
+		map.put("endPage", endPage);
 		
 		// 자바스크립트 연결 => Map을 JSON으로 => Kotlin, Flutter
 		ObjectMapper mapper=new ObjectMapper();

@@ -11,6 +11,12 @@
     <script src="https://unpkg.com/vue@3"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+    .logo-image {
+        width: 20px;
+        height: 20px;
+    }
+</style>
 
 </head>
 <body>
@@ -30,7 +36,7 @@
 </div>
 
 
-    <div class="container" id="baseTable">
+    <div class="container" id="batterTable">
         <div class="header-top">
             <div class="row">
                 <h4>Points Table</h4>
@@ -50,12 +56,13 @@
                                 <th>삼진</th>
                                 <th>WAR</th>
                             </tr>
-                            <tr v-for="vo in batter_list">
+                            <tr v-for="vo in list">
                                 <td>{{vo.bno}}</td>
                                 <td>
                                     <a :href="'../player/batter_detail.do?bno='+vo.bno">{{vo.name}}</a>
                                 </td>
-                                <td><img :src="vo.logo">{{vo.team}}</td>
+                               <td><img :src="vo.logo" class="logo-image">{{vo.team}}</td>
+
                                 <td>{{vo.age}}</td>
                                 <td>{{vo.game}}</td>
                                 <td>{{vo.homerun}}</td>
@@ -98,7 +105,7 @@
         let playerApp=Vue.createApp({
             data() {
                 return {
-                    batter_list:[],
+                    list:[],
                     curpage:1,
                     totalpage:0,
                     startPage:0,
@@ -138,17 +145,21 @@
                         }
                     }).then(response=>{
                         console.log(response.data)
-                        this.batter_list=response.data.list
+                        this.list=response.data.list
                         this.curpage=response.data.curpage
                         this.totalpage=response.data.totalpage
                         this.startPage=response.data.startPage
                         this.endPage=response.data.endPage
+                        
+                        for(let i = 0; i < this.list.length; i++) {
+                            this.list[i].bno = i + 1;
+                        }
                     }).catch(error => {
                         console.log(error.response)
                     })
                 }
             }
-        }).mount('#baseTable')
+        }).mount('#batterTable')
     </script>
 </body>
 

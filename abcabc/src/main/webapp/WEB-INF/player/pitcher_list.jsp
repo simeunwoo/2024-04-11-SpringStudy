@@ -11,62 +11,29 @@
     <script src="https://unpkg.com/vue@3"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+<style>
+    .logo-image {
+        width: 20px;
+        height: 20px;
+    }
+</style>
 </head>
 <body>
-<div style="height:500px"></div>
-<!-- Wrapper for slides -->
-               <div class="carousel-inner" role="listbox">
-                  <!-- First slide -->
-                  <div class="item active deepskyblue" data-ride="carousel" data-interval="5000">
-                  <img src="m1.jpg" alt="Slide 1 Image" style="width:900px;height:720px" class="img-fluid">
-                     <div class="carousel-caption">
-                        <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12"></div>
-                        <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
-                           <div class="slider-contant" data-animation="animated fadeInRight">
-                              <h3>If you Don’t Practice<br>You <span class="color-yellow">Don’t Derserve</span><br>to win!</h3>
-                              <p>If you use this site regularly and would like to help keep the site on the Internet,<br>
-                                 please consider donating a small sum to help pay..
-                              </p>
-                              <button class="btn btn-primary btn-lg">Read More</button>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <!-- /.item -->
-                  <!-- Second slide -->
-                  <div class="item skyblue" data-ride="carousel" data-interval="5000">
-                  <img src="m2.jpg" alt="Slide 1 Image" class="img-fluid">
-                     <div class="carousel-caption">
-                        <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12"></div>
-                        <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
-                           <div class="slider-contant" data-animation="animated fadeInRight">
-                              <h3>If you Don’t Practice<br>You <span class="color-yellow">Don’t Derserve</span><br>to win!</h3>
-                              <p>You can make a case for several potential winners of<br>the expanded European Championships.</p>
-                              <button class="btn btn-primary btn-lg">Button</button>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <!-- /.item -->
-                  <!-- Third slide -->
-                  <div class="item darkerskyblue" data-ride="carousel" data-interval="5000">
-                  <img src="m3.jpg" alt="Slide 1 Image" class="img-fluid">
-                     <div class="carousel-caption">
-                        <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12"></div>
-                        <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
-                           <div class="slider-contant" data-animation="animated fadeInRight">
-                              <h3>If you Don’t Practice<br>You <span class="color-yellow">Don’t Derserve</span><br>to win!</h3>
-                              <p>You can make a case for several potential winners of<br>the expanded European Championships.</p>
-                              <button class="btn btn-primary btn-lg">Button</button>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <!-- /.item -->
-               </div>
+		<div class="container">
+		    <!-- 고정 이미지 -->
+		    <div class="text-center" style="text-align: center;">
+		        <img src="../player/m1.jpg" style="width:1200px;height:720px">
+		        <div class="carousel-caption">
+		            <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12"></div>
+		            <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+		                <div class="slider-contant" data-animation="animated fadeInRight">
+		                </div>
+		            </div>
+		        </div>
+		    </div>
+		</div>
 
-            <div class="container">
+            <div class="container" id="pitcherTable">
                <div class="header-top">
                   <div class="row">
 				<h4>Points Table</h4>
@@ -94,7 +61,7 @@
                                  <td>
                                  	<a :href="'../player/pitcher_detail.do?pno='+vo.pno">{{vo.name}}</a>
                                  </td>
-                                 <td><img :src="vo.logo">{{vo.team}}</td>
+                                 <td><img :src="vo.logo" class="logo-image">{{vo.team}}</td>
                                  <td>{{vo.age}}</td>
                                  <td>{{vo.game}}</td>
                                  <td>{{vo.win}}</td>
@@ -107,16 +74,26 @@
                           
                         </table>
                         
-                        <div class="text-center">
-                        	<tr>
-									<td colspan="5" class="text-center">
-										<input type="button" class="btn btn-sm btn-success" value="이전" @click="prev()">
-											{{curpage}} 페이지 / {{totalpage}} 페이지
-										<input type="button" class="btn btn-sm btn-success" value="다음" @click="next()">
-									</td>
-								</tr>
-                       
-                     </div>
+                        <div class="col-12">
+		                    <div class="pagination-area d-sm-flex mt-15">
+		                        <nav aria-label="#">
+		                            <ul class="pagination">
+		                            	<li class="page-item" v-if="startPage>1">
+		                                    <a class="page-link" @click="prev()"><i class="fa fa-angle-double-left" aria-hidden="true"></i> 이전</a>
+		                                </li>
+		                                <li :class="i===curpage?'page-item active':'page-item'" v-for="i in range(startPage,endPage)">
+		                                    <a class="page-link" @click="pageChange(i)">{{i}}</a>
+		                                </li>
+		                                <li class="page-item" v-if="endPage<totalpage">
+		                                    <a class="page-link" @click="next()">다음 <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+		                                </li>
+		                            </ul>
+		                        </nav>
+		                        <div class="page-status">
+		                            <p>{{curpage}} / {{totalpage}}</p>
+		                        </div>
+		                    </div>
+		                </div>
                   </div></div></div>
                   </aside></div>
 	<script>
@@ -125,14 +102,39 @@
 				return{
 					list:[],
 					curpage:1,
-					totalpage:0
+					totalpage:0,
+					startPage:0,
+					endPage:0
 				}
 			},
 			mounted(){
 				this.dataRecv()
 			},
 			methods:{
-				dataRecv(){
+				
+				prev() {
+                    this.curpage=this.startPage-1
+                    this.dataRecv()
+                },
+                next() {
+                    this.curpage=this.endPage+1
+                    this.dataRecv()
+                },
+                pageChange(page){
+                	this.curpage=page
+                	this.dataRecv()
+                },
+                range(start,end){
+                	let arr=[]
+                	let len=end-start
+    				for(let i=0;i<=len;i++)
+    				{
+    					arr[i]=start
+    					start++
+    				}
+    				return arr
+    			},
+                dataRecv(){
 					axios.get('../player/pitcher_list_vue.do',{
 						params:{
 							page:this.curpage
@@ -142,20 +144,18 @@
 						this.list=response.data.list
 						this.curpage=response.data.curpage
 						this.totalpage=response.data.totalpage
+						this.startPage=response.data.startPage
+                        this.endPage=response.data.endPage
+                        
+                        for(let i = 0; i < this.list.length; i++) {
+                            this.list[i].pno = i + 1;
+                        }
 					}).catch(error=>{
 						console.log(error.response)
 					})
-				},
-				prev(){
-					this.curpage=this.curpage>1?this.curpage-1:this.curpage
-					this.dataRecv()
-				},
-				next(){
-					this.curpage=this.curpage<this.totalpage?this.curpage+1:this.curpage
-					this.dataRecv()
 				}
 			}
-		}).mount('.container')
+		}).mount('#pitcherTable')
 	</script>
 </body>
 </html>
