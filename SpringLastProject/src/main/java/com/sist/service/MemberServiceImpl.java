@@ -17,4 +17,16 @@ public class MemberServiceImpl implements MemberService {
 		// TODO Auto-generated method stub
 		return mDao.idCheck(userId);
 	}
+
+	@Override
+	public void memberInsert(MemberVO vo) {
+		// TODO Auto-generated method stub
+		mDao.memberInsert(vo);
+	}
+
+	@Override
+	public void memberAuthorityInsert(String userId) {
+		// TODO Auto-generated method stub
+		mDao.memberAuthorityInsert(userId);
+	}
 }

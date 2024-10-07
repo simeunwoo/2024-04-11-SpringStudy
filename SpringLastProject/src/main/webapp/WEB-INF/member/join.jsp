@@ -33,7 +33,7 @@
         <div class="container">
             <div class="row justify-content-center">
             	<div class="wrapper row3">
-			   <form method="post" action="../member/join_ok.do" @submit.prevent="submitForm()">
+			   <form method="post" action="../member/join_ok.do" @submit="submitForm()">
 			    <table class="table">
 			     <tr>
 			      <th class="text-right" width="20%">ID</th>
@@ -177,7 +177,7 @@
 						this.pwdOk="비밀 번호는 공백 없이 입력하세요"
 						return
 					}
-					else if(num<0 || eng>0)
+					else if(num<0 || eng<0)
 					{
 						this.pwdOk="비밀 번호는 영문, 숫자를 혼합하여 입력해야 됩니다"
 						return
@@ -189,7 +189,14 @@
 					}
 				},
 				pwdValidate2(){
-					
+					if(this.userPwd!=this.userPwd2)
+					{
+						this.pwdOk='비밀 번호가 일치하지 않습니다'
+					}
+					else
+					{
+						this.pwdOk=''
+					}
 				},
 				submitForm(e){
 					alert("submit call ...")
@@ -201,6 +208,36 @@
 						alert("정상 수행")
 						return true
 					}
+					if(this.userId==='' || this.idOk!='')
+					{
+						this.$refs.userId.focus()
+					}
+					else if(this.userName==='')
+					{
+						this.$refs.userName.focus()
+					}
+					else if(this.userPwd==='')
+					{
+						this.$refs.userPwd.focus()
+					}
+					else if(this.userPwd2==='')
+					{
+						this.$refs.userPwd2.focus()
+					}
+					else if(this.userPwd!==this.userPwd2)
+					{
+						this.userPwd=''
+						this.userPwd2=''
+					}
+					else if(this.phone2==='')
+					{
+						this.$refs.phone2.focus()
+					}
+					else if(this.email==='')
+					{
+						this.$refs.email.focus()
+					}
+					e.preventDefault()
 				},
 				postFind(){
 					let _this=this

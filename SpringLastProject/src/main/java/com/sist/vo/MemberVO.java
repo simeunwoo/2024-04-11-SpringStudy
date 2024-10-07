@@ -26,6 +26,8 @@ public class MemberVO {
 	private int enabled;
 	private Date regdate,modifydate,lastlogin;
 	
+	private String phone1,phone2;
+	
 	private String msg,authority; // msg : 로그인 확인 변수, authority : 권한 변수
 	/*
 	 * 	보안 : userName, userPwd

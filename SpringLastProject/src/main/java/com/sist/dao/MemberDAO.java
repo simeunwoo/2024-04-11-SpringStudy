@@ -3,6 +3,7 @@ import java.util.*;
 import com.sist.vo.*;
 import com.sist.mapper.*;
 
+import org.apache.ibatis.annotations.Insert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -15,5 +16,15 @@ public class MemberDAO {
 	public int idCheck(String userId)
 	{
 		return mapper.idCheck(userId);
+	}
+	
+	public void memberInsert(MemberVO vo)
+	{
+		mapper.memberInsert(vo);
+	}
+	
+	public void memberAuthorityInsert(String userId)
+	{
+		mapper.memberAuthorityInsert(userId);
 	}
 }
