@@ -30,7 +30,7 @@
 </div>
 
 
-    <div class="container">
+    <div class="container" id="baseTable">
         <div class="header-top">
             <div class="row">
                 <h4>Points Table</h4>
@@ -148,7 +148,7 @@
                     })
                 }
             }
-        }).mount('.container')
+        }).mount('#baseTable')
     </script>
 </body>
 
