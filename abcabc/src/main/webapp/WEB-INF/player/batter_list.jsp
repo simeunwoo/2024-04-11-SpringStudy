@@ -50,10 +50,10 @@
                                 <th>삼진</th>
                                 <th>WAR</th>
                             </tr>
-                            <tr v-for="vo in list">
+                            <tr v-for="vo in batter_list">
                                 <td>{{vo.bno}}</td>
                                 <td>
-                                    <a :href="'../player/batter_detail.do?bno=' + vo.bno">{{vo.name}}</a>
+                                    <a :href="'../player/batter_detail.do?bno='+vo.bno">{{vo.name}}</a>
                                 </td>
                                 <td><img :src="vo.logo">{{vo.team}}</td>
                                 <td>{{vo.age}}</td>
@@ -92,12 +92,13 @@
             </div>
         </div>
     </div>
+    
 
     <script>
         let playerApp=Vue.createApp({
             data() {
                 return {
-                    list:[],
+                    batter_list:[],
                     curpage:1,
                     totalpage:0,
                     startPage:0,
@@ -137,7 +138,7 @@
                         }
                     }).then(response=>{
                         console.log(response.data)
-                        this.list=response.data.list
+                        this.batter_list=response.data.list
                         this.curpage=response.data.curpage
                         this.totalpage=response.data.totalpage
                         this.startPage=response.data.startPage
