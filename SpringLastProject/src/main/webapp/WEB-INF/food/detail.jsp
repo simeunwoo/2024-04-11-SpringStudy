@@ -167,7 +167,7 @@
                                                 <p>{{vo.msg}}</p>
                                                 <button v-if="sessionId===vo.id" class="btn-xs btn-info" style="margin-left:2px">Update</button>
                                                 <button v-if="sessionId===vo.id" class="btn-xs btn-danger" style="margin-left:2px">Delete</button>
-                                                <button class="insert" :id="'i'+vo.cno" href="#" v-if="sessionId!==''" @click="replyForm(vo.cno)" 
+                                                <button class="active insert" :id="'i'+vo.cno" href="#" v-if="sessionId!==''" @click="replyForm(vo.cno)" 
                                                   style="margin-left:2px">Reply</button>
                                                 <button v-if="sessionId!==vo.id && sessionId!==''" class="btn-xs btn-warning"
                                                   style="margin-left:2px">Like</button>
