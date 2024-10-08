@@ -277,6 +277,7 @@
     					rno:this.rno,
     					type:this.type,
     					msg:this.msg
+    					cno:cno
     				}
     			}).then(response=>{
 	   				 console.log(response.data)
@@ -285,6 +286,9 @@
 					 this.totalpage=response.data.totalpage
 					 this.startPage=response.data.startPage
 					 this.endPage=response.data.endPage
+					 $('#msg'+cno).val('')
+					 $('#in'+cno).hide()
+					 $('#i'+cno).text("Reply")
 				 }).catch(error=>{
 					 console.log(error.response)
 				 })
