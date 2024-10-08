@@ -96,4 +96,9 @@ public class CommentDAO {
 	{
 		return mapper.commentTotalPage(map);
 	}
+	
+	public void commentInsert(CommentVO vo)
+	{
+		mapper.commentInsert(vo);
+	}
 }

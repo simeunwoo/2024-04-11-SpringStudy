@@ -165,12 +165,22 @@
                                                 <span class="comment-date text-muted">{{vo.dbday}}</span>
                                                 <h5>{{vo.name}}</h5>
                                                 <p>{{vo.msg}}</p>
-                                                <a href="#" v-if="sessionId===vo.id">Update</a>
-                                                <a href="#" v-if="sessionId===vo.id">Delete</a>
-                                                <a class="active" href="#" v-if="sessionId!=''">Reply</a>
-                                                <a href="#" v-if="sessionId!=vo.id">Like</a>
-                                                
-                                            </div>
+                                                <button v-if="sessionId===vo.id" class="btn-xs btn-info" style="margin-left:2px">Update</button>
+                                                <button v-if="sessionId===vo.id" class="btn-xs btn-danger" style="margin-left:2px">Delete</button>
+                                                <button class="insert" :id="'i'+vo.cno" href="#" v-if="sessionId!==''" @click="replyForm(vo.cno)" 
+                                                  style="margin-left:2px">Reply</button>
+                                                <button v-if="sessionId!==vo.id && sessionId!==''" class="btn-xs btn-warning"
+                                                  style="margin-left:2px">Like</button>
+			                                    <table class="table ins" style="display:none" :id="'in'+vo.cno">
+			                                    <tr>
+			                                      <td>
+			                                       <textarea rows="4" cols="70" style="float:sleft" ref="msg" v-model="msg"></textarea>
+			                                       <input type=button value="댓글" style="float:left;background-color:blue;color:white;width:80px;height:94px"
+			                                         @click="replyInsert()">
+			                                      </td>
+			                                    </tr>
+			                                   </table>
+			                                </div>
                                         </div>
                                         <ol class="children" v-if="vo.group_tab===1">
                                             <li class="single_comment_area">
@@ -186,7 +196,7 @@
                                                         <p>{{vo.msg}}</p>
                                                         <a href="#" v-if="sessionId===vo.id">Update</a>
                                                         <a href="#" v-if="sessionId===vo.id">Delete</a>
-                                                        <a href="#" v-if="sessionId!=vo.id">Like</a>
+                                                        <a href="#" v-if="sessionId!==vo.id">Like</a>
                                                     </div>
                                                 </div>
                                             </li>
@@ -204,8 +214,9 @@
 	                                   <table class="table">
 	                                    <tr>
 	                                      <td>
-	                                       <textarea rows="4" cols="70" style="float: left" ref="msg" v-model="msg"></textarea>
-	                                       <input type=button value="댓글" style="float: left;background-color: blue;color: white;width: 80px;height:94px">
+	                                       <textarea rows="4" cols="60" style="float: left" ref="msg" v-model="msg"></textarea>
+	                                       <input type=button value="댓글" style="float: left;background-color: blue;color: white;width: 80px;height:94px"
+	                                         @click="replyReplyInsert(vo.cno)">
 	                                      </td>
 	                                    </tr>
 	                                   </table>
@@ -230,13 +241,54 @@
                 endPage:0,
                 startPage:0,
                 type:1,
-                sessionId:'${sessionId}'
+                sessionId:'${sessionId}',
+                msg:'',
+                isReply:false
     		 }
     	 },
     	 mounted(){
     		 this.dataRecv()
     	 },
     	 methods:{
+    		 replyForm(cno){
+    			$('.ins').hide()
+    			$('.insert').text('Reply')
+    			if(this.isReply===false)
+    			{
+    				this.isReply=true
+    				$('#in'+cno).show()
+    				$('#i'+cno).text("Cancel")
+    			}
+    			else
+    			{
+    				this.isReply=false
+    				$('#in'+cno).hide()
+    				$('#i'+cno).text("Reply")
+    			}
+    		 },
+    		 replyInsert(){
+    			if(this.msg==="")
+    			{
+    				this.$refs.msg.focus()
+    				return
+    			}
+    			axios.post('../comment/insert_vue.do',null,{
+    				params:{
+    					rno:this.rno,
+    					type:this.type,
+    					msg:this.msg
+    				}
+    			}).then(response=>{
+	   				 console.log(response.data)
+					 this.reply_list=response.data.list
+					 this.curpage=response.data.curpage
+					 this.totalpage=response.data.totalpage
+					 this.startPage=response.data.startPage
+					 this.endPage=response.data.endPage
+				 }).catch(error=>{
+					 console.log(error.response)
+				 })
+    		 },
     		 dataRecv(){
     			 axios.get('../comment/list_vue.do',{
     				 params:{
@@ -251,6 +303,7 @@
     				 this.totalpage=response.data.totalpage
     				 this.startPage=response.data.startPage
     				 this.endPage=response.data.endPage
+    				 this.msg=''
     			 }).catch(error=>{
     				 console.log(error.response)
     			 })
