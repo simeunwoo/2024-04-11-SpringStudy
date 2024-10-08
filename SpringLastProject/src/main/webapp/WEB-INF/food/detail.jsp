@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,7 +57,7 @@
                             </div>
                             <table class="table">
                               <tr>
-                                <td width="30%" class="text-center">
+                                <td width="30%" class="text-center" rowspan="6">
                                 	<img src="http://www.menupan.com${vo.poster }" style="width:100%">
                                 </td>
                                 <td colspan="2">
@@ -93,9 +94,11 @@
                             	</tr>
                             	<tr>
                             		<td class="text-right">
-                            			<a href="#" class="btn btn-xs btn-danger">굿</a>
-                            			<a href="#" class="btn btn-xs btn-success">찜</a>
-                            			<a href="#" class="btn btn-xs btn-info">예약</a>
+                            			<c:if test="${sessionScope.userId!=null }">
+	                            			<a href="#" class="btn btn-xs btn-danger">굿</a>
+	                            			<a href="#" class="btn btn-xs btn-success">찜</a>
+	                            			<a href="#" class="btn btn-xs btn-info">예약</a>
+                            			</c:if>
                             			<a href="../food/list.do" class="btn btn-xs btn-warning">목록</a>
                             		</td>
                             	</tr>
@@ -144,76 +147,82 @@
         						});  
                             </script>
                             <!-- Comment Area Start -->
-                            <div class="comment_area section_padding_50 clearfix">
-                                <h4 class="mb-30">2 Comments</h4>
-
-                                <ol>
-                                    <!-- Single Comment Area -->
-                                    <li class="single_comment_area">
-                                        <div class="comment-wrapper d-flex">
-                                            <!-- Comment Meta -->
-                                            <div class="comment-author">
-                                                <img src="../img/blog-img/17.jpg" alt="">
-                                            </div>
-                                            <!-- Comment Content -->
-                                            <div class="comment-content">
-                                                <span class="comment-date text-muted">27 Aug 2018</span>
-                                                <h5>Brandon Kelley</h5>
-                                                <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora.</p>
-                                                <a href="#">Like</a>
-                                                <a class="active" href="#">Reply</a>
-                                            </div>
-                                        </div>
-                                        <ol class="children">
-                                            <li class="single_comment_area">
-                                                <div class="comment-wrapper d-flex">
-                                                    <!-- Comment Meta -->
-                                                    <div class="comment-author">
-                                                        <img src="../img/blog-img/18.jpg" alt="">
-                                                    </div>
-                                                    <!-- Comment Content -->
-                                                    <div class="comment-content">
-                                                        <span class="comment-date text-muted">27 Aug 2018</span>
-                                                        <h5>Brandon Kelley</h5>
-                                                        <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora.</p>
-                                                        <a href="#">Like</a>
-                                                        <a class="active" href="#">Reply</a>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ol>
-                                    </li>
-                                    <li class="single_comment_area">
-                                        <div class="comment-wrapper d-flex">
-                                            <!-- Comment Meta -->
-                                            <div class="comment-author">
-                                                <img src="../img/blog-img/19.jpg" alt="">
-                                            </div>
-                                            <!-- Comment Content -->
-                                            <div class="comment-content">
-                                                <span class="comment-date text-muted">27 Aug 2018</span>
-                                                <h5>Brandon Kelley</h5>
-                                                <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora.</p>
-                                                <a href="#">Like</a>
-                                                <a class="active" href="#">Reply</a>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ol>
-                            </div>
-
-                            <!-- Leave A Comment -->
-                            <div class="leave-comment-area section_padding_50 clearfix">
-                                <div class="comment-form">
-                                    <h4 class="mb-30">Leave A Comment</h4>
-
-                                    <!-- Comment Form -->
-                                    <form action="#" method="post">
-                                       
-                                    </form>
-                                </div>
-                            </div>
-
+                            <div id="replyApp">
+	                            <div class="comment_area section_padding_50 clearfix">
+	                                <h4 class="mb-30">댓글</h4>
+	
+	                                <ol>
+	                                    <!-- Single Comment Area -->
+	                                    <li class="single_comment_area">
+	                                        <div class="comment-wrapper d-flex">
+	                                            <!-- Comment Meta -->
+	                                            <div class="comment-author">
+	                                                <img src="../img/blog-img/17.jpg" alt="">
+	                                            </div>
+	                                            <!-- Comment Content -->
+	                                            <div class="comment-content">
+	                                                <span class="comment-date text-muted">27 Aug 2018</span>
+	                                                <h5>Brandon Kelley</h5>
+	                                                <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora.</p>
+	                                                <a href="#">Like</a>
+	                                                <a class="active" href="#">Reply</a>
+	                                            </div>
+	                                        </div>
+	                                        <ol class="children">
+	                                            <li class="single_comment_area">
+	                                                <div class="comment-wrapper d-flex">
+	                                                    <!-- Comment Meta -->
+	                                                    <div class="comment-author">
+	                                                        <img src="../img/blog-img/18.jpg" alt="">
+	                                                    </div>
+	                                                    <!-- Comment Content -->
+	                                                    <div class="comment-content">
+	                                                        <span class="comment-date text-muted">27 Aug 2018</span>
+	                                                        <h5>Brandon Kelley</h5>
+	                                                        <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora.</p>
+	                                                        <a href="#">Like</a>
+	                                                        <a class="active" href="#">Reply</a>
+	                                                    </div>
+	                                                </div>
+	                                            </li>
+	                                        </ol>
+	                                    </li>
+	                                    <li class="single_comment_area">
+	                                        <div class="comment-wrapper d-flex">
+	                                            <!-- Comment Meta -->
+	                                            <div class="comment-author">
+	                                                <img src="../img/blog-img/19.jpg" alt="">
+	                                            </div>
+	                                            <!-- Comment Content -->
+	                                            <div class="comment-content">
+	                                                <span class="comment-date text-muted">27 Aug 2018</span>
+	                                                <h5>Brandon Kelley</h5>
+	                                                <p>Neque porro qui squam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora.</p>
+	                                                <a href="#">Like</a>
+	                                                <a class="active" href="#">Reply</a>
+	                                            </div>
+	                                        </div>
+	                                    </li>
+	                                </ol>
+	                            </div>
+	
+	                            <!-- Leave A Comment -->
+	                            <c:if test="${sessionScope.userId!=null }">
+		                            <div class="leave-comment-area section_padding_50 clearfix">
+		                                <div class="comment-form">
+		                                    <table class="table">
+		                                    	<tr>
+		                                    		<td>
+		                                    			<textarea rows="4" cols="70" style="float:left" ref="msg" v-model="msg"></textarea>
+		                                    			<input type="button" value="댓글"
+		                                    			  style="float:left;background-color:blue;color:white;width:80px;height:98px">
+		                                    		</td>
+		                                    	</tr>
+		                                    </table>
+		                                </div>
+		                            </div>
+	                            </c:if>
+							</div>
                         </div>
                     </div>
                 </div>
