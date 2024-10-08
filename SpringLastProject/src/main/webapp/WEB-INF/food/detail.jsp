@@ -186,9 +186,7 @@
                                                         <p>{{vo.msg}}</p>
                                                         <a href="#" v-if="sessionId===vo.id">Update</a>
                                                         <a href="#" v-if="sessionId===vo.id">Delete</a>
-                               
                                                         <a href="#" v-if="sessionId!=vo.id">Like</a>
-                                                        
                                                     </div>
                                                 </div>
                                             </li>
@@ -208,7 +206,6 @@
 	                                      <td>
 	                                       <textarea rows="4" cols="70" style="float: left" ref="msg" v-model="msg"></textarea>
 	                                       <input type=button value="댓글" style="float: left;background-color: blue;color: white;width: 80px;height:94px">
-	                                       
 	                                      </td>
 	                                    </tr>
 	                                   </table>
