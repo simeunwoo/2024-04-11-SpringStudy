@@ -5,6 +5,7 @@ import java.util.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,11 +44,14 @@ public class FoodController {
 	// => HTML / Cookie
 	
 	@GetMapping("food/detail.do")
-	public String food_detail(int fno,Model model)
+	public String food_detail(int fno,Model model,HttpSession session)
 	{
+		String id=(String)session.getAttribute("userId");
 		FoodVO vo=fService.foodDetailData(fno);
 		
+		model.addAttribute("sessionId", id);
 		model.addAttribute("vo", vo);
+		model.addAttribute("fno", fno);
 		
 		return "food/detail";
 	}
