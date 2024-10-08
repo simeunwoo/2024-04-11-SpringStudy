@@ -28,7 +28,7 @@
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="bradcumb-title text-center">
-                        <h2>{{vo.name}}</h2>
+                        <h2></h2>
                     </div>
                 </div>
             </div>
@@ -43,7 +43,7 @@
             </div>
         </div>
     </div>
-    <section class="single_blog_area section_padding_80">
+    <section class="single_blog_area section_padding_80" id="detailApp">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-12 col-lg-8">
@@ -57,66 +57,64 @@
                               
                                 <div class="related-post-slider owl-carousel">
                                     <!-- Single Related Post-->
-                                    <c:forTokens items="${vo.images }" delims="^" var="img">
 	                                    <div class="single-post">
 	                                        <!-- Post Thumb -->
 	                                        <div class="post-thumb">
-	                                            <img src="http://www.menupan.com${img }" alt="">
+	                                            <img src="#" alt="">
 	                                        </div>
 	                                    </div>
-                                    </c:forTokens>
                                 </div>
                             </div>
-                            <table class="table">
-                              <tr>
-                                <td width="30%" class="text-center">
-                                	<img src="http://www.menupan.com${vo.poster }" style="width:100%">
-                                </td>
-                                <td colspan="2">
-                                	<h3>${vo.name }&nbsp;<span style="color:orange">${vo.score }</span></h3>
-                                </td>
-                              </tr>
-                              <tr>
-                              	<td width="15%" class="text-center">주소</td>
-                              	<td width="55%" class="text-center">${vo.address }</td>
-                              </tr>
-                              <tr>
-                              	<td width="15%" class="text-center">전화</td>
-                              	<td width="55%" class="text-center">${vo.phone }</td>
-                              </tr>
-                              <tr>
-                              	<td width="15%" class="text-center">음식 종류</td>
-                              	<td width="55%" class="text-center">${vo.type }</td>
-                              </tr>
-                              <tr>
-                              	<td width="15%" class="text-center">주차</td>
-                              	<td width="55%" class="text-center">${vo.parking }</td>
-                              </tr>
-                              <tr>
-                              	<td width="15%" class="text-center">영업 시간</td>
-                              	<td width="55%" class="text-center">${vo.time }</td>
-                              </tr>
-                            </table>
-                            <table class="table">                            	
-                            	<tr>
-                            		<td>${vo.theme }</td>
-                            	</tr>
-                            	<tr>
-                            		<td>${vo.content }</td>
-                            	</tr>
-                            	<tr>
-                            		<td class="text-right">
-                            			<a href="#" class="btn btn-xs btn-danger">굿</a>
-                            			<a href="#" class="btn btn-xs btn-success">찜</a>
-                            			<a href="#" class="btn btn-xs btn-info">예약</a>
-                            			<a href="../food/list.do" class="btn btn-xs btn-warning">목록</a>
-                            		</td>
-                            	</tr>
-                            	<tr>
-                            		<td>
-                            			<div id="map" style="width:100%;height:350px"></div>
-                            		</td>
-                            	</tr>
-                            </table>
+                            
+        <div class="header-top">
+            <div class="row">
+                <h4>Points Table</h4>
+                <aside id="sidebar" class="left-bar">
+                    <div class="feature-matchs text-center">
+                        <table class="table table-bordered table-hover" style="font-size:16px;margin:0 auto">
+                            <tr>
+                            	<td colspan="6" class="text-center">
+   									<img src="https://statiz.sporki.com${vo.image }" style="width:101px;height:134px">
+   									&nbsp;&nbsp;<h3>${vo.name }</h3>
+   									&nbsp;<img src="${vo.logo }" style="width:130px;height:130px">
+   									&nbsp;<h3>${vo.team }</h3>
+                            	</td>
+                            </tr>
+                            <tr>
+                                <th width="20%" class="text-center">나이</th>
+                                <td width="13%" class="text-center">${vo.age }</td>
+                                <th width="20%" class="text-center">경기</th>
+                                <td width="13%" class="text-center">${vo.game }</td>
+                                <th width="20%" class="text-center">타수</th>
+                                <td width="14%" class="text-center">${vo.tasoo }</td>
+                            </tr>
+                            <tr>
+                                <th width="20%" class="text-center">안타</th>
+                                <td width="13%" class="text-center">${vo.h1 }</td>
+                                <th width="20%" class="text-center">2루타</th>
+                                <td width="13%" class="text-center">${vo.h2 }</td>
+                                <th width="20%" class="text-center">3루타</th>
+                                <td width="14%" class="text-center">${vo.h3 }</td>
+                            </tr>
+                            <tr>
+                                <th width="20%" class="text-center">홈런</th>
+                                <td width="13%" class="text-center">${vo.homerun }</td>
+                                <th width="20%" class="text-center">타점</th>
+                                <td width="13%" class="text-center">${vo.rbi }</td>
+                                <th width="20%" class="text-center">도루</th>
+                                <td width="14%" class="text-center">${vo.steel }</td>
+                            </tr>
+                            <tr>
+                                <th width="20%" class="text-center">삼진</th>
+                                <td width="13%" class="text-center">${vo.strikeout }</td>
+                                <th width="20%" class="text-center">볼넷</th>
+                                <td width="13%" class="text-center">${vo.ball }</td>
+                                <th width="20%" class="text-center" style="color:red">WAR</th>
+                                <td width="14%" class="text-center" style="color:red">${vo.war }</td>
+                            </tr>
+                        </table></div></aside></div></div></div></div></div></div></div></section>
+	<script>
+		
+	</script>
 </body>
 </html>

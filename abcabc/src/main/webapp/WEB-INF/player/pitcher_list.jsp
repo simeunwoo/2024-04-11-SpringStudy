@@ -146,11 +146,11 @@
 						this.totalpage=response.data.totalpage
 						this.startPage=response.data.startPage
                         this.endPage=response.data.endPage
-                        
+                        /*
                         for(let i=0;i<this.list.length;i++)
                         {
                         	this.list[i].pno=i+1
-                        }
+                        } */
 					}).catch(error=>{
 						console.log(error.response)
 					})

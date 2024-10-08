@@ -152,8 +152,6 @@
                                                       <li><a href="../player/batter_list.do">타자</a></li>
                                                       <li><a href="../player/pitcher_list.do">투수</a></li>
                                                       <li><a href="../player/test.do">test</a></li>
-                                                      <li><a href="../player/batter_detail.do">타자 상세</a></li>
-                                                      <li><a href="../player/pitcher_detail.do">투수 상세</a></li>
                                                       <li><a href="../schedule/schedule.do">스케줄</a></li>
                                                       <li><a href="#">Contrary vs classical</a></li>
                                                       <li><a href="#">Discovered vs undoubtable</a></li>

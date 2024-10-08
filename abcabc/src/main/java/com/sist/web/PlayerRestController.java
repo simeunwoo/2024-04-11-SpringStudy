@@ -76,4 +76,28 @@ public class PlayerRestController {
 		
 		return json;
 	}
+	
+	@GetMapping(value="player/batter_detail_vue.do",produces="text/plain;charset=UTF-8")
+	public String batter_detail(int bno) throws Exception
+	{
+		BatterVO vo=pService.batterDetailData(bno);
+		
+		
+		ObjectMapper mapper=new ObjectMapper();
+		String json=mapper.writeValueAsString(vo);
+		
+		return json;
+	}
+	
+	@GetMapping(value="player/pitcher_detail_vue.do",produces="text/plain;charset=UTF-8")
+	public String pitcher_detail(int pno) throws Exception
+	{
+		PitcherVO vo=pService.pitcherDetailData(pno);
+		
+		
+		ObjectMapper mapper=new ObjectMapper();
+		String json=mapper.writeValueAsString(vo);
+		
+		return json;
+	}
 }

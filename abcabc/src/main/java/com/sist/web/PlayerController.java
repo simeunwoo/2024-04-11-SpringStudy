@@ -31,6 +31,7 @@ public class PlayerController {
 	{
 		BatterVO vo=pService.batterDetailData(bno);
 		
+		model.addAttribute("bno", bno);
 		model.addAttribute("vo", vo);
 		
 		return "player/batter_detail";
@@ -41,6 +42,7 @@ public class PlayerController {
 	{
 		PitcherVO vo=pService.pitcherDetailData(pno);
 		
+		model.addAttribute("pno", pno);
 		model.addAttribute("vo", vo);
 		
 		return "player/pitcher_detail";
