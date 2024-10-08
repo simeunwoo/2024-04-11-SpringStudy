@@ -89,4 +89,11 @@ public class CommentRestController {
 		
 		return commonsListData(1, vo.getRno(), vo.getType());
 	}
+	
+	@GetMapping(value="comment/delete_vue.do",produces="text/plain;charset=UTF-8")
+	public String comment_delete(int cno,int rno,int type) throws Exception
+	{
+		// 데이터베이스 연동
+		return commonsListData(1, rno, type);
+	}
 }
