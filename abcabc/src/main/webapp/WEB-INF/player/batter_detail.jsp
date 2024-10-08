@@ -43,7 +43,7 @@
             </div>
         </div>
     </div>
-    <section class="single_blog_area section_padding_80" id="detailApp">
+    <section class="single_blog_area section_padding_80">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-12 col-lg-8">

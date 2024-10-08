@@ -12,7 +12,20 @@
 </head>
 <body>
 <div class="container">
-    <template>
+	    <!-- 고정 이미지 -->
+	    <div class="text-center" style="text-align: center;">
+	        <img src="../player/m1.jpg" style="width:1200px;height:720px">
+	        <div class="carousel-caption">
+	            <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12"></div>
+	            <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+	                <div class="slider-contant" data-animation="animated fadeInRight">
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+<div class="container" id="gameApp">
+    <div class="row">
   <div>
     <h2>{{ month }}월 {{ day }}일 경기 결과</h2>
     <div v-if="games.length > 0">
@@ -26,7 +39,7 @@
       <p>경기가 없습니다.</p>
     </div>
   </div>
-</template>
+</div>
 </div>
 <script>
     let scheduleApp = Vue.createApp({
@@ -60,7 +73,7 @@
                 this.dataRecv(); // 날짜 변경 후 데이터 새로 받기
             }
         }
-    }).mount('.container')
+    }).mount('#gameApp')
 </script>
 
 
