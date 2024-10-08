@@ -229,5 +229,22 @@
           </div>
       </div>
     </section>
+    <script>
+    	let replyApp=Vue.createApp({
+    		data(){
+    			return{
+    				
+    			}
+    		},
+    		mounted(){
+    			this.dataRecv()
+    		},
+    		methods:{
+    			dataRecv(){
+    				
+    			}
+    		}
+    	}).mount('#replyApp')
+    </script>
 </body>
 </html>
