@@ -21,9 +21,9 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	@Override
-	public int commentTotalPage(int rno) {
+	public int commentTotalPage(Map map) {
 		// TODO Auto-generated method stub
-		return cDao.commentTotalPage(rno);
+		return cDao.commentTotalPage(map);
 	}
 
 }

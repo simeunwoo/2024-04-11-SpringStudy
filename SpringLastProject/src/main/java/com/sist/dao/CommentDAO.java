@@ -92,8 +92,8 @@ public class CommentDAO {
 		return mapper.commentListData(map);
 	}
 	
-	public int commentTotalPage(int rno)
+	public int commentTotalPage(Map map)
 	{
-		return mapper.commentTotalPage(rno);
+		return mapper.commentTotalPage(map);
 	}
 }
