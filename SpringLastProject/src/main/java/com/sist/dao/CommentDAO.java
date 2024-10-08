@@ -1,5 +1,10 @@
 package com.sist.dao;
+import java.util.*;
+import com.sist.vo.*;
+import com.sist.mapper.*;
 
+import org.apache.ibatis.annotations.Select;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 /*
  * 	스프링에서 메모리 할당 ===> @Autowired
@@ -20,6 +25,35 @@ import org.springframework.stereotype.Repository;
  *         		====================================
  *         		| XML, JSON
  *         		=> 데이터만 전송
+ *         6) @ControllerAdvice, @RestControllerAdvice : 예외 처리
+ *         		=> 메모리 할당 (X)
+ *         			=> @CrossOrigin : 포트 번호가 틀린 경우 => 허용
+ *         			=> @Aspect : 공통 모듈
+ *         			=> @RequestMapping : 공통 경로
+ *         			=> @Async : 비동기
+ *         => 메소드 위에 : @GetMapping, @PostMapping
+ *         	  --------
+ *            멤버 변수 : @Autowired
+ *            => 구분자 : 어노테이션에 따라 주소 대입, 메소드 호출
+ *         => MVC
+ *         		클라이언트 : <a>, <form>, javascript
+ *         		요청 => .do => 화면 요청 / 저장 / 수정 / 삭제 ...
+ *         		|
+ *         		DispatcherServlet : .do 자동 호출
+ *         		| 요청 처리 => 사용자 정의 (Model) => Controller
+ *         		  -------
+ *         		   찾기 => 구분 (GetMapping, PostMapping)
+ *                 --- HandlerMapping
+ *                 | model, request 값을 전송
+ *                 ViewResolver
+ *                 |
+ *                 JSP를 찾아서 요청 결과 출력
+ *              ===> Model (Controller, RestController)
+ *                    | Controller, DAO, Service, VO
+ *                    ===> 원래 Model은 Controller 그 자체
+ *                    ===> 그러나, Controller 한 곳에서 하면 수정이 어려우므로 => 각각의 클래스로 나눠준다
+ *                    ===> 기능별로 분리 목적 : 재사용, 편리한 수정, 에러 처리
+ *              ===> JSP
  *
  *	=> 실무에서의 핵심 : @RestController
  *
@@ -50,4 +84,16 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class CommentDAO {
 
+	@Autowired
+	private CommentMapper mapper;
+	
+	public List<CommentVO> commentListData(Map map)
+	{
+		return mapper.commentListData(map);
+	}
+	
+	public int commentTotalPage(int rno)
+	{
+		return mapper.commentTotalPage(rno);
+	}
 }
