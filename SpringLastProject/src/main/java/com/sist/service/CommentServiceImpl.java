@@ -54,4 +54,10 @@ public class CommentServiceImpl implements CommentService {
 		cDao.foodReplyDecrement(fno);
 	}
 
+	@Override
+	public void commentUpdate(CommentVO vo) {
+		// TODO Auto-generated method stub
+		cDao.commentUpdate(vo);
+	}
+
 }

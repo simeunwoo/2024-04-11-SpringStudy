@@ -105,4 +105,11 @@ public class CommentRestController {
 		
 		return commonsListData(1, rno, type);
 	}
+	
+	@GetMapping(value="comment/update_vue.do",produces="text/plain;charset=UTF-8")
+	public String comment_update(CommentVO vo) throws Exception
+	{
+		cService.commentUpdate(vo);
+		return commonsListData(1, vo.getRno(), vo.getType());
+	}
 }

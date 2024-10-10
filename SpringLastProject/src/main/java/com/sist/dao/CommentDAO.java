@@ -146,4 +146,9 @@ public class CommentDAO {
 	{
 		mapper.foodReplyDecrement(fno);
 	}
+	
+	public void commentUpdate(CommentVO vo)
+	{
+		mapper.commentUpdate(vo);
+	}
 }
