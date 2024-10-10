@@ -1,5 +1,21 @@
 package com.sist.service;
+import java.util.*;
 
-public class TeamServiceImpl {
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import com.sist.vo.*;
+import com.sist.dao.*;
+
+@Service
+public class TeamServiceImpl implements TeamService {
+
+	@Autowired
+	private TeamDAO tDao;
+
+	@Override
+	public List<TeamDetailVO> teamListData() {
+		// TODO Auto-generated method stub
+		return tDao.teamListData();
+	}
 }

@@ -151,9 +151,9 @@
                                                       <li class="dropdown-header">Next Matchs</li>
                                                       <li><a href="../player/batter_list.do">타자</a></li>
                                                       <li><a href="../player/pitcher_list.do">투수</a></li>
-                                                      <li><a href="../player/test.do">test</a></li>
+                                                      <li><a href="../team/list.do">팀</a></li>
+                                                      <li><a href="../team/ranking.do">팀 순위</a></li>
                                                       <li><a href="../schedule/schedule.do">스케줄</a></li>
-                                                      <li><a href="#">Contrary vs classical</a></li>
                                                       <li><a href="#">Discovered vs undoubtable</a></li>
                                                    </ul>
                                                 </li>
