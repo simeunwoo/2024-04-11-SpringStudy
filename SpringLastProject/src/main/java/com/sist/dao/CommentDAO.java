@@ -3,6 +3,7 @@ import java.util.*;
 import com.sist.vo.*;
 import com.sist.mapper.*;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -119,4 +120,23 @@ public class CommentDAO {
 		mapper.commentReplyReplyInsert(vo);
 		mapper.commentDepthIncrement(cno);
 	}
+	
+	/*
+	 * 	MyBatis
+	 *	CRUD => INSERT / UPDATE / DELETE / SELECT => 1차 프로젝트
+	 *
+	 *	Spring 내의 MyBatis
+	 *	CRUD는 기본
+	 *	+ JOIN / 동적 쿼리 / Transaction
+	 */
+	public CommentVO commentDeleteInfoData(int cno)
+	{
+		return mapper.commentDeleteInfoData(cno);
+	}
+	
+	public void commentDelete(Map map)
+	{
+		mapper.commentDelete(map);
+	}
+	
 }

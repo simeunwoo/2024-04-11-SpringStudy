@@ -203,17 +203,15 @@
                                                         <span class="comment-date text-muted">{{vo.dbday}}</span>
                                                         <h5>{{vo.name}}</h5>
                                                         <p>{{vo.msg}}</p>
-                                                        <a href="#" v-if="sessionId===vo.id">Update</a>
-                                                        <a href="#" v-if="sessionId===vo.id">Delete</a>
-                               
-                                                        <a href="#" v-if="sessionId!==vo.id && sessionId!==''">Like</a>
-                                                        
+                                                        <button v-if="sessionId===vo.id" class="btn-xs btn-danger" style="margin-left:2px">Update</button>
+		                                                <button v-if="sessionId===vo.id" class="btn-xs btn-info" style="margin-left:2px"
+		                                                  @click="replyDelete(vo.cno)">Delete</button>
+                                                        <button v-if="sessionId!==vo.id && sessionId!==''" style="margin-left:2px">Like</button>
                                                     </div>
                                                 </div>
                                             </li>
                                         </ol>
                                     </li>
-                                    
                                 </ol>
                             </div>
                             <!--  페이지  -->
@@ -228,7 +226,6 @@
 	                                       <input type=button value="댓글" style="float: left;background-color: blue;color: white;width: 80px;height:94px"
 	                                         @click="replyInsert()"
 	                                       >
-	                                       
 	                                      </td>
 	                                    </tr>
 	                                   </table>

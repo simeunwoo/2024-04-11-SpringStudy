@@ -36,4 +36,16 @@ public class CommentServiceImpl implements CommentService {
 		cDao.commentReplyReplyInsert(cno, vo);
 	}
 
+	@Override
+	public CommentVO commentDeleteInfoData(int cno) {
+		// TODO Auto-generated method stub
+		return cDao.commentDeleteInfoData(cno);
+	}
+
+	@Override
+	public void commentDelete(Map map) {
+		// TODO Auto-generated method stub
+		cDao.commentDelete(map);
+	}
+
 }

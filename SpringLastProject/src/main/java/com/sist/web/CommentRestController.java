@@ -94,6 +94,14 @@ public class CommentRestController {
 	public String comment_delete(int cno,int rno,int type) throws Exception
 	{
 		// 데이터베이스 연동
+		CommentVO vo=cService.commentDeleteInfoData(cno);
+		
+		Map map=new HashMap();
+		map.put("cno", cno);
+		map.put("group_id", vo.getGroup_id());
+		map.put("group_step", vo.getGroup_step());
+		cService.commentDelete(map);
+		
 		return commonsListData(1, rno, type);
 	}
 }

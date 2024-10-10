@@ -8,4 +8,6 @@ public interface CommentService {
 	public int commentTotalPage(Map map);
 	public void commentInsert(CommentVO vo);
 	public void commentReplyReplyInsert(int cno,CommentVO vo);
+	public CommentVO commentDeleteInfoData(int cno);
+	public void commentDelete(Map map);
 }
