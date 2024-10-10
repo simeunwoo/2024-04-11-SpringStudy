@@ -26,4 +26,10 @@ public class FreeBoardDAO {
 	{
 		mapper.freeboardInsert(vo);
 	}
+	
+	public FreeBoardVO freeboardDetailData(int no)
+	{
+		mapper.freeboardHitIncrement(no);
+		return mapper.freeboardDetailData(no);
+	}
 }

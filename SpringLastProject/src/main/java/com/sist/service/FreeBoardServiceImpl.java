@@ -31,4 +31,10 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 		fbDAO.freeboardInsert(vo);
 	}
 
+	@Override
+	public FreeBoardVO freeboardDetailData(int no) {
+		// TODO Auto-generated method stub
+		return fbDAO.freeboardDetailData(no);
+	}
+
 }

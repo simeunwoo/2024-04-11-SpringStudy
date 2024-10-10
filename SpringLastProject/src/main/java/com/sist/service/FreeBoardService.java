@@ -7,4 +7,5 @@ public interface FreeBoardService {
 	public List<FreeBoardVO> freeboardListData(int start,int end);
 	public int freeboardRowCount();
 	public void freeboardInsert(FreeBoardVO vo);
+	public FreeBoardVO freeboardDetailData(int no);
 }

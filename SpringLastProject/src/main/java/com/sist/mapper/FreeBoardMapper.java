@@ -4,6 +4,7 @@ import java.util.*;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.sist.vo.*;
 
@@ -23,4 +24,15 @@ public interface FreeBoardMapper {
 	@Insert("INSERT INTO spring_freeboard "
 			+ "VALUES(sf_no_seq.nextval,#{id},#{name},#{subject},#{content},SYSDATE,0)")
 	public void freeboardInsert(FreeBoardVO vo);
+	
+	// 상세 보기
+	@Update("UPDATE spring_freeboard SET "
+			+ "hit=hit+1 "
+			+ "WHERE no=#{no}")
+	public void freeboardHitIncrement(int no);
+	
+	@Select("SELECT no,id,name,subject,content,TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS') as dbday,hit "
+			+ "FROM spring_freeboard "
+			+ "WHERE no=#{no}")
+	public FreeBoardVO freeboardDetailData(int no); 
 }

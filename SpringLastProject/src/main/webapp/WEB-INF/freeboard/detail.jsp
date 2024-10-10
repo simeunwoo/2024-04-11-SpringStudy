@@ -48,7 +48,16 @@
     			}
     		},
     		mounted(){
-    			
+    			axios.get('../freeboard/detail_vue.do',{
+    				params:{
+    					no:this.no
+    				}
+    			}).then(response=>{
+    				console.log(response.data)
+    				this.vo=response.data
+    			}).catch(error=>{
+    				console.log(error.response)
+    			})
     		},
     		methods:{
     			

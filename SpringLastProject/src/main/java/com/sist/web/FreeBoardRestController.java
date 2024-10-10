@@ -78,4 +78,18 @@ public class FreeBoardRestController {
 		
 		return result;
 	}
+	
+	// 상세 보기
+	@GetMapping(value="freeboard/detail_vue.do",produces="text/plain;charset=UTF-8")
+	public String freeboard_detail(int no) throws Exception
+	{
+		// 조회수 증가
+		
+		// 데이터 전송
+		
+		// JSON 변경
+		
+		// 전송
+		return "";
+	}
 }
