@@ -48,4 +48,10 @@ public class CommentServiceImpl implements CommentService {
 		cDao.commentDelete(map);
 	}
 
+	@Override
+	public void foodReplyDecrement(int fno) {
+		// TODO Auto-generated method stub
+		cDao.foodReplyDecrement(fno);
+	}
+
 }

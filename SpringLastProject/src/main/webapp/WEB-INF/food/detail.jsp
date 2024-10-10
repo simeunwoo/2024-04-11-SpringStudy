@@ -186,6 +186,16 @@
 			                                       </td>
 			                                    </tr>
 			                                   </table>
+			                                   <table class="table ups" style="display:none" :id="'up'+vo.cno">
+			                                    <tr>
+			                                      <td>
+			                                       <textarea rows="4" cols="60" style="float: left" :id="'msg'+vo.cno">{{vo.msg}}</textarea>
+			                                       <input type=button value="댓글" style="float: left;background-color: blue;color: white;width: 80px;height:94px"
+			                                         @click="replyInsert()"
+			                                       >
+			                                      </td>
+			                                    </tr>
+			                                   </table>
 			                               
                                             </div>
                                  
@@ -207,6 +217,16 @@
 		                                                <button v-if="sessionId===vo.id" class="btn-xs btn-info" style="margin-left:2px"
 		                                                  @click="replyDelete(vo.cno)">Delete</button>
                                                         <button v-if="sessionId!==vo.id && sessionId!==''" style="margin-left:2px">Like</button>
+                                                        <table class="table ups" :id="'up'+vo.cno">
+					                                    <tr>
+					                                      <td>
+					                                       <textarea rows="4" cols="60" style="float: left" :id="'msg'+vo.cno">{{vo.msg}}</textarea>
+					                                       <input type=button value="댓글" style="float: left;background-color: blue;color: white;width: 80px;height:94px"
+					                                         @click="replyInsert()"
+					                                       >
+					                                      </td>
+					                                    </tr>
+					                                   </table>
                                                     </div>
                                                 </div>
                                             </li>
@@ -222,7 +242,7 @@
 	                                   <table class="table">
 	                                    <tr>
 	                                      <td>
-	                                       <textarea rows="4" cols="70" style="float: left" ref="msg" v-model="msg"></textarea>
+	                                       <textarea rows="4" cols="60" style="float: left" ref="msg" v-model="msg"></textarea>
 	                                       <input type=button value="댓글" style="float: left;background-color: blue;color: white;width: 80px;height:94px"
 	                                         @click="replyInsert()"
 	                                       >

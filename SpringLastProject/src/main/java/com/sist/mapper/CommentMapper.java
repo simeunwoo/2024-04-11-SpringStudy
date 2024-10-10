@@ -70,4 +70,14 @@ public interface CommentMapper {
 			+ "</if>"
 			+ "</script>")
 	public void commentDelete(Map map);
+	
+	@Update("UPDATE project_food_house SET "
+			+ "replycount=replycount+1 "
+			+ "WHERE fno=#{fno}")
+	public void foodReplyIncrement(int fno);
+	
+	@Update("UPDATE project_food_house SET "
+			+ "replycount=replycount-1 "
+			+ "WHERE fno=#{fno}")
+	public void foodReplyDecrement(int fno);
 }

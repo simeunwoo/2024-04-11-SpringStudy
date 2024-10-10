@@ -101,6 +101,7 @@ public class CommentRestController {
 		map.put("group_id", vo.getGroup_id());
 		map.put("group_step", vo.getGroup_step());
 		cService.commentDelete(map);
+		cService.foodReplyDecrement(rno);
 		
 		return commonsListData(1, rno, type);
 	}

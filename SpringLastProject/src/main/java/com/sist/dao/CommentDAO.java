@@ -104,6 +104,7 @@ public class CommentDAO {
 	
 	public void commentInsert(CommentVO vo)
 	{
+		mapper.foodReplyIncrement(vo.getRno());
 		mapper.commentInsert(vo);
 	}
 	
@@ -111,6 +112,8 @@ public class CommentDAO {
 	@Transactional(propagation=Propagation.REQUIRED,rollbackFor=Exception.class)
 	public void commentReplyReplyInsert(int cno,CommentVO vo)
 	{
+		mapper.foodReplyIncrement(vo.getRno());
+		
 		CommentVO pvo=mapper.commentParentInfoData(cno);
 		vo.setGroup_id(pvo.getGroup_id());
 		vo.setGroup_step(pvo.getGroup_step()+1);
@@ -139,4 +142,8 @@ public class CommentDAO {
 		mapper.commentDelete(map);
 	}
 	
+	public void foodReplyDecrement(int fno)
+	{
+		mapper.foodReplyDecrement(fno);
+	}
 }
