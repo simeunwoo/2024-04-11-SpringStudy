@@ -1,4 +1,5 @@
 package com.sist.web;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import javax.servlet.http.HttpSession;
@@ -37,11 +38,14 @@ public class FreeBoardRestController {
 		
 		count=count-((page*rowSize)-rowSize);
 		
+		String today=new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+		
 		Map map=new HashMap();
 		map.put("list", list);
 		map.put("count", count);
 		map.put("curpage", page);
 		map.put("totalpage", totalpage);
+		map.put("today", today);
 		
 		ObjectMapper mapper=new ObjectMapper();
 		String json=mapper.writeValueAsString(map);

@@ -57,13 +57,30 @@
             			<th class="text-center" width="20%">작성일</th>
             			<th class="text-center" width="10%">조회수</th>
             		</tr>
+            		<tr v-for="vo in board_list">
+            			<td class="text-center" width="10%">{{vo.no}}</td>
+            			<td width="45%">
+            				<a :href="'../freeboard/detail.do?no='+vo.no">{{vo.subject}}</a>
+            				<sup v-if="today===vo.dbday"><img src="../img/icon/new.gif"></sup>
+            			</td>
+            			<td class="text-center" width="15%">{{vo.name}}</td>
+            			<td class="text-center" width="20%">{{vo.dbday}}</td>
+            			<td class="text-center" width="10%">{{vo.hit}}</td>
+            		</tr>            		
+            		<tr>
+            			<td colspan="5" class="text-center">
+            				<button class="btn-sm btn-danger">이전</button>
+            					{{curpage}} 페이지 / {{totalpage}} 페이지
+            				<button class="btn-sm btn-danger">다음</button>
+            			</td>
+            		</tr>
             	</table>
             </div>
 		</div>
 	</section>
 	<script>
 		// MVVM => M(데이터)V(HTML)VM(수정)
-		let ListApp=createApp({
+		let ListApp=Vue.createApp({
 			// Model => 데이터의 상태(변경) 관리
 			// List => [], VO => {} ~~~~~~~~~~~~~~> React까지 동일
 			data(){
@@ -71,17 +88,34 @@
 					board_list:[],
 					curpage:1,
 					totalpage:0,
-					count:0
+					count:0,
+					today:''
 				}
 			},
 			// VM => ViewModel => 데이터 값을 변경 (시작하자마자)
 			// => window.onload
 			mounted(){
-				
+				this.dataRecv()
 			},
 			// 사용자 요청에 따라 데이터 변경
 			methods:{
 				// 1) 공통으로 적용되는 기능을 설정 => 목록 읽기
+				dataRecv(){
+					axios.get('../freeboard/list_vue.do',{
+						params:{
+							page:this.curpage
+						}
+					}).then(response=>{
+						console.log(response.data)
+						this.board_list=response.data.list
+						this.curpage=response.data.curpage
+						this.totalpage=response.data.totalpage
+						this.count=response.data.count
+						this.today=response.data.today
+					}).catch(error=>{
+						console.log(error.response)
+					})
+				}
 				// 2) CRUD
 			}
 		}).mount('#listApp')
