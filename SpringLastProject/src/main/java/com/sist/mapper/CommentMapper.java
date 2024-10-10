@@ -80,4 +80,10 @@ public interface CommentMapper {
 			+ "replycount=replycount-1 "
 			+ "WHERE fno=#{fno}")
 	public void foodReplyDecrement(int fno);
+	
+	// 수정
+	@Update("UPDATE spring_comment SET "
+			+ "msg=#{msg},modifydate=SYSDATE "
+			+ "WHERE cno=#{cno}")
+	public void commentUpdate(CommentVO vo);
 }
