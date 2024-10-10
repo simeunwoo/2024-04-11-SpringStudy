@@ -37,5 +37,4 @@ public interface MemberMapper {
 			+ "FROM spring_member "
 			+ "WHERE userId=#{userId}")
 	public MemberVO memberSessionData(String userId);
-	
 }
