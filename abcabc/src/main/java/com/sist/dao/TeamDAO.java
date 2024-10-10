@@ -17,4 +17,9 @@ public class TeamDAO {
 	{
 		return mapper.teamListData();
 	}
+	
+	public TeamDetailVO teamDetailData(String name)
+	{
+		return mapper.teamDetailData(name);
+	}
 }

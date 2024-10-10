@@ -11,4 +11,8 @@ public interface TeamMapper {
 			+ "FROM teamdetail "
 			+ "ORDER BY name ASC")
 	public List<TeamDetailVO> teamListData();
+	
+	@Select("SELECT * FROM teamdetail "
+			+ "WHERE name=#{name}")
+	public TeamDetailVO teamDetailData(String name);
 }

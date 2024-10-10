@@ -21,7 +21,17 @@ public class TeamController {
 		List<TeamDetailVO> list=tService.teamListData();
 		
 		model.addAttribute("list", list);
-		
+			
 		return "team/list";
+	}
+	
+	@GetMapping("team/detail.do")
+	public String team_detail(Model model,String name)
+	{
+		TeamDetailVO vo=tService.teamDetailData(name);
+		
+		model.addAttribute("vo", vo);
+		
+		return "team/detail";
 	}
 }

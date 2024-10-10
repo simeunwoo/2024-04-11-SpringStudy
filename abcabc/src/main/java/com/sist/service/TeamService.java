@@ -5,4 +5,5 @@ import com.sist.vo.*;
 public interface TeamService {
 
 	public List<TeamDetailVO> teamListData();
+	public TeamDetailVO teamDetailData(String name);
 }

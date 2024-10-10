@@ -18,4 +18,10 @@ public class TeamServiceImpl implements TeamService {
 		// TODO Auto-generated method stub
 		return tDao.teamListData();
 	}
+
+	@Override
+	public TeamDetailVO teamDetailData(String name) {
+		// TODO Auto-generated method stub
+		return tDao.teamDetailData(name);
+	}
 }
