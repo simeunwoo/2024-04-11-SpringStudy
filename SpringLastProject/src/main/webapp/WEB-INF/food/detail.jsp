@@ -283,10 +283,10 @@
     	 },
     	 methods:{
     		 replyUpdate(cno){
-    			let msg=$('#msg'+cno).val()
+    			let msg=$('#umsg'+cno).val()
     			if(msg.trim()==="")
     			{
-    				 $('#msg'+cno).focus()
+    				 $('#umsg'+cno).focus()
     				 return
     			}
     			axios.get('../comment/update_vue.do',{
@@ -303,6 +303,8 @@
   					 this.totalpage=response.data.totalpage
   					 this.startPage=response.data.startPage
   					 this.endPage=response.data.endPage
+  					 $('#umsg'+cno).val("")
+  					 $('#up'+cno).hide()
   			   }).catch(error=>{
   				     console.log(error.response)
   			   })
