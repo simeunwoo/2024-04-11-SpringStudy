@@ -62,6 +62,8 @@ public class FreeBoardRestController {
 		// id, name => HttpSession을 이용한다
 		String id=(String)session.getAttribute("userId");
 		String name=(String)session.getAttribute("userName");
+		System.out.println("Retrieved userId: " + id); // 로그 추가
+		System.out.println("Retrieved userName: " + name); // 로그 추가
 		
 		try
 		{
@@ -86,10 +88,30 @@ public class FreeBoardRestController {
 		// 조회수 증가
 		
 		// 데이터 전송
+		FreeBoardVO vo=fbService.freeboardDetailData(no);
 		
 		// JSON 변경
+		ObjectMapper mapper=new ObjectMapper();
+		String json=mapper.writeValueAsString(vo);
 		
 		// 전송
+		return json;
+	}
+	
+	@GetMapping(value="freeboard/delete_vue.do",produces="text/plain;charset=UTF-8")
+	public String freeboard_delete(int no) throws Exception
+	{
+		String result="";
+		try
+		{
+			// DB 연동
+			fbService.freeboardDelete(no);
+			result="yes";
+		}catch(Exception ex)
+		{
+			result=ex.getMessage();
+		}
+		
 		return "";
 	}
 }

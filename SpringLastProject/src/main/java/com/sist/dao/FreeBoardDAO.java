@@ -32,4 +32,9 @@ public class FreeBoardDAO {
 		mapper.freeboardHitIncrement(no);
 		return mapper.freeboardDetailData(no);
 	}
+	
+	public void freeboardDelete(int no)
+	{
+		mapper.freeboardDelete(no);
+	}
 }

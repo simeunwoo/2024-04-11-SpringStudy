@@ -33,6 +33,38 @@
             <div class="row justify-content-center">
                 <div class="col-12 col-lg-8">
                     <div class="row no-gutters">
+                    	<table class="table">
+                    		<tr>
+                    			<th width="20%" class="text-center">번호</th>
+                    			<td width="30%" class="text-center">{{vo.no}}</td>
+                    			<th width="20%" class="text-center">작성일</th>
+                    			<td width="30%" class="text-center">{{vo.dbday}}</td>
+                    		</tr>
+                    		<tr>
+                    			<th width="20%" class="text-center">이름</th>
+                    			<td width="30%" class="text-center">{{vo.name}}</td>
+                    			<th width="20%" class="text-center">조회수</th>
+                    			<td width="30%" class="text-center">{{vo.hit}}</td>
+                    		</tr>
+                    		<tr>
+                    			<th width="20%" class="text-center">제목</th>
+                    			<td colspan="3">{{vo.subject}}</td>
+                    		</tr>
+                    		<tr>
+                    			<td colspan="4" class="text-left" valign="top" height="200">
+                    				<pre style="white-space:pre-wrap;background-color:white;border:none">{{vo.content}}</pre>
+                    			</td>
+                    		</tr>
+                    		<tr>
+                    			<td colspan="4" class="text-right">
+                    				<a :href="'../freeboard/update.do?no='+vo.no" class="btn btn-xs btn-primary"
+                    				  v-show="sessionId===vo.id">수정</a>
+                    				<button class="btn btn-xs btn-warning" @click="boardDelete()"
+                    				  v-show="sessionId===vo.id">삭제</button>
+                    				<a href="../freeboard/list.do" class="btn btn-xs btn-danger">목록</a>
+                    			</td>
+                    		</tr>
+                    	</table>
                     </div>
                 </div>
             </div>
@@ -60,7 +92,25 @@
     			})
     		},
     		methods:{
-    			
+    			boardDelete(){
+    				axios.get('../freeboard/delete_vue.do',{
+    					params:{
+    						no:this.no
+    					}
+    				}).then(response=>{
+    					if(response.data==='yes')
+    					{
+    						
+    					}
+    					else
+    					{
+    						alert('삭제 실패')
+    						console.log(response.data)
+    					}
+    				}).catch(error=>{
+    					console.log(error.response)
+    				})
+    			}
     		}
     	}).mount('#detailApp')
     </script>

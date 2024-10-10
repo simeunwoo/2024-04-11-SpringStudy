@@ -8,4 +8,5 @@ public interface FreeBoardService {
 	public int freeboardRowCount();
 	public void freeboardInsert(FreeBoardVO vo);
 	public FreeBoardVO freeboardDetailData(int no);
+	public void freeboardDelete(int no);
 }
