@@ -34,9 +34,9 @@ public class PlayerDAO {
 		return mapper.pitcherTotalPage();
 	}
 	
-	public List<BatterVO> batterListData(int start,int end)
+	public List<BatterVO> batterListData(Map map)
 	{
-		return mapper.batterListData(start, end);
+		return mapper.batterListData(map);
 	}
 	
 	public List<PitcherVO> pitcherListData(int start,int end)

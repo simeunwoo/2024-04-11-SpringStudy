@@ -25,9 +25,11 @@ public interface PlayerMapper {
 	@Select("SELECT bno,age,game,h1,homerun,rbi,war,name,team,position,logo,image,num "
 			+ "FROM (SELECT bno,age,game,h1,homerun,rbi,war,name,team,position,logo,image,rownum as num "
 			+ "FROM (SELECT bno,age,game,h1,homerun,rbi,war,name,team,position,logo,image "
-			+ "FROM batter ORDER BY bno ASC)) "
+			+ "FROM batter "
+			+ "WHERE name LIKE '%'||#{fd}||'%' "
+			+ "ORDER BY bno ASC)) "
 			+ "WHERE num BETWEEN #{start} AND #{end}")
-	public List<BatterVO> batterListData(@Param("start") int start,@Param("end") int end);
+	public List<BatterVO> batterListData(Map map);
 	
 	@Select("SELECT pno,age,game,win,lose,save,hold,era,war,name,team,logo,image,num "
 			+ "FROM (SELECT pno,age,game,win,lose,save,hold,era,war,name,team,logo,image,rownum as num "

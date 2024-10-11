@@ -44,7 +44,7 @@
                     <div class="feature-matchs">
                         <table class="table table-bordered table-hover">
                             <tr>
-                                <th></th>
+                                <th><input type="text" size="25" ref="fd" v-model="fd" @keydown.enter="playerFind()"></th>
                                 <th>이름</th>
                                 <th>소속팀</th>
                                 <th>나이</th>
@@ -109,13 +109,23 @@
                     curpage:1,
                     totalpage:0,
                     startPage:0,
-                    endPage:0
+                    endPage:0,
+                    fd:''
                 }
             },
             mounted() {
                 this.dataRecv()
             },
             methods: {
+            	playerFind(){
+            		if(this.fd==="")
+            		{
+            			this.$refs.fd.focus()
+            			return
+            		}
+            		this.curpage=1
+            		this.dataRecv()
+            	},
                 prev() {
                     this.curpage=this.startPage-1
                     this.dataRecv()
@@ -141,7 +151,8 @@
                 dataRecv() {
                     axios.get('../player/batter_list_vue.do', {
                         params:{
-                            page:this.curpage
+                            page:this.curpage,
+                            fd:this.fd
                         }
                     }).then(response=>{
                         console.log(response.data)

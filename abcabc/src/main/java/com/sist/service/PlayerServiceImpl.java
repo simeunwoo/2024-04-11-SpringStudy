@@ -1,6 +1,6 @@
 package com.sist.service;
 
-import java.util.List;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,9 +39,9 @@ public class PlayerServiceImpl implements PlayerService {
 	}
 
 	@Override
-	public List<BatterVO> batterListData(int start, int end) {
+	public List<BatterVO> batterListData(Map map) {
 		// TODO Auto-generated method stub
-		return pDao.batterListData(start, end);
+		return pDao.batterListData(map);
 	}
 
 	@Override
