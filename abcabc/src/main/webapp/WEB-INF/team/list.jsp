@@ -62,7 +62,7 @@
             },
             methods: {
                 openNewWindow(teamName) {
-                    window.open('../team/detail.do?name=' + encodeURIComponent(teamName), 'winname', 'width=700,height=900,scrollbars=yes');
+                    window.open('../team/detail.do?name=' + encodeURIComponent(teamName), 'winname', 'width=700,height=900,scrollbars=yes,resizable=no');
                 }
             }
         }).mount('#newScreenApp');
