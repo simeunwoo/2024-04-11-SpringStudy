@@ -53,4 +53,15 @@ public class ChefRestController {
 		
 		return json;
 	}
+	
+	@GetMapping(value="chef/recipe_make.do",produces="text/plain;charset=UTF-8")
+	public String recipe_make(String chef) throws Exception
+	{
+		List<RecipeVO> list=rService.recipeMakeData(chef);
+		
+		ObjectMapper mapper=new ObjectMapper();
+		String json=mapper.writeValueAsString(list);
+		
+		return json;
+	}
 }

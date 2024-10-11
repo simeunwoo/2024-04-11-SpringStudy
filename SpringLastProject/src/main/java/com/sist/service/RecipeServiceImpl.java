@@ -61,4 +61,10 @@ public class RecipeServiceImpl implements RecipeService {
 		// TODO Auto-generated method stub
 		return cDao.chefTotalPage();
 	}
+
+	@Override
+	public List<RecipeVO> recipeMakeData(String chef) {
+		// TODO Auto-generated method stub
+		return rDao.recipeMakeData(chef);
+	}
 }
