@@ -5,8 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.14.0/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="https://code.jquery.com/ui/1.14.0/jquery-ui.js"></script>
 <style type="text/css">
-.page-link:hover{
+.page-link:hover,.nav-link:hover{
 	cursor: pointer;
 }
 </style>
@@ -51,10 +54,11 @@
                 				<table class="table" v-for="vo in chef_list">
                 					<tr>
                 						<td width="20%" class="text-center" rowspan="2">
-                							<img :src="vo.poster" style="width:100px;height:100px">
+                							<img :src="vo.poster" style="width:180px;height:150px"
+                							  class="nav-link" @click="detail(vo.chef)">
                 						</td>
                 						<td colspan="4">
-                							<h3 style="color:orange">{{vo.chef}}</h3>
+                							<h3 style="color:orange" class="nav-link" @click="detail(vo.chef)">{{vo.chef}}</h3>
                 						</td>
                 					</tr>
                 					<tr>
@@ -98,8 +102,28 @@
                 </div>
             </div>
         </div>
+        <div id="dialog" title="레시피" v-show="isShow">
+        	<make_dialog v-bind:r_list="recipe_list"></make_dialog>
+        </div>
     </section>
     <script>
+    	const makeRecipe={
+    		props:["r_list"],
+    		template:`
+    			<div class="row">
+	    		  <div class="col-md-3" v-for="vo in r_list">
+				    <div class="thumbnail">
+				      <a href="#">
+				        <img :src="vo.poster" style="width:100%">
+				        <div class="caption">
+				          <p class="a">{{vo.title}}</p>
+				        </div>
+				      </a>
+				    </div>
+				  </div>
+    			</div>
+    		`
+    	}
 	    let chefApp=Vue.createApp({
 			data(){
 				return{
@@ -127,6 +151,10 @@
 					}).then(response=>{
 						console.log(response.data)
 						this.recipe_list=response.data
+						$('#dialog').dialog({
+							autoOpen:false,
+							modal:true
+						}).dialog("open")
 					}).catch(error=>{
 						console.log(error.response)
 					})
@@ -171,7 +199,7 @@
 				}
 			},
 			components:{
-				
+				"make_dialog":makeRecipe
 			}
 		}).mount('#listApp')
     </script>

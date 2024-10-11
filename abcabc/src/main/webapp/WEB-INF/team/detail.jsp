@@ -60,6 +60,12 @@
                             </tr>
                         </table>
                         </div></aside></div></div></div>
+                        
+                        <!--
+                        $('#dialog').dialog({
+							autoOpen:false,
+							modal:true
+                        -->
 
     
 </body>
