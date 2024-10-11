@@ -118,7 +118,7 @@
                                     <a class="nav-link dropdown-toggle" href="#" id="yummyDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">레시피</a>
                                     <div class="dropdown-menu" aria-labelledby="yummyDropdown">
                                         <a class="dropdown-item" href="../recipe/list.do">레시피 목록</a>
-                                        <a class="dropdown-item" href="../recipe/chef.do">쉐프 목록</a>
+                                        <a class="dropdown-item" href="../chef/list.do">쉐프 목록</a>
                                         <sec:authorize access="hasRole('ROLE_USER')">
                                         	<a class="dropdown-item" href="single.html">레시피 만들기</a>
                                         </sec:authorize>

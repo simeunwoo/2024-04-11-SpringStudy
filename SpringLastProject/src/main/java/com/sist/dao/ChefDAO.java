@@ -16,4 +16,14 @@ public class ChefDAO {
 	{
 		return mapper.chefToday();
 	}
+	
+	public List<ChefVO> chefListData(Map map)
+	{
+		return mapper.chefListData(map);
+	}
+	
+	public int chefTotalPage()
+	{
+		return mapper.chefTotalPage();
+	}
 }

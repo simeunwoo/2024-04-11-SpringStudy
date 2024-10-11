@@ -77,12 +77,56 @@
     				console.log(response.data)
     				this.subject=response.data.subject
     				this.content=response.data.content
+    				// 변수 값이 갱신 => v-model로 값을 전송 => HTML 값을 변경하여 출력 (자동화 처리 : React)
+    				/*
+    					response={
+    						config:{}, => response.config
+    						data:{subject:'',content:''}, => response.data : 실제 서버에서 전송된 값
+    						header:{} => response.header
+    					}
+    				
+    					response.data={subject:'',content:''} => 객체
+    					              ======================= 멤버 변수
+    					              .subject
+    				*/
     			}).catch(error=>{
     				console.log(error.response)
     			})
     		},
     		methods:{
     			// 버튼 => 사용자 요청 처리
+    			boardUpdate(){
+    				if(this.subject==="")
+    				{
+    					this.$refs.subject.focus()
+    					return
+    				}
+    				if(this.content==="")
+    				{
+    					this.$refs.content.focus()
+    					return
+    				}
+    				
+    				// 서버로 전송
+    				axios.post('../freeboard/update_vue.do',null,{
+    					params:{
+    						no:this.no,
+    						subject:this.subject,
+    						content:this.content
+    					}
+    				}).this(response=>{
+    					if(response.data==="yes")
+    					{
+    						location.href="../freeboard/detail.do?no="+this.no
+    					}
+    					else
+    					{
+    						alert(response.data)
+    					}
+    				}).catch(error=>{
+    					console.log(error.response)
+    				})
+    			}
     		}
     	}).mount('#updateApp')
     </script>

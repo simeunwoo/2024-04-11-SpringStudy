@@ -53,33 +53,49 @@ public class FreeBoardRestController {
 		return json;
 	}
 	
-	@PostMapping(value="freeboard/insert_vue.do",produces="text/plain;charset=UTF-8")
-	// ResponseEntity<List> : router
-	public String freeboard_insert(FreeBoardVO vo,HttpSession session)
-	{
-		String result="";
-		
-		// id, name => HttpSession을 이용한다
-		String id=(String)session.getAttribute("userId");
-		String name=(String)session.getAttribute("userName");
-		System.out.println("Retrieved userId: " + id); // 로그 추가
-		System.out.println("Retrieved userName: " + name); // 로그 추가
-		
-		try
-		{
-			vo.setId(id);
-			vo.setName(name);
-			
-			fbService.freeboardInsert(vo);
-			
-			result="yes";
-		}catch(Exception ex)
-		{
-			result=ex.getMessage();
-		}
-		
-		return result;
+	@PostMapping(value="freeboard/insert_vue.do", produces="text/plain;charset=UTF-8")
+	public String freeboard_insert(FreeBoardVO vo, HttpSession session) {
+	    String result = "";
+
+	    // id, name => HttpSession을 이용하여 가져옴
+	    Object userIdObj = session.getAttribute("userId");
+	    Object userNameObj = session.getAttribute("userName");
+
+	    try {
+	        // userId가 Boolean일 경우 String으로 변환하여 저장
+	        if (userIdObj instanceof Boolean) {
+	            session.setAttribute("userId", String.valueOf(userIdObj));
+	            userIdObj = session.getAttribute("userId");  // 업데이트된 값 다시 가져오기
+	        }
+
+	        // userName이 Boolean일 경우 String으로 변환하여 저장
+	        if (userNameObj instanceof Boolean) {
+	            session.setAttribute("userName", String.valueOf(userNameObj));
+	            userNameObj = session.getAttribute("userName");  // 업데이트된 값 다시 가져오기
+	        }
+
+	        // userId와 userName이 String 타입인지 확인 후 처리
+	        if (userIdObj instanceof String && userNameObj instanceof String) {
+	            String id = (String) userIdObj;
+	            String name = (String) userNameObj;
+
+	            vo.setId(id);
+	            vo.setName(name);
+
+	            fbService.freeboardInsert(vo);
+	            result = "yes";
+	        } else {
+	            // 타입이 맞지 않을 경우 오류 처리
+	            result = "세션에 저장된 userId 또는 userName이 잘못된 타입입니다.";
+	        }
+	    } catch (Exception ex) {
+	        result = ex.getMessage();
+	    }
+
+	    return result;
 	}
+
+
 	
 	// 상세 보기
 	@GetMapping(value="freeboard/detail_vue.do",produces="text/plain;charset=UTF-8")
@@ -112,6 +128,43 @@ public class FreeBoardRestController {
 			result=ex.getMessage();
 		}
 		
-		return "";
+		return result;
 	}
+	
+	@GetMapping(value="freeboard/update_vue.do",produces="text/plain;charset=UTF-8")
+	public String freeboard_update(int no) throws Exception
+	{
+		FreeBoardVO vo=fbService.freeboardUpdateData(no);
+		
+		ObjectMapper mapper=new ObjectMapper();
+		String json=mapper.writeValueAsString(vo);
+		
+		return json;
+	}
+	
+	@PostMapping(value="freeboard/update_ok_vue.do",produces="text/plain;charset=UTF-8")
+	public String freeboard_update_ok(FreeBoardVO vo/*int no,String subject,String content*/)
+	{
+		String result="";
+		
+		try
+		{
+			/*
+			(int no,String subject,String content로 설정한 경우 필요한 코딩)
+			FreeBoardVO vo=new FreeBoardVO();
+			vo.setNo(no);
+			vo.setSubject(subject);
+			vo.setContent(content);
+			*/
+			fbService.freeboardUpdate(vo);
+			
+			result="yes";
+		}catch(Exception ex)
+		{
+			result=ex.getMessage();
+		}
+		
+		return result;
+	}
+	
 }
