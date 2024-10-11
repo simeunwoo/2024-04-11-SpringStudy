@@ -92,7 +92,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 // jsp 연동
 @Controller
-@RequestMapping("main/")
 public class MainController {
 
 	// 필요한 클래스 => 스프링에서 가져 온다 (객체 주소)
@@ -102,7 +101,7 @@ public class MainController {
 	private FoodService fService;
 	
 	// 사용자 요청에 따라 => 처리
-	@GetMapping("main.do")
+	@GetMapping("main/main.do")
 	public String main_main(Model model)
 	{
 		RecipeVO rvo=rService.recipeMaxHitData();
@@ -118,5 +117,11 @@ public class MainController {
 		model.addAttribute("cvo", cvo);
 		
 		return "main";
+	}
+	
+	@GetMapping("chat/chat.do")
+	public String chat_chat()
+	{
+		return "site/chat/chat";
 	}
 }
