@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Team List</title>
+<script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
 <style>
 .card {
 	display: grid;
@@ -39,8 +40,9 @@
                         <p class="title">창단연도&nbsp;:&nbsp;${vo.syear }년</p>
                         <p class="title">연고지&nbsp;:&nbsp;${vo.home }</p>
                         <p>
-                        	<div class="center"><button class="button" @click="openNewWindow">
-                        	  Learn More</button></div>
+                        	<div class="center">
+                            	<button class="button" @click="openNewWindow('${vo.name}')">Learn More</button>
+                        	</div>
                         </p>
                      </div>
                   </div>
@@ -51,21 +53,19 @@
 </section>
 	<script>
         let NewScreenApp = Vue.createApp({
-            data(){
-                return{
-                    // 필요한 데이터 속성을 추가할 수 있습니다.
+            data() {
+                return {
                 }
             },
-            mounted(){
-                // 컴포넌트가 마운트된 후 실행할 코드를 여기에 추가할 수 있습니다.
+            mounted() {
                 console.log("앱이 마운트되었습니다.");
             },
-            methods:{
-                openNewWindow(){
-                    window.open('../team/detail.do?name=${vo.name}','winname','width=500,height=700,scrollbars=yes');
+            methods: {
+                openNewWindow(teamName) {
+                    window.open('../team/detail.do?name=' + encodeURIComponent(teamName), 'winname', 'width=700,height=900,scrollbars=yes');
                 }
             }
-        }).mount('#newScreenApp')
+        }).mount('#newScreenApp');
     </script>
 </body>
 </html>

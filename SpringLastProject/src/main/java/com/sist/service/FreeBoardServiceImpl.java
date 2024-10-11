@@ -43,6 +43,18 @@ public class FreeBoardServiceImpl implements FreeBoardService {
 		fbDAO.freeboardDelete(no);
 	}
 
+	@Override
+	public FreeBoardVO freeboardUpdateData(int no) {
+		// TODO Auto-generated method stub
+		return fbDAO.freeboardUpdateData(no);
+	}
+
+	@Override
+	public void freeboardUpdate(FreeBoardVO vo) {
+		// TODO Auto-generated method stub
+		fbDAO.freeboardUpdate(vo);
+	}
+
 	/*
 	 * 	JSP => .do
 	 * 	|

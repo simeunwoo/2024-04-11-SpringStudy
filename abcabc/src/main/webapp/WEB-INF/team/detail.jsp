@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -29,24 +30,24 @@
                     <div class="feature-matchs">
                         <table class="table table-bordered table-hover">
                             <tr>
-                                <th></th>
                                 <th>이름</th>
-                                <th>소속팀</th>
-                                <th>나이</th>
-                                <th>게임</th>
-                                <th>홈런</th>
-                                <th>안타</th>
-                                <th>타점</th>
-                                <th>볼넷</th>
-                                <th>삼진</th>
-                                <th>WAR</th>
+                                <th>창단연도</th>
+                                <th>내용</th>
+                                <th>우승연도</th>
+                                <th>연고지</th>
+                                <th>사라진연도</th>
+                                <th>조상팀</th>
+                                <th>로고</th>
+                                <th>영구결번</th>
+                                <th>마스코트</th>
+                                <th>이미지</th>
                             </tr>
                             <tr>
                                 <td>${vo.name }</td>
                                 <td>
-                                    <a href="#">${vo.syear }</a>
+                                    <a href="${vo.logo}">${vo.syear }</a>
                                 </td>
-                               <td><img src="#" class="logo-image">${vo.content }</td>
+                               <td><img src="${vo.logo}" class="logo-image">${vo.content }</td>
 
                                 <td>${vo.winyear }</td>
                                 <td>${vo.home }</td>

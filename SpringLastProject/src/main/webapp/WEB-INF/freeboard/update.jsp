@@ -62,11 +62,24 @@
     	let updateApp=Vue.createApp({
     		data(){
     			return{
-    				
+    				no:${no},
+    				subject:'',
+    				content:''
     			}
     		},
     		mounted(){
     			// 시작과 동시에 자동 처리
+    			axois.post('../freeboard/update_vue.do',null,{
+    				params:{
+    					no:this.no
+    				}
+    			}).then(response=>{
+    				console.log(response.data)
+    				this.subject=response.data.subject
+    				this.content=response.data.content
+    			}).catch(error=>{
+    				console.log(error.response)
+    			})
     		},
     		methods:{
     			// 버튼 => 사용자 요청 처리
