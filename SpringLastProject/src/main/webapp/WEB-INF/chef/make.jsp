@@ -149,15 +149,18 @@
 							chef:this.chef
 						}
 					}).then(response=>{
-						console.log(response.data)
-						this.recipe_list=response.data
-						$('#dialog').dialog({
-							autoOpen:false,
-							modal:true
-						}).dialog("open")
-					}).catch(error=>{
-						console.log(error.response)
-					})
+		   				 console.log(response.data)
+		   				 this.recipe_list=response.data
+		   				 alert("1")
+		   				 $('#dialog').dialog({
+		   					 autoOpen:false,
+		   					 modal:true,
+		   					 width:700,
+		   					 height:600
+		   				 }).dialog("open")
+		   			 })/*.catch(error=>{
+		   				 console.log(error.response)
+		   			 })*/
 				},
 				prev(){
 					this.curpage=this.startPage-1
