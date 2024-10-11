@@ -7,8 +7,8 @@ public interface PlayerService {
 
 	public BatterVO batterDetailData(int bno);
 	public PitcherVO pitcherDetailData(int pno);
-	public int batterTotalPage();
-	public int pitcherTotalPage();
+	public int batterTotalPage(String fd);
+	public int pitcherTotalPage(String fd);
 	public List<BatterVO> batterListData(Map map);
-	public List<PitcherVO> pitcherListData(int start,int end);
+	public List<PitcherVO> pitcherListData(Map map);
 }

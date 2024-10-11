@@ -27,15 +27,15 @@ public class PlayerServiceImpl implements PlayerService {
 	}
 
 	@Override
-	public int batterTotalPage() {
+	public int batterTotalPage(String fd) {
 		// TODO Auto-generated method stub
-		return pDao.batterTotalPage();
+		return pDao.batterTotalPage(fd);
 	}
 
 	@Override
-	public int pitcherTotalPage() {
+	public int pitcherTotalPage(String fd) {
 		// TODO Auto-generated method stub
-		return pDao.pitcherTotalPage();
+		return pDao.pitcherTotalPage(fd);
 	}
 
 	@Override
@@ -45,9 +45,9 @@ public class PlayerServiceImpl implements PlayerService {
 	}
 
 	@Override
-	public List<PitcherVO> pitcherListData(int start, int end) {
+	public List<PitcherVO> pitcherListData(Map map) {
 		// TODO Auto-generated method stub
-		return pDao.pitcherListData(start, end);
+		return pDao.pitcherListData(map);
 	}
 	
 	

@@ -36,7 +36,9 @@
             <div class="container" id="pitcherTable">
                <div class="header-top">
                   <div class="row">
-				<h4>Points Table</h4>
+                  <input type="text" size="25" ref="fd" v-model="fd" @keydown.enter="playerFind()">&nbsp;
+	              <button style="width:70px;height:35px"class="btn-sm btn-primary" @click="playerFind()">검색</button>
+	              <div style="height:10px"></div>
                   <aside id="sidebar" class="left-bar">
                      <div class="feature-matchs">
                      
@@ -104,14 +106,23 @@
 					curpage:1,
 					totalpage:0,
 					startPage:0,
-					endPage:0
+					endPage:0,
+					fd:''
 				}
 			},
 			mounted(){
 				this.dataRecv()
 			},
 			methods:{
-				
+				playerFind(){
+            		if(this.fd==="")
+            		{
+            			this.$refs.fd.focus()
+            			return
+            		}
+            		this.curpage=1
+            		this.dataRecv()
+            	},
 				prev() {
                     this.curpage=this.startPage-1
                     this.dataRecv()
@@ -137,7 +148,8 @@
                 dataRecv(){
 					axios.get('../player/pitcher_list_vue.do',{
 						params:{
-							page:this.curpage
+							page:this.curpage,
+							fd:this.fd
 						}
 					}).then(response=>{
 						console.log(response.data)

@@ -28,7 +28,7 @@ public class PlayerRestController {
 		map.put("fd", fd);
 		
 		List<BatterVO> list=pService.batterListData(map);
-		int totalpage=pService.batterTotalPage();
+		int totalpage=pService.batterTotalPage(fd);
 		
 		final int BLOCK=5;
 		int startPage=((page-1)/BLOCK*BLOCK)+1;
@@ -51,14 +51,19 @@ public class PlayerRestController {
 	}
 	
 	@GetMapping(value="player/pitcher_list_vue.do",produces="text/plain;charset=UTF-8")
-	public String pitcher_list(int page) throws Exception
+	public String pitcher_list(int page,String fd) throws Exception
 	{
 		int rowSize=20;
 		int start=(rowSize*page)-(rowSize-1);
 		int end=rowSize*page;
 		
-		List<PitcherVO> list=pService.pitcherListData(start, end);
-		int totalpage=pService.pitcherTotalPage();
+		Map map=new HashMap();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("fd", fd);
+		
+		List<PitcherVO> list=pService.pitcherListData(map);
+		int totalpage=pService.pitcherTotalPage(fd);
 		
 		final int BLOCK=5;
 		int startPage=((page-1)/BLOCK*BLOCK)+1;
@@ -67,7 +72,6 @@ public class PlayerRestController {
 			endPage=totalpage;
 		
 		// Vue로 데이터 전송
-		Map map=new HashMap();
 		map.put("list", list);
 		map.put("curpage", page);
 		map.put("totalpage", totalpage);

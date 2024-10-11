@@ -16,11 +16,13 @@ public interface PlayerMapper {
 			+ "WHERE pno=#{pno}")
 	public PitcherVO pitcherDetailData(int pno);
 	
-	@Select("SELECT CEIL(COUNT(*)/20.0) FROM batter")
-	public int batterTotalPage();
+	@Select("SELECT CEIL(COUNT(*)/20.0) FROM batter "
+			+ "WHERE name LIKE '%'||#{fd}||'%'")
+	public int batterTotalPage(String fd);
 	
-	@Select("SELECT CEIL(COUNT(*)/20.0) FROM pitcher")
-	public int pitcherTotalPage();
+	@Select("SELECT CEIL(COUNT(*)/20.0) FROM pitcher "
+			+ "WHERE name LIKE '%'||#{fd}||'%'")
+	public int pitcherTotalPage(String fd);
 	
 	@Select("SELECT bno,age,game,h1,homerun,rbi,war,name,team,position,logo,image,num "
 			+ "FROM (SELECT bno,age,game,h1,homerun,rbi,war,name,team,position,logo,image,rownum as num "
@@ -34,7 +36,9 @@ public interface PlayerMapper {
 	@Select("SELECT pno,age,game,win,lose,save,hold,era,war,name,team,logo,image,num "
 			+ "FROM (SELECT pno,age,game,win,lose,save,hold,era,war,name,team,logo,image,rownum as num "
 			+ "FROM (SELECT pno,age,game,win,lose,save,hold,era,war,name,team,logo,image "
-			+ "FROM pitcher ORDER BY pno ASC)) "
+			+ "FROM pitcher "
+			+ "WHERE name LIKE '%'||#{fd}||'%' "
+			+ "ORDER BY pno ASC)) "
 			+ "WHERE num BETWEEN #{start} AND #{end}")
-	public List<PitcherVO> pitcherListData(@Param("start") int start,@Param("end") int end);
+	public List<PitcherVO> pitcherListData(Map map);
 }

@@ -24,14 +24,14 @@ public class PlayerDAO {
 		return mapper.pitcherDetailData(pno);
 	}
 	
-	public int batterTotalPage()
+	public int batterTotalPage(String fd)
 	{
-		return mapper.batterTotalPage();
+		return mapper.batterTotalPage(fd);
 	}
 	
-	public int pitcherTotalPage()
+	public int pitcherTotalPage(String fd)
 	{
-		return mapper.pitcherTotalPage();
+		return mapper.pitcherTotalPage(fd);
 	}
 	
 	public List<BatterVO> batterListData(Map map)
@@ -39,8 +39,8 @@ public class PlayerDAO {
 		return mapper.batterListData(map);
 	}
 	
-	public List<PitcherVO> pitcherListData(int start,int end)
+	public List<PitcherVO> pitcherListData(Map map)
 	{
-		return mapper.pitcherListData(start, end);
+		return mapper.pitcherListData(map);
 	}
 }
