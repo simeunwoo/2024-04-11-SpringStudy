@@ -12,7 +12,7 @@ public class ChefController {
 	@GetMapping("chef/list.do")
 	public String chef_list()
 	{
-		return "chef/list";
+		return "chef/make";
 	}
 	
 }

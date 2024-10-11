@@ -94,7 +94,7 @@
     				 <div class="col-md-3" v-for="vo in r_list">
 	    			    <div class="thumbnail">
 	    			      <a href="#">
-	    			        <img :src="vo.poster" alt="Lights" style="width:100%">
+	    			        <img :src="vo.poster" style="width:100%">
 	    			        <div class="caption">
 	    			          <p class="a">{{vo.title}}</p>
 	    			        </div>
@@ -126,7 +126,7 @@
     				this.chef=chef
     				axios.get('../chef/recipe_make.do',{
     					params:{
-    						chef=this.chef
+    						chef:this.chef
     					}
     				}).then(response=>{
     					console.log(response.data)
