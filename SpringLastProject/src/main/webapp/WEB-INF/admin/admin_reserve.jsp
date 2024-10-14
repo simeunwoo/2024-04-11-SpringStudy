@@ -49,7 +49,6 @@
 			mounted(){
 				axios.get('../admin/admin_reserve_vue.do')
 				.then(response=>{
-					console.log(response.data)
 					this.reserve_list=response.data
 				}).catch(error=>{
 					console.log(error.response)

@@ -14,8 +14,8 @@ public class MyPageRestController {
 	@Autowired
 	private ReserveService rService;
 	
-	@GetMapping(value="mypage/mypage_reserve_info_vue.do",produces="text/plain;charset=UTF-8")
-	public String mypage_reserve_info(int fno,int rno) throws Exception
+	@GetMapping(value="mypage/reserve_info_vue.do",produces="text/plain;charset=UTF-8")
+	public String reserve_info(int fno,int rno) throws Exception
 	{
 		ReserveVO vo=rService.reserveInfoData(rno);
 		
