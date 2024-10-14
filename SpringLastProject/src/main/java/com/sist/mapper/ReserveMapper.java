@@ -17,5 +17,4 @@ public interface ReserveMapper {
 	@Select("SELECT CEIL(COUNT(*)/30.0) FROM project_food_house "
 			+ "WHERE type LIKE '%'||#{type}||'%'")
 	public int reserveFoodTotalPage(String type);
-	
 }
