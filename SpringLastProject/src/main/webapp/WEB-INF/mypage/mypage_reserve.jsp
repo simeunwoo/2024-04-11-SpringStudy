@@ -35,6 +35,13 @@
 				</td>
 			</tr>
 		</table>
+		<table class="table" v-show="isShow">
+			<tr>
+				<td>
+					<h4>예약 정보</h4>
+				</td>
+			</tr>
+		</table>
 	</div>
 	<script>
 		let mypageApp=Vue.createApp({
@@ -42,7 +49,8 @@
 				return{
 					reserve_list:[],
 					rno:0,
-					reserve_info:{}
+					reserve_info:{},
+					isShow:false
 				}
 			},
 			mounted(){
@@ -58,6 +66,7 @@
 			},
 			methods:{
 				foodInfo(fno,rno){
+					this.isShow=true
 					axios.get('../mypage/mypage_reserve_info_vue.do',{
 						params:{
 							fno:fno,

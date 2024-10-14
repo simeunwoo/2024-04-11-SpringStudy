@@ -51,7 +51,7 @@
   			width: 100%;
   			height: 100%;
   			z-index: -1;
-}
+		}
         .container {
             position: relative; /* 자식 요소들이 부모 요소에 상대적으로 위치하도록 설정 */
             z-index: 1; /* 배경 이미지보다 위로 표시 */
@@ -66,10 +66,13 @@
             text-align: center;
             color: gold;
         }
+        #abc{
+        	background-color: rgba(255, 255, 255, 0);
+        }
     </style>
 </head>
 <body>
-    <div class="background" :style="{backgroundImage:'url('+vo.logo+')'}"></div> <!-- 배경을 위한 div -->
+    <div class="background" style="background-image: url('${vo.logo}');"></div> <!-- 배경을 위한 div -->
     <div class="container">
         <div class="header-top">
             <div class="row">
@@ -84,7 +87,7 @@
                             ${vo.star }
                         </div>
                         <div style="height:30px"></div>
-                        <table class="table">
+                        <table class="table" id="abc">
                             <tr>
                                 <th width="15%" class="text-right">이름</th>
                                 <td width="85%">${vo.name }</td>
