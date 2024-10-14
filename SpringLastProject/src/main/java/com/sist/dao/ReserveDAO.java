@@ -31,4 +31,14 @@ public class ReserveDAO {
 	{
 		return mapper.reserveMyPageListData(id);
 	}
+	
+	public List<ReserveVO> reserveAdminListData()
+	{
+		return mapper.reserveAdminListData();
+	}
+	
+	public void reserveOk(int rno)
+	{
+		mapper.reserveOk(rno);
+	}
 }

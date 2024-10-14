@@ -42,15 +42,15 @@
             margin: 0; /* 기본 여백 제거 */
         }
         .background {
-  background-size: cover;
-  background-position: center;
-  filter: blur(5px);
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
+  			background-size: cover;
+  			background-position: center;
+  			filter: blur(5px);
+  			position: fixed;
+  			top: 0;
+  			left: 0;
+  			width: 100%;
+  			height: 100%;
+  			z-index: -1;
 }
         .container {
             position: relative; /* 자식 요소들이 부모 요소에 상대적으로 위치하도록 설정 */

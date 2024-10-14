@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.sist.vo.*;
 
@@ -33,9 +34,23 @@ public interface ReserveMapper {
 	@Select("SELECT rno,sr.fno,poster,name,rday,rtime,rinwon,TO_CHAR(regdate,'YYYY-MM-DD') as dbday "
 			+ "FROM spring_reserve sr,project_food_house pf "
 			+ "WHERE sr.fno=pf.fno "
-			+ "AND id=#{id}")
+			+ "AND id=#{id} "
+			+ "ORDER BY rno DESC")
 	public List<ReserveVO> reserveMyPageListData(String id);
 	
-	// 어드민 페이지 출력
+	// 관리자 페이지 출력
+	@Results({
+		@Result(property="fvo.poster",column="poster"),
+		@Result(property="fvo.name",column="name")
+	})
+	@Select("SELECT rno,sr.fno,id,poster,name,rday,rtime,rinwon,TO_CHAR(regdate,'YYYY-MM-DD') as dbday "
+			+ "FROM spring_reserve sr,project_food_house pf "
+			+ "WHERE sr.fno=pf.fno "
+			+ "ORDER BY rno DESC") // 관리자는 id가 따로 필요 없다
+	public List<ReserveVO> reserveAdminListData();
 	
+	@Update("UPDATE spring_reserve SET "
+			+ "isReserve=1 "
+			+ "WHERE rno=#{rno}")
+	public void reserveOk(int rno); 
 }

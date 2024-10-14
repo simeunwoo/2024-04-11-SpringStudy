@@ -8,4 +8,6 @@ public interface ReserveService {
 	public int reserveFoodTotalPage(String type);
 	public void reserveInsert(ReserveVO vo);
 	public List<ReserveVO> reserveMyPageListData(String id);
+	public List<ReserveVO> reserveAdminListData();
+	public void reserveOk(int rno);
 }
