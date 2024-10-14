@@ -7,4 +7,5 @@ public interface ReserveService {
 	public List<FoodVO> reserveFoodInfoData(Map map);
 	public int reserveFoodTotalPage(String type);
 	public void reserveInsert(ReserveVO vo);
+	public List<ReserveVO> reserveMyPageListData(String id);
 }

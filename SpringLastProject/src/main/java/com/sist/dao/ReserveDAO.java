@@ -26,4 +26,9 @@ public class ReserveDAO {
 	{
 		mapper.reserveInsert(vo);
 	}
+	
+	public List<ReserveVO> reserveMyPageListData(String id)
+	{
+		return mapper.reserveMyPageListData(id);
+	}
 }

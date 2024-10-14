@@ -18,6 +18,7 @@
 	      <li class="list-group-item"><a href="../member/pwd_change.do">비밀번호 변경</a></li>
 	    </ul>
 	   </div>
+	   <div style="height:30px"></div>
 	   <div class="panel panel-warning">
 	    <div class="panel-heading">
 	      <h3 class="panel-title">관리정보</h3>

@@ -12,4 +12,10 @@ public class MyPageController {
 	{
 		return "mypage";
 	}
+	
+	@GetMapping("mypage/mypage_reserve.do")
+	public String mypage_reserve()
+	{
+		return "mypage/mypage_reserve";
+	}
 }
