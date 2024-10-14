@@ -6,6 +6,7 @@ import com.sist.service.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -62,4 +63,16 @@ public class ReserveRestController {
 		
 		return json; // 자바스크립트(jQuery, Vue.js, AJAX)와 연동
 	}
+	
+	@PostMapping(value="reserve/reserve_ok_vue.do",produces="text/plain;charset=UTF-8")
+	public String reserve_ok(ReserveVO vo)
+	{
+		System.out.println("맛집 번호 : "+vo.getFno());
+		System.out.println("예약일 : "+vo.getRday());
+		System.out.println("예약 시간 : "+vo.getRtime());
+		System.out.println("예약 인원 : "+vo.getRinwon());
+		
+		return "";
+	}
+	
 }

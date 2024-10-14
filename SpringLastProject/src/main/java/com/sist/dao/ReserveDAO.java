@@ -21,4 +21,9 @@ public class ReserveDAO {
 	{
 		return mapper.reserveFoodTotalPage(type);
 	}
+	
+	public void reserveInsert(ReserveVO vo)
+	{
+		mapper.reserveInsert(vo);
+	}
 }

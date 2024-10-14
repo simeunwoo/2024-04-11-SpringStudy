@@ -23,4 +23,10 @@ public class ReserveServiceImpl implements ReserveService {
 		// TODO Auto-generated method stub
 		return rDao.reserveFoodTotalPage(type);
 	}
+
+	@Override
+	public void reserveInsert(ReserveVO vo) {
+		// TODO Auto-generated method stub
+		rDao.reserveInsert(vo);
+	}
 }
