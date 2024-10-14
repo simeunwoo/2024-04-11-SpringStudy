@@ -10,4 +10,5 @@ public interface ReserveService {
 	public List<ReserveVO> reserveMyPageListData(String id);
 	public List<ReserveVO> reserveAdminListData();
 	public void reserveOk(int rno);
+	public ReserveVO reserveInfoData(int rno);
 }

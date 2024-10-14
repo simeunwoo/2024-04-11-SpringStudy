@@ -53,4 +53,24 @@ public interface ReserveMapper {
 			+ "isReserve=1 "
 			+ "WHERE rno=#{rno}")
 	public void reserveOk(int rno); 
+	
+	// 예약 정보
+	@Results({
+		@Result(property="fvo.name",column="name"),
+		@Result(property="fvo.poster",column="poster"),
+		@Result(property="fvo.type",column="type"),
+		@Result(property="fvo.address",column="address"),
+		@Result(property="fvo.phone",column="phone"),
+		@Result(property="fvo.score",column="score"),
+		@Result(property="fvo.time",column="time"),
+		@Result(property="fvo.parking",column="parking"),
+		@Result(property="fvo.theme",column="theme"),
+		@Result(property="fvo.content",column="content")
+	})
+	@Select("SELECT rno,rday,rtime,rinwon,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,"
+			+ "name,poster,type,address,phone,score,time,parking,theme,content "
+			+ "FROM spring_reserve sr,project_food_house pf "
+			+ "WHERE sr.fno=pf.fno "
+			+ "AND rno=#{rno}")
+	public ReserveVO reserveInfoData(int rno);
 }

@@ -41,4 +41,9 @@ public class ReserveDAO {
 	{
 		mapper.reserveOk(rno);
 	}
+	
+	public ReserveVO reserveInfoData(int rno)
+	{
+		return mapper.reserveInfoData(rno);
+	}
 }

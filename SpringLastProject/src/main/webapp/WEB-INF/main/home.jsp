@@ -198,7 +198,7 @@
                         <!-- Single Widget Area -->
                         <div class="single-widget-area about-me-widget text-center">
                             <div class="widget-title">
-                                <h6>오늘의 쉐프</h6>
+                                <h6>오늘의 셰프</h6>
                             </div>
                             <div class="about-me-widget-thumb">
                                 <img src="${cvo.poster }" alt="">
