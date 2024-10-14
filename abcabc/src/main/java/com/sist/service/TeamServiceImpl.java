@@ -24,4 +24,10 @@ public class TeamServiceImpl implements TeamService {
 		// TODO Auto-generated method stub
 		return tDao.teamDetailData(name);
 	}
+
+	@Override
+	public List<TeamVO> teamRankingData(String team) {
+		// TODO Auto-generated method stub
+		return tDao.teamRankingData(team);
+	}
 }

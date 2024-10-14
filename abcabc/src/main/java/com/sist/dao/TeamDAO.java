@@ -22,4 +22,9 @@ public class TeamDAO {
 	{
 		return mapper.teamDetailData(name);
 	}
+	
+	public List<TeamVO> teamRankingData(String team)
+	{
+		return mapper.teamRankingData(team);
+	}
 }

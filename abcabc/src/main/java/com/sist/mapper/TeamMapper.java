@@ -15,4 +15,8 @@ public interface TeamMapper {
 	@Select("SELECT * FROM teamdetail "
 			+ "WHERE name=#{name}")
 	public TeamDetailVO teamDetailData(String name);
+	
+	@Select("SELECT * FROM team "
+			+ "WHERE team=#{team}")
+	public List<TeamVO> teamRankingData(String team);
 }
