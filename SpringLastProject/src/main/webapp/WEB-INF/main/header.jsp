@@ -156,7 +156,7 @@
                                 </sec:authorize>
                                 <sec:authorize access="hasRole('ROLE_USER')">
 	                                <li class="nav-item">
-	                                    <a class="nav-link" href="archive.html">마이 페이지</a>
+	                                    <a class="nav-link" href="../mypage/mypage_main.do">마이 페이지</a>
 	                                </li>
                                 </sec:authorize>
                                 <sec:authorize access="hasRole('ROLE_ADMIN')">

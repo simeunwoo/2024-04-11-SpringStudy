@@ -245,6 +245,14 @@
     					}
     				}).then(response=>{
     					// 이동 => mypage
+    					if(response.data==='yes')
+    					{
+    						location.href="../mypage/mypage_reserve.do"
+    					}
+    					else
+    					{
+    						alert(response.data)
+    					}
     					console.log(response.data)
     				}).catch(error=>{
     					console.log(error.response)
