@@ -30,8 +30,8 @@
 				<td class="text-center">{{vo.rinwon}}</td>
 				<td class="text-center">{{vo.dbday}}</td>
 				<td class="text-center">
-					<button class="btn-xs btn-success" v-if="vo.isReserve===1">예약 완료</button>
-					<button class="btn-xs btn-success" v-else>예약 대기</button>
+					<button class="btn-xs btn-success" v-if="vo.isReserve===1" @click="foodInfo(vo.fno,vo.rno)">예약 완료</button>
+					<button class="btn-xs btn-danger" v-else>예약 대기</button>
 				</td>
 			</tr>
 		</table>
@@ -41,7 +41,8 @@
 			data(){
 				return{
 					reserve_list:[],
-					rno:0
+					rno:0,
+					reserve_info:{}
 				}
 			},
 			mounted(){
@@ -56,7 +57,18 @@
 				})
 			},
 			methods:{
-				
+				foodInfo(fno,rno){
+					axios.get('../mypage/mypage_reserve_info_vue.do',{
+						params:{
+							fno:fno,
+							rno:rno
+						}
+					}).then(response=>{
+						console.log(response.data)
+					}).catch(error=>{
+						console.log(error.response)
+					})
+				}
 			}
 		}).mount('#mypageApp')
 	</script>

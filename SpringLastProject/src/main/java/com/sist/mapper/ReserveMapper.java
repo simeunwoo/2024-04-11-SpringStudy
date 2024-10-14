@@ -31,7 +31,7 @@ public interface ReserveMapper {
 		@Result(property="fvo.poster",column="poster"),
 		@Result(property="fvo.name",column="name")
 	})
-	@Select("SELECT rno,sr.fno,poster,name,rday,rtime,rinwon,TO_CHAR(regdate,'YYYY-MM-DD') as dbday "
+	@Select("SELECT rno,sr.fno,poster,name,rday,rtime,rinwon,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,isReserve "
 			+ "FROM spring_reserve sr,project_food_house pf "
 			+ "WHERE sr.fno=pf.fno "
 			+ "AND id=#{id} "
@@ -43,7 +43,7 @@ public interface ReserveMapper {
 		@Result(property="fvo.poster",column="poster"),
 		@Result(property="fvo.name",column="name")
 	})
-	@Select("SELECT rno,sr.fno,id,poster,name,rday,rtime,rinwon,TO_CHAR(regdate,'YYYY-MM-DD') as dbday "
+	@Select("SELECT rno,sr.fno,id,poster,name,rday,rtime,rinwon,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,isReserve "
 			+ "FROM spring_reserve sr,project_food_house pf "
 			+ "WHERE sr.fno=pf.fno "
 			+ "ORDER BY rno DESC") // 관리자는 id가 따로 필요 없다
