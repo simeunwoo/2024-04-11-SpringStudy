@@ -42,17 +42,16 @@
             margin: 0; /* 기본 여백 제거 */
         }
         .background {
-            background-image: url('../team/background.jpg'); /* 배경 이미지 경로 */
-            background-size: cover;
-            background-position: center;
-            filter: blur(5px); /* 흐림 효과 */
-            position: fixed; /* 고정 위치 */
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1; /* 배경을 다른 요소 뒤로 */
-        }
+  background-size: cover;
+  background-position: center;
+  filter: blur(5px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
         .container {
             position: relative; /* 자식 요소들이 부모 요소에 상대적으로 위치하도록 설정 */
             z-index: 1; /* 배경 이미지보다 위로 표시 */
@@ -70,7 +69,7 @@
     </style>
 </head>
 <body>
-    <div class="background"></div> <!-- 배경을 위한 div -->
+    <div class="background" :style="{backgroundImage:'url('+vo.logo+')'}"></div> <!-- 배경을 위한 div -->
     <div class="container">
         <div class="header-top">
             <div class="row">

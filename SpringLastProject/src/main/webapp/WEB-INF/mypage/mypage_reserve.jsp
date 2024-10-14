@@ -49,7 +49,8 @@
 				// params => '?'와 관련
 				axios.get('../mypage/mypage_reserve_vue.do')
 				.then(response=>{
-					
+					console.log(response.data)
+					this.reserve_list=response.data
 				}).catch(error=>{
 					console.log(error.response)
 				})

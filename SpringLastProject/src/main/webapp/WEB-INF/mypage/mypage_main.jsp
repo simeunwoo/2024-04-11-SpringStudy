@@ -12,6 +12,9 @@
 
     <!-- Title -->
     <title>SpringLastProject</title>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    
     <!-- Favicon -->
     <link rel="icon" href="../img/core-img/favicon.ico">
     <!-- Core Stylesheet -->
@@ -72,10 +75,10 @@
     <section class="archive-area section_padding_80">
         <div class="container">
             <div class="row">
-			    <div class="col-sm-4">
+			    <div class="col-sm-2">
 			    	<tiles:insertAttribute name="mypage_menu"/>
 			    </div>
-			    <div class="col-sm-8">
+			    <div class="col-sm-10">
 			    	<tiles:insertAttribute name="mypage_home"/>
 			    </div>
 			</div>
