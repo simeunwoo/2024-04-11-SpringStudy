@@ -1,5 +1,8 @@
 package com.sist.web;
 import java.util.*;
+
+import javax.servlet.http.HttpSession;
+
 import com.sist.vo.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sist.service.*;
@@ -65,14 +68,28 @@ public class ReserveRestController {
 	}
 	
 	@PostMapping(value="reserve/reserve_ok_vue.do",produces="text/plain;charset=UTF-8")
-	public String reserve_ok(ReserveVO vo)
+	public String reserve_ok(ReserveVO vo,HttpSession session)
 	{
+		String result="";
+		try
+		{
+			String id=(String)session.getAttribute("userId");
+			vo.setId(id);
+			
+			rService.reserveInsert(vo);
+			
+			result="yes";
+		}catch(Exception ex)
+		{
+			result=ex.getMessage();
+		}
+		
 		System.out.println("맛집 번호 : "+vo.getFno());
 		System.out.println("예약일 : "+vo.getRday());
 		System.out.println("예약 시간 : "+vo.getRtime());
 		System.out.println("예약 인원 : "+vo.getRinwon());
 		
-		return "";
+		return result;
 	}
 	
 }
