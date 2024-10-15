@@ -96,7 +96,7 @@
 						console.log(error.response)
 					})
 				},
-				goodDetail(gno){
+				goodsDetail(gno){
 					this.isShow=true
 					axios.get('../goods/goods_detail_vue.do',{
 						params:{
