@@ -46,12 +46,12 @@
             <div class="row">
 
                 <!-- Single Post -->
-                <div class="col-12 col-md-6 col-lg-4" v-for="vo in food_list">
+                <div class="col-12 col-md-6 col-lg-4" v-for="vo in goods_list">
                     <div class="single-post wow fadeInUp" data-wow-delay="0.1s">
                         <!-- Post Thumb -->
                         <div class="post-thumb">
-                        	<a :href="'../food/detail_before.do?fno='+vo.fno">
-                            	<img :src="vo.poster" style="width:350px;height:200px">
+                        	<a :href="'../goods/detail.do?no='+vo.no">
+                            	<img :src="vo.goods_poster" style="width:350px;height:200px">
                             </a>
                         </div>
                         <!-- Post Content -->
@@ -60,11 +60,11 @@
                                 <div class="post-author-date-area d-flex">
                                     <!-- Post Author -->
                                     <div class="post-author">
-                                        <a href="#">{{vo.type}}</a>
+                                        <a href="#">{{vo.goods_delivery}}</a>
                                     </div>
                                     <!-- Post Date -->
                                     <div class="post-date">
-                                        <a href="#" style="color:orange">{{vo.score}}</a>
+                                        <a href="#" style="color:orange">{{vo.hit}}</a>
                                     </div>
                                 </div>
                                 <!-- Post Comment & Share Area -->
@@ -75,7 +75,7 @@
                                     </div>
                                     <!-- Post Comments -->
                                     <div class="post-comments">
-                                        <a href="#"><i class="fa fa-comment-o" aria-hidden="true"></i> {{vo.replycount}}</a>
+                                        <a href="#"><i class="fa fa-comment-o" aria-hidden="true"></i> 0</a>
                                     </div>
                                     <!-- Post Share -->
                                     <div class="post-share">
@@ -83,8 +83,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <a :href="'../food/detail_before.do?fno='+vo.fno">
-                                <h4 class="post-headline">{{vo.name}}</h4>
+                            <a :href="'../goods/detail.do?no='+vo.no">
+                                <h4 class="post-headline">{{vo.goods_name}}</h4>
                             </a>
                         </div>
                     </div>
@@ -114,5 +114,61 @@
             </div>
         </div>
     </section>
+    <script>
+    	let listApp=Vue.createApp({
+    		data(){
+    			return{
+    				goods_list:[],
+    				curpage:1,
+    				totalpage:0,
+    				startPage:0,
+    				endPage:0
+    			}
+    		},
+    		mounted(){
+    			this.dataRecv()
+    		},
+    		methods:{
+    			prev(){
+    				this.curpage=this.startPage-1
+    				this.dataRecv()
+    			},
+    			next(){
+    				this.curpage=this.endPage+1
+    				this.dataRecv()
+    			},
+    			pageChange(page){
+    				this.curpage=page
+    				this.dataRecv()
+    			},
+    			range(start,end){
+    				let arr=[]
+    				let len=end-start
+    				for(let i=0;i<=len;i++)
+    				{
+    					arr[i]=start
+    					start++
+    				}
+    				return arr
+    			},
+    			dataRecv(){
+    				axios.get('../goods/list_vue.do',{
+    					params:{
+    						page:this.curpage
+    					}
+    				}).then(response=>{
+    					console.log(response.data)
+    					this.goods_list=response.data.list
+    					this.curpage=response.data.curpage
+    					this.totalpage=response.data.totalpage
+    					this.startPage=response.data.startPage
+    					this.endPage=response.data.endPage
+    				}).catch(error=>{
+    					console.log(error.response)
+    				})
+    			}
+    		}
+    	}).mount('#listApp')
+    </script>
 </body>
 </html>

@@ -46,4 +46,19 @@ public class GoodsRestController {
 		
 		return json;
 	}
+	
+	@GetMapping(value="goods/detail_vue.do",produces="text/plain;charset=UTF-8")
+	public String goods_detail(int no) throws Exception
+	{
+		GoodsVO vo=gService.goodsDetailData(no);
+		
+		String temp=vo.getGoods_price();
+		temp=temp.replaceAll("[^0-9]", ""); // 숫자 외에 나머지 제거
+		vo.setPrice(Integer.parseInt(temp.trim()));
+		
+		ObjectMapper mapper=new ObjectMapper();
+		String json=mapper.writeValueAsString(vo);
+		
+		return json;
+	}
 }

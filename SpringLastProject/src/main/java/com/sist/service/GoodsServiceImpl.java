@@ -23,6 +23,24 @@ public class GoodsServiceImpl implements GoodsService {
 		// TODO Auto-generated method stub
 		return gDao.goodsTotalPage();
 	}
+
+	@Override
+	public void goodsHitIncrement(int no) {
+		// TODO Auto-generated method stub
+		gDao.goodsHitIncrement(no);
+	}
+
+	@Override
+	public GoodsVO goodsDetailData(int no) {
+		// TODO Auto-generated method stub
+		return gDao.goodsDetailData(no);
+	}
+
+	@Override
+	public MemberVO memberinfoData(String userId) {
+		// TODO Auto-generated method stub
+		return gDao.memberinfoData(userId);
+	}
 	
 	
 }

@@ -21,4 +21,19 @@ public class GoodsDAO {
 	{
 		return mapper.goodsTotalPage();
 	}
+	
+	public void goodsHitIncrement(int no)
+	{
+		mapper.goodsHitIncrement(no);
+	}
+	
+	public GoodsVO goodsDetailData(int no)
+	{
+		return mapper.goodsDetailData(no);
+	}
+	
+	public MemberVO memberinfoData(String userId)
+	{
+		return mapper.memberinfoData(userId);
+	}
 }
