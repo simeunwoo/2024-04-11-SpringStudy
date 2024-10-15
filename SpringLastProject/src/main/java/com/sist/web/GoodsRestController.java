@@ -71,7 +71,25 @@ public class GoodsRestController {
 		String result="";
 		try
 		{
+			String id=(String)session.getAttribute("userId");
+			CartVO vo=new CartVO();
+			vo.setGno(gno);
+			vo.setAccount(account);
+			vo.setId(id);
+			
 			// 오라클에 저장
+			int count=gService.goodsCartGnoCount(gno);
+			if(count==0)
+			{
+				gService.goodsCartInsert(vo);
+			}
+			else
+			{
+				gService.goodsCartAccountUpdate(vo);
+			}
+			
+			gService.goodsCartInsert(vo);
+			
 			result="yes";
 		}catch(Exception ex)
 		{

@@ -41,4 +41,19 @@ public class GoodsDAO {
 	{
 		mapper.goodsCartInsert(vo);
 	}
+	
+	public void goodsCartAccountUpdate(CartVO vo)
+	{
+		mapper.goodsCartAccountUpdate(vo);
+	}
+	
+	public int goodsCartGnoCount(int gno)
+	{
+		return mapper.goodsCartGnoCount(gno);
+	}
+	
+	public List<CartVO> goodsCartListData(String id)
+	{
+		return mapper.goodsCartListData(id);
+	}
 }
