@@ -152,4 +152,30 @@ public class GoodsRestController {
 		
 		return json;
 	}
+	
+	@GetMapping(value="goods/buy_vue.do",produces="text/plain;charset=UTF-8")
+	public String goods_buy_vue(HttpSession session) throws Exception
+	{
+		String id=(String)session.getAttribute("userId");
+		List<CartVO> list=gService.goodsBuyListData(id);
+		
+		ObjectMapper mapper=new ObjectMapper();
+		String json=mapper.writeValueAsString(list);
+		
+		return json;
+	}
+	
+	@GetMapping(value="goods/cart_cancel_vue2.do",produces="text/plain;charset=UTF-8")
+	public String cart_cancel2(int cno,HttpSession session) throws Exception
+	{
+		gService.goodsCartCancel(cno);
+		
+		String id=(String)session.getAttribute("userId");
+		List<CartVO> list=gService.goodsBuyListData(id);
+		
+		ObjectMapper mapper=new ObjectMapper();
+		String json=mapper.writeValueAsString(list);
+		
+		return json;
+	}
 }
