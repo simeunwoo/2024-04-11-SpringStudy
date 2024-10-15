@@ -10,7 +10,7 @@
 	<div id="mypageApp">
 		<table class="table">
 			<tr>
-				<td class="text-center" colspan="8">
+				<td class="text-center" colspan="6">
 					<h4>장바구니 관리</h4>
 				</td>
 			</tr>
@@ -25,7 +25,7 @@
 			<tr v-for="cart_vo in cart_list">
 				<td class="text-center">{{cart_vo.cno}}</td>
 				<td class="text-center">
-					<img src="cart_vo.gvo.goods_poster" style="width:30px;height:30px">
+					<img :src="cart_vo.gvo.goods_poster" style="width:30px;height:30px">
 				</td>
 				<td class="text-center">{{cart_vo.account}}</td>
 				<td class="text-center">{{cart_vo.gvo.goods_price}}</td>
@@ -48,7 +48,8 @@
 			mounted(){
 				axios.get('../mypage/mypage_cart_vue.do')
 				.then(response=>{
-					this.cart_vo=response.data
+					console.log(response.data)
+					this.cart_list=response.data
 				}).catch(error=>{
 					console.log(error.response)
 				})
