@@ -11,4 +11,7 @@ public interface PlayerService {
 	public int pitcherTotalPage(String fd);
 	public List<BatterVO> batterListData(Map map);
 	public List<PitcherVO> pitcherListData(Map map);
+	public List<BatterVO> batterChartData();
+	public List<PitcherVO> pitcherChartData();
+	
 }

@@ -24,9 +24,9 @@ public interface PlayerMapper {
 			+ "WHERE name LIKE '%'||#{fd}||'%'")
 	public int pitcherTotalPage(String fd);
 	
-	@Select("SELECT bno,age,game,h1,homerun,rbi,war,name,team,position,logo,image,num "
-			+ "FROM (SELECT bno,age,game,h1,homerun,rbi,war,name,team,position,logo,image,rownum as num "
-			+ "FROM (SELECT bno,age,game,h1,homerun,rbi,war,name,team,position,logo,image "
+	@Select("SELECT bno,age,game,h1,homerun,rbi,war,name,team,position,logo,image,avg,num "
+			+ "FROM (SELECT bno,age,game,h1,homerun,rbi,war,name,team,position,logo,image,avg,rownum as num "
+			+ "FROM (SELECT bno,age,game,h1,homerun,rbi,war,name,team,position,logo,image,avg "
 			+ "FROM batter "
 			+ "WHERE name LIKE '%'||#{fd}||'%' "
 			+ "ORDER BY bno ASC)) "
@@ -41,4 +41,10 @@ public interface PlayerMapper {
 			+ "ORDER BY pno ASC)) "
 			+ "WHERE num BETWEEN #{start} AND #{end}")
 	public List<PitcherVO> pitcherListData(Map map);
+	
+	@Select("SELECT bno,avg,war FROM batter")
+	public List<BatterVO> batterChartData();
+
+	@Select("SELECT pno,era,war FROM pitcher")
+	public List<PitcherVO> pitcherChartData();
 }

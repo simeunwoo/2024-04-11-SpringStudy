@@ -43,4 +43,14 @@ public class PlayerDAO {
 	{
 		return mapper.pitcherListData(map);
 	}
+	
+	public List<BatterVO> batterChartData()
+	{
+		return mapper.batterChartData();
+	}
+	
+	public List<PitcherVO> pitcherChartData()
+	{
+		return mapper.pitcherChartData();
+	}
 }

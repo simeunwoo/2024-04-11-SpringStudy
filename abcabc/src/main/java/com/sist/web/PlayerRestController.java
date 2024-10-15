@@ -108,14 +108,14 @@ public class PlayerRestController {
 	}
 	
 	@GetMapping(value="player/vs_vue.do",produces="text/plain;charset=UTF-8")
-	public String player_vs(int bno,int pno) throws Exception
+	public String player_vs() throws Exception
 	{
-		BatterVO bvo=pService.batterDetailData(bno);
-		PitcherVO pvo=pService.pitcherDetailData(pno);
+		List<BatterVO> bList=pService.batterChartData();
+		List<PitcherVO> pList=pService.pitcherChartData();
 		
 		Map map=new HashMap();
-		map.put("bvo", bvo);
-		map.put("pvo", pvo);
+		map.put("bList", bList);
+		map.put("pList", pList);
 		
 		ObjectMapper mapper=new ObjectMapper();
 		String json=mapper.writeValueAsString(map);

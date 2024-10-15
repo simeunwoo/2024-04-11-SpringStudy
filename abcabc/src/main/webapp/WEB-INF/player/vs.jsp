@@ -11,30 +11,6 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
-
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['타율 (Average)', '승리기여도 (WAR)'],
-          [ 8,      12],
-          [ 4,      5.5],
-          [ 11,     14],
-          [ 4,      5],
-          [ 3,      3.5],
-          [ 6.5,    7]
-        ]);
-
-        var options = {
-          title: '타율 및 승리기여도 비교',
-          hAxis: {title: '타율 (Average)', minValue: 0, maxValue: 15},
-          vAxis: {title: '승리기여도 (WAR)', minValue: 0, maxValue: 15},
-          legend: 'none'
-        };
-
-        var chart = new google.visualization.ScatterChart(document.getElementById('chart_div'));
-
-        chart.draw(data, options);
-      }
     </script>
 </head>
 <body>
@@ -73,31 +49,64 @@
     </div>
     <section id="vsApp">
     	<div id="chart_div" style="width: 900px; height: 500px;"></div>
+    	<div id="chart2_div" style="width: 900px; height: 500px;"></div>
     </section>
     <script>
     	let vsApp=Vue.createApp({
     		data(){
     			return{
-    				bvo:{},
-    				pvo:{}
+    				bList:[],
+    				pList:[]
     			}
     		},
     		mounted(){
-    			axios.get('../player/vs_vue.do',{
-    				params:{
-    					bvo:this.bvo,
-    					pvo:this.pvo
-    				}
-    			}).then(response=>{
+    			axios.get('../player/vs_vue.do')
+    			.then(response=>{
     				console.log(response.data)
-    				this.bvo=response.data.bvo
-    				this.pvo=response.data.pvo
+    				this.bList=response.data.bList
+    				this.pList=response.data.pList
+    				
+    				this.drawBatterChart()
+    				this.drawPitcherChart()
     			}).catch(error=>{
     				console.log(error.response)
     			})
     		},
     		methods:{
-    			
+    			drawBatterChart() {
+    		        const data = [['타율 (Average)', '승리기여도 (WAR)']]
+    		        this.bList.forEach(bvo=>{
+    		        	data.push([bvo.avg,bvo.war])
+    		        })
+    				const dataTable=google.visualization.arrayToDataTable(data)
+    		        const options = {
+    		          title: 'KBO 타자들의 타율 및 승리기여도 비교',
+    		          hAxis: {title: '타율 (Average)', minValue: 0, maxValue: 0.5},
+    		          vAxis: {title: '승리기여도 (WAR)', minValue: -1, maxValue: 9},
+    		          legend: 'none'
+    		        };
+
+    		        const chart = new google.visualization.ScatterChart(document.getElementById('chart_div'));
+
+    		        chart.draw(dataTable, options);
+    		      },
+    		      drawPitcherChart() {
+    		          var data = [['평균자책점 (ERA)', '승리기여도 (WAR)']]
+    		          this.pList.forEach(pvo=>{
+    		        	  data.push([pvo.era,pvo.war])
+    		          })
+    		  		var dataTable=google.visualization.arrayToDataTable(data)
+    		          var options = {
+    		            title: 'KBO 투수들의 평균자책점 및 승리기여도 비교',
+    		            hAxis: {title: '평균자책점 (ERA)', minValue: 0, maxValue: 100},
+    		            vAxis: {title: '승리기여도 (WAR)', minValue: -1, maxValue: 10},
+    		            legend: 'none'
+    		          };
+
+    		          var chart = new google.visualization.ScatterChart(document.getElementById('chart2_div'));
+
+    		          chart.draw(dataTable, options);
+    		        }
     		}
     	}).mount('#vsApp')
     </script>
