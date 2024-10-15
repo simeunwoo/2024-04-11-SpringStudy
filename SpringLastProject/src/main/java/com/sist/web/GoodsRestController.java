@@ -4,8 +4,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sist.service.*;
 import java.util.*;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 // => 링크 (목록 / 메뉴 : <a>) => Mapper => DAO => Service => Controller => JSP
 @RestController
@@ -60,5 +63,21 @@ public class GoodsRestController {
 		String json=mapper.writeValueAsString(vo);
 		
 		return json;
+	}
+	
+	@PostMapping(value="goods/cart_insert.do",produces="text/plain;charset=UTF-8")
+	public String cart_insert(int gno,int account,HttpSession session)
+	{
+		String result="";
+		try
+		{
+			// 오라클에 저장
+			result="yes";
+		}catch(Exception ex)
+		{
+			result=ex.getMessage();
+		}
+		
+		return result;
 	}
 }

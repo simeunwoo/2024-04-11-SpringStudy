@@ -2,6 +2,7 @@ package com.sist.mapper;
 import java.util.*;
 import com.sist.vo.*;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -30,4 +31,9 @@ public interface GoodsMapper {
 			+ "FROM spring_member "
 			+ "WHERE userId=#{userId}")
 	public MemberVO memberinfoData(String userId);
+	
+	// 장바구니 저장
+	@Insert("INSERT INTO spring_cart(cno,gno,id,account) "
+			+ "VALUES(sc2_cno_seq.nextval,#{gno},#{id},#{account})")
+	public void goodsCartInsert(CartVO vo);
 }

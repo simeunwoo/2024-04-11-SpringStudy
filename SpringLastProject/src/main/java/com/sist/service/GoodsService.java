@@ -9,4 +9,5 @@ public interface GoodsService {
 	public void goodsHitIncrement(int no);
 	public GoodsVO goodsDetailData(int no);
 	public MemberVO memberinfoData(String userId);
+	public void goodsCartInsert(CartVO vo);
 }

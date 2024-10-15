@@ -36,4 +36,9 @@ public class GoodsDAO {
 	{
 		return mapper.memberinfoData(userId);
 	}
+	
+	public void goodsCartInsert(CartVO vo)
+	{
+		mapper.goodsCartInsert(vo);
+	}
 }

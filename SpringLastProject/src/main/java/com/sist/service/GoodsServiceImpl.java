@@ -41,6 +41,12 @@ public class GoodsServiceImpl implements GoodsService {
 		// TODO Auto-generated method stub
 		return gDao.memberinfoData(userId);
 	}
+
+	@Override
+	public void goodsCartInsert(CartVO vo) {
+		// TODO Auto-generated method stub
+		gDao.goodsCartInsert(vo);
+	}
 	
 	
 }
