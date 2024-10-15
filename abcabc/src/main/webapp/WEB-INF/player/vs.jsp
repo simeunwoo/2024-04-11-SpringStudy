@@ -74,33 +74,33 @@
     		},
     		methods:{
     			drawBatterChart() {
-    		        const data = [['타율 (Average)', '승리기여도 (WAR)']]
+    		        var data = [['', '타율, 승리기여도']]
     		        this.bList.forEach(bvo=>{
     		        	data.push([bvo.avg,bvo.war])
     		        })
-    				const dataTable=google.visualization.arrayToDataTable(data)
-    		        const options = {
+    				var dataTable=google.visualization.arrayToDataTable(data)
+    		        var options = {
     		          title: 'KBO 타자들의 타율 및 승리기여도 비교',
-    		          hAxis: {title: '타율 (Average)', minValue: 0, maxValue: 0.5},
+    		          hAxis: {title: '타율 (Average)', minValue: 0, maxValue: 1},
     		          vAxis: {title: '승리기여도 (WAR)', minValue: -1, maxValue: 9},
-    		          legend: 'none'
+    		          legend: { position: 'right' }
     		        };
 
-    		        const chart = new google.visualization.ScatterChart(document.getElementById('chart_div'));
+    		        var chart = new google.visualization.ScatterChart(document.getElementById('chart_div'));
 
     		        chart.draw(dataTable, options);
     		      },
     		      drawPitcherChart() {
-    		          var data = [['평균자책점 (ERA)', '승리기여도 (WAR)']]
+    		          var data = [['', '평균자책점, 승리기여도']]
     		          this.pList.forEach(pvo=>{
     		        	  data.push([pvo.era,pvo.war])
     		          })
     		  		var dataTable=google.visualization.arrayToDataTable(data)
     		          var options = {
     		            title: 'KBO 투수들의 평균자책점 및 승리기여도 비교',
-    		            hAxis: {title: '평균자책점 (ERA)', minValue: 0, maxValue: 100},
+    		            hAxis: {title: '평균자책점 (ERA)', minValue: 0, maxValue: 20},
     		            vAxis: {title: '승리기여도 (WAR)', minValue: -1, maxValue: 10},
-    		            legend: 'none'
+    		            legend: { position: 'right' }
     		          };
 
     		          var chart = new google.visualization.ScatterChart(document.getElementById('chart2_div'));

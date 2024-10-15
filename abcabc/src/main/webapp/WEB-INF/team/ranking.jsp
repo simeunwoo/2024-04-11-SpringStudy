@@ -29,8 +29,8 @@
 			     <tr>
 			      <th class="text-right" width="20%">연도</th>
 			      <td width="80%">
-			       <select class="input-sm" name="phone1" v-model="phone1">
-			        <option>010</option>
+			       <select class="input-sm" @change="teamRanking()" name="phone1" ref="phone1" v-model="phone1">
+			        <option selected>010</option>
 			        <option>010</option>
 			        <option>010</option>
 			        <option>010</option>
@@ -43,5 +43,24 @@
             </div>
         </div>
     </section>
+    <script>
+    	let rankingApp=Vue.createApp({
+    		data(){
+    			return{
+    				
+    			}
+    		},
+    		mounted(){
+    			axios.get('../team/ranking_vue.do',{
+    				params:{
+    					
+    				}
+    			})
+    		},
+    		methods:{
+    			
+    		}
+    	}).mount('#rankingApp')
+    </script>
 </body>
 </html>
