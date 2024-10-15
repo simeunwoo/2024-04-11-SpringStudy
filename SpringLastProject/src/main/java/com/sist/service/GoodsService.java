@@ -13,4 +13,7 @@ public interface GoodsService {
 	public void goodsCartAccountUpdate(CartVO vo);
 	public int goodsCartGnoCount(int gno);
 	public List<CartVO> goodsCartListData(String id);
+	public void goodsCartCancel(int cno);
+	public void goodsBuy(int cno);
+	public List<CartVO> goodsBuyListData(String id);
 }

@@ -56,4 +56,19 @@ public class GoodsDAO {
 	{
 		return mapper.goodsCartListData(id);
 	}
+	
+	public void goodsCartCancel(int cno)
+	{
+		mapper.goodsCartCancel(cno);
+	}
+	
+	public void goodsBuy(int cno)
+	{
+		mapper.goodsBuy(cno);
+	}
+	
+	public List<CartVO> goodsBuyListData(String id)
+	{
+		return mapper.goodsBuyListData(id);
+	}
 }

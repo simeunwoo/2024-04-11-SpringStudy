@@ -98,4 +98,58 @@ public class GoodsRestController {
 		
 		return result;
 	}
+	
+	@GetMapping(value="goods/cart_cancel_vue.do",produces="text/plain;charset=UTF-8")
+	public String cart_cancel(int cno,HttpSession session) throws Exception
+	{
+		gService.goodsCartCancel(cno);
+		
+		String id=(String)session.getAttribute("userId");
+		List<CartVO> list=gService.goodsCartListData(id);
+		
+		ObjectMapper mapper=new ObjectMapper();
+		String json=mapper.writeValueAsString(list);
+		
+		return json;
+	}
+	
+	@GetMapping(value="goods/goods_detail_vue.do",produces="text/plain;charset=UTF-8")
+	public String goods_detail_cart(int gno) throws Exception
+	{
+		GoodsVO vo=gService.goodsDetailData(gno);
+		
+		String temp=vo.getGoods_price();
+		temp=temp.replaceAll("[^0-9]", ""); // 숫자 외에 나머지 제거
+		vo.setPrice(Integer.parseInt(temp.trim()));
+		
+		ObjectMapper mapper=new ObjectMapper();
+		String json=mapper.writeValueAsString(vo);
+		
+		return json;
+	}
+	
+	@GetMapping(value="goods/goods_buy_vue.do",produces="text/plain;charset=UTF-8")
+	public String goods_buy(int cno,int gno,HttpSession session) throws Exception
+	{
+		gService.goodsBuy(cno);
+		
+		GoodsVO vo=gService.goodsDetailData(gno);
+		
+		String temp=vo.getGoods_price();
+		temp=temp.replaceAll("[^0-9]", "");
+		vo.setPrice(Integer.parseInt(temp.trim()));
+		
+		String id=(String)session.getAttribute("userId");
+		
+		MemberVO mvo=gService.memberinfoData(id);
+		
+		Map map=new HashMap();
+		map.put("gvo", vo);
+		map.put("mvo", mvo);
+		
+		ObjectMapper mapper=new ObjectMapper();
+		String json=mapper.writeValueAsString(map);
+		
+		return json;
+	}
 }
