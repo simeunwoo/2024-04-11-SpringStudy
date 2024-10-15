@@ -49,8 +49,8 @@ public class BatterDAOAfter {
 		   try
 		   {
 			   getConnection();
-			   String sql="INSERT INTO batter(bno,age,game,h1,h2,h3,homerun,rbi,ball,strikeout,war,name,team,position,steel,tasoo,image) "
-			   		+ "VALUES(batter_bno_seq.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+			   String sql="INSERT INTO batter(bno,age,game,h1,h2,h3,homerun,rbi,ball,strikeout,war,name,team,position,steel,tasoo,image,avg) "
+			   		+ "VALUES(batter_bno_seq.nextval,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			   ps=conn.prepareStatement(sql);
 			   ps.setInt(1, vo.getBno());
 			   ps.setInt(2, vo.getGame());
@@ -68,6 +68,7 @@ public class BatterDAOAfter {
 			   ps.setInt(14, vo.getSteel());
 			   ps.setInt(15, vo.getTasoo());
 			   ps.setString(16, vo.getImage());
+			   ps.setDouble(17, vo.getAvg());
 			   ps.executeUpdate();
 		   }catch(Exception ex)
 		   {

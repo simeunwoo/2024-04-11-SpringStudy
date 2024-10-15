@@ -47,4 +47,10 @@ public class PlayerController {
 		
 		return "player/pitcher_detail";
 	}
+	
+	@GetMapping("player/vs.do")
+	public String player_vs()
+	{
+		return "player/vs";
+	}
 }

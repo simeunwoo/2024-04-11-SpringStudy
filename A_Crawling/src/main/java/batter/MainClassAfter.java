@@ -17,7 +17,7 @@ public class MainClassAfter {
         BatterDAOAfter dao = BatterDAOAfter.newInstance();
         try {
             int k = 1;
-            for (int i = 10001; i <= 10200; i++) {
+            for (int i = 15056; i <= 15060; i++) { // 10001~11000,14501~15000,15056~15060
                 try {
                     Document doc = Jsoup.connect("https://statiz.sporki.com/player/?m=playerinfo&p_no=" + i).get();
 
@@ -42,6 +42,7 @@ public class MainClassAfter {
                         int steel = Integer.parseInt(tds.get(18).text());     // 도루 (SB)
                         int tasoo = Integer.parseInt(tds.get(10).text());     // 타수
                         double war = Double.parseDouble(tds.get(33).text());// WAR
+                        double avg = Double.parseDouble(tds.get(27).text()); // 타율 (avg)
 
                         // 프로필 이미지 URL 추출
                         Element profileImg = doc.selectFirst("div.profile_img02 img");
@@ -66,6 +67,7 @@ public class MainClassAfter {
                         vo.setPosition(position);
                         vo.setSteel(steel);
                         vo.setImage(image); // 프로필 이미지 URL 저장
+                        vo.setAvg(avg);
 
                         dao.batterAfterInsert(vo);
 
@@ -86,6 +88,7 @@ public class MainClassAfter {
                         System.out.printf("포지션: %s%n", position);
                         System.out.printf("도루: %d%n", steel);
                         System.out.printf("WAR: %.2f%n", war);
+                        System.out.printf("avg: %.3f%n", avg);
                         System.out.printf("프로필 이미지 URL: %s%n", image);
                         System.out.println("==============================================");
                     } else {

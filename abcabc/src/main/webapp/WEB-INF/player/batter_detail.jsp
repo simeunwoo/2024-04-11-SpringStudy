@@ -5,9 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://unpkg.com/vue@3"></script>
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 <body>
 	<div class="container">
@@ -85,8 +83,8 @@
                                 <td width="13%" class="text-center">${vo.age }</td>
                                 <th width="20%" class="text-center">경기</th>
                                 <td width="13%" class="text-center">${vo.game }</td>
-                                <th width="20%" class="text-center">타수</th>
-                                <td width="14%" class="text-center">${vo.tasoo }</td>
+                                <th width="20%" class="text-center">타율</th>
+                                <td width="14%" class="text-center">${vo.avg }</td>
                             </tr>
                             <tr>
                                 <th width="20%" class="text-center">안타</th>
@@ -112,7 +110,9 @@
                                 <th width="20%" class="text-center" style="color:red">WAR</th>
                                 <td width="14%" class="text-center" style="color:red">${vo.war }</td>
                             </tr>
-                        </table></div></aside></div></div></div></div></div></div></div></section>
+                        </table></div></aside></div></div></div></div></div></div>
+                        
+                        </div></section>
 	<script>
 		
 	</script>

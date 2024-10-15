@@ -90,7 +90,6 @@ public class PlayerRestController {
 	{
 		BatterVO vo=pService.batterDetailData(bno);
 		
-		
 		ObjectMapper mapper=new ObjectMapper();
 		String json=mapper.writeValueAsString(vo);
 		
@@ -102,9 +101,24 @@ public class PlayerRestController {
 	{
 		PitcherVO vo=pService.pitcherDetailData(pno);
 		
-		
 		ObjectMapper mapper=new ObjectMapper();
 		String json=mapper.writeValueAsString(vo);
+		
+		return json;
+	}
+	
+	@GetMapping(value="player/vs_vue.do",produces="text/plain;charset=UTF-8")
+	public String player_vs(int bno,int pno) throws Exception
+	{
+		BatterVO bvo=pService.batterDetailData(bno);
+		PitcherVO pvo=pService.pitcherDetailData(pno);
+		
+		Map map=new HashMap();
+		map.put("bvo", bvo);
+		map.put("pvo", pvo);
+		
+		ObjectMapper mapper=new ObjectMapper();
+		String json=mapper.writeValueAsString(map);
 		
 		return json;
 	}
