@@ -12,4 +12,7 @@ public interface ScheduleMapper {
 			+ "WHERE month=#{month} AND day=#{day}")
 	public List<ScheduleVO> scheduleListData(@Param("month") int month, @Param("day") int day);
 
+	@Select("SELECT CEIL(COUNT(*)/10.0) FROM schedule "
+			+ "WHERE month=#{month} AND day=#{day}")
+	public int scheduleTotalPage(@Param("month") int month, @Param("day") int day);
 }

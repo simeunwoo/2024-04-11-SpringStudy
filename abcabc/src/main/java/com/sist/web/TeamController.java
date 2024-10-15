@@ -34,4 +34,10 @@ public class TeamController {
 		
 		return "team/detail";
 	}
+	
+	@GetMapping("team/ranking.do")
+	public String team_ranking()
+	{
+		return "team/ranking";
+	}
 }

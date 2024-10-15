@@ -17,4 +17,10 @@ public class ScheduleServiceImpl implements ScheduleService {
 		// TODO Auto-generated method stub
 		return sDao.scheduleListData(month, day);
 	}
+
+	@Override
+	public int scheduleTotalPage(int month, int day) {
+		// TODO Auto-generated method stub
+		return sDao.scheduleTotalPage(month, day);
+	}
 }

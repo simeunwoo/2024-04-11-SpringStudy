@@ -11,7 +11,7 @@ import com.sist.service.*;
 public class ScheduleController {
 	
 	@GetMapping("schedule/schedule.do")
-	public String schedule()
+	public String schedule_schedule()
 	{
 		return "schedule/schedule";
 	}
