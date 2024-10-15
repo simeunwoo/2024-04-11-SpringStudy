@@ -15,4 +15,8 @@ HIT                        NUMBER(38)
 @Data
 public class GoodsVO {
 
+	private int no,goods_discount,hit;
+	private String goods_name,goods_sub,goods_price,goods_first_price,goods_delivery,goods_poster;
+	
+	private int price; // goods_price가 문자열 => int형으로 바꾸기 위해 (가격에 ,가 포함되었기 때문)
 }
