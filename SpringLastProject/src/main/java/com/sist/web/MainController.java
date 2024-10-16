@@ -1,6 +1,7 @@
 package com.sist.web;
 import java.util.*;
 import com.sist.vo.*;
+import com.sist.manager.NaverNewsManager;
 import com.sist.service.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,11 +100,18 @@ public class MainController {
 	private RecipeService rService;
 	@Autowired
 	private FoodService fService;
+	@Autowired
+	private NaverNewsManager nnm;
 	
 	// 사용자 요청에 따라 => 처리
 	@GetMapping("main/main.do")
-	public String main_main(Model model)
+	public String main_main(String fd,Model model)
 	{
+		if(fd==null)
+			fd="맛집";
+		
+		List<NewsVO> nList=nnm.newsFind(fd);
+		
 		RecipeVO rvo=rService.recipeMaxHitData();
 		List<RecipeVO> rList=rService.recipeHitTop8();
 		
@@ -114,6 +122,7 @@ public class MainController {
 		model.addAttribute("rvo", rvo);
 		model.addAttribute("rList", rList);
 		model.addAttribute("fList", fList);
+		model.addAttribute("nList", nList);
 		model.addAttribute("cvo", cvo);
 		
 		return "main";

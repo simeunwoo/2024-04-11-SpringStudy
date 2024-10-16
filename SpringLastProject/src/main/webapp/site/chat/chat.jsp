@@ -16,7 +16,6 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
 <script type="text/javascript">
 	let websocket
-	let name
 	function connection()
 	{
 		// 서버 연결
@@ -49,28 +48,38 @@
 		let data=event.data // 서버에서 보낸 데이터
 		if(data.substring(0,5)==="msg :")
 		{
-			
+			$('#recvMsg').append("<font color=red>"+data.substring(5)+"</font><br>")
 		}
 		else if(data.substring(0,4)==="my :")
 		{
-			
+			$('#recvMsg').append("<font color=blue>"+data.substring(4)+"</font><br>")			
 		}
 		else if(data.substring(0,5)==="you :")
 		{
-			
+			$('#recvMsg').append(data.substring(5)+"<br>")			
 		}
+		
+		// 스크롤 위치 지정
+		let ch=$('#chatArea').height()
+		let m=$('#recvMsg').height()-ch
+		$('#chatArea').scrollTop(m)
 	}
 	function disConnection()
 	{
 		websocket.close()
 	}
-	function appendMessage(msg)
-	{
-		// div 출력 => 스크롤 바 조절
-	}
 	function send()
 	{
 		// 서버로 데이터 전송
+		let msg=$('#sendMsg').val()
+		if(msg.trim()==="")
+		{
+			$('#sendMsg').focus()
+			return
+		}
+		websocket.send(msg)
+		$('#sendMsg').val("")
+		$('#sendMsg').focus()
 	}
 	// 이벤트 처리
 	$(function(){
@@ -79,6 +88,15 @@
 		})
 		$('#outputBtn').click(function(){
 			disConnection()
+		})
+		$('#sendBtn').click(function(){
+			send()
+		})
+		$('#sendMsg').keydown(function(key){
+			if(key.keyCode===13) // enter
+			{
+				send()
+			}
 		})
 	})
 </script>
@@ -120,7 +138,6 @@
                     	<table class="table">
                     		<tr>
                     			<td>
-                    				<!--<input type="text" class="input-sm" id="name" size="20">-->
                     				<input type="button" class="btn-sm btn-warning"
                     				  value="입장" id="inputBtn">
                     				<input type="button" class="btn-sm btn-danger"
@@ -137,7 +154,7 @@
                     		<tr>
                     			<td>
                     				<input type="text" id="sendMsg" class="input-sm" size="70">
-                    				<input type="button" value="전송" class-"btn btn-sm btn-primary">
+                    				<input type="button" value="전송" class="btn btn-sm btn-primary">
                     			</td>
                     		</tr>
                     	</table>

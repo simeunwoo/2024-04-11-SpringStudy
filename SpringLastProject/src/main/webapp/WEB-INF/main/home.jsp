@@ -251,11 +251,17 @@
                             </div>
                             
                             <div class="newsletter-form">
-               
-                                    <input type="text" name="newsletter-email" id="nd" placeholder="검색어 입력">
-                                    <button type=button><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+               					<form action="../main/main.do"></form>
+                                    <input type="text" name="fd" id="nd" placeholder="검색어 입력">
+                                    <button type="submit"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
                                     
                             </div>
+                            <div style="height:10px"></div>
+                            <ul style="list-style-type:none">
+                            	<c:forEach var="nvo" items="${nList }" varStatus="s">
+                            		<li>${s.index+1 }.&nbsp;<a href="${nvo.link }">${nvo.title }</a></li>
+                            	</c:forEach>
+                            </ul>
                         </div>
                     </div>
                 </div>

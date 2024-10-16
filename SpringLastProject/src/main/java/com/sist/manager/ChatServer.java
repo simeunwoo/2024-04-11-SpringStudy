@@ -51,7 +51,7 @@ public class ChatServer {
 		while(it.hasNext())
 		{
 			Session ss=it.next();
-			ChatVO vo=users.get(ss);
+			ChatVO vo=users.get(session);
 			if(session.getId()==ss.getId()) // 본인인 경우
 			{
 				ss.getBasicRemote().sendText("my : ["+vo.getUserName()+"] "+message);
@@ -74,7 +74,7 @@ public class ChatServer {
 		{
 			Session ss=it.next(); // 저장되어 있는 모든 사용자를 한명씩 읽어 온다
 			// Map => key : session, value : ChatVO
-			ChatVO vo=users.get(ss);
+			ChatVO vo=users.get(session);
 			if(ss.getId()!=session.getId())
 			{
 				ss.getBasicRemote().sendText("msg : [알림 →] "+vo.getUserName()+"님이 퇴장하셨습니다.");
