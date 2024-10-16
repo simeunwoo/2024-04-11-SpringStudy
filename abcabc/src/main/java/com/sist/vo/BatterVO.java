@@ -20,11 +20,12 @@ LOGO               VARCHAR2(255)
 STEEL              NUMBER         
 TASOO              NUMBER         
 IMAGE              VARCHAR2(4000)
+AVG                NUMBER(4,3)
  */
 @Data
 public class BatterVO {
 
 	private int bno,age,game,h1,h2,h3,homerun,rbi,ball,strikeout,steel,tasoo;
-	private double war;
+	private double war,avg;
 	private String name,team,position,logo,image;
 }

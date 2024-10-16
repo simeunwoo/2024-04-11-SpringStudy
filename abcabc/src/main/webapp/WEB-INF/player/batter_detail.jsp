@@ -5,7 +5,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script src="https://unpkg.com/vue@3"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+google.charts.load('current', {packages: ['corechart', 'bar']});
+</script>
 </head>
 <body>
 	<div class="container">
@@ -41,7 +48,7 @@
             </div>
         </div>
     </div>
-    <section class="single_blog_area section_padding_80">
+    <section class="single_blog_area section_padding_80" id="chartApp">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-12 col-lg-8">
@@ -72,49 +79,105 @@
                         <table class="table table-bordered table-hover" style="font-size:16px;margin:0 auto">
                             <tr>
                             	<td colspan="6" class="text-center">
-   									<img src="https://statiz.sporki.com${vo.image }" style="width:101px;height:134px">
-   									&nbsp;&nbsp;<h3>${vo.name }</h3>
-   									&nbsp;<img src="${vo.logo }" style="width:130px;height:130px">
-   									&nbsp;<h3>${vo.team }</h3>
+   									<img :src="'https://statiz.sporki.com'+vo.image" style="width:101px;height:134px">
+   									&nbsp;&nbsp;<h3>{{vo.name}}</h3>
+   									&nbsp;<img :src="vo.logo" style="width:130px;height:130px">
+   									&nbsp;<h3>{{vo.team}}</h3>
                             	</td>
                             </tr>
                             <tr>
                                 <th width="20%" class="text-center">나이</th>
-                                <td width="13%" class="text-center">${vo.age }</td>
+                                <td width="13%" class="text-center">{{vo.age}}</td>
                                 <th width="20%" class="text-center">경기</th>
-                                <td width="13%" class="text-center">${vo.game }</td>
-                                <th width="20%" class="text-center">타율</th>
-                                <td width="14%" class="text-center">${vo.avg }</td>
+                                <td width="13%" class="text-center">{{vo.game}}</td>
+                                <th width="20%" class="text-center" style="color:red">타율</th>
+                                <td width="14%" class="text-center" style="color:red">{{vo.avg}}</td>
                             </tr>
                             <tr>
                                 <th width="20%" class="text-center">안타</th>
-                                <td width="13%" class="text-center">${vo.h1 }</td>
+                                <td width="13%" class="text-center">{{vo.h1}}</td>
                                 <th width="20%" class="text-center">2루타</th>
-                                <td width="13%" class="text-center">${vo.h2 }</td>
+                                <td width="13%" class="text-center">{{vo.h2}}</td>
                                 <th width="20%" class="text-center">3루타</th>
-                                <td width="14%" class="text-center">${vo.h3 }</td>
+                                <td width="14%" class="text-center">{{vo.h3}}</td>
                             </tr>
                             <tr>
                                 <th width="20%" class="text-center">홈런</th>
-                                <td width="13%" class="text-center">${vo.homerun }</td>
+                                <td width="13%" class="text-center">{{vo.homerun}}</td>
                                 <th width="20%" class="text-center">타점</th>
-                                <td width="13%" class="text-center">${vo.rbi }</td>
+                                <td width="13%" class="text-center">{{vo.rbi}}</td>
                                 <th width="20%" class="text-center">도루</th>
-                                <td width="14%" class="text-center">${vo.steel }</td>
+                                <td width="14%" class="text-center">{{vo.steel}}</td>
                             </tr>
                             <tr>
                                 <th width="20%" class="text-center">삼진</th>
-                                <td width="13%" class="text-center">${vo.strikeout }</td>
+                                <td width="13%" class="text-center">{{vo.strikeout}}</td>
                                 <th width="20%" class="text-center">볼넷</th>
-                                <td width="13%" class="text-center">${vo.ball }</td>
+                                <td width="13%" class="text-center">{{vo.ball}}</td>
                                 <th width="20%" class="text-center" style="color:red">WAR</th>
-                                <td width="14%" class="text-center" style="color:red">${vo.war }</td>
+                                <td width="14%" class="text-center" style="color:red">{{vo.war}}</td>
                             </tr>
                         </table></div></aside></div></div></div></div></div></div>
                         
-                        </div></section>
+                        </div>
+                        <div>
+				    		<div id="chart_div" style="width: 900px; height: 500px;"></div>
+				    	</div>
+                        </section>
+    	
 	<script>
-		
+		let chartApp=Vue.createApp({
+			data(){
+				return{
+					vo:{},
+					bno:${bno}
+				}
+			},
+			mounted(){
+				axios.get('../player/batter_detail_vue.do',{
+					params:{
+						bno:this.bno
+					}
+				}).then(response=>{
+					console.log(response.data)
+					this.vo=response.data
+					
+					this.drawTitleSubtitle()
+				}).catch(error=>{
+					console.log(error.response)
+				})
+				
+			},
+			methods:{
+				drawTitleSubtitle() {
+				      var data = google.visualization.arrayToDataTable([
+				        ['City', '2010 Population', '2000 Population'],
+				        ['New York City, NY', 8175000, 8008000],
+				        ['Los Angeles, CA', 3792000, 3694000],
+				        ['Chicago, IL', 2695000, 2896000],
+				        ['Houston, TX', 2099000, 1953000],
+				        ['Philadelphia, PA', 1526000, 1517000]
+				      ]);
+
+				      var materialOptions = {
+				        chart: {
+				          title: 'Population of Largest U.S. Cities',
+				          subtitle: 'Based on most recent and previous census data'
+				        },
+				        hAxis: {
+				          title: 'Total Population',
+				          minValue: 0,
+				        },
+				        vAxis: {
+				          title: 'City'
+				        },
+				        bars: 'horizontal'
+				      };
+				      var materialChart = new google.charts.Bar(document.getElementById('chart_div'));
+				      materialChart.draw(data, materialOptions);
+				    }
+			}
+		}).mount('#chartApp')
 	</script>
 </body>
 </html>
