@@ -6,9 +6,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class SeoulController {
 
-	@GetMapping("seoul/seoul_location.do")
+	@GetMapping("seoul/location.do")
 	public String seoul_location()
 	{
-		return "seoul/seoul_location";
+		return "seoul/location";
+	}
+	
+	@GetMapping("seoul/nature.do")
+	public String seoul_nature()
+	{
+		return "seoul/nature";
+	}
+	
+	@GetMapping("seoul/shop.do")
+	public String seoul_shop()
+	{
+		return "seoul/shop";
 	}
 }

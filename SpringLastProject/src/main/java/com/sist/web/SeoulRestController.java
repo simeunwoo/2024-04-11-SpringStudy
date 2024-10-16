@@ -14,7 +14,7 @@ public class SeoulRestController {
 	@Autowired
 	private SeoulService sService;
 	
-	@GetMapping(value="seoul/seoul_location_vue.do",produces="text/plain;charset=UTF-8")
+	@GetMapping(value="seoul/location_vue.do",produces="text/plain;charset=UTF-8")
 	public String seoul_location(int page) throws Exception
 	{
 		int rowSize=12;
@@ -47,7 +47,7 @@ public class SeoulRestController {
 		return json;
 	}
 	
-	@GetMapping(value="seoul/seoul_nature_vue.do",produces="text/plain;charset=UTF-8")
+	@GetMapping(value="seoul/nature_vue.do",produces="text/plain;charset=UTF-8")
 	public String seoul_nature(int page) throws Exception
 	{
 		int rowSize=12;
@@ -80,7 +80,7 @@ public class SeoulRestController {
 		return json;
 	}
 	
-	@GetMapping(value="seoul/seoul_shop_vue.do",produces="text/plain;charset=UTF-8")
+	@GetMapping(value="seoul/shop_vue.do",produces="text/plain;charset=UTF-8")
 	public String seoul_shop(int page) throws Exception
 	{
 		int rowSize=12;
