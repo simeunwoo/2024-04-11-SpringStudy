@@ -6,5 +6,5 @@ public interface TeamService {
 
 	public List<TeamDetailVO> teamListData();
 	public TeamDetailVO teamDetailData(String name);
-	public List<TeamVO> teamRankingData(String team);
+	public List<TeamVO> teamRankingData();
 }
