@@ -1,9 +1,86 @@
 package com.sist.manager;
+import java.util.*;
+import com.sist.vo.*;
 
+import javax.servlet.http.HttpSession;
+import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 
-@ServerEndpoint("/site/chat/chat-ws")
+@ServerEndpoint(value="/site/chat/chat-ws",configurator=WebSocketSessionConfigurator.class)
 public class ChatServer {
 
+	// 접속자 저장
+	private static Map<Session,ChatVO> users=Collections.synchronizedMap(new HashMap<Session,ChatVO>());
 	
+	// 접속 시 처리
+	@OnOpen
+	public void onOpen(Session session,EndpointConfig config) throws Exception
+	{
+		ChatVO vo=new ChatVO();
+		
+		// 로그인 시에 세션에 저장된 값을 읽어 온다
+		HttpSession hs=(HttpSession)config.getUserProperties().get(HttpSession.class.getName());
+		vo.setUserId((String)hs.getAttribute("userId"));
+		vo.setUserName((String)hs.getAttribute("userName"));
+		vo.setSession(session);
+		
+		users.put(session, vo); // 사용자 정보 저장
+		
+		// 입장 메시지 전송
+		Iterator<Session> it=users.keySet().iterator();
+		while(it.hasNext())
+		{
+			Session ss=it.next(); // 접속자 한명씩 읽어 온다
+			if(ss.getId()!=session.getId()) // 본인이 아닌 경우
+			{
+				// 이미 접속이 되어 있는 사람에게 전송
+				ss.getBasicRemote().sendText("msg : [알림 →] "+vo.getUserName()+"님이 입장하셨습니다.");
+			}
+		}
+		// 서버 확인
+		System.out.println("클라이언트 접속 : "+vo.getUserId()+","+vo.getUserName()+","+vo.getSession());
+	}
+	
+	// 메시지 전송 시 처리
+	@OnMessage
+	public void onMessage(String message,Session session) throws Exception
+	{
+		System.out.println("수신된 메시지 : "+message+" ===> 보낸 사람 : "+session.getId());
+		
+		Iterator<Session> it=users.keySet().iterator();
+		while(it.hasNext())
+		{
+			Session ss=it.next();
+			ChatVO vo=users.get(ss);
+			if(session.getId()==ss.getId()) // 본인인 경우
+			{
+				ss.getBasicRemote().sendText("my : ["+vo.getUserName()+"] "+message);
+			}
+			else // 본인이 아닌 경우 = 상대방인 경우
+			{
+				ss.getBasicRemote().sendText("you : ["+vo.getUserName()+"] "+message);
+			}
+		}
+	}
+	
+	// 접속 해제 Session session = 접속자에 대한 구분자 => 접속자마다 번호 부여
+	@OnClose
+	public void onClose(Session session) throws Exception
+	{
+		Iterator<Session> it=users.keySet().iterator();
+		// Iterator : 전체 저장된 데이터를 모아서 처리
+		// => Collection은 전체 Iterator를 가지고 있다
+		while(it.hasNext())
+		{
+			Session ss=it.next(); // 저장되어 있는 모든 사용자를 한명씩 읽어 온다
+			// Map => key : session, value : ChatVO
+			ChatVO vo=users.get(ss);
+			if(ss.getId()!=session.getId())
+			{
+				ss.getBasicRemote().sendText("msg : [알림 →] "+vo.getUserName()+"님이 퇴장하셨습니다.");
+			}
+		}
+		System.out.println("클라이언트 퇴장 : "+users.get(session).getUserName());
+		users.remove(session);
+	}
 }

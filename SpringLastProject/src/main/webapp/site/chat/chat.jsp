@@ -5,6 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+#chatArea{
+  height: 450px;
+  overflow-y: auto;
+  border: 1px solid black; 
+}
+</style>
 <script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
 <script type="text/javascript">
@@ -28,17 +35,34 @@
 	// 연결이 된 경우
 	function onOpen(event)
 	{
-		alert("채팅 서버에 연결되었습니다")
+		alert("채팅 서버에 연결되었습니다.")
 	}
 	// 연결이 해제 된 경우
 	function onClose(event)
-	{	alert("채팅 서버 연결이 종료되었습니다")
+	{	alert("채팅 서버 연결이 해제되었습니다.")
 		
 	}
 	// 메세지가 정상으로 전송
 	function onMessage(event)
 	{
 		// 서버에서 메세지를 받은 경우
+		let data=event.data // 서버에서 보낸 데이터
+		if(data.substring(0,5)==="msg :")
+		{
+			
+		}
+		else if(data.substring(0,4)==="my :")
+		{
+			
+		}
+		else if(data.substring(0,5)==="you :")
+		{
+			
+		}
+	}
+	function disConnection()
+	{
+		websocket.close()
 	}
 	function appendMessage(msg)
 	{
@@ -50,7 +74,12 @@
 	}
 	// 이벤트 처리
 	$(function(){
-		
+		$('#inputBtn').click(function(){
+			connection()
+		})
+		$('#outputBtn').click(function(){
+			disConnection()
+		})
 	})
 </script>
 <style type="text/css">
@@ -91,11 +120,11 @@
                     	<table class="table">
                     		<tr>
                     			<td>
-                    				<input type="text" class="input-sm" id="name" size="20">
-                    				<input type="button" class="btn-sm btn-info"
-                    				  value="입장">
+                    				<!--<input type="text" class="input-sm" id="name" size="20">-->
+                    				<input type="button" class="btn-sm btn-warning"
+                    				  value="입장" id="inputBtn">
                     				<input type="button" class="btn-sm btn-danger"
-                    				  value="퇴장">
+                    				  value="퇴장" id="outputBtn">
                     			</td>
                     		</tr>
                     		<tr>
