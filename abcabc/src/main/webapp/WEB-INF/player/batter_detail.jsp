@@ -9,7 +9,6 @@
 <script src="https://unpkg.com/vue@3"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
 google.charts.load('current', {packages: ['corechart', 'bar']});
 </script>
@@ -117,13 +116,16 @@ google.charts.load('current', {packages: ['corechart', 'bar']});
                                 <th width="20%" class="text-center" style="color:red">WAR</th>
                                 <td width="14%" class="text-center" style="color:red">{{vo.war}}</td>
                             </tr>
-                        </table></div></aside></div></div></div></div></div></div>
+                         </table></div></aside></div></div></div></div></div>
                         
                         </div>
                         <div>
-				    		<div id="chart_div" style="width: 900px; height: 500px;"></div>
-				    	</div>
-                        </section>
+                        </div>
+                        	<div id="chart_div" style="width: 900px; height: 500px;"></div>
+                        	<div style="height:80px"></div>
+                        	<div id="chart2_div" style="width: 900px; height: 500px;"></div>
+                        	<div style="height:80px"></div>
+                        </div></section>
     	
 	<script>
 		let chartApp=Vue.createApp({
@@ -142,30 +144,35 @@ google.charts.load('current', {packages: ['corechart', 'bar']});
 					console.log(response.data)
 					this.vo=response.data
 					
-					this.drawTitleSubtitle()
+					this.drawDetailChart()
+					this.drawImportantChart()
 				}).catch(error=>{
 					console.log(error.response)
 				})
 				
 			},
 			methods:{
-				drawTitleSubtitle() {
+				drawDetailChart() {
 				      var data = google.visualization.arrayToDataTable([
-				        ['City', '2010 Population', '2000 Population'],
-				        ['New York City, NY', 8175000, 8008000],
-				        ['Los Angeles, CA', 3792000, 3694000],
-				        ['Chicago, IL', 2695000, 2896000],
-				        ['Houston, TX', 2099000, 1953000],
-				        ['Philadelphia, PA', 1526000, 1517000]
+				        ['', '김도영 (Do-Yeong Kim)', this.vo.name],
+				        ['경기수', 141, this.vo.game],
+				        ['안타', 189, this.vo.h1],
+				        ['2루타', 29, this.vo.h2],
+				        ['3루타', 10, this.vo.h3],
+				        ['홈런', 38, this.vo.homerun],
+				        ['타점', 109, this.vo.rbi],
+				        ['볼넷', 66, this.vo.ball],
+				        ['삼진', 110, this.vo.strikeout],
+				        ['도루', 40, this.vo.steel]
 				      ]);
 
 				      var materialOptions = {
 				        chart: {
-				          title: 'Population of Largest U.S. Cities',
-				          subtitle: 'Based on most recent and previous census data'
+				          title: this.vo.name+'와(과) 김도영 (Do-Yeong Kim)의 세부 기록 비교 차트',
+				          subtitle: '비교 항목 : 경기수, 안타, 2루타, 3루타, 홈런, 타점, 볼넷, 삼진, 도루'
 				        },
 				        hAxis: {
-				          title: 'Total Population',
+				          title: '',
 				          minValue: 0,
 				        },
 				        vAxis: {
@@ -174,6 +181,31 @@ google.charts.load('current', {packages: ['corechart', 'bar']});
 				        bars: 'horizontal'
 				      };
 				      var materialChart = new google.charts.Bar(document.getElementById('chart_div'));
+				      materialChart.draw(data, materialOptions);
+				    },
+			
+				drawImportantChart() {
+				      var data = google.visualization.arrayToDataTable([
+				        ['', '김도영 (Do-Yeong Kim)', this.vo.name],
+				        ['WAR(승리기여도)', 8.32, this.vo.war],
+				        ['타율', 0.347, this.vo.avg]
+				      ]);
+
+				      var materialOptions = {
+				        chart: {
+				          title: this.vo.name+'와(과) 김도영 (Do-Yeong Kim)의 WAR, 타율 기록 비교 차트',
+				          subtitle: '비교 항목 : WAR(승리기여도), 타율'
+				        },
+				        hAxis: {
+				          title: '',
+				          minValue: 0,
+				        },
+				        vAxis: {
+				          title: 'City'
+				        },
+				        bars: 'horizontal'
+				      };
+				      var materialChart = new google.charts.Bar(document.getElementById('chart2_div'));
 				      materialChart.draw(data, materialOptions);
 				    }
 			}
