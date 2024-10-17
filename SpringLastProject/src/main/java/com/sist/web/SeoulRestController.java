@@ -128,6 +128,9 @@ public class SeoulRestController {
 		vo.setAddr(addr3.trim());
 		System.out.println("주소 : "+vo.getAddr());
 		
-		return "";
+		ObjectMapper mapper=new ObjectMapper();
+		String json=mapper.writeValueAsString(vo);
+		
+		return json;
 	}
 }
