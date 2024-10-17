@@ -155,6 +155,7 @@
                                                       <li><a href="../team/ranking.do">팀 순위</a></li>
                                                       <li><a href="../schedule/schedule.do">스케줄</a></li>
                                                       <li><a href="../player/vs.do">선수 비교</a></li>
+                                                      <li><a href="../weather/weather.do">날씨</a></li>
                                                    </ul>
                                                 </li>
                                              </ul>

@@ -1,4 +1,5 @@
 package com.sist.web;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,4 +41,15 @@ public class TeamController {
 	{
 		return "team/ranking";
 	}
+	
+	@GetMapping("weather/weather.do")
+	   public String weather_weather(Model model) 
+	   {
+		   SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+		   Date date=new Date();
+		   StringTokenizer st=new StringTokenizer(sdf.format(date),"-");
+		   String today=st.nextToken()+"년도 "+st.nextToken()+"월 "+st.nextToken()+"일";
+		   model.addAttribute("today", today);
+		   return "weather/weather";   
+	   }
 }

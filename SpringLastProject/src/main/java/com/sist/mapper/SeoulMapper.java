@@ -143,6 +143,11 @@ END;
 			   =====            ==
 			   property         column
 		}
+		
+		@Select("SELECT no,title,poster,msg,address "
+			+ "FROM project_seoul_shop "
+			+ "WHERE no=#{no}")
+	public SeoulVO seoulShopDetailData(int no);
 	 */
 	@Results({
 		@Result(property="no",column="no"),
