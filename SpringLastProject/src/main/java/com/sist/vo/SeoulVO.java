@@ -35,5 +35,5 @@ ADDRESS NOT NULL VARCHAR2(300)
 public class SeoulVO {
 
 	private int no;
-	private String title,poster,msg,address;
+	private String title,poster,msg,address,addr;
 }

@@ -113,4 +113,21 @@ public class SeoulRestController {
 		return json;
 	}
 	
+	@GetMapping(value="seoul/location_detail_vue.do",produces="text/plain;charset=UTF-8")
+	public String location_detail(int no) throws Exception
+	{
+		SeoulVO vo=sService.seoulLocationDetailData(no);
+		
+		// 04340 서울 용산구 남산공원길 105 (용산동2가, YTN서울타워)
+		String addr1=vo.getAddress();
+		addr1=addr1.substring(addr1.indexOf(" ")+1);
+		String addr2=addr1.trim();
+		addr2=addr2.substring(addr2.indexOf(" ")+1);
+		String addr3=addr2.trim();
+		addr3=addr3.substring(0, addr3.indexOf(" "));
+		vo.setAddr(addr3.trim());
+		System.out.println("주소 : "+vo.getAddr());
+		
+		return "";
+	}
 }
