@@ -24,11 +24,11 @@ public class SeoulServiceImpl implements SeoulService {
 		return sDao.seoulNatureListData(map);
 	}
 
-	@Override
+/*	@Override
 	public List<SeoulVO> seoulShopListData(Map map) {
 		// TODO Auto-generated method stub
 		return sDao.seoulShopListData(map);
-	}
+	} */
 
 	@Override
 	public int seoulLocationTotalPage() {
@@ -42,11 +42,11 @@ public class SeoulServiceImpl implements SeoulService {
 		return sDao.seoulNatureTotalPage();
 	}
 
-	@Override
+/*	@Override
 	public int seoulShopTotalPage() {
 		// TODO Auto-generated method stub
 		return sDao.seoulShopTotalPage();
-	}
+	} */
 
 	@Override
 	public SeoulVO seoulLocationDetailData(int no) {
@@ -60,10 +60,10 @@ public class SeoulServiceImpl implements SeoulService {
 		return sDao.seoulNatureDetailData(no);
 	}
 
-	@Override
+/*	@Override
 	public SeoulVO seoulShopDetailData(int no) {
 		// TODO Auto-generated method stub
 		return sDao.seoulShopDetailData(no);
-	}
+	} */
 
 }

@@ -21,12 +21,12 @@ public interface SeoulMapper {
 			+ "WHERE num BETWEEN #{start} AND #{end}")
 	public List<SeoulVO> seoulNatureListData(Map map);
 
-	@Select("SELECT no,poster,title,num "
+/*	@Select("SELECT no,poster,title,num "
 			+ "FROM (SELECT no,poster,title,rownum as num "
 			+ "FROM (SELECT no,poster,title "
 			+ "FROM project_seoul_shop ORDER BY no ASC)) "
 			+ "WHERE num BETWEEN #{start} AND #{end}")
-	public List<SeoulVO> seoulShopListData(Map map);
+	public List<SeoulVO> seoulShopListData(Map map); */
 	
 	@Select("SELECT CEIL(COUNT(*)/12.0) FROM project_seoul_location")
 	public int seoulLocationTotalPage();
@@ -34,8 +34,8 @@ public interface SeoulMapper {
 	@Select("SELECT CEIL(COUNT(*)/12.0) FROM project_seoul_nature")
 	public int seoulNatureTotalPage();
 	
-	@Select("SELECT CEIL(COUNT(*)/12.0) FROM project_seoul_shop")
-	public int seoulShopTotalPage();
+/*	@Select("SELECT CEIL(COUNT(*)/12.0) FROM project_seoul_shop")
+	public int seoulShopTotalPage(); */
 	
 	@Select("SELECT no,title,poster,msg,address "
 			+ "FROM project_seoul_location "
@@ -47,8 +47,8 @@ public interface SeoulMapper {
 			+ "WHERE no=#{no}")
 	public SeoulVO seoulNatureDetailData(int no);
 	
-	@Select("SELECT no,title,poster,msg,address "
+/*	@Select("SELECT no,title,poster,msg,address "
 			+ "FROM project_seoul_shop "
 			+ "WHERE no=#{no}")
-	public SeoulVO seoulShopDetailData(int no);
+	public SeoulVO seoulShopDetailData(int no); */
 }

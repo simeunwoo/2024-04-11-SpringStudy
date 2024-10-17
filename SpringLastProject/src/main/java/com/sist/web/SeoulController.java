@@ -19,11 +19,11 @@ public class SeoulController {
 		return "seoul/nature";
 	}
 	
-	@GetMapping("seoul/shop.do")
+/*	@GetMapping("seoul/shop.do")
 	public String seoul_shop()
 	{
 		return "seoul/shop";
-	}
+	} */
 	
 	@GetMapping("seoul/location_detail.do")
 	public String location_detail(int no,Model model)
@@ -41,11 +41,11 @@ public class SeoulController {
 		return "seoul/nature_detail";
 	}
 	
-	@GetMapping("seoul/shop_detail.do")
+/*	@GetMapping("seoul/shop_detail.do")
 	public String shop_detail(int no,Model model)
 	{
 		model.addAttribute("no", no);
 		
 		return "seoul/shop_detail";
-	}
+	} */
 }

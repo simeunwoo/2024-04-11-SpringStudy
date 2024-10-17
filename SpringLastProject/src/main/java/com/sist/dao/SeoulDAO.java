@@ -25,10 +25,10 @@ public class SeoulDAO {
 		return mapper.seoulNatureListData(map);
 	}
 
-	public List<SeoulVO> seoulShopListData(Map map)
+/*	public List<SeoulVO> seoulShopListData(Map map)
 	{
 		return mapper.seoulShopListData(map);
-	}
+	} */
 	
 	public int seoulLocationTotalPage()
 	{
@@ -40,10 +40,10 @@ public class SeoulDAO {
 		return mapper.seoulNatureTotalPage();
 	}
 
-	public int seoulShopTotalPage()
+/*	public int seoulShopTotalPage()
 	{
 		return mapper.seoulShopTotalPage();
-	}
+	} */
 	
 	public SeoulVO seoulLocationDetailData(int no)
 	{
@@ -55,8 +55,8 @@ public class SeoulDAO {
 		return mapper.seoulNatureDetailData(no);
 	}
 	
-	public SeoulVO seoulShopDetailData(int no)
+/*	public SeoulVO seoulShopDetailData(int no)
 	{
 		return mapper.seoulShopDetailData(no);
-	}
+	} */
 }
