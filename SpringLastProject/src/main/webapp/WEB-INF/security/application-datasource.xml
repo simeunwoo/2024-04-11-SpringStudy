@@ -27,6 +27,7 @@
     <bean id="transactionManager"
     	class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
     	p:dataSource-ref="ds"
+    	p:configLocation="/WEB-INF/config/Config.xml"
     />
     <!-- SqlSessionFactoryBean -->
     <bean id="ssf" 

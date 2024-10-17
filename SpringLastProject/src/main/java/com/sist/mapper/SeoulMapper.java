@@ -111,7 +111,7 @@ END;
 	@Select(value="{CALL seoulShopListData"
 			+ "(#{pStart,mode=IN,javaType=java.lang.Integer},"
 			+ "#{pEnd,mode=IN,javaType=java.lang.Integer},"
-			+ "#{pResult,mode=OUT,jdbcType=CURSOR})}")
+			+ "#{pResult,mode=OUT,jdbcType=CURSOR,resultMap=seoulMap})}")
 	@Options(statementType=StatementType.CALLABLE)
 	// Statement, PreparedStatement(default), CallableStatement(procedure 호출)
 	public List<SeoulVO> seoulShopListData(Map map);
@@ -152,7 +152,7 @@ END;
 	})
 	@Select(value="{CALL seoulShopDetailData"
 			+ "(#{pNo,javaType=java.lang.Integer},"
-			+ "#{pResult,mode=OUT,jdbcType=CURSOR})}")
+			+ "#{pResult,mode=OUT,jdbcType=CURSOR,resultMap=seoulMap})}")
 	@Options(statementType=StatementType.CALLABLE)
 	public SeoulVO seoulShopDetailData(Map map);
 }
