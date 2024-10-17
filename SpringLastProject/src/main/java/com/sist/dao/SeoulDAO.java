@@ -44,4 +44,19 @@ public class SeoulDAO {
 	{
 		return mapper.seoulShopTotalPage();
 	}
+	
+	public SeoulVO seoulLocationDetailData(int no)
+	{
+		return mapper.seoulLocationDetailData(no);
+	}
+
+	public SeoulVO seoulNatureDetailData(int no)
+	{
+		return mapper.seoulNatureDetailData(no);
+	}
+	
+	public SeoulVO seoulShopDetailData(int no)
+	{
+		return mapper.seoulShopDetailData(no);
+	}
 }

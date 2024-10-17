@@ -10,30 +10,45 @@ public interface SeoulMapper {
 	@Select("SELECT no,poster,title,num "
 			+ "FROM (SELECT no,poster,title,rownum as num "
 			+ "FROM (SELECT no,poster,title "
-			+ "FROM seoul_location ORDER BY no ASC)) "
+			+ "FROM project_seoul_location ORDER BY no ASC)) "
 			+ "WHERE num BETWEEN #{start} AND #{end}")
 	public List<SeoulVO> seoulLocationListData(Map map);
 
 	@Select("SELECT no,poster,title,num "
 			+ "FROM (SELECT no,poster,title,rownum as num "
 			+ "FROM (SELECT no,poster,title "
-			+ "FROM seoul_nature ORDER BY no ASC)) "
+			+ "FROM project_seoul_nature ORDER BY no ASC)) "
 			+ "WHERE num BETWEEN #{start} AND #{end}")
 	public List<SeoulVO> seoulNatureListData(Map map);
 
 	@Select("SELECT no,poster,title,num "
 			+ "FROM (SELECT no,poster,title,rownum as num "
 			+ "FROM (SELECT no,poster,title "
-			+ "FROM seoul_shop ORDER BY no ASC)) "
+			+ "FROM project_seoul_shop ORDER BY no ASC)) "
 			+ "WHERE num BETWEEN #{start} AND #{end}")
 	public List<SeoulVO> seoulShopListData(Map map);
 	
-	@Select("SELECT CEIL(COUNT(*)/12.0) FROM seoul_location")
+	@Select("SELECT CEIL(COUNT(*)/12.0) FROM project_seoul_location")
 	public int seoulLocationTotalPage();
 	
-	@Select("SELECT CEIL(COUNT(*)/12.0) FROM seoul_nature")
+	@Select("SELECT CEIL(COUNT(*)/12.0) FROM project_seoul_nature")
 	public int seoulNatureTotalPage();
 	
-	@Select("SELECT CEIL(COUNT(*)/12.0) FROM seoul_shop")
+	@Select("SELECT CEIL(COUNT(*)/12.0) FROM project_seoul_shop")
 	public int seoulShopTotalPage();
+	
+	@Select("SELECT no,title,poster,msg,address "
+			+ "FROM project_seoul_location "
+			+ "WHERE no=#{no}")
+	public SeoulVO seoulLocationDetailData(int no);
+
+	@Select("SELECT no,title,poster,msg,address "
+			+ "FROM project_seoul_nature "
+			+ "WHERE no=#{no}")
+	public SeoulVO seoulNatureDetailData(int no);
+	
+	@Select("SELECT no,title,poster,msg,address "
+			+ "FROM project_seoul_shop "
+			+ "WHERE no=#{no}")
+	public SeoulVO seoulShopDetailData(int no);
 }

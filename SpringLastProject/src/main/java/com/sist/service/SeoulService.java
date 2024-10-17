@@ -10,4 +10,7 @@ public interface SeoulService {
 	public int seoulLocationTotalPage();
 	public int seoulNatureTotalPage();
 	public int seoulShopTotalPage();
+	public SeoulVO seoulLocationDetailData(int no);
+	public SeoulVO seoulNatureDetailData(int no);
+	public SeoulVO seoulShopDetailData(int no);
 }
