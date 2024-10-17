@@ -73,12 +73,14 @@
                 totalpage:0,
                 startPage:1,
                 endPage:5,
-                selectedDate:{month:3,day:23}
+                selectedDate:{month:10,day:1}
             }
         },
         mounted() {
         	this.dataDates()
-        	this.loadGames()
+        	if(this.dates.length > 0) {  // dates가 채워진 후에만 loadGames 호출
+		        this.loadGames()
+		    }
             this.dataRecv()
         },
         methods: {
@@ -151,33 +153,8 @@
         }
     }).mount('#gameApp')
 </script>
-
-
-<style scoped>
-h2 {
-  color: #333;
-}
-</style>
-
-	
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
