@@ -13,4 +13,7 @@ public interface SeoulService {
 	public SeoulVO seoulLocationDetailData(int no);
 	public SeoulVO seoulNatureDetailData(int no);
 //	public SeoulVO seoulShopDetailData(int no);
+	public List<SeoulVO> seoulShopListData(Map map);
+	public int seoulShopTotalPage(Map map);
+	public SeoulVO seoulShopDetailData(Map map);
 }

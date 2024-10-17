@@ -31,6 +31,22 @@ import org.springframework.web.bind.annotation.RestController;
 	> 삭제
 		DROP PROCEDURE proc_name
 -- 목록 출력
+	CREATE OR REPLACE PROCEDURE seoulShopListData(
+	    pStart NUMBER,
+	    pEnd NUMBER,
+	    pResult OUT SYS_REFCURSOR
+	)
+	IS
+	BEGIN
+	    OPEN pResult FOR
+	    SELECT no,title,poster,num
+	    FROM (SELECT no,title,poster,rownum as num
+	    FROM (SELECT no,title,poster
+	    FROM project_seoul_shop
+	    ORDER BY no ASC))
+	    WHERE num BETWEEN pStart AND pEnd;
+	END;
+	/
 -- 총 페이지
 	CREATE OR REPLACE PROCEDURE seoulShopTotalPage(
 	    pTotal OUT NUMBER
@@ -222,4 +238,61 @@ public class SeoulRestController {
 		
 		return json;
 	} */
+	
+	@GetMapping(value="seoul/shop_vue.do",produces="text/plain;charset=UTF-8")
+	public String seoul_shop(int page) throws Exception
+	{
+		int rowSize=12;
+		int start=(rowSize*page)-(rowSize-1);
+		int end=rowSize*page;
+		
+		Map map=new HashMap();
+		map.put("pStart", start);
+		map.put("pEnd", end);
+		
+		List<SeoulVO> list=sService.seoulShopListData(map);
+		int totalpage=sService.seoulShopTotalPage(map);
+		
+		final int BLOCK=10;
+		int startPage=((page-1)/BLOCK*BLOCK)+1;
+		int endPage=((page-1)/BLOCK*BLOCK)+BLOCK;
+		if(endPage>totalpage)
+			endPage=totalpage;
+		
+		map=new HashMap();
+		map.put("list", list);
+		map.put("curpage", page);
+		map.put("totalpage", totalpage);
+		map.put("startPage", startPage);
+		map.put("endPage", endPage);
+		
+		ObjectMapper mapper=new ObjectMapper();
+		String json=mapper.writeValueAsString(map);
+		
+		return json;
+	}
+	
+	@GetMapping(value="seoul/shop_detail_vue.do",produces="text/plain;charset=UTF-8")
+	public String shop_detail(int no) throws Exception
+	{
+		Map map=new HashMap();
+		map.put("pNo", no);
+		
+		SeoulVO vo=sService.seoulShopDetailData(map);
+		
+		// 04340 서울 용산구 남산공원길 105 (용산동2가, YTN서울타워)
+		String addr1=vo.getAddress();
+		addr1=addr1.substring(addr1.indexOf(" ")+1);
+		String addr2=addr1.trim();
+		addr2=addr2.substring(addr2.indexOf(" ")+1);
+		String addr3=addr2.trim();
+		addr3=addr3.substring(0, addr3.indexOf(" "));
+		vo.setAddr(addr3.trim());
+		System.out.println("주소 : "+vo.getAddr());
+		
+		ObjectMapper mapper=new ObjectMapper();
+		String json=mapper.writeValueAsString(vo);
+		
+		return json;
+	}
 }

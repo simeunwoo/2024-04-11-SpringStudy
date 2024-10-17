@@ -59,4 +59,22 @@ public class SeoulDAO {
 	{
 		return mapper.seoulShopDetailData(no);
 	} */
+	
+	public List<SeoulVO> seoulShopListData(Map map)
+	{
+		mapper.seoulShopListData(map);
+		return (List<SeoulVO>)map.get("pResult");
+	}
+	
+	public int seoulShopTotalPage(Map map)
+	{
+		mapper.seoulShopTotalPage(map);
+		return (int)map.get("pTotal");
+	}
+	
+	public SeoulVO seoulShopDetailData(Map map)
+	{
+		mapper.seoulShopDetailData(map);
+		return (SeoulVO)map.get("pResult");
+	}
 }

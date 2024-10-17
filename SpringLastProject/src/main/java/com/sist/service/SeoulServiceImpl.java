@@ -66,4 +66,21 @@ public class SeoulServiceImpl implements SeoulService {
 		return sDao.seoulShopDetailData(no);
 	} */
 
+	@Override
+	public List<SeoulVO> seoulShopListData(Map map) {
+		// TODO Auto-generated method stub
+		return sDao.seoulShopListData(map);
+	}
+
+	@Override
+	public int seoulShopTotalPage(Map map) {
+		// TODO Auto-generated method stub
+		return sDao.seoulShopTotalPage(map);
+	}
+
+	@Override
+	public SeoulVO seoulShopDetailData(Map map) {
+		// TODO Auto-generated method stub
+		return sDao.seoulShopDetailData(map);
+	}
 }
