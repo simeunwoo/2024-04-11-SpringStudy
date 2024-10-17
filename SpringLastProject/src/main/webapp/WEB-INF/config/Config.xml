@@ -4,6 +4,6 @@
  "https://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<mappers>
-		<mapper resource="com/sist/dao/seoul-mapper.xml"/>
+		<mapper resource="com/sist/mapper/seoul-mapper.xml"/>
 	</mappers>
 </configuration>

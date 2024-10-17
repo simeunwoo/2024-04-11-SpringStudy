@@ -73,9 +73,9 @@ public class SeoulServiceImpl implements SeoulService {
 	}
 
 	@Override
-	public int seoulShopTotalPage(Map map) {
+	public int seoulShopTotalPage() {
 		// TODO Auto-generated method stub
-		return sDao.seoulShopTotalPage(map);
+		return sDao.seoulShopTotalPage();
 	}
 
 	@Override

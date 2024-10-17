@@ -251,7 +251,7 @@ public class SeoulRestController {
 		map.put("pEnd", end);
 		
 		List<SeoulVO> list=sService.seoulShopListData(map);
-		int totalpage=sService.seoulShopTotalPage(map);
+		int totalpage=sService.seoulShopTotalPage();
 		
 		final int BLOCK=10;
 		int startPage=((page-1)/BLOCK*BLOCK)+1;

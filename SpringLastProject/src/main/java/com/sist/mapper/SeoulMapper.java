@@ -122,9 +122,10 @@ END;
 	    pTotal OUT NUMBER
 	)
 	 */
-	@Select(value="{CALL seoulShopTotalPage({#pTotal,mode=OUT,javaType=java.lang.Integer})}")
-	@Options(statementType=StatementType.CALLABLE)
-	public int seoulShopTotalPage(Map map);
+//	@Select(value="{CALL seoulShopTotalPage({#pTotal,mode=OUT,javaType=java.lang.Integer})}")
+//	@Options(statementType=StatementType.CALLABLE)
+//	public int seoulShopTotalPage(Map map);
+	public int seoulShopTotalPage();
 	
 	// 상세 보기
 	/*

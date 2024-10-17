@@ -66,15 +66,15 @@ public class SeoulDAO {
 		return (List<SeoulVO>)map.get("pResult");
 	}
 	
-	public int seoulShopTotalPage(Map map)
+	public int seoulShopTotalPage()
 	{
-		mapper.seoulShopTotalPage(map);
-		return (int)map.get("pTotal");
+		return mapper.seoulShopTotalPage();
 	}
 	
 	public SeoulVO seoulShopDetailData(Map map)
 	{
 		mapper.seoulShopDetailData(map);
-		return (SeoulVO)map.get("pResult");
+		List<SeoulVO> list=(List<SeoulVO>)map.get("pResult");
+		return list.get(0);
 	}
 }
