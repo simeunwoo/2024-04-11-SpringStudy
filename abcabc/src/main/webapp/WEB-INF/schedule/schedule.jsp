@@ -26,19 +26,22 @@
 	</div>
 <div class="container" id="gameApp">
     <div class="row">
-  <div>
-    <h2>{{ selectedDate.month }}월 {{ selectedDate.day }}일 경기 결과</h2>
+
+    <h2>{{month}}월 {{day}}일 경기 결과</h2>
     <div v-if="games.length > 0">
       <div v-for="vo in games" :key="vo.sno">
-        <p>
-          {{ vo.away }} {{ vo.awayscore }} - {{ vo.homescore }} {{ vo.home }}
-        </p>
+      	<div>
+      	
+	        <p>
+	          {{ vo.away }} {{ vo.awayscore }} - {{ vo.homescore }} {{ vo.home }}
+	        </p>
+        </div>
       </div>
     </div>
     <div v-else>
       <p>경기가 없습니다.</p>
     </div>
-  </div>
+
 </div>
 <div>
 	<div class="pagination-area d-sm-flex mt-15">
@@ -46,17 +49,12 @@
 			<li class="page-item" v-if="startPage>1">
 		      <a class="page-link" @click="prev()"><i class="fa fa-angle-double-left" aria-hidden="true"></i> 이전</a>
 		    </li>
-		    <li :class="i===curpage?'page-item active':'page-item'" v-for="i in range(startPage,endPage)" :key="i">
-		      <a class="page-link" @click="pageChange(i)">{{formatDate(dates[i-1])}}</a>
+		    <li :class="page===curpage?'page-item active':'page-item'" v-for="i in range(startPage,endPage)" :key="page">
+		      <a class="page-link" @click="pageChange(page)">{{month}}월 {{day}}일</a>
 		    </li>
 		    <li class="page-item" v-if="endPage<totalpage">
 		      <a class="page-link" @click="next()">다음 <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
 		    </li>
-		    <!-- 
-			<button v-for="(date.index) in dates" :key="index" @click="updateDate(date.month,date.day)">
-				{{date.month}}월 {{date.day}}일
-			</button>
-			 -->
 		</ul>
 	</div>
 </div>
@@ -66,89 +64,59 @@
         data() {
             return {
                 games:[],
-                //month:3,  // 초기값, 필요에 따라 변경 가능
-                //day:23,   // 초기값, 필요에 따라 변경 가능
-                dates:[],
                 curpage:1,
                 totalpage:0,
-                startPage:1,
-                endPage:5,
-                selectedDate:{month:10,day:1}
+                startPage:0,
+                endPage:0,
+                month:3,
+                day:23
             }
         },
         mounted() {
-        	this.dataDates()
-        	if(this.dates.length > 0) {  // dates가 채워진 후에만 loadGames 호출
-		        this.loadGames()
-		    }
             this.dataRecv()
         },
         methods: {
+            prev(){
+            	this.curpage=this.startPage-1
+                this.dataRecv()
+            },
+            next(){
+            	this.curpage=this.endPage+1
+                this.dataRecv()
+            },
+            pageChange(page){
+            	this.curpage=page
+            	this.dataRecv()
+            },
+            range(start,end){
+            	let arr=[]
+            	let len=end-start
+				for(let i=0;i<=len;i++)
+				{
+					arr[i]=start
+					start++
+				}
+				return arr
+            }
             dataRecv() {
                 axios.get('../schedule/schedule_vue.do', {
                     params: {
-                        month:this.selectedDate.month,
-                        day:this.selectedDate.day,
+                        month:this.month,
+                        day:this.day,
                         page:this.curpage
                     }
                 }).then(response => {
                     console.log(response.data)
-                    this.games = response.data.games
+                    this.games=response.data.games
                     this.curpage=response.data.curpage
                     this.totalpage=response.data.totalpage
                     this.startPage=response.data.startPage
                     this.endPage=response.data.endPage
+                    this.month=response.data.month
+                    this.day=response.data.day
                 }).catch(error => {
                     console.log(error.response)
                 })
-            },
-            updateDate(newMonth, newDay) {
-                this.month = newMonth
-                this.day = newDay
-               this.dataRecv()
-            },
-            dataDates(){
-            	let startDate=new Date(2024,2,23)
-            	let endDate=new Date(2024,9,1)
-            	this.dates=[]
-            	
-            	while(startDate<=endDate){
-            		this.dates.push(new Date(startDate))
-            		startDate.setDate(startDate.getDate()+1)
-            	}
-            	this.totalpage=this.dates.length
-            },
-            loadGames(){
-            	let date=this.dates[this.curpage-1]
-            	this.selectedDate={
-            			month:date.getMonth()+1,
-            			day:date.getDate()
-            	}
-            	this.dataRecv()
-            },
-            prev(){
-            	if(this.curpage>1)
-            	{
-            		this.pageChange(this.curpage-1)
-            	}
-            },
-            next(){
-            	if(this.curpage<this.totalpage)
-            	{
-            		this.pageChange(this.curpage+1)
-            	}
-            },
-            pageChange(page){
-            	this.curpage=page
-            	this.loadGames()
-            },
-            range(start,end){
-            	return Array.from({length:end-start+1},(v,k)=>k+start)
-            },
-            formatDate(date){
-            	let month=date.getMonth()+1
-            	let day=date.getDate()
-            	return `${month}월 ${day}일`
             }
         }
     }).mount('#gameApp')

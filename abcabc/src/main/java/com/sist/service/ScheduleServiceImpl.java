@@ -13,14 +13,14 @@ public class ScheduleServiceImpl implements ScheduleService {
 	private ScheduleDAO sDao;
 
 	@Override
-	public List<ScheduleVO> scheduleListData(int month, int day) {
+	public List<ScheduleVO> scheduleListData(Map map) {
 		// TODO Auto-generated method stub
-		return sDao.scheduleListData(month, day);
+		return sDao.scheduleListData(map);
 	}
 
 	@Override
-	public int scheduleTotalPage(int month, int day) {
+	public int scheduleRowCount(Map map) {
 		// TODO Auto-generated method stub
-		return sDao.scheduleTotalPage(month, day);
+		return sDao.scheduleRowCount(map);
 	}
 }

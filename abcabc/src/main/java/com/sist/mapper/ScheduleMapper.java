@@ -1,4 +1,6 @@
 package com.sist.mapper;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import org.apache.ibatis.annotations.Param;
@@ -8,11 +10,15 @@ import com.sist.vo.*;
 
 public interface ScheduleMapper {
 
-	@Select("SELECT * FROM schedule "
-			+ "WHERE month=#{month} AND day=#{day}")
-	public List<ScheduleVO> scheduleListData(@Param("month") int month, @Param("day") int day);
+	@Select("SELECT sno,day,home,away,homescore,awayscore,month,rownum as num "
+			+ "FROM (SELECT sno,day,home,away,homescore,awayscore,month "
+			+ "FROM schedule "
+			+ "WHERE month=#{month} AND day=#{day} "
+			+ "ORDER BY sno ASC)) "
+			+ "WHERE num BETWEEN #{start} AND #{end}")
+	public List<ScheduleVO> scheduleListData(Map map);
 
-	@Select("SELECT CEIL(COUNT(*)/10.0) FROM schedule "
+	@Select("SELECT COUNT(*) FROM schedule "
 			+ "WHERE month=#{month} AND day=#{day}")
-	public int scheduleTotalPage(@Param("month") int month, @Param("day") int day);
+	public int scheduleRowCount(Map map);
 }

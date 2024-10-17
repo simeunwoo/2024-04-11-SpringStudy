@@ -4,6 +4,6 @@ import com.sist.vo.*;
 
 public interface ScheduleService {
 
-	public List<ScheduleVO> scheduleListData(int month,int day);
-	public int scheduleTotalPage(int month, int day);
+	public List<ScheduleVO> scheduleListData(Map map);
+	public int scheduleRowCount(Map map);
 }
