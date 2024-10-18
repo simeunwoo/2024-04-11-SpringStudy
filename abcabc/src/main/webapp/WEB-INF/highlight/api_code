@@ -1,0 +1,4 @@
+apiUrl= https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=50&status=&playlistId=
+playlistId= PLuY-NTS_5IpzwH3FfskfFOrnui5O5NlkC &key=
+apiKey= AIzaSyBIGT4K45TpQVfaN7Uta1gxYfRdWdbtFD0
+

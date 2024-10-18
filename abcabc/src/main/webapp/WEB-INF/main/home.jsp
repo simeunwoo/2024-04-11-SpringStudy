@@ -132,7 +132,7 @@
                            </ul>
                         </div>
                      </div>
-                  </div>
+                  </div> 
                </div>
             </div>
          </div>
@@ -355,8 +355,11 @@
             <div class="row">
                <div class="col-md-12">
                   <div class="full">
-                     <div class="match_vedio">
-                        <img class="img-responsive" src="../images/img-07.jpg" alt="#" />
+                     <div class="match_vedio text-center">
+                        <iframe id="ytplayer" type="text/html" width="640" height="360"
+						  src="https://www.youtube.com/embed?listType=playlist&list=PLuY-NTS_5IpzwH3FfskfFOrnui5O5NlkC"
+						  frameborder="0">
+						</iframe>
                      </div>
                   </div>
                </div>

@@ -21,9 +21,9 @@
    <!-- Site CSS -->
    <link rel="stylesheet" href="../css/style.css">
    <!-- Colors CSS -->
-   <link rel="stylesheet" href="../css/colors.css">
+  <!--  <link rel="stylesheet" href="../css/colors.css"> -->
    <!-- ALL VERSION CSS -->	
-   <link rel="stylesheet" href="../css/versions.css">
+<!--    <link rel="stylesheet" href="../css/versions.css"> -->
    <!-- Responsive CSS -->
    <link rel="stylesheet" href="../css/responsive.css">
    <!-- Custom CSS -->
@@ -35,6 +35,9 @@
    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
    <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
    <script src="../js/3dslider.js"></script>
+       <!-- VueJS -->
+    <script src="https://unpkg.com/vue@3"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
    </head>
 
 

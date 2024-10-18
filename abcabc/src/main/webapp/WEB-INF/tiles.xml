@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN" "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
+
  <definition name="main" template="/WEB-INF/main/main.jsp">
    <put-attribute name="header" value="/WEB-INF/main/header.jsp"/>
    <put-attribute name="home" value="/WEB-INF/main/home.jsp"/>
@@ -9,6 +10,17 @@
  <definition name="*/*" extends="main">
    <put-attribute name="home" value="/WEB-INF/{1}/{2}.jsp"/>
  </definition>
+ 
+ <!-- 관리자페이지 -->
+ <definition name="adminpage" template="/WEB-INF/adminpage/admin_main.jsp">
+   <put-attribute name="header" value="/WEB-INF/main/header.jsp"/>
+   <put-attribute name="admin_menu" value="/WEB-INF/adminpage/admin_menu.jsp"></put-attribute>
+   <put-attribute name="admin_home" value="/WEB-INF/adminpage/admin_home.jsp"/>
+   <put-attribute name="footer" value="/WEB-INF/main/footer.jsp"/>
+ </definition>
+ <definition name="adminpage/*" extends="adminpage">
+   <put-attribute name="admin_home" value="/WEB-INF/admin/{1}.jsp"/>
+ </definition> 
  <definition name="team/detail" template="/WEB-INF/team/detail.jsp">
    <put-attribute name="home" value="/WEB-INF/team/detail.jsp"/>
  </definition>
