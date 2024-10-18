@@ -71,7 +71,7 @@
     	 },
     	 mounted(){
     		// 시작과 동시에 자동으로 처리 
-    		axios.get('../freeboard/update_vue.do',{
+    		axios.get('../notice/update_vue.do',{
     			params:{
     				no:this.no
     			}
@@ -137,7 +137,7 @@
     			   })
     			*/
     			// 서버로 전송 
-    			axios.post('../freeboard/update_ok_vue.do',null,{
+    			axios.post('../notice/update_ok_vue.do',null,{
     				params:{
     					no:this.no,
     					subject:this.subject,
@@ -147,7 +147,7 @@
     				// then((response)=>{})
     				if(response.data==="yes")
     				{
-    				    location.href="../freeboard/detail.do?no="+this.no	
+    				    location.href="../notice/detail.do?no="+this.no	
     				}
     				else
     				{

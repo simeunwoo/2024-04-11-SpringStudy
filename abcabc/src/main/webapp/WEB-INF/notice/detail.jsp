@@ -62,7 +62,7 @@
                         </tr>
                         <tr>
                           <td colspan="4" class="text-right">
-                           <a :href="'../freeboard/update.do?no='+vo.no" class="btn btn-xs btn-primary"
+                           <a :href="'../notice/update.do?no='+vo.no" class="btn btn-xs btn-primary"
                              v-show="sessionId===vo.id"
                            >수정</a>
                            <button class="btn btn-xs btn-success" @click="boardDelete()"
@@ -70,7 +70,7 @@
                            >삭제</button>
                            <button class="btn btn-xs btn-success" @click="boardConfig()"
                            >통계</button>
-                           <a href="../freeboard/list.do" class="btn btn-xs btn-info">목록</a>
+                           <a href="../notice/list.do" class="btn btn-xs btn-info">목록</a>
                           </td>
                         </tr>
                       </table>
@@ -95,7 +95,7 @@
     		}  
     	  },
     	  mounted(){
-    		  axios.get('../freeboard/detail_vue.do',{
+    		  axios.get('../notice/detail_vue.do',{
     			  params:{
     				  no:this.no
     			  }
@@ -115,14 +115,14 @@
     			})
     		  },
     		  boardDelete(){
-    			  axios.get('../freeboard/delete_vue.do',{
+    			  axios.get('../notice/delete_vue.do',{
     				  params:{
     					  no:this.no
     				  }
     			  }).then(response=>{
     				  if(response.data==='yes')
     				  {
-    					   location.href="../freeboard/list.do"  
+    					   location.href="../notice/list.do"  
     				  }
     				  else
     				  {

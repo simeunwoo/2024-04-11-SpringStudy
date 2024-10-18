@@ -72,7 +72,7 @@
     	 },
     	 methods:{
     		 boardInsert(){
-    			 axios.post('../freeboard/insert_vue.do',null,{
+    			 axios.post('../notice/insert_vue.do',null,{
     				 params:{
     					 subject:this.subject,
     					 content:this.content
@@ -80,7 +80,7 @@
     			 }).then(response=>{
     				 if(response.data==='yes')
     				 {
-    					 location.href='../freeboard/list.do' 
+    					 location.href='../notice/list.do' 
     				 }
     				 else
     				 {

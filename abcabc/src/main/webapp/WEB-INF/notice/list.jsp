@@ -45,7 +45,7 @@
 			              <table class="table">
 			                <tr>
 			                 <td>
-			                  <a href="../freeboard/insert.do" class="btn btn-sm btn-primary">새글</a>
+			                  <a href="../notice/insert.do" class="btn btn-sm btn-primary">새글</a>
 			                 </td>
 			                </tr>
 			              </table>
@@ -61,7 +61,7 @@
 			              <tr v-for="vo in board_list">
 			                <td class="text-center" width=10%>{{vo.no}}</td>
 			                <td width=45%>
-			                 <a :href="'../freeboard/detail.do?no='+vo.no">{{vo.subject}}</a>
+			                 <a :href="'../notice/detail.do?no='+vo.no">{{vo.subject}}</a>
 			                 <sup v-if="today===vo.dbday"><img src="../img/icon/new.gif"></sup>
 			                </td>
 			                <td class="text-center" width=15%>{{vo.name}}</td>
@@ -112,7 +112,7 @@
     		   },
     		   //1. 공통으로 적용되는 기능을 설정 => 목록 읽기
     		   dataRecv(){
-    			   axios.get('../freeboard/list_vue.do',{
+    			   axios.get('../notice/list_vue.do',{
     				   params:{
     					   page:this.curpage
     				   }
