@@ -54,29 +54,13 @@ BEGIN
 END;
 /
  */
-	
-	@Results({
-	    @Result(property="bno",column="bno"),
-	    @Result(property="age",column="age"),
-	    @Result(property="game",column="game"),
-	    @Result(property="h1",column="h1"),
-	    @Result(property="homerun",column="homerun"),
-	    @Result(property="rbi",column="rbi"),
-	    @Result(property="war",column="war"),
-	    @Result(property="name",column="name"),
-	    @Result(property="team",column="team"),
-	    @Result(property="position",column="position"),
-	    @Result(property="logo",column="logo"),
-	    @Result(property="image",column="image"),
-	    @Result(property="avg",column="avg"),
-	    @Result(property="num",column="num")
-	})
-	@Select(value="{CALL batterListData"
-			+ "(#{pFd,mode=INjavaType=java.lang.String},"
-			+ "#{pStart,mode=IN,javaType=java.lang.Integer},"
-			+ "#{pEnd,mode=IN,javaType=java.lang.Integer},"
-			+ "#{pResult,mode=OUT,jdbcType=CURSOR})}")
-	@Options(statementType = StatementType.CALLABLE)
+	@Select("SELECT bno,age,game,h1,homerun,rbi,war,name,team,position,logo,image,avg,num "
+			+ "FROM (SELECT bno,age,game,h1,homerun,rbi,war,name,team,position,logo,image,avg,rownum as num "
+			+ "FROM (SELECT bno,age,game,h1,homerun,rbi,war,name,team,position,logo,image,avg "
+			+ "FROM batter "
+			+ "WHERE name LIKE '%'||#{fd}||'%' "
+			+ "ORDER BY bno ASC)) "
+			+ "WHERE num BETWEEN #{start} AND #{end}")
 	public List<BatterVO> batterListData(Map map);
 
 	

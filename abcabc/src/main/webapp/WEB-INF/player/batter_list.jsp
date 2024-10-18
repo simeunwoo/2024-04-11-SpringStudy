@@ -16,6 +16,9 @@
         width: 20px;
         height: 20px;
     }
+    .row{
+    	margin: 0px auto;
+    }
 </style>
 
 </head>

@@ -33,24 +33,9 @@ END;
 /
  */
 	
-	@Results({
-		@Result(property="name",column="name"),
-		@Result(property="syear",column="syear"),
-		@Result(property="content",column="content"),
-		@Result(property="winyear",column="winyear"),
-		@Result(property="home",column="home"),
-		@Result(property="dyear",column="dyear"),
-		@Result(property="oldteam",column="oldteam"),
-		@Result(property="logo",column="logo"),
-		@Result(property="rno",column="rno"),
-		@Result(property="mascot",column="mascot"),
-		@Result(property="mimage",column="mimage"),
-		@Result(property="star",column="star")
-	})
-	@Select(value="{CALL teamRankingData"
-			+ "(#{pName,javaType=java.lang.String,mode=IN},"
-			+ "#{pResult,mode=OUT,jdbcType=CURSOR})}")
-	@Options(statementType=StatementType.CALLABLE)
+	
+	@Select("SELECT * FROM teamdetail "
+			+ "WHERE name=#{name}")
 	public TeamDetailVO teamDetailData(String name);
 	
 	@Select("SELECT * FROM team ORDER BY no ASC")

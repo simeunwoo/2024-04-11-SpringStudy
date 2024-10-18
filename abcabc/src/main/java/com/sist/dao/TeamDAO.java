@@ -27,4 +27,9 @@ public class TeamDAO {
 	{
 		return mapper.teamRankingData();
 	}
+	/*
+		mapper.seoulShopDetailData(map);
+	   List<SeoulVO> list=(List<SeoulVO>)map.get("pResult");
+	   return list.get(0);
+	 */
 }
