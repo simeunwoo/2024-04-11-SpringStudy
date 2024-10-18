@@ -1,12 +1,13 @@
 package com.sist.exam;
 import java.util.*;
 import java.sql.*;
+import com.sist.vo.*;
 
 public class MainClass {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		try
+	/*	try
 		{
 			String url="jdbc:mysql://localhost:3306/mydb?serverTimezone=UTC";
 			String user="root";
@@ -33,7 +34,24 @@ public class MainClass {
 			rs.close();
 			ps.close();
 			conn.close();
-		}catch(Exception ex) {}
+		}catch(Exception ex) {} */
+		
+		Scanner scan=new Scanner(System.in);
+		// malloc(클래스) => 크기 확인 => free()
+		int totalpage=SeoulDAO.seoulTotalPage();
+		System.out.print("페이지 입력 (1 ~ "+totalpage+") : ");
+		int page=scan.nextInt();
+		
+		int start=(page*10)-10;
+
+		List<SeoulVO> list=SeoulDAO.seoulListData(start);
+		
+		for(SeoulVO vo:list)
+		{
+			System.out.println("==============================");
+			System.out.println(vo.getTitle());
+			System.out.println(vo.getAddress());
+		}
 	}
 
 }
