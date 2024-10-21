@@ -24,7 +24,7 @@ public class NoticeRestController {
    
    @GetMapping(value="notice/list_vue.do",produces = "text/plain;charset=UTF-8")
    // => text/plain(JSON) ,  text/html  , text/xml
-   public String notice_list(int page)throws Exception
+   public String notice_list(int page) throws Exception
    {
 	   int rowSize=15;
 	   int start=(rowSize*page)-(rowSize-1);
@@ -64,7 +64,7 @@ public class NoticeRestController {
    public String notice_insert(NoticeVO vo,HttpSession session)
    {
 	   String result="";
-	   // id,name => HttpSession을 이용한다 
+	   // id, name => HttpSession을 이용한다 
 	   String id=(String)session.getAttribute("userId");
 	   String name=(String)session.getAttribute("userName");
 	   try

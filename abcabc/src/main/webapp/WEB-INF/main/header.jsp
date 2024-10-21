@@ -233,7 +233,7 @@ li.col-sm-4 {
                                                
                                                 <li class="col-sm-4">
                                                    <ul class="menu-inner">
-                                                      <li><a href="#">공지사항</a></li>
+                                                      <li><a href="../notice/list.do">공지사항</a></li>
                                                       <li><a href="../board/list.do">게시판</a></li>
                                                       <li><a href="../gnd/list.do">갤러리/자료실</a></li>
                                                    </ul>

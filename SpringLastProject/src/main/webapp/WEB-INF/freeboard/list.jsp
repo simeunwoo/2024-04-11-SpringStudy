@@ -40,7 +40,7 @@
     <section class="archive-area section_padding_80" id="listApp">
         <div class="container">
             <div class="row">
-            	<c:if test="${sessionScope.userId=!null }">
+            	<c:if test="${sessionScope.userId!=null }">
 	            	<table class="table">
 	            		<tr>
 	            			<td>

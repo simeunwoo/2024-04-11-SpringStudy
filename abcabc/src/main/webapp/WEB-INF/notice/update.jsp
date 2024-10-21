@@ -5,15 +5,37 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://unpkg.com/vue@3"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<style>
+.container{
+	text-align: center;
+}
+</style>
 </head>
 <body>
+<div class="container">
+    <!-- 고정 이미지 -->
+    <div class="text-center" style="text-align: center;">
+        <img src="m1.jpg" style="width:1200px;height:720px">
+        <div class="carousel-caption">
+            <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12"></div>
+            <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                <div class="slider-contant" data-animation="animated fadeInRight">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="height:80px"></div>
+<div class="container text-center"> 
 <!-- ****** Breadcumb Area Start ****** -->
     <div class="breadcumb-area" style="background-image: url(../img/bg-img/breadcumb.jpg);">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12">
                     <div class="bradcumb-title text-center">
-                        <h2>수정하기</h2>
+                        <h1>수정하기</h1>
                     </div>
                 </div>
             </div>
@@ -28,22 +50,22 @@
             </div>
         </div>
     </div>
-    <section class="single_blog_area section_padding_80" id="updateApp">
-        <div class="container">
+    
+        <div class="container" id="updateApp">
             <div class="row justify-content-center">
-                <div class="col-12 col-lg-8">
+                <div>
                     <div class="row no-gutters">
                      <table class="table">
                        <tr>
-                         <th class="text-center" width=15%>제목</th>
-                         <td width=85%>
-                          <input type=text size=45 class="input-sm"
+                         <th class="text-right" width=35%>제목&nbsp;&nbsp;</th>
+                         <td class="text-left" width=65%>
+                          <input type=text size=51 class="input-sm"
                             ref="subject" v-model="subject">
                          </td>
                        </tr>
                        <tr>
-                         <th class="text-center" width=15%>내용</th>
-                         <td width=85%>
+                         <th class="text-right" width=35%>내용&nbsp;&nbsp;</th>
+                         <td class="text-left" width=65%>
                           <textarea rows="10" cols="48" ref="content" v-model="content"></textarea>
                          </td>
                        </tr>
@@ -59,7 +81,8 @@
                 </div>
             </div>
          </div>
-    </section>
+         <div style="height:50px"></div>
+    </div>
     <script>
      let updateApp=Vue.createApp({
     	 data(){

@@ -16,4 +16,6 @@ public class NoticeVO {
    private int no,hit;
    private String id,name,subject,content,dbday;
    private Date regdate;
+   
+   private AuthorityVO avo=new AuthorityVO();
 }

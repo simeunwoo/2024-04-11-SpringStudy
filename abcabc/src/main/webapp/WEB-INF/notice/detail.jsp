@@ -5,13 +5,30 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style type="text/css">
-.nav-link{
-  cursor: pointer;
+<script src="https://unpkg.com/vue@3"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<style>
+.container{
+	text-align: center;
 }
 </style>
 </head>
 <body>
+<div class="container">
+    <!-- 고정 이미지 -->
+    <div class="text-center" style="text-align: center;">
+        <img src="m1.jpg" style="width:1200px;height:720px">
+        <div class="carousel-caption">
+            <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12"></div>
+            <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+                <div class="slider-contant" data-animation="animated fadeInRight">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div style="height:80px"></div>
+<div class="container text-center"> 
 <!-- ****** Breadcumb Area Start ****** -->
     <div class="breadcumb-area" style="background-image: url(../img/bg-img/breadcumb.jpg);">
         <div class="container h-100">
@@ -33,9 +50,11 @@
             </div>
         </div>
     </div>
-    <section class="single_blog_area section_padding_80" id="detailApp">
-        <div class="container">
+    
+        <div class="container" id="detailApp">
             <div class="row justify-content-center">
+            	<div class="col-12 col-lg-2">
+            	</div>
                 <div class="col-12 col-lg-8">
                     <div class="row no-gutters">
                       <table class="table">
@@ -61,15 +80,13 @@
                           </td>
                         </tr>
                         <tr>
-                          <td colspan="4" class="text-right">
+                          <td colspan="4" style="margin:0 auto;">
                            <a :href="'../notice/update.do?no='+vo.no" class="btn btn-xs btn-primary"
                              v-show="sessionId===vo.id"
                            >수정</a>
                            <button class="btn btn-xs btn-success" @click="boardDelete()"
                              v-show="sessionId===vo.id"
                            >삭제</button>
-                           <button class="btn btn-xs btn-success" @click="boardConfig()"
-                           >통계</button>
                            <a href="../notice/list.do" class="btn btn-xs btn-info">목록</a>
                           </td>
                         </tr>
@@ -81,9 +98,12 @@
                      </div>
                     </div>
                 </div>
+                <div class="col-12 col-lg-2">
+            	</div>
             </div>
         </div>
-    </section>
+        <div style="height:50px"></div>
+    </div>
     <script>
       let detailApp=Vue.createApp({
     	  data(){
@@ -107,13 +127,6 @@
     		  })
     	  },
     	  methods:{
-    		  boardConfig(){
-    			this.isShow=true
-    			axios.get('http://localhost:8000/web/emp')
-    			.then(response=>{
-    				
-    			})
-    		  },
     		  boardDelete(){
     			  axios.get('../notice/delete_vue.do',{
     				  params:{
