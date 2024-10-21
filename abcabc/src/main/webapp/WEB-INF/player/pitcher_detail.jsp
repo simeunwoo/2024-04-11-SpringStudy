@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,9 +10,19 @@
 <script src="https://unpkg.com/vue@3"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 google.charts.load('current', {packages: ['corechart', 'bar']});
 </script>
+<style>
+.container{
+	text-align: center;
+}
+#chart_div,#chart2_div{
+	display: block;
+	margin: 0 auto;
+}
+</style>
 </head>
 <body>
 	<div class="container">
@@ -69,12 +80,13 @@ google.charts.load('current', {packages: ['corechart', 'bar']});
 	                                    </div>
                                 </div>
                             </div>
-                            
+         </div>
+         <div class="container">                   
         <div class="header-top">
             <div class="row">
                 <h4>Points Table</h4>
                 <aside id="sidebar" class="left-bar">
-                    <div class="feature-matchs text-center">
+                    <div class="feature-matchs text-center" style="text-align: center;">
                         <table class="table table-bordered table-hover" style="font-size:16px;margin:0 auto">
                             <tr>
                             	<td colspan="6" class="text-center">
@@ -238,14 +250,14 @@ google.charts.load('current', {packages: ['corechart', 'bar']});
 				drawDetailChart() {
 					var data = google.visualization.arrayToDataTable([
 				        ['', '류현진 (Hyun-Jin Ryu)', this.vo.name],
-				        ['경기수', 141, this.vo.game],
-				        ['승', 189, this.vo.win],
-				        ['패', 29, this.vo.lose],
-				        ['피안타', 10, this.vo.hit],
-				        ['볼넷', 38, this.vo.ball],
-				        ['이닝', 109, this.vo.inning],
-				        ['세이브', 66, this.vo.save],
-				        ['홀드', 110, this.vo.hold]
+				        ['경기수', 25, this.vo.game],
+				        ['승', 16, this.vo.win],
+				        ['패', 4, this.vo.lose],
+				        ['피안타', 149, this.vo.hit],
+				        ['볼넷', 45, this.vo.ball],
+				        ['이닝', 192.2, this.vo.inning],
+				        ['세이브', 0, this.vo.save],
+				        ['홀드', 0, this.vo.hold]
 				      ]);
 
 				      var materialOptions = {
@@ -291,6 +303,8 @@ google.charts.load('current', {packages: ['corechart', 'bar']});
 				    }
 			}
 		}).mount('#chartApp')
+		</script>
+		<script>
 		let replyApp=Vue.createApp({
     	 data(){
     		 return {

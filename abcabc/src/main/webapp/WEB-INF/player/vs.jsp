@@ -12,6 +12,15 @@
     <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
     </script>
+<style>
+ .container {
+        text-align: center;
+    }
+    #chart_div, #chart2_div {
+        display: block;
+        margin: 0 auto;
+    }
+</style>
 </head>
 <body>
 	<div class="container">
@@ -26,7 +35,7 @@
 	            </div>
 	        </div>
 	    </div>
-	</div>
+	
 	<div class="breadcumb-area" style="background-image: url(../img/bg-img/breadcumb.jpg);">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
@@ -48,9 +57,10 @@
         </div>
     </div>
     <section id="vsApp">
-    	<div id="chart_div" style="width: 900px; height: 500px;"></div>
-    	<div id="chart2_div" style="width: 900px; height: 500px;"></div>
+    	<div id="chart_div" style="width: 1200px; height: 800px;"></div>
+    	<div id="chart2_div" style="width: 1200px; height: 800px;"></div>
     </section>
+    </div>
     <script>
     	let vsApp=Vue.createApp({
     		data(){
@@ -74,16 +84,17 @@
     		},
     		methods:{
     			drawBatterChart() {
-    		        var data = [['', '타율, 승리기여도']]
-    		        this.bList.forEach(bvo=>{
-    		        	data.push([bvo.avg,bvo.war])
-    		        })
+    				var data = [['', '타율 & 승리기여도', { role: 'tooltip' }]]
+    				  this.bList.forEach(bvo => {
+    				    data.push([bvo.avg, bvo.war, bvo.name+' 타율:'+bvo.avg+', 승리기여도:'+bvo.war])
+    				  })
     				var dataTable=google.visualization.arrayToDataTable(data)
     		        var options = {
     		          title: 'KBO 타자들의 타율 및 승리기여도 비교',
-    		          hAxis: {title: '타율 (Average)', minValue: 0, maxValue: 1},
+    		          hAxis: {title: '타율 (Average)', minValue: 0, maxValue: 0.5},
     		          vAxis: {title: '승리기여도 (WAR)', minValue: -1, maxValue: 9},
-    		          legend: { position: 'right' }
+    		          legend: { position: 'right' },
+    		          series: { 0: { color: 'red' } }
     		        };
 
     		        var chart = new google.visualization.ScatterChart(document.getElementById('chart_div'));
@@ -91,14 +102,14 @@
     		        chart.draw(dataTable, options);
     		      },
     		      drawPitcherChart() {
-    		          var data = [['', '평균자책점, 승리기여도']]
+    		          var data = [['', '평균자책점 & 승리기여도', { role: 'tooltip' }]]
     		          this.pList.forEach(pvo=>{
-    		        	  data.push([pvo.era,pvo.war])
+    		        	  data.push([pvo.era, pvo.war, pvo.name+' 평균자책점:'+pvo.era+', 승리기여도:'+pvo.war])
     		          })
     		  		var dataTable=google.visualization.arrayToDataTable(data)
     		          var options = {
     		            title: 'KBO 투수들의 평균자책점 및 승리기여도 비교',
-    		            hAxis: {title: '평균자책점 (ERA)', minValue: 0, maxValue: 20},
+    		            hAxis: {title: '평균자책점 (ERA)', minValue: 0, maxValue: 12},
     		            vAxis: {title: '승리기여도 (WAR)', minValue: -1, maxValue: 10},
     		            legend: { position: 'right' }
     		          };

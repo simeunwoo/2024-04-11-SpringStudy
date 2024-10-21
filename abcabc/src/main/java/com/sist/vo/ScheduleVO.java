@@ -3,7 +3,7 @@ package com.sist.vo;
 import lombok.Data;
 /*
 SNO       NOT NULL NUMBER       
-DAY                VARCHAR2(20) 
+DAY                NUMBER 
 HOME               VARCHAR2(50) 
 AWAY               VARCHAR2(50) 
 HOMESCORE          VARCHAR2(10) 
@@ -13,6 +13,6 @@ MONTH              NUMBER
 @Data
 public class ScheduleVO {
 
-	private int sno,month;
-	private String day,home,away,homescore,awayscore;
+	private int sno,month,day;
+	private String home,away,homescore,awayscore;
 }

@@ -52,7 +52,7 @@ public class ScheduleRestController {
 			map.put("month", month);
 			map.put("day", day);
 			
-			// 자바스크립트 연결 => Map을 JSON으로 => Kotlin, Flutter
+			//  옄諛붿뒪 겕由쏀듃  뿰寃  => Map 쓣 JSON 쑝濡  => Kotlin, Flutter
 			ObjectMapper mapper=new ObjectMapper();
 			String json=mapper.writeValueAsString(map);
 			
@@ -70,8 +70,10 @@ public class ScheduleRestController {
 		int start=(rowSize*page)-(rowSize-1);
 		int end=rowSize*page;
 		
+		map.put("start", start);
+		map.put("end", end);
+		
 	     List<ScheduleVO> games=sService.scheduleListData(map);
-	     int count=sService.scheduleRowCount(map);
 	     int totalpage=(int)Math.ceil((double)rowSize/10);
 	     
 	     final int BLOCK=10;
@@ -79,7 +81,7 @@ public class ScheduleRestController {
 		 int endPage=((page-1)/BLOCK*BLOCK)+BLOCK;
 		 if(endPage>totalpage)
 		 	 endPage=totalpage;
-	        
+	         
 	        map=new HashMap();
 			map.put("games", games);
 			map.put("curpage", page);
@@ -89,7 +91,7 @@ public class ScheduleRestController {
 			map.put("month", month);
 			map.put("day", day);
 			
-			// 자바스크립트 연결 => Map을 JSON으로 => Kotlin, Flutter
+			//  옄諛붿뒪 겕由쏀듃  뿰寃  => Map 쓣 JSON 쑝濡  => Kotlin, Flutter
 			ObjectMapper mapper=new ObjectMapper();
 			String json=mapper.writeValueAsString(map);
 			

@@ -12,6 +12,15 @@
 <script type="text/javascript">
 google.charts.load('current', {packages: ['corechart', 'bar']});
 </script>
+<style>
+.container{
+	text-align: center;
+}
+#chart_div,#chart2_div{
+	display: block;
+	margin: 0 auto;
+}
+</style>
 </head>
 <body>
 	<div class="container">
@@ -26,7 +35,7 @@ google.charts.load('current', {packages: ['corechart', 'bar']});
 	            </div>
 	        </div>
 	    </div>
-	</div>
+	
 	<div class="breadcumb-area" style="background-image: url(../img/bg-img/breadcumb.jpg);">
         <div class="container h-100">
             <div class="row h-100 align-items-center">
@@ -48,7 +57,6 @@ google.charts.load('current', {packages: ['corechart', 'bar']});
         </div>
     </div>
     <section class="single_blog_area section_padding_80" id="chartApp">
-        <div class="container">
             <div class="row justify-content-center">
                 <div class="col-12 col-lg-8">
                     <div class="row no-gutters">
@@ -68,13 +76,12 @@ google.charts.load('current', {packages: ['corechart', 'bar']});
 	                                        </div>
 	                                    </div>
                                 </div>
-                            </div>
-                            
+                            </div></div>
+        <div class="container">                    
         <div class="header-top">
             <div class="row">
-                <h4>Points Table</h4>
                 <aside id="sidebar" class="left-bar">
-                    <div class="feature-matchs text-center">
+                    <div class="feature-matchs text-center" style="text-align: center;">
                         <table class="table table-bordered table-hover" style="font-size:16px;margin:0 auto">
                             <tr>
                             	<td colspan="6" class="text-center">
@@ -125,7 +132,7 @@ google.charts.load('current', {packages: ['corechart', 'bar']});
                         	<div style="height:80px"></div>
                         	<div id="chart2_div" style="width: 900px; height: 500px;"></div>
                         	<div style="height:80px"></div>
-                        </div></section>
+                        </section></div>
     	
 	<script>
 		let chartApp=Vue.createApp({

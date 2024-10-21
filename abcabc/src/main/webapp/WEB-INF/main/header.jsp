@@ -173,11 +173,12 @@ li.col-sm-4 {
                                           <li class="active"><a href="../main/main.do">Home</a></li>
                                           <li class="dropdown mega-dropdown">
                                              <a href="match" class="dropdown-toggle" data-toggle="dropdown">일정/기록<span class="caret"></span></a>				
-                                             <ul class="dropdown-menu mega-dropdown-menu"  style="width:170px;height:120px;">
+                                             <ul class="dropdown-menu mega-dropdown-menu"  style="width:170px;height:180px;">
                                                
                                                 <li class="col-sm-4">
                                                    <ul class="menu-inner">
-                                                      <li><a href="#">경기일정&결과</a></li>
+                                                      <li><a href="../schedule/schedule.do">경기일정&결과</a></li>
+                                                      <li><a href="../team/ranking.do">순위</a></li>
                                                       <li><a href="#">일자별 기록</a></li>
                                                       <li><a href="../seoul/weather.do">오늘의 날씨</a></li>
                                                    </ul>
@@ -186,13 +187,15 @@ li.col-sm-4 {
                                           </li>
                                           <li class="dropdown mega-dropdown">
                                              <a href="match" class="dropdown-toggle" data-toggle="dropdown">구장/선수/팀<span class="caret"></span></a>				
-                                             <ul class="dropdown-menu mega-dropdown-menu"  style="width:110px;height:180px; width:60px;">
+                                             <ul class="dropdown-menu mega-dropdown-menu"  style="width:110px;height:225px; width:60px;">
                                                
                                                 <li class="col-sm-4">
                                                    <ul class="menu-inner">
                                                       <li><a href="#">구장 정보</a></li>
-                                                      <li><a href="#">팀 정보</a></li>
-                                                      <li><a href="#">선수 정보</a></li>
+                                                      <li><a href="../team/list.do">팀 정보</a></li>
+                                                      <li><a href="../player/batter_list.do">타자 정보</a></li>
+                                                      <li><a href="../player/pitcher_list.do">투수 정보</a></li>
+                                                      <li><a href="../player/vs.do">선수 비교</a></li>
                                                    </ul>
                                                 </li>
                                              </ul>
@@ -229,7 +232,7 @@ li.col-sm-4 {
                                                
                                                 <li class="col-sm-4">
                                                    <ul class="menu-inner">
-                                                      <li><a href="../notice/notice.do">공지사항</a></li>
+                                                      <li><a href="#">공지사항</a></li>
                                                       <li><a href="../board/list.do">게시판</a></li>
                                                       <li><a href="../gnd/list.do">갤러리/자료실</a></li>
                                                    </ul>

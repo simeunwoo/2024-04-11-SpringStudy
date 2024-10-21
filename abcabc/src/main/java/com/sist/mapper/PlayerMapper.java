@@ -73,9 +73,9 @@ END;
 			+ "WHERE num BETWEEN #{start} AND #{end}")
 	public List<PitcherVO> pitcherListData(Map map);
 	
-	@Select("SELECT bno,avg,war FROM batter")
+	@Select("SELECT bno,name,avg,war FROM batter")
 	public List<BatterVO> batterChartData();
 
-	@Select("SELECT pno,era,war FROM pitcher")
+	@Select("SELECT pno,name,era,war FROM pitcher")
 	public List<PitcherVO> pitcherChartData();
 }
