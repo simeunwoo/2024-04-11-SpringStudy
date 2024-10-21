@@ -225,7 +225,7 @@
                         </div>
                      </div>
                   </aside>
-                  <h4>Points Table</h4>
+                  <h4>KBO 순위</h4>
                   <aside id="sidebar" class="left-bar">
                      <div class="feature-matchs">
                         <table class="table table-bordered table-hover">
