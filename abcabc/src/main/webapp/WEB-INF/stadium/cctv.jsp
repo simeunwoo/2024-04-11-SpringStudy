@@ -47,11 +47,11 @@
        </td>
      </tr>
      <tr>
-       <th class="text-center">돌발상황</th>
-       <th class="text-center">공사일</th>
-       <th class="text-center">도로위치</th>
-       <th class="text-center">도로차단</th>
-       <th class="text-center">사유</th>
+       <th width="7%" class="text-center">돌발상황</th>
+       <th width="13%" class="text-center">공사일</th>
+       <th width="20%" class="text-center">도로위치</th>
+       <th width="15%" class="text-center">도로차단</th>
+       <th width="45%" class="text-center">사유</th>
      </tr>
      <tr v-for="vo in state_list">
        <td class="text-center">{{vo.eventType}}</td>
@@ -66,38 +66,67 @@
   <script>
   let app=Vue.createApp({
 	  data(){
-		return {
+		return{
 			 no:0,
 		     state_list:[],
-		     isShow:false
+		     isShow:false,
+		     cctvurl:''
 		}
 	  },
 	  methods:{
-		  cctvView(no){
-			  this.isShow=true
-			  this.no=no
-			  window.open(`http://cctv-url-for-stadium${no}`, '_blank', 'width=800,height=600');
-			  axios.get('http://127.0.0.1:8000/web/food/',{
-				  params:{
-					  no:this.no
-				  }
-			  }).then(response=>{
-				  alert("정상수행:"+response.data)
-			  }).catch(error=>{
-				  console.log(error.response)
-			  })
-			  
-			  axios.get('../stadium/cctv_vue.do',{
-				  params:{
-					  no:this.no
-				  }
-			  }).then(response=>{
-				  this.state_list=response.data
-			  }).catch(error=>{
-				  console.log(error.response)
-			  })
-		  }
-	  }
+			cctvView(no){
+		        this.isShow=true
+		        let cctvUrl=''
+
+		        switch(no){
+		            case 1:
+		                cctvUrl='http://cctvsec.ktict.co.kr/5730/L+6u49S0VzDxZmoHvxhZ4v1jt8qQ3+gKSpPXyY710juiqC7JnYSCuRJlhMNJMer1FWcmlpy5zqFQmFI4FoxC/w=='
+		                break
+		            case 2:
+		                cctvUrl='http://cctvsec.ktict.co.kr/43/BfmZpJJb0e0ByFxazhMewYJqUPC1l+IrFba2y4ec3E8qEooED/1JfcYdTIDi0gNTLF9orV3yTt0u1jF0K1OweA=='
+		                break
+		            case 3:
+		                cctvUrl='http://cctvsec.ktict.co.kr/5248/gGsFSdioKLBqlx/k4yniNBgBcNUrFvWMBSqp/WbKu7+zRk1vxnQComQdFjHOyYf0NfaAOKoattO5r0iEj6YarA=='
+		                break
+		            case 4:
+		                cctvUrl='http://cctvsec.ktict.co.kr/3715/t9zOCr5Y5+Nqc5ilNNtwAwAl9qEcI9TJbolOBJpRiaOearveYAUDrcq6jSpXS0+HwzI1yOmsquSc71w/WUL4zw=='
+		                break
+		            case 5:
+		                cctvUrl='http://cctvsec.ktict.co.kr/3344/t1Fz9HFiUOWiXcjvFiB4tyteVEXFbxym+tOIIyGLfQtx8VJcuWzPupjtSrId5D8oiJ+lAgQV9VUgxw3uWIHtOg=='
+		                break
+		            case 6:
+		                cctvUrl='http://cctvsec.ktict.co.kr/5119/W3zQ1/3JVLBdcc84lp2WCfr4OscjYybiIFtkPMoEftUx7nrYshz7JaI05Dq7TKErUqyq0IMn9BiqiJKLEv4yoQ=='
+		                break
+		            case 7:
+		                cctvUrl='http://cctvsec.ktict.co.kr/3908/5OALxtvdb1g9vnjjBJQQtIWJcwPIDmX2DOhPMqt/V3OMRbYoWZHFkNOa/BkQMaI1KrBtP2RzWqAmFQS3uFfmzw=='
+		                break
+		            case 8:
+		                cctvUrl='http://cctvsec.ktict.co.kr/2050/cOxmh1LB2lnjAgl0DSQc4f/NyrMusoLCuFPh1fVVBF2r81iNx52sQxpovDzNip/55p9M0b+juBfGYDvuMBpTTA=='
+		                break
+		            case 9:
+		                cctvUrl='http://cctvsec.ktict.co.kr/2326/y8Oy0cujl4sjYZIQeqMNI+WvJtET3lmSjVmKib2Yc7jVEhk0eDZW7S5yN8XojtCUc+d3JJ+j+a67emt8YxAZkg=='
+		                break
+		            default:
+		                console.log('Invalid stadium number')
+		                return
+		        }
+
+		        // 새 창으로 CCTV URL 열기
+		        window.open(cctvUrl, '_blank', 'width=800,height=600')
+
+		        // 교통 상태 API 호출
+		        axios.get('../stadium/cctv_vue.do', {
+		            params:{
+		                no:this.no
+		            }
+		        }).then(response=>{
+		            this.state_list=response.data
+		        }).catch(error=>{
+		            console.log(error.response)
+		        })
+		    }
+		}
+
   }).mount("#myApp")
   </script>
 </body>

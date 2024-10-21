@@ -34,7 +34,7 @@ public class ApiExplorer {
         urlBuilder.append("&" + URLEncoder.encode("minY", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(minY), "UTF-8")); // 최소위도영역
         urlBuilder.append("&" + URLEncoder.encode("maxY", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(maxY), "UTF-8")); // 최대위도영역
         urlBuilder.append("&" + URLEncoder.encode("getType", "UTF-8") + "=" + URLEncoder.encode("xml", "UTF-8")); // 출력타입
-
+        
         URL url = new URL(urlBuilder.toString());
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
         conn.setRequestMethod("GET");
