@@ -13,11 +13,11 @@
     <script src="../js/calendar.js"></script>
     <style>
         /* 여기에 필요한 스타일을 추가하세요 */
-        #calendar {
+        #calendar{
             display: flex;
             flex-wrap: wrap;
         }
-        .calendar-day {
+        .calendar-day{
             width: 14.28%; /* 7 days in a week */
             padding: 10px;
             text-align: center;
@@ -25,12 +25,21 @@
             border: 1px solid #ddd;
             margin: 2px;
         }
-        .calendar-day:hover {
+        .calendar-day:hover{
             background-color: #f0f0f0;
         }
-        .selected {
+        .selected{
             background-color: #007bff;
             color: white;
+        }
+        .schedule-logo{
+        	width: 35px;
+        	height: 35px;
+        }
+        .a{
+        	display: flex;
+    		justify-content: space-around;
+    		align-items: center;
         }
     </style>
 </head>
@@ -55,10 +64,12 @@
     <div id="gameApp" class="details">
         <h2>{{ month }}월 {{ day }}일 경기 결과</h2>
         <div v-if="games.length > 0">
-            <div v-for="vo in games" :key="vo.sno">
+            <div v-for="vo in games" :key="vo.sno" class="a">
+            	<img :src="vo.awayimage" class="schedule-logo">
                 <p class="event">
-                    {{ vo.away }} {{ vo.awayscore }} - {{ vo.homescore }} {{ vo.home }}
+                    {{ vo.away }}&nbsp; {{ vo.awayscore }} - {{ vo.homescore }} &nbsp;{{ vo.home }}
                 </p>
+                <img :src="vo.homeimage" class="schedule-logo">
             </div>
         </div>
         <div v-else>

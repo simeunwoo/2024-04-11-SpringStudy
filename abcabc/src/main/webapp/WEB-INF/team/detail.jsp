@@ -106,7 +106,14 @@
                             </tr>
                             <tr>
                                 <th width="15%" class="text-right">우승</th>
-                                <td width="85%">${vo.winyear }년</td>
+                                <td width="85%">
+                                    <c:if test="${vo.winyear=='-'}">
+                                        -
+                                    </c:if>
+                                    <c:if test="${vo.winyear!='-'}">
+                                        ${vo.winyear}년
+                                    </c:if>
+                                </td>
                             </tr>
                             <tr>
                                 <th width="15%" class="text-right">해체연도</th>
