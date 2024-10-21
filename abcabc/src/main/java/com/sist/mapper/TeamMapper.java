@@ -56,4 +56,10 @@ END;
    SELECT no,title,poster,address,msg
 		    FROM project_seoul_shop
  */
+	
+	@Select("SELECT ranking,team,win,draw,lose,cha,winper,logo "
+			+ "FROM team "
+			+ "WHERE year='2024' "
+			+ "ORDER BY no ASC")
+	public List<TeamVO> teamRankingMainData();
 }

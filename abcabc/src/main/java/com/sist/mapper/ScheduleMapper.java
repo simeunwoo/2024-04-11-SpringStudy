@@ -30,4 +30,9 @@ public interface ScheduleMapper {
 	@Select("SELECT COUNT(*) FROM schedule "
 			+ "WHERE month=#{month} AND day=#{day}")
 	public int scheduleRowCount(Map map);
+	
+	@Select("SELECT home,away,homescore,awayscore "
+			+ "FROM schedule sc "
+			+ "WHERE sno BETWEEN 790 AND 794")
+	public List<ScheduleVO> scheduleListMainData();
 }

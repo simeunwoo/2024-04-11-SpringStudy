@@ -23,4 +23,10 @@ public class ScheduleServiceImpl implements ScheduleService {
 		// TODO Auto-generated method stub
 		return sDao.scheduleRowCount(map);
 	}
+
+	@Override
+	public List<ScheduleVO> scheduleListMainData() {
+		// TODO Auto-generated method stub
+		return sDao.scheduleListMainData();
+	}
 }

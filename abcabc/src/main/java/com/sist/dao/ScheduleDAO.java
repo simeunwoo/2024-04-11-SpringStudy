@@ -24,4 +24,9 @@ public class ScheduleDAO {
 	{
 		return mapper.scheduleRowCount(map);
 	}
+	
+	public List<ScheduleVO> scheduleListMainData()
+	{
+		return mapper.scheduleListMainData();
+	}
 }

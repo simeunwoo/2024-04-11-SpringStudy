@@ -12,13 +12,13 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <style>
-    .logo-image {
-        width: 20px;
-        height: 20px;
-    }
-    .row{
-    	margin: 0px auto;
-    }
+.logo-image{
+	width: 20px;
+	height: 20px;
+}
+.row{
+	margin: 0px auto;
+}
 </style>
 
 </head>

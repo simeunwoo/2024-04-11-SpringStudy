@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,8 +19,16 @@
 
 /* .carousel-inner {
     position: relative;
-    margin-top: 160px; /* 헤더 높이만큼 여백을 줘서 비디오가 헤더 아래에 위치 */
+    margin-top: 160px;
 } */
+.logo-schedule{
+	width: 50px;
+	height: 50px;
+}
+.logo-image{
+	width: 30px;
+	height: 30px;
+}
 
 </style>
 </head>
@@ -163,124 +172,60 @@
                         <h3>Lorem Ipsum is simply dummy text..</h3>
                      </div>
                   </aside>
-                  <h4>Match Fixture</h4>
+                  <h4>9월 28일 일정&결과</h4>
                   <aside id="sidebar" class="left-bar">
                      <div class="feature-matchs">
-                        <div class="team-btw-match">
-                           <ul>
-                              <li>
-                                 <img src="../images/img-01_002.png" alt="">
-                                 <span>Portugal</span>
-                              </li>
-                              <li class="vs"><span>vs</span></li>
-                              <li>
-                                 <img src="../images/img-02.png" alt="">
-                                 <span>Germany</span>
-                              </li>
-                           </ul>
-                           <ul>
-                              <li>
-                                 <img src="../images/img-03_002.png" alt="">
-                                 <span>Portugal</span>
-                              </li>
-                              <li class="vs"><span>vs</span></li>
-                              <li>
-                                 <img src="../images/img-04_003.png" alt="">
-                                 <span>Germany</span>
-                              </li>
-                           </ul>
-                           <ul>
-                              <li>
-                                 <img src="../images/img-05_002.png" alt="">
-                                 <span>Portugal</span>
-                              </li>
-                              <li class="vs"><span>vs</span></li>
-                              <li>
-                                 <img src="../images/img-06.png" alt="">
-                                 <span>Germany</span>
-                              </li>
-                           </ul>
-                           <ul>
-                              <li>
-                                 <img src="../images/img-07_002.png" alt="">
-                                 <span>Portugal</span>
-                              </li>
-                              <li class="vs"><span>vs</span></li>
-                              <li>
-                                 <img src="../images/img-08.png" alt="">
-                                 <span>Germany</span>
-                              </li>
-                           </ul>
-                           <ul>
-                              <li>
-                                 <img src="../images/img-05_002.png" alt="">
-                                 <span>Portugal</span>
-                              </li>
-                              <li class="vs"><span>vs</span></li>
-                              <li>
-                                 <img src="../images/img-06.png" alt="">
-                                 <span>Germany</span>
-                              </li>
-                           </ul>
-                        </div>
+                     	<c:forEach var="svo" items="${sList }" varStatus="s">
+                            <c:if test="${s.index<5}">
+		                        <div class="team-btw-match">
+		                           <ul>
+		                           	<c:forEach var="rvo" items="${rList }" varStatus="s">
+		                           	 <c:if test="${s.index<1}">
+		                              <li>
+		                                 <img src="#" class="logo-schedule">
+		                                 <span>${svo.away }</span>
+		                              </li>
+		                              <li class="vs"><span>${svo.awayscore } - ${svo.homescore }</span></li>
+		                              <li>
+		                                 <img src="#" class="logo-schedule">
+		                                 <span>${svo.home }</span>
+		                              </li>
+		                             </c:if>
+		                            </c:forEach>
+		                          </ul>
+                        		</div>
+                              </c:if></c:forEach>
                      </div>
                   </aside>
-                  <h4>KBO 순위</h4>
+                  <h4>KBO 순위<a href="../team/ranking.do" class="btn btn-sm btn-info">목록</a></h4>
                   <aside id="sidebar" class="left-bar">
                      <div class="feature-matchs">
                         <table class="table table-bordered table-hover">
                            <thead>
                               <tr>
-                                 <th>#</th>
-                                 <th>Team</th>
-                                 <th>P</th>
-                                 <th>W</th>
-                                 <th>L</th>
+                                 <th class="text-center">#</th>
+                                 <th class="text-center">팀</th>
+                                 <th class="text-center">승</th>
+                                 <th class="text-center">무</th>
+                                 <th class="text-center">패</th>
+                                 <th class="text-center">승차</th>
+                                 <th class="text-center">승률</th>
                               </tr>
                            </thead>
                            <tbody>
+                           <c:forEach var="rvo" items="${rList }" varStatus="s">
+                            <c:if test="${s.index<10}">
                               <tr>
-                                 <td>1</td>
-                                 <td><img src="../images/img-01_004.png" alt="">Liverpool</td>
-                                 <td>10</td>
-                                 <td>12</td>
-                                 <td>20</td>
+                                 <td class="text-center">${rvo.ranking }</td>
+                                 <td><img src="${rvo.logo }" class="logo-image">${rvo.team }</td>
+                                 <td class="text-center">${rvo.win }</td>
+                                 <td class="text-center">${rvo.draw }</td>
+                                 <td class="text-center">${rvo.lose }</td>
+                                 <td>${rvo.cha }</td>
+                                 <td>${rvo.winper }</td>
                               </tr>
-                              <tr>
-                                 <td>2</td>
-                                 <td><img src="../images/img-02_002.png" alt="">Chelsea</td>
-                                 <td>10</td>
-                                 <td>12</td>
-                                 <td>20</td>
-                              </tr>
-                              <tr>
-                                 <td>3</td>
-                                 <td><img src="../images/img-03_003.png" alt="">Norwich City</td>
-                                 <td>20</td>
-                                 <td>15</td>
-                                 <td>20</td>
-                              </tr>
-                              <tr>
-                                 <td>4</td>
-                                 <td><img src="../images/img-04_002.png" alt="">West Brom</td>
-                                 <td>60</td>
-                                 <td>10</td>
-                                 <td>60</td>
-                              </tr>
-                              <tr>
-                                 <td>5</td>
-                                 <td><img src="../images/img-05.png" alt="">sunderland</td>
-                                 <td>30</td>
-                                 <td>06</td>
-                                 <td>30</td>
-                              </tr>
-                              <tr>
-                                 <td>1</td>
-                                 <td><img src="../images/img-01_004.png" alt="">Liverpool</td>
-                                 <td>10</td>
-                                 <td>12</td>
-                                 <td>20</td>
-                              </tr>
+                             </c:if>
+                           </c:forEach>
                            </tbody>
                         </table>
                      </div>
