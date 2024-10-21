@@ -29,4 +29,11 @@ public class StadiumController {
  	    model.addAttribute("no", no);
  	    return "stadium/detail";
     }
+    
+    @GetMapping("stadium/cctv.do")
+    public String stadium_cctv()
+    {
+  	  
+  	  return "stadium/cctv";
+    }
 }

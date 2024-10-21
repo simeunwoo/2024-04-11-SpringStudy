@@ -1,5 +1,6 @@
 package com.sist.web;
 import org.springframework.beans.factory.annotation.Autowired;
+import com.sist.task.ApiExplorer;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -58,4 +59,13 @@ public class StadiumRestController {
 		   String json=mapper.writeValueAsString(vo);
 		   return json;
 	   }
+	
+	@GetMapping(value="stadium/cctv_vue.do",produces = "text/plain;charset=UTF-8")
+	  public String stadium_cctv(int no) throws Exception
+	  {
+		  List<CctvVO> list=ApiExplorer.cctvData(no);
+		  ObjectMapper mapper=new ObjectMapper();
+		  String json=mapper.writeValueAsString(list);
+		  return json;
+	  }
 }

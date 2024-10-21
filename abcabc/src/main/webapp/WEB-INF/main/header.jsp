@@ -173,7 +173,7 @@ li.col-sm-4 {
                                           <li class="active"><a href="../main/main.do">Home</a></li>
                                           <li class="dropdown mega-dropdown">
                                              <a href="match" class="dropdown-toggle" data-toggle="dropdown">일정/기록<span class="caret"></span></a>				
-                                             <ul class="dropdown-menu mega-dropdown-menu"  style="width:170px;height:180px;">
+                                             <ul class="dropdown-menu mega-dropdown-menu"  style="width:170px;height:225px;">
                                                
                                                 <li class="col-sm-4">
                                                    <ul class="menu-inner">
@@ -181,6 +181,7 @@ li.col-sm-4 {
                                                       <li><a href="../team/ranking.do">순위</a></li>
                                                       <li><a href="#">일자별 기록</a></li>
                                                       <li><a href="../seoul/weather.do">오늘의 날씨</a></li>
+                                                      <li><a href="../stadium/cctv.do">경기장 cctv</a></li>
                                                    </ul>
                                                 </li>
                                              </ul>
