@@ -32,8 +32,9 @@
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12">
+                	<div style="height:50px"></div>
                     <div class="bradcumb-title text-center">
-                        <h2>자유 게시판</h2>
+                        <h1>공지사항</h1>
                     </div>
                 </div>
             </div>
