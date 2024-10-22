@@ -26,7 +26,7 @@ public class ApiExplorer {
         double maxY = lat + 1;
 
         StringBuilder urlBuilder = new StringBuilder("https://openapi.its.go.kr:9443/eventInfo"); // URL
-        urlBuilder.append("?" + URLEncoder.encode("apiKey", "UTF-8") + "=" + URLEncoder.encode("8cc24a9744ae41148fed6bbc7975d37f", "UTF-8")); // 공개키
+        urlBuilder.append("?" + URLEncoder.encode("apiKey", "UTF-8") + "=" + URLEncoder.encode("2052e1a7edbe45b185faaec832aa0625", "UTF-8")); // 공개키
         urlBuilder.append("&" + URLEncoder.encode("type", "UTF-8") + "=" + URLEncoder.encode("all", "UTF-8")); // 도로유형
         urlBuilder.append("&" + URLEncoder.encode("eventType", "UTF-8") + "=" + URLEncoder.encode("all", "UTF-8")); // 이벤트유형
         urlBuilder.append("&" + URLEncoder.encode("minX", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(minX), "UTF-8")); // 최소경도영역
@@ -65,7 +65,7 @@ public class ApiExplorer {
         Elements lb = doc.select("lanesBlocked");
         Elements ms = doc.select("message");
 
-        List<CctvVO> list = new ArrayList<CctvVO>();
+        List<CctvVO> state_list = new ArrayList<CctvVO>();
 
         for (int i = 0; i < et.size(); i++) {
             System.out.println(et.get(i).text() + " "
@@ -80,17 +80,17 @@ public class ApiExplorer {
             vo.setLanesBlocked(lb.get(i).text());
             vo.setRoadName(rn.get(i).text());
             vo.setMessage(ms.get(i).text());
-            list.add(vo);
+            state_list.add(vo);
         }
 
-        return list;
+        return state_list;
     }
 
     // Main 메소드 추가
     public static void main(String[] args) {
         try {
-            List<CctvVO> data = cctvData(1); // 예: 1번 지역의 CCTV 데이터를 조회
-            for (CctvVO vo : data) {
+            List<CctvVO> state_data = cctvData(1); // 예: 1번 지역의 CCTV 데이터를 조회
+            for (CctvVO vo : state_data) {
                 System.out.println("Event: " + vo.getEventType());
                 System.out.println("Start Date: " + vo.getStartDate());
                 System.out.println("Road Name: " + vo.getRoadName());

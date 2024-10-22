@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
- <script src="https://unpkg.com/vue@3"></script>
+<script src="https://unpkg.com/vue@3"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
@@ -28,7 +28,7 @@
    <table class="table">
     <tr>
       <td class="text-center">
-       <button class="btn-sm" style="background-color:#131230;color:white" @click="cctvView(1)">잠실 구장 (두산,LG)</button>
+       <button class="btn-sm" style="background-color:#131230;color:white" @click="cctvView(1)">잠실 구장 (두산, LG)</button>
        &nbsp;<button class="btn-sm btn-success" style="background-color:purple" @click="cctvView(2)">고척 스카이돔 (키움)</button>
        &nbsp;<button class="btn-sm btn-info" style="background-color:red" @click="cctvView(3)">인천 SSG 랜더스필드 (SSG)</button>
        &nbsp;<button class="btn-sm btn-warning" style="background-color:black" @click="cctvView(4)">수원 케이티 위즈 파크 (KT)</button>
@@ -47,10 +47,10 @@
        </td>
      </tr>
      <tr>
-       <th width="7%" class="text-center">돌발상황</th>
+       <th width="7%" class="text-center">돌발 상황</th>
        <th width="13%" class="text-center">공사일</th>
-       <th width="20%" class="text-center">도로위치</th>
-       <th width="15%" class="text-center">도로차단</th>
+       <th width="20%" class="text-center">도로 위치</th>
+       <th width="15%" class="text-center">도로 차단</th>
        <th width="45%" class="text-center">사유</th>
      </tr>
      <tr v-for="vo in state_list">
@@ -61,16 +61,37 @@
        <td>{{vo.message}}</td>
      </tr>
    </table>
+   <div style="height:80px"></div>
+   <table class="table" v-show="isShow">
+     <tr>
+       <td class="text-center" colspan="4">
+         <h4>주의 운전 구간</h4>
+       </td>
+     </tr>
+     <tr>
+       <th width="15%" class="text-center">도로명</th>
+       <th width="15%" class="text-center">도로 위치</th>
+       <th width="15%" class="text-center">발생 유형</th>
+       <th width="55%" class="text-center">사유</th>
+     </tr>
+     <tr v-for="svo in safe_list">
+       <td class="text-center">{{svo.routeNo}}</td>
+       <td class="text-center">{{svo.revRouteName}}</td>
+       <td class="text-center">{{svo.outbrkType}}</td>
+       <td>{{svo.message}}</td>
+     </tr>
+   </table>
   </div>
   </div>
   <script>
-  let app=Vue.createApp({
+  let myApp=Vue.createApp({
 	  data(){
 		return{
 			 no:0,
 		     state_list:[],
+		     safe_list:[],
 		     isShow:false,
-		     cctvurl:''
+		     cctvUrl:''
 		}
 	  },
 	  methods:{
@@ -120,7 +141,9 @@
 		                no:this.no
 		            }
 		        }).then(response=>{
-		            this.state_list=response.data
+		        	console.log(response.data)
+		            this.state_list=response.data.state_list
+		            this.safe_list=response.data.safe_list
 		        }).catch(error=>{
 		            console.log(error.response)
 		        })
