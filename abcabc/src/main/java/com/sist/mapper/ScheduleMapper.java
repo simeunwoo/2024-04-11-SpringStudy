@@ -9,17 +9,10 @@ import org.apache.ibatis.annotations.Select;
 import com.sist.vo.*;
 
 public interface ScheduleMapper {
-/*
-	@Select("SELECT sno,day,home,away,homescore,awayscore,month,rownum as num "
-			+ "FROM (SELECT sno,day,home,away,homescore,awayscore,month "
-			+ "FROM schedule "
-			+ "WHERE month=#{month} AND day=#{day} "
-			+ "ORDER BY sno ASC)) "
-			+ "WHERE num BETWEEN #{start} AND #{end}")
-	public List<ScheduleVO> scheduleListData(Map map); */
+
 	@Select("SELECT * "
-			+"FROM(SELECT sno,day,home,away,homescore,awayscore,month,rownum as num "
-			+"FROM(SELECT sno,day,home,away,homescore,awayscore,month " 
+			+"FROM(SELECT sno,day,home,away,homescore,awayscore,month,homeimage,awayimage,rownum as num "
+			+"FROM(SELECT sno,day,home,away,homescore,awayscore,month,homeimage,awayimage " 
 			+"FROM schedule " 
 			+"WHERE month=#{month} AND day=#{day} "
 			+"ORDER BY sno) "
