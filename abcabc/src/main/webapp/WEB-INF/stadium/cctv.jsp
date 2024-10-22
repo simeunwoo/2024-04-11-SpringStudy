@@ -40,6 +40,7 @@
       </td>
     </tr>
    </table>
+   <div style="overflow-y:auto;height:500px">
    <table class="table" v-show="isShow">
      <tr>
        <td class="text-center" colspan="5">
@@ -61,7 +62,9 @@
        <td>{{vo.message}}</td>
      </tr>
    </table>
+   </div>
    <div style="height:80px"></div>
+   <div style="overflow-y:auto;height:500px">
    <table class="table" v-show="isShow">
      <tr>
        <td class="text-center" colspan="4">
@@ -81,6 +84,7 @@
        <td>{{svo.message}}</td>
      </tr>
    </table>
+   <div style="overflow-y:auto;height:500px">
   </div>
   </div>
   <script>
