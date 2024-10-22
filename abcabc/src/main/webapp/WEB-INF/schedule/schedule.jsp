@@ -75,7 +75,7 @@
             <p class="event empty">경기가 없습니다.</p>
         </div>
 
-        <div class="pagination-area d-sm-flex mt-15">
+        <div class="pagination-area d-sm-flex mt-15" v-show="isShow">
             <ul class="pagination">
                 <li class="page-item" v-if="startPage > 1">
                     <a class="page-link" @click="prev"><i class="fa fa-angle-double-left" aria-hidden="true"></i> 이전</a>
@@ -101,6 +101,7 @@
                 totalpage: 0,
                 startPage: 0,
                 endPage: 0,
+                isShow: false,
                 month: moment().month() + 1,
                 day: moment().date(),
                 currentMonthYear: moment().format('YYYY-MM')
