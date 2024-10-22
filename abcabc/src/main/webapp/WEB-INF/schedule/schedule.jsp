@@ -46,48 +46,53 @@
 <div class="container">
     <!-- 고정 이미지 -->
     <div class="text-center">
-        <img src="../player/m1.jpg" style="width:1200px;height:30px">
+        <img src="../player/m1.jpg" style="width:1200px;height:150px">
     </div>
 </div>
 
 <div class="container" id="calendarApp">
-    <div style="height:50px"></div>
-    <div class="header">
-        <h1>2024년 {{ month }}월</h1>
-        <div class="left" @click="prevMonth"></div>
-        <div class="right" @click="nextMonth"></div>
+	<div style="height:50px"></div>
+    <div class="col-12 col-md-7">
+	    <div class="header">
+	        <h1>2024년 {{ month }}월</h1>
+	        <div class="left" @click="prevMonth"></div>
+	        <div class="right" @click="nextMonth"></div>
+	    </div>
+	
+	    <div id="calendar"></div>
+	    <div style="height:50px"></div>
     </div>
-
-    <div id="calendar"></div>
-
-    <div id="gameApp" class="details">
-        <h2>{{ month }}월 {{ day }}일 경기 결과</h2>
-        <div v-if="games.length > 0">
-            <div v-for="vo in games" :key="vo.sno" class="a">
-            	<img :src="vo.awayimage" class="schedule-logo">
-                <p class="event">
-                    {{ vo.away }}&nbsp; {{ vo.awayscore }} - {{ vo.homescore }} &nbsp;{{ vo.home }}
-                </p>
-                <img :src="vo.homeimage" class="schedule-logo">
-            </div>
-        </div>
-        <div v-else>
-            <p class="event empty">경기가 없습니다.</p>
-        </div>
-
-        <div class="pagination-area d-sm-flex mt-15" v-show="isShow">
-            <ul class="pagination">
-                <li class="page-item" v-if="startPage > 1">
-                    <a class="page-link" @click="prev"><i class="fa fa-angle-double-left" aria-hidden="true"></i> 이전</a>
-                </li>
-                <li :class="page === curpage ? 'page-item active' : 'page-item'" v-for="i in range(startPage, endPage)" :key="i">
-                    <a class="page-link" @click="pageChange(i)">{{ month }}월 {{ day }}일</a>
-                </li>
-                <li class="page-item" v-if="endPage < totalpage">
-                    <a class="page-link" @click="next">다음 <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
-                </li>
-            </ul>
-        </div>
+    <div style="height:50px"></div>
+	<div class="col-12 col-md-5">
+	    <div id="gameApp" class="details">
+	        <h2>{{ month }}월 {{ day }}일 경기 결과</h2>
+	        <div v-if="games.length > 0">
+	            <div v-for="vo in games" :key="vo.sno" class="a">
+	            	<img :src="vo.awayimage" class="schedule-logo">
+	                <p class="event">
+	                    {{ vo.away }}&nbsp; {{ vo.awayscore }} - {{ vo.homescore }} &nbsp;{{ vo.home }}
+	                </p>
+	                <img :src="vo.homeimage" class="schedule-logo">
+	            </div>
+	        </div>
+	        <div v-else>
+	            <p class="event empty">경기가 없습니다.</p>
+	        </div>
+	
+	        <div class="pagination-area d-sm-flex mt-15" v-show="isShow">
+	            <ul class="pagination">
+	                <li class="page-item" v-if="startPage > 1">
+	                    <a class="page-link" @click="prev"><i class="fa fa-angle-double-left" aria-hidden="true"></i> 이전</a>
+	                </li>
+	                <li :class="page === curpage ? 'page-item active' : 'page-item'" v-for="i in range(startPage, endPage)" :key="i">
+	                    <a class="page-link" @click="pageChange(i)">{{ month }}월 {{ day }}일</a>
+	                </li>
+	                <li class="page-item" v-if="endPage < totalpage">
+	                    <a class="page-link" @click="next">다음 <i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+	                </li>
+	            </ul>
+	        </div>
+	    </div>
     </div>
     <div style="height:200px"></div>
 </div>
