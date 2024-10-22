@@ -18,9 +18,8 @@ public interface ScheduleMapper {
 			+ "WHERE num BETWEEN #{start} AND #{end}")
 	public List<ScheduleVO> scheduleListData(Map map); */
 	@Select("SELECT * "
-			+"FROM(SELECT sno,day,home,away,homescore,awayscore,month,homeimage,awayimage,"
-				+"rownum as num "
-			+"FROM(SELECT sno,day,home,away,homescore,awayscore,month,homeimage,awayimage " 
+			+"FROM(SELECT sno,day,home,away,homescore,awayscore,month,rownum as num "
+			+"FROM(SELECT sno,day,home,away,homescore,awayscore,month " 
 			+"FROM schedule " 
 			+"WHERE month=#{month} AND day=#{day} "
 			+"ORDER BY sno) "
@@ -31,4 +30,9 @@ public interface ScheduleMapper {
 	@Select("SELECT COUNT(*) FROM schedule "
 			+ "WHERE month=#{month} AND day=#{day}")
 	public int scheduleRowCount(Map map);
+	
+	@Select("SELECT home,away,homescore,awayscore,homeimage,awayimage "
+			+ "FROM schedule "
+			+ "WHERE sno BETWEEN 790 AND 794")
+	public List<ScheduleVO> scheduleListMainData();
 }

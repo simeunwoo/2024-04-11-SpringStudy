@@ -29,6 +29,23 @@
 	width: 30px;
 	height: 30px;
 }
+.side-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.more {
+    display: inline-block;
+    font-size: 13px;
+    color: #007bff;
+    background-color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+.more:hover{
+    background-color: rgba(0, 123, 255, 0.2);
+}
 
 </style>
 </head>
@@ -172,32 +189,29 @@
                         <h3>Lorem Ipsum is simply dummy text..</h3>
                      </div>
                   </aside>
-                  <h4>9월 28일 일정&결과</h4>
+                  <h4 class="side-title">9월 28일 일정&결과<a href="../schedule/schedule.do" class="more">더보기</a></h4>
                   <aside id="sidebar" class="left-bar">
                      <div class="feature-matchs">
                      	<c:forEach var="svo" items="${sList }" varStatus="s">
                             <c:if test="${s.index<5}">
 		                        <div class="team-btw-match">
 		                           <ul>
-		                           	<c:forEach var="rvo" items="${rList }" varStatus="s">
-		                           	 <c:if test="${s.index<1}">
 		                              <li>
-		                                 <img src="#" class="logo-schedule">
+		                                 <img src="${svo.awayimage }" class="logo-schedule">
 		                                 <span>${svo.away }</span>
 		                              </li>
-		                              <li class="vs"><span>${svo.awayscore } - ${svo.homescore }</span></li>
+		                              <li class="vs"><span style="font-size:20px">${svo.awayscore } - ${svo.homescore }</span>
+		                              </li>
 		                              <li>
-		                                 <img src="#" class="logo-schedule">
+		                                 <img src="${svo.homeimage }" class="logo-schedule">
 		                                 <span>${svo.home }</span>
 		                              </li>
-		                             </c:if>
-		                            </c:forEach>
 		                          </ul>
                         		</div>
                               </c:if></c:forEach>
                      </div>
                   </aside>
-                  <h4>KBO 순위<a href="../team/ranking.do" class="btn btn-sm btn-info">목록</a></h4>
+                  <h4 class="side-title">KBO 순위<a href="../team/ranking.do" class="more">더보기</a></h4>
                   <aside id="sidebar" class="left-bar">
                      <div class="feature-matchs">
                         <table class="table table-bordered table-hover">
@@ -213,8 +227,8 @@
                               </tr>
                            </thead>
                            <tbody>
-                           <c:forEach var="rvo" items="${rList }" varStatus="s">
-                            <c:if test="${s.index<10}">
+                           <c:forEach var="rvo" items="${rList }" varStatus="r">
+                            <c:if test="${r.index<10}">
                               <tr>
                                  <td class="text-center">${rvo.ranking }</td>
                                  <td><img src="${rvo.logo }" class="logo-image">${rvo.team }</td>
