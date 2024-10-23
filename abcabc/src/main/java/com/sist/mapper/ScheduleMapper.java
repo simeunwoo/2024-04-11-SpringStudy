@@ -23,9 +23,9 @@ public interface ScheduleMapper {
 			+ "FROM schedule WHERE month=#{month} AND day=#{day}")
 	public List<ScheduleVO> scheduleListData(Map map);
 
-	@Select("SELECT COUNT(*) FROM schedule "
+/*	@Select("SELECT COUNT(*) FROM schedule "
 			+ "WHERE month=#{month} AND day=#{day}")
-	public int scheduleRowCount(Map map);
+	public int scheduleRowCount(Map map); */
 	
 	@Select("SELECT home,away,homescore,awayscore,homeimage,awayimage "
 			+ "FROM schedule "

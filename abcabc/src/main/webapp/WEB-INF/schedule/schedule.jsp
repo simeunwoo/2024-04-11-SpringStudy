@@ -9,6 +9,8 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+
     
     <link href='https://cdn.jsdelivr.net/npm/@fullcalendar/icalendar@5.11.3/main.css' rel='stylesheet' />
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
@@ -18,6 +20,32 @@
             max-width: 900px;
             margin: 40px auto;
         }
+        .team-logo{
+        	width: 65px;
+        	height: 65px;
+        }
+        .game-item{
+        	display: flex;
+    		align-items: center;
+    		text-align: center;
+    		justify-content: center; /* 중앙 정렬 추가 */
+    		margin-bottom: 30px;
+        }
+        .game-result{
+        	font-size: 25px;
+        }
+        #a{
+        	border: 2px solid rgba(0, 0, 0, 0);
+	        border-radius: 10px;
+	        padding: 10px;
+	        margin-top: 20px;
+	        background-color: #f9f9f9;
+        }
+        body {
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+        
     </style>
 </head>
 <body>
@@ -30,90 +58,73 @@
 
 <div class="container" id="calendarApp">
 	<div style="height:50px"></div>
+	<div class="col-12 col-md-7">
     <div id="calendar"></div>
+    </div>
+    <div class="col-12 col-md-5">
+    <div id="a">
+     <div v-if="games.length > 0">
+     	<h2 class="text-center">{{ month }}월 {{ day }}일 경기 결과</h2>
+     	<div style="height:30px"></div>
+        <div v-for="vo in games" :key="vo.sno" class="game-item">
+            <img :src="vo.awayimage" class="team-logo">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <p class="game-result">{{ vo.away }}&nbsp;{{ vo.awayscore }}&nbsp;-&nbsp;{{ vo.homescore }}&nbsp;{{ vo.home }}</p>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <img :src="vo.homeimage" class="team-logo">
+        </div></div>
+    
+    <div v-else>
+    	<h2 class="text-center">{{ month }}월 {{ day }}일 경기 결과</h2>
+        <p>해당 날짜에 경기가 없습니다.</p>
+    </div></div>
+    </div>
     <div style="height:50px"></div>
 </div>
 
 <script>
-    let calendarApp = Vue.createApp({
-        data() {
-            return {
-                games: [],
-                curpage: 1,
-                totalpage: 0,
-                startPage: 0,
-                endPage: 0,
-                isShow: false,
-                month: '',
-                day: ''
-            };
-        },
-        mounted() {
-            let date = new Date();
-            let year = date.getFullYear();
-            let month = ("0" + (1 + date.getMonth())).slice(-2);
-            let day = ("0" + date.getDate()).slice(-2);
-            
-            var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
-                initialView: 'dayGridMonth',
-                
-                height: 450,
-                
-                themeSystem: 'bootstrap',
-                editable: true,
-                droppable: true,
-                dateClick: (info) => {
-                    this.day = info.dateStr;
-                    this.isShow = true;
-                    this.dataRecv(); // 클릭된 날짜에 대한 데이터 가져오기
-                }
-            });
-            calendar.render();
-            
-            this.dataRecv(); // 초기 데이터 로드
-        },
-        methods: {
-            prev() {
-                this.curpage = this.curpage > 1 ? this.curpage - 1 : this.curpage;
-                this.dataRecv();
-            },
-            next() {
-                this.curpage = this.curpage < this.totalpage ? this.curpage + 1 : this.curpage;
-                this.dataRecv();
-            },
-            pageChange(page) {
-                this.curpage = page;
-                this.dataRecv();
-            },
-            range(start, end) {
-                let arr = [];
-                for (let i = start; i <= end; i++) {
-                    arr.push(i);
-                }
-                return arr;
-            },
-            dataRecv() {
-                axios.get('../schedule/schedule_vue.do', {
-                    params: {
-                        month: this.month,
-                        day: this.day,
-                        page: this.curpage
-                    }
-                }).then(response => {
-                    this.games = response.data.games;
-                    this.curpage = response.data.curpage;
-                    this.totalpage = response.data.totalpage;
-                    this.startPage = response.data.startPage;
-                    this.endPage = response.data.endPage;
-                    this.month = response.data.month;
-                    this.day = response.data.day;
-                }).catch(error => {
-                    console.log(error.response);
-                });
+let calendarApp = Vue.createApp({
+    data() {
+        return {
+            games: [],
+            month: this.getCurrentMonth(),
+            day: this.getCurrentDay()
+        };
+    },
+    mounted() {
+        let calendarEl = document.getElementById('calendar');
+        let calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            dateClick: (info) => {
+                this.day = parseInt(info.dateStr.split('-')[2]); // 클릭한 날짜의 day 가져오기
+                this.month = parseInt(info.dateStr.split('-')[1]); // 클릭한 날짜의 month 가져오기
+                this.dataRecv(); // 경기 데이터 가져오기
             }
+        });
+        calendar.render();
+        this.dataRecv();
+    },
+    methods: {
+    	getCurrentMonth() {
+            return new Date().getMonth() + 1; // 현재 월 (0부터 시작하므로 +1)
+        },
+        getCurrentDay() {
+            return new Date().getDate(); // 현재 일
+        },
+        dataRecv() {
+            axios.get('../schedule/schedule_vue.do', {
+                params: {
+                    month: this.month,
+                    day: this.day,
+                }
+            }).then(response => {
+                this.games = response.data.games;
+            }).catch(error => {
+                console.log(error.response);
+            });
         }
-    }).mount('#calendarApp');
+    }
+}).mount('#calendarApp');
+
 </script>
 
 </body>

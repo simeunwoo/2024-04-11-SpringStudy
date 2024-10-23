@@ -22,33 +22,17 @@ public class ScheduleRestController {
 	private ScheduleService sService;
 	
 	@RequestMapping(value="schedule/schedule_vue.do",produces="text/plain;charset=UTF-8")
-	public String schedule_schedule(int page,int month,int day) throws Exception
+	public String schedule_schedule(int month,int day) throws Exception
 	{
-		int rowSize=10;
-		int start=(rowSize*page)-(rowSize-1);
-		int end=rowSize*page;
-		
 		Map map=new HashMap();
-		map.put("start", start);
-		map.put("end", end);
 		map.put("month", month);
 		map.put("day", day);
 		
 	     List<ScheduleVO> games=sService.scheduleListData(map);
-	     int totalpage=sService.scheduleRowCount(map);
 	     
-	     final int BLOCK=10;
-	     int startPage=((page-1)/BLOCK*BLOCK)+1;
-		 int endPage=((page-1)/BLOCK*BLOCK)+BLOCK;
-		 if(endPage>totalpage)
-		 	 endPage=totalpage;
 	        
 	        map=new HashMap();
 			map.put("games", games);
-			map.put("curpage", page);
-			map.put("totalpage", totalpage);
-			map.put("startPage", startPage);
-			map.put("endPage", endPage);
 			map.put("month", month);
 			map.put("day", day);
 			
