@@ -90,7 +90,7 @@
         var clone = this.current.clone().add('months', 1).subtract('days', 1);
         var dayOfWeek = clone.day();
 
-        for (var i = dayOfWeek; i < 6; i++) { // Change to 6 to complete the week
+        for (var i = dayOfWeek; i < 7; i++) { // Change to 6 to complete the week
             this.drawDay(clone.add('days', 1));
         }
     }

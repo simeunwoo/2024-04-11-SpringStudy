@@ -10,7 +10,7 @@ import com.sist.vo.*;
 
 public interface ScheduleMapper {
 
-	@Select("SELECT * "
+	/*@Select("SELECT * "
 			+"FROM(SELECT sno,day,home,away,homescore,awayscore,month,homeimage,awayimage,rownum as num "
 			+"FROM(SELECT sno,day,home,away,homescore,awayscore,month,homeimage,awayimage " 
 			+"FROM schedule " 
@@ -18,6 +18,9 @@ public interface ScheduleMapper {
 			+"ORDER BY sno) "
 			+"WHERE ROWNUM <= #{end}) "
 			+"WHERE num >= #{start}")
+	public List<ScheduleVO> scheduleListData(Map map);*/
+	@Select("SELECT sno,day,home,away,homescore,awayscore,month,homeimage,awayimage "
+			+ "FROM schedule WHERE month=#{month} AND day=#{day}")
 	public List<ScheduleVO> scheduleListData(Map map);
 
 	@Select("SELECT COUNT(*) FROM schedule "

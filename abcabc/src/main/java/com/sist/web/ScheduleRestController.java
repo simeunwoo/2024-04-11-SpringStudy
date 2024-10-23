@@ -21,7 +21,7 @@ public class ScheduleRestController {
 	@Autowired
 	private ScheduleService sService;
 	
-/*	@RequestMapping(value="schedule/schedule_vue.do",produces="text/plain;charset=UTF-8")
+	@RequestMapping(value="schedule/schedule_vue.do",produces="text/plain;charset=UTF-8")
 	public String schedule_schedule(int page,int month,int day) throws Exception
 	{
 		int rowSize=10;
@@ -35,7 +35,7 @@ public class ScheduleRestController {
 		map.put("day", day);
 		
 	     List<ScheduleVO> games=sService.scheduleListData(map);
-	     int totalpage=sService.scheduleTotalPage(map);
+	     int totalpage=sService.scheduleRowCount(map);
 	     
 	     final int BLOCK=10;
 	     int startPage=((page-1)/BLOCK*BLOCK)+1;
@@ -57,9 +57,9 @@ public class ScheduleRestController {
 			String json=mapper.writeValueAsString(map);
 			
 			return json;
-	} */
+	}
 
-	@RequestMapping(value="schedule/schedule_vue.do",produces="text/plain;charset=UTF-8")
+	/*@RequestMapping(value="schedule/schedule_vue.do",produces="text/plain;charset=UTF-8")
 	public String schedule_schedule(int page,int month,int day) throws Exception
 	{
 		Map map=new HashMap();
@@ -88,13 +88,11 @@ public class ScheduleRestController {
 			map.put("totalpage", totalpage);
 			map.put("startPage", startPage);
 			map.put("endPage", endPage);
-			map.put("month", month);
-			map.put("day", day);
 			
 			//  옄諛붿뒪 겕由쏀듃  뿰寃  => Map 쓣 JSON 쑝濡  => Kotlin, Flutter
 			ObjectMapper mapper=new ObjectMapper();
 			String json=mapper.writeValueAsString(map);
 			
 			return json;
-	}
+	}*/
 }

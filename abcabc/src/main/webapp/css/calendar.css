@@ -113,8 +113,8 @@
 
 .day {
   display: inline-block;
-  width: 60px;
-  padding: 10px;
+  width: 30px;
+  /*padding: 10px;*/
   text-align: center;
   vertical-align: top;
   cursor: pointer;
