@@ -24,7 +24,7 @@ public interface PlayerCommentMapper {
 	
 	// 댓글 입력
 	@Insert("INSERT INTO batter_comment(cno,rno,id,name,sex,msg,group_id,type) "
-			+ "VALUES(sc_cno_seq.nextval,#{rno},#{id},#{name},#{sex},#{msg},"
+			+ "VALUES(bc_cno_seq.nextval,#{rno},#{id},#{name},#{sex},#{msg},"
 			+ "(SELECT NVL(MAX(group_id)+1,1) FROM batter_comment),#{type})")
 	public void batterCommentInsert(BatterCommentVO vo);
 	
@@ -41,7 +41,7 @@ public interface PlayerCommentMapper {
 	
 	@Insert("INSERT INTO batter_comment(cno,rno,id,name,sex,msg,group_id,"
 			+ "group_step,group_tab,root,type) "
-			+ "VALUES(sc_cno_seq.nextval,#{rno},#{id},#{name},#{sex},#{msg},"
+			+ "VALUES(bc_cno_seq.nextval,#{rno},#{id},#{name},#{sex},#{msg},"
 			+ "#{group_id},#{group_step},#{group_tab},#{root},#{type})")
 	public void batterCommentReplyReplyInsert(BatterCommentVO vo);
 	
@@ -103,7 +103,7 @@ public interface PlayerCommentMapper {
 	
 	// 댓글 입력
 	@Insert("INSERT INTO pitcher_comment(cno,rno,id,name,sex,msg,group_id,type) "
-			+ "VALUES(sc_cno_seq.nextval,#{rno},#{id},#{name},#{sex},#{msg},"
+			+ "VALUES(pc2_cno_seq.nextval,#{rno},#{id},#{name},#{sex},#{msg},"
 			+ "(SELECT NVL(MAX(group_id)+1,1) FROM pitcher_comment),#{type})")
 	public void pitcherCommentInsert(PitcherCommentVO vo);
 	
@@ -120,7 +120,7 @@ public interface PlayerCommentMapper {
 	
 	@Insert("INSERT INTO pitcher_comment(cno,rno,id,name,sex,msg,group_id,"
 			+ "group_step,group_tab,root,type) "
-			+ "VALUES(sc_cno_seq.nextval,#{rno},#{id},#{name},#{sex},#{msg},"
+			+ "VALUES(pc2_cno_seq.nextval,#{rno},#{id},#{name},#{sex},#{msg},"
 			+ "#{group_id},#{group_step},#{group_tab},#{root},#{type})")
 	public void pitcherCommentReplyReplyInsert(PitcherCommentVO vo);
 	

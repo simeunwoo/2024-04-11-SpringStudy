@@ -20,10 +20,7 @@ public class ScheduleDAO {
 		return mapper.scheduleListData(map);
 	}
 	
-	public int scheduleRowCount(Map map)
-	{
-		return mapper.scheduleRowCount(map);
-	}
+	
 	
 	public List<ScheduleVO> scheduleListMainData()
 	{
