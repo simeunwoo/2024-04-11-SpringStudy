@@ -6,11 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script src="https://unpkg.com/vue@3"></script>
+<script src="http://code.jquery.com/jquery.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
 google.charts.load('current', {packages: ['corechart', 'bar']});
 </script>
@@ -137,8 +137,7 @@ google.charts.load('current', {packages: ['corechart', 'bar']});
                         	<div style="height:80px"></div>
                         	<div id="chart2_div" style="width: 900px; height: 500px;"></div>
                         	<div style="height:80px"></div>
-                        </div></section>
-   	<section id="replyApp">
+                        </div>
    		<div class="comment_area section_padding_50 clearfix">
                                 <h4 class="mb-30">댓글</h4>
 
@@ -478,7 +477,7 @@ google.charts.load('current', {packages: ['corechart', 'bar']});
     			 })
     		 }
     	 }
-     }).mount('#replyApp')
+     }).mount('#chartApp')
 	</script>
 </body>
 </html>
