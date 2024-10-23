@@ -229,9 +229,7 @@
 
     document.addEventListener('DOMContentLoaded', function() {
         var calendar = new Calendar('#calendar', [
-            { event: 'Event 1', color: 'event-color-1', date: moment().date(5) },
-            { event: 'Event 2', color: 'event-color-2', date: moment().date(15) },
-            { event: 'Event 3', color: 'event-color-3', date: moment().date(20) }
+            { event: 'Event 1', color: 'event-color-1', date: moment().date(5) }
         ]);
     });
 }();

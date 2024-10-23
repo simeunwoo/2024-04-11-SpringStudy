@@ -9,7 +9,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../css/calendar.css">
-    <script src="../js/calendar.js"></script>
+    <script src="calendar.js"></script>
     <style>
         /* 여기에 필요한 스타일을 추가하세요 */
         #calendar{

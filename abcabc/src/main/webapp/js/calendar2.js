@@ -100,9 +100,9 @@
     var clone = this.current.clone().add('months', 1).subtract('days', 1);
     var dayOfWeek = clone.day();
 
-    if(dayOfWeek === 6) { return; }
+    if(dayOfWeek === 7) { return; }
 
-    for(var i = dayOfWeek; i < 6 ; i++) {
+    for(var i = dayOfWeek; i < 7 ; i++) {
       this.drawDay(clone.add('days', 1));
     }
   }
