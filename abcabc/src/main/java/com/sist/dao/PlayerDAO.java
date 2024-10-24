@@ -36,7 +36,8 @@ public class PlayerDAO {
 	
 	public List<BatterVO> batterListData(Map map)
 	{
-		return mapper.batterListData(map);
+		mapper.batterListData(map);
+		return (List<BatterVO>)map.get("pResult");
 	}
 	
 	public List<PitcherVO> pitcherListData(Map map)

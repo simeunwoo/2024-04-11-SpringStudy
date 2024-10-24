@@ -137,7 +137,7 @@ google.charts.load('current', {packages: ['corechart', 'bar']});
                     	<div class="comment_area section_padding_50 clearfix" id="replyApp">
    			<div class="col-12 col-lg-4"></div>
    			<div class="col-12 col-lg-5">
-                                <h4 class="mb-30">댓글</h4>
+                              
 
                                 <ol>
                                     <!-- Single Comment Area -->
