@@ -126,8 +126,6 @@ google.charts.load('current', {packages: ['corechart', 'bar']});
                          </table></div></aside></div></div></div></div></div>
                         
                         </div>
-                        <div>
-                        </div>
                         	<div id="chart_div" style="width: 900px; height: 500px;"></div>
                         	<div style="height:80px"></div>
                         	<div id="chart2_div" style="width: 900px; height: 500px;"></div>

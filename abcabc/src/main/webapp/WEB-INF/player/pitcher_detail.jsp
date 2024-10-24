@@ -130,16 +130,17 @@ google.charts.load('current', {packages: ['corechart', 'bar']});
                                 <td width="14%" class="text-center" style="color:red">${pvo.war }</td>
                             </tr>
                         </table></div></aside></div></div></div></div></div>
+                        	
+                        </div>
+                        	<div style="height:50px"></div>
                         	<div id="chart_div" style="width: 900px; height: 500px;"></div>
                         	<div style="height:80px"></div>
                         	<div id="chart2_div" style="width: 900px; height: 500px;"></div>
-                        </div>
-                        <div>
-                        </div>
-                        	
                         	<div style="height:80px"></div>
                         </div>
    		<div class="comment_area section_padding_50 clearfix" id="replyApp">
+   			<div class="col-12 col-lg-4"></div>
+   			<div class="col-12 col-lg-5">
                                 <h4 class="mb-30">댓글</h4>
 
                                 <ol>
@@ -237,7 +238,8 @@ google.charts.load('current', {packages: ['corechart', 'bar']});
 	                                   </table>
 	                                </div>
 	                            </div>
-                            </c:if>
+                            </c:if></div>
+                            <div class="col-12 col-lg-3"></div>
                             </div>
                             
    	</section>
