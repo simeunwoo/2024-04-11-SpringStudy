@@ -245,182 +245,83 @@ google.charts.load('current', {packages: ['corechart', 'bar']});
 	let chartApp=Vue.createApp({
    	 data(){
    		 return {
-               rno:${pno},
-               reply_list:[],
-               curpage:1,
-               totalpage:0,
-               endPage:0,
-               startPage:0,
-               types:1,
-               sessionId:'${sessionId}',
-               msg:'',
-               isReply:false,
-               upReply:false
+   			vo:{},
+			pno:${pno}
    		 }
    	 },
    	 mounted(){
-   		 this.dataRecv()
+   		axios.get('../player/pitcher_detail_vue.do',{
+			params:{
+				pno:this.pno
+			}
+		}).then(response=>{
+			console.log(response.data)
+			this.vo=response.data
+			
+			this.drawDetailChart()
+			this.drawImportantChart()
+		}).catch(error=>{
+			console.log(error.response)
+		})
    	 },
-   	 methods:{
-   		 replyUpdate(cno){
-   			 let msg=$('#umsg'+cno).val()
-   			 if(msg.trim()==="")
-   			 {
-   				 $('#umsg'+cno).focus()
-   				 return
-   			 }
-   			 axios.post('../comment/pitcher_update_vue.do',null,{
-    				params:{
-    					cno:cno,
-    					rno:this.rno,
-    					types:this.types,
-    					msg:msg
-    				}
-    			}).then(response=>{
- 	   				 console.log(response.data)
- 					 this.reply_list=response.data.list
- 					 this.curpage=response.data.curpage
- 					 this.totalpage=response.data.totalpage
- 					 this.startPage=response.data.startPage
- 					 this.endPage=response.data.endPage
- 					$('#umsg'+cno).val("")
- 					$('#up'+cno).hide()
-    				$('#u'+cno).text("Update")
- 					
- 			   }).catch(error=>{
- 				     console.log(error.response)
- 			   }) 
-   		 },
-   		 replyDelete(cno){
-   			axios.get('../comment/pitcher_delete_vue.do',{
-   				params:{
-   					cno:cno,
-   					rno:this.rno,
-   					types:this.types
-   				}
-   			}).then(response=>{
-	   				 console.log(response.data)
-					 this.reply_list=response.data.list
-					 this.curpage=response.data.curpage
-					 this.totalpage=response.data.totalpage
-					 this.startPage=response.data.startPage
-					 this.endPage=response.data.endPage
-					 
-			   }).catch(error=>{
-				     console.log(error.response)
-			   }) 
-   		 },
-   		
-   		 replyReplyInsert(cno){
-   			 let msg=$('#msg'+cno).val()
-   			 if(msg.trim()==="")
-   			 {
-   				 $('#msg'+cno).focus()
-   				 return
-   			 }
-   			 
-   			 axios.post('../comment/pitcher_reply_insert_vue.do',null,{
-    				params:{
-    					rno:this.rno,
-    					types:this.types,
-    					msg:msg,
-    					cno:cno
-    				}
-    			}).then(response=>{
-	   				 console.log(response.data)
-					 this.reply_list=response.data.list
-					 this.curpage=response.data.curpage
-					 this.totalpage=response.data.totalpage
-					 this.startPage=response.data.startPage
-					 this.endPage=response.data.endPage
-					 $('#msg'+cno).val('')
-					 $('#in'+cno).hide()
-					 $('#i'+cno).text("Reply")
-			   }).catch(error=>{
-				     console.log(error.response)
-			   })
-   		 },
-            replyUpdateForm(cno){
-   			$('.ins').hide()
-    			$('.ups').hide()
-    			$('.update').text('Update')
-    			$('.insert').text('Reply')
-    			if(this.upReply===false)
-    			{
-    				this.upReply=true
-    				$('#up'+cno).show()
-    			    $('#u'+cno).text("Cancel")	
-    			}
-    			else
-    			{
-    				this.upReply=false
-    				$('#up'+cno).hide()
-    				$('#u'+cno).text("Update")	
-    			}
-   		 },
-   		 
-   		 replyForm(cno){
-   			$('.ins').hide()
-   			$('.ups').hide()
-   			$('.update').text('Update')
-   			$('.insert').text('Reply')
-   			if(this.isReply===false)
-   			{
-   				this.isReply=true
-   			    $('#in'+cno).show()
-   			    $('#i'+cno).text("Cancel")
-   			    
-   			} 
-   			else
-   			{
-   				this.isReply=false
-   				$('#in'+cno).hide()
-   			    $('#i'+cno).text("Reply")
-   			}
-   		 },
-   		 replyInsert(){
-   			if(this.msg==="")
-   			{
-   				this.$refs.msg.focus()
-   				return
-   			}
-   			axios.post('../comment/pitcher_insert_vue.do',null,{
-   				params:{
-   					rno:this.rno,
-   					types:this.types,
-   					msg:this.msg
-   				}
-   			}).then(response=>{
-	   				 console.log(response.data)
-					 this.reply_list=response.data.list
-					 this.curpage=response.data.curpage
-					 this.totalpage=response.data.totalpage
-					 this.startPage=response.data.startPage
-					 this.endPage=response.data.endPage
-					 this.msg=''
-			   }).catch(error=>{
-				     console.log(error.response)
-			   })
-   		 },
-   		 dataRecv(){
-   			 axios.get('../comment/pitcher_list_vue.do',{
-   				 params:{
-   					rno:this.rno, 
-   					types:this.types,
-   					page:this.curpage,
-   				 }
-   			 }).then(response=>{
-   				 console.log(response.data)
-   				 this.reply_list=response.data.list
-   				 this.curpage=response.data.curpage
-   				 this.totalpage=response.data.totalpage
-   				 this.startPage=response.data.startPage
-   				 this.endPage=response.data.endPage
-   			 }).catch(error=>{
-   				 console.log(error.response)
-   			 })
-   		 }
-   	 }
+   	methods:{
+		drawDetailChart() {
+		      var data = google.visualization.arrayToDataTable([
+		        ['', '류현진 (Hyun-Jin Ryu)', this.vo.name],
+		        ['경기수', 25, this.vo.game],
+		        ['승', 16, this.vo.win],
+		        ['패', 4, this.vo.lose],
+		        ['피안타', 149, this.vo.hit],
+		        ['삼진', 187, this.vo.strikeout],
+		        ['볼넷', 45, this.vo.ball],
+		        ['세이브', 0, this.vo.save],
+		        ['홀드', 0, this.vo.hold],
+		        ['이닝', 192.2, this.vo.inning]
+		      ]);
+
+		      var materialOptions = {
+		        chart: {
+		          title: this.vo.name+'와(과) 류현진 (Hyun-Jin Ryu)의 세부 기록 비교 차트',
+		          subtitle: '비교 항목 : 경기수, 승, 패, 피안타, 삼진, 볼넷, 세이브, 홀드, 이닝'
+		        },
+		        hAxis: {
+		          title: '',
+		          minValue: 0,
+		        },
+		        vAxis: {
+		          title: 'City'
+		        },
+		        bars: 'horizontal'
+		      };
+		      var materialChart = new google.charts.Bar(document.getElementById('chart_div'));
+		      materialChart.draw(data, materialOptions);
+		    },
+	
+		drawImportantChart() {
+		      var data = google.visualization.arrayToDataTable([
+		        ['', '류현진 (Hyun-Jin Ryu)', this.vo.name],
+		        ['WAR(승리기여도)', 9.34, this.vo.war],
+		        ['ERA(평균자책점)', 1.82, this.vo.era]
+		      ]);
+
+		      var materialOptions = {
+		        chart: {
+		          title: this.vo.name+'와(과) 류현진 (Hyun-Jin Ryu)의 WAR, ERA 기록 비교 차트',
+		          subtitle: '비교 항목 : WAR(승리기여도), ERA(평균자책점)'
+		        },
+		        hAxis: {
+		          title: '',
+		          minValue: 0,
+		        },
+		        vAxis: {
+		          title: 'City'
+		        },
+		        bars: 'horizontal'
+		      };
+		      var materialChart = new google.charts.Bar(document.getElementById('chart2_div'));
+		      materialChart.draw(data, materialOptions);
+		    }
+		}
     }).mount('#chartApp')
 		</script>
 	<script>
