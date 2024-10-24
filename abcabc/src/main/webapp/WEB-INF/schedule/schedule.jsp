@@ -49,13 +49,18 @@
     </style>
 </head>
 <body>
-<div class="container">
-    <!-- 고정 이미지 -->
-    <div class="text-center">
-        <img src="../player/m1.jpg" style="width:1200px;height:150px">
-    </div>
-</div>
-
+<section id="top">
+         
+         <div class="inner-information-text">
+            <div class="container">
+               <h3>Schedule</h3>
+               <ul class="breadcrumb">
+                  <li><a href="../main/main.do">Home</a></li>
+                  <li class="active">일정 & 결과</li>
+               </ul>
+            </div>
+         </div>
+      </section>
 <div class="container" id="calendarApp">
 	<div style="height:50px"></div>
 	<div class="col-12 col-md-7">

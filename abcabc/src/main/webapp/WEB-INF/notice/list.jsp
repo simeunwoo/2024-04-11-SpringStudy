@@ -14,19 +14,19 @@
 </style>
 </head>
 <body>
-<div class="container">
-    <!-- 고정 이미지 -->
-    <div class="text-center" style="text-align: center;">
-        <img src="m1.jpg" style="width:1200px;height:720px">
-        <div class="carousel-caption">
-            <div class="col-lg-7 col-md-7 col-sm-12 col-xs-12"></div>
-            <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
-                <div class="slider-contant" data-animation="animated fadeInRight">
-                </div>
+<section id="top">
+<section id="top">
+         
+         <div class="inner-information-text">
+            <div class="container">
+               <h3>Notice</h3>
+               <ul class="breadcrumb">
+                  <li><a href="../main/main.do">Home</a></li>
+                  <li class="active">공지 사항</li>
+               </ul>
             </div>
-        </div>
-    </div>
-</div>
+         </div>
+      </section>
 <div class="container text-center"> 
 <div class="breadcumb-area" style="background-image: url(../img/bg-img/breadcumb.jpg);">
         <div class="container h-100">
