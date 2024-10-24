@@ -170,7 +170,7 @@ public class PlayerCommentRestController {
 		
 		// INSERT INTO spring_comment(cno,rno,id,name,sex,msg,group_id,type)
 		// id, name => 저장
-		return pitcherCommonsListData(1, vo.getRno(), vo.getType());
+		return pitcherCommonsListData(1, vo.getRno(), vo.getTypes());
 	}
 	
 	@PostMapping(value="comment/pitcher_reply_insert_vue.do",produces="text/plain;charset=UTF-8")
@@ -184,7 +184,7 @@ public class PlayerCommentRestController {
 		vo.setSex(sex);
 		pService.pitcherCommentReplyReplyInsert(cno, vo);
 		
-		return pitcherCommonsListData(1, vo.getRno(), vo.getType());
+		return pitcherCommonsListData(1, vo.getRno(), vo.getTypes());
 	}
 	
 	@GetMapping(value="comment/pitcher_delete_vue.do",produces="text/plain;charset=UTF-8")
@@ -207,6 +207,6 @@ public class PlayerCommentRestController {
 	public String pitcherComment_update(PitcherCommentVO vo) throws Exception
 	{
 		pService.pitcherCommentUpdate(vo);
-		return pitcherCommonsListData(1, vo.getRno(), vo.getType());
+		return pitcherCommonsListData(1, vo.getRno(), vo.getTypes());
 	}
 }

@@ -99,10 +99,10 @@ public class PlayerRestController {
 	@GetMapping(value="player/pitcher_detail_vue.do",produces="text/plain;charset=UTF-8")
 	public String pitcher_detail(int pno) throws Exception
 	{
-		PitcherVO vo=pService.pitcherDetailData(pno);
+		PitcherVO pvo=pService.pitcherDetailData(pno);
 		
 		ObjectMapper mapper=new ObjectMapper();
-		String json=mapper.writeValueAsString(vo);
+		String json=mapper.writeValueAsString(pvo);
 		
 		return json;
 	}

@@ -89,16 +89,16 @@ public interface PlayerCommentMapper {
 	
 	//////////////////////////////////////////////////////////
 	
-	@Select("SELECT cno,rno,type,id,name,msg,sex,group_tab,likecount,TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS') as dbday,num "
-			+ "FROM (SELECT cno,rno,type,id,name,msg,sex,group_tab,likecount,regdate,rownum as num "
-			+ "FROM (SELECT cno,rno,type,id,name,msg,sex,group_tab,likecount,regdate "
-			+ "FROM pitcher_comment WHERE rno=#{rno} AND type=#{type} "
+	@Select("SELECT cno,rno,types,id,name,msg,sex,group_tab,likecount,TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS') as dbday,num "
+			+ "FROM (SELECT cno,rno,types,id,name,msg,sex,group_tab,likecount,regdate,rownum as num "
+			+ "FROM (SELECT cno,rno,types,id,name,msg,sex,group_tab,likecount,regdate "
+			+ "FROM pitcher_comment WHERE rno=#{rno} AND types=#{types} "
 			+ "ORDER BY group_id DESC,group_step ASC)) "
 			+ "WHERE num BETWEEN #{start} AND #{end}")
 	public List<PitcherCommentVO> pitcherCommentListData(Map map);
 	
 	@Select("SELECT CEIL(COUNT(*)/10.0) FROM pitcher_comment "
-			+ "WHERE rno=#{rno} AND type=#{type}")
+			+ "WHERE rno=#{rno} AND types=#{types}")
 	public int pitcherCommentTotalPage(Map map);
 	
 	// 댓글 입력

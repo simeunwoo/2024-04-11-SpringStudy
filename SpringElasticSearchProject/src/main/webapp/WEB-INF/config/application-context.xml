@@ -30,4 +30,9 @@
 		@ControllerAdvice
 		@Configuration
 	-->
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		p:prefix="/"
+		p:suffix=".jsp"
+	/>
 </beans>

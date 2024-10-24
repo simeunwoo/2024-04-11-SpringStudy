@@ -90,55 +90,53 @@ google.charts.load('current', {packages: ['corechart', 'bar']});
                         <table class="table table-bordered table-hover" style="font-size:16px;margin:0 auto">
                             <tr>
                             	<td colspan="6" class="text-center">
-   									<img :src="'https://statiz.sporki.com'+vo.image" style="width:101px;height:134px">
-   									&nbsp;&nbsp;<h3>{{vo.name}}</h3>
-   									&nbsp;<img :src="vo.logo" style="width:130px;height:130px">
-   									&nbsp;<h3>{{vo.team}}</h3>
+   									<img src="'https://statiz.sporki.com'${pvo.image }" style="width:101px;height:134px">
+   									&nbsp;&nbsp;<h3>${pvo.name }</h3>
+   									&nbsp;<img src="${pvo.logo }" style="width:130px;height:130px">
+   									&nbsp;<h3>${pvo.team }</h3>
                             	</td>
                             </tr>
                             <tr>
                                 <th width="20%" class="text-center">나이</th>
-                                <td width="13%" class="text-center">{{vo.age}}</td>
+                                <td width="13%" class="text-center">${pvo.age }</td>
                                 <th width="20%" class="text-center">경기</th>
-                                <td width="13%" class="text-center">{{vo.game}}</td>
+                                <td width="13%" class="text-center">${pvo.game }</td>
                                 <th width="20%" class="text-center">이닝</th>
-                                <td width="14%" class="text-center">{{vo.inning}}</td>
+                                <td width="14%" class="text-center">${pvo.inning }</td>
                             </tr>
                             <tr>
                                 <th width="20%" class="text-center">승</th>
-                                <td width="13%" class="text-center">{{vo.win}}</td>
+                                <td width="13%" class="text-center">${pvo.win }</td>
                                 <th width="20%" class="text-center">패</th>
-                                <td width="13%" class="text-center">{{vo.lose}}</td>
+                                <td width="13%" class="text-center">${pvo.lose }</td>
                                 <th width="20%" class="text-center" style="color:red">평균자책점(ERA)</th>
-                                <td width="14%" class="text-center" style="color:red">{{vo.era}}</td>
+                                <td width="14%" class="text-center" style="color:red">${pvo.era }</td>
                             </tr>
                             <tr>
                                 <th width="20%" class="text-center">피안타</th>
-                                <td width="13%" class="text-center">{{vo.hit}}</td>
+                                <td width="13%" class="text-center">${pvo.hit }</td>
                                 <th width="20%" class="text-center">탈삼진</th>
-                                <td width="13%" class="text-center">{{vo.strikeout}}</td>
+                                <td width="13%" class="text-center">${pvo.strikeout }</td>
                                 <th width="20%" class="text-center">볼넷</th>
-                                <td width="14%" class="text-center">{{vo.ball}}</td>
+                                <td width="14%" class="text-center">${pvo.ball }</td>
                             </tr>
                             <tr>
                                 <th width="20%" class="text-center">세이브</th>
-                                <td width="13%" class="text-center">{{vo.save}}</td>
+                                <td width="13%" class="text-center">${pvo.save }</td>
                                 <th width="20%" class="text-center">홀드</th>
-                                <td width="13%" class="text-center">{{vo.hold}}</td>
+                                <td width="13%" class="text-center">${pvo.hold }</td>
                                 <th width="20%" class="text-center" style="color:red">WAR</th>
-                                <td width="14%" class="text-center" style="color:red">{{vo.war}}</td>
+                                <td width="14%" class="text-center" style="color:red">${pvo.war }</td>
                             </tr>
                         </table></div></aside></div></div></div></div></div>
                         
                         </div>
                         <div>
                         </div>
-                        	<div id="chart_div" style="width: 900px; height: 500px;"></div>
-                        	<div style="height:80px"></div>
-                        	<div id="chart2_div" style="width: 900px; height: 500px;"></div>
+                        	
                         	<div style="height:80px"></div>
                         </div>
-   		<div class="comment_area section_padding_50 clearfix">
+   		<div class="comment_area section_padding_50 clearfix" id="replyApp">
                                 <h4 class="mb-30">댓글</h4>
 
                                 <ol>
@@ -222,250 +220,186 @@ google.charts.load('current', {packages: ['corechart', 'bar']});
                             </div>
    	</section>
 	<script>
-		let chartApp=Vue.createApp({
-			data(){
-				return{
-					vo:{},
-					pno:${pno},
-					rno:${fno},
-	                reply_list:[],
-	                curpage:1,
-	                totalpage:0,
-	                endPage:0,
-	                startPage:0,
-	                type:1,
-	                sessionId:'${sessionId}',
-	                msg:'',
-	                isReply:false,
-	                upReply:false
-				}
-			},
-			mounted(){
-				axios.get('../player/pitcher_detail_vue.do',{
-					params:{
-						pno:this.pno
-					}
-				}).then(response=>{
-					console.log(response.data)
-					this.vo=response.data
-					
-					this.drawDetailChart()
-					this.drawImportantChart()
-				}).catch(error=>{
-					console.log(error.response)
-				})
-				this.dataRecv()
-				
-			},
-			methods:{
-				drawDetailChart() {
-					var data = google.visualization.arrayToDataTable([
-				        ['', '류현진 (Hyun-Jin Ryu)', this.vo.name],
-				        ['경기수', 25, this.vo.game],
-				        ['승', 16, this.vo.win],
-				        ['패', 4, this.vo.lose],
-				        ['피안타', 149, this.vo.hit],
-				        ['볼넷', 45, this.vo.ball],
-				        ['이닝', 192.2, this.vo.inning],
-				        ['세이브', 0, this.vo.save],
-				        ['홀드', 0, this.vo.hold]
-				      ]);
-
-				      var materialOptions = {
-				        chart: {
-				          title: this.vo.name+'와(과) 류현진 (Hyun-Jin Ryu)의 세부 기록 비교 차트',
-				          subtitle: '비교 항목 : 경기수, 승, 패, 피안타, 볼넷, 이닝, 세이브, 홀드'
-				        },
-				        hAxis: {
-				          title: '',
-				          minValue: 0,
-				        },
-				        vAxis: {
-				          title: 'City'
-				        },
-				        bars: 'horizontal'
-				      };
-				      var materialChart = new google.charts.Bar(document.getElementById('chart_div'));
-				      materialChart.draw(data, materialOptions);
-				    },
-				drawImportantChart() {
-					var data = google.visualization.arrayToDataTable([
-				        ['', '류현진 (Hyun-Jin Ryu)', this.vo.name],
-				        ['WAR(승리기여도)', 9.34, this.vo.war],
-				        ['ERA(평균자책점)', 1.82, this.vo.era]
-				      ]);
-
-				      var materialOptions = {
-				        chart: {
-				          title: this.vo.name+'와(과) 류현진 (Hyun-Jin Ryu)의 WAR, ERA 기록 비교 차트',
-				          subtitle: '비교 항목 : WAR(승리기여도), ERA(평균자책점)'
-				        },
-				        hAxis: {
-				          title: '',
-				          minValue: 0
-				        },
-				        vAxis: {
-				          title: 'City'
-				        },
-				        bars: 'horizontal'
-				      };
-				      var materialChart = new google.charts.Bar(document.getElementById('chart2_div'));
-				      materialChart.draw(data, materialOptions);
-				    },
-				    replyUpdate(cno){
-		    			let msg=$('#umsg'+cno).val()
-		    			if(msg.trim()==="")
-		    			{
-		    				 $('#umsg'+cno).focus()
-		    				 return
-		    			}
-		    			axios.get('../comment/pitcher_update_vue.do',{
-		     				params:{
-		     					cno:cno,
-		     					rno:this.rno,
-		     					type:this.type,
-		     					msg:msg
-		     				}
-		     		   	}).then(response=>{
-		  	   				 console.log(response.data)
-		  					 this.reply_list=response.data.list
-		  					 this.curpage=response.data.curpage
-		  					 this.totalpage=response.data.totalpage
-		  					 this.startPage=response.data.startPage
-		  					 this.endPage=response.data.endPage
-		  					 $('#umsg'+cno).val("")
-		  					 $('#up'+cno).hide()
-		  			   }).catch(error=>{
-		  				     console.log(error.response)
-		  			   })
-		    		 },
-		    		 replyDelete(cno){
-		    			axios.get('../comment/pitcher_delete_vue.do',{
-		    				params:{
-		    					cno:cno,
-		    					rno:this.rno,
-		    					type:this.type
-		    				}
-		    			}).then(response=>{
-		 	   				 console.log(response.data)
-		 					 this.reply_list=response.data.list
-		 					 this.curpage=response.data.curpage
-		 					 this.totalpage=response.data.totalpage
-		 					 this.startPage=response.data.startPage
-		 					 this.endPage=response.data.endPage
-		 			   }).catch(error=>{
-		 				     console.log(error.response)
-		 			   })
-		    		 },
-		    		 replyReplyInsert(cno){
-		    			 let msg=$('#msg'+cno).val()
-		    			 if(msg.trim()==="")
-		    			 {
-		    				 $('#msg'+cno).focus()
-		    				 return
-		    			 }
-		    			 axios.post('../comment/pitcher_reply_insert_vue.do',null,{
-		     				params:{
-		     					rno:this.rno,
-		     					type:this.type,
-		     					msg:msg,
-		     					cno:cno
-		     				}
-		     			}).then(response=>{
-		 	   				 console.log(response.data)
-		 					 this.reply_list=response.data.list
-		 					 this.curpage=response.data.curpage
-		 					 this.totalpage=response.data.totalpage
-		 					 this.startPage=response.data.startPage
-		 					 this.endPage=response.data.endPage
-		 					 $('#msg'+cno).val('')
-		 					 $('#in'+cno).hide()
-		 					 $('#i'+cno).text("Reply")
-		 			   }).catch(error=>{
-		 				     console.log(error.response)
-		 			   })
-		    		 },
-		    		 replyUpdateForm(cno){
-		    			$('.ins').hide()
-		     			$('.ups').hide()
-		     			$('.update').text('Update')
-		     			$('.insert').text('Reply')
-		     			if(this.upReply===false)
-		     			{
-		     				this.upReply=true
-		     				$('#up'+cno).show()
-		     				$('#u'+cno).text("Cancel")
-		     			}
-		     			else
-		     			{
-		     				this.upReply=false
-		     				$('#up'+cno).hide()
-		     				$('#u'+cno).text("Update")
-		     			}
-		    		 },
-		    		 replyForm(cno){
-		    			$('.ins').hide()
-		    			$('.ups').hide()
-		    			$('.update').text('Update')
-		    			$('.insert').text('Reply')
-		    			if(this.isReply===false)
-		    			{
-		    				this.isReply=true
-		    			    $('#in'+cno).show()
-		    			    $('#i'+cno).text("Cancel")
-		    			    
-		    			} 
-		    			else
-		    			{
-		    				this.isReply=false
-		    				$('#in'+cno).hide()
-		    			    $('#i'+cno).text("Reply")
-		    			}
-		    		 },
-		    		 replyInsert(){
-		    			if(this.msg==="")
-		    			{
-		    				this.$refs.msg.focus()
-		    				return
-		    			}
-		    			axios.post('../comment/pitcher_insert_vue.do',null,{
-		    				params:{
-		    					rno:this.rno,
-		    					type:this.type,
-		    					msg:this.msg
-		    				}
-		    			}).then(response=>{
-			   				 console.log(response.data)
-							 this.reply_list=response.data.list
-							 this.curpage=response.data.curpage
-							 this.totalpage=response.data.totalpage
-							 this.startPage=response.data.startPage
-							 this.endPage=response.data.endPage
-							 this.msg=''
-					   }).catch(error=>{
-						     console.log(error.response)
-					   })
-		    		 },
-		    		 dataRecv(){
-		    			 axios.get('../comment/pitcher_list_vue.do',{
-		    				 params:{
-		    					rno:this.rno, 
-		    					type:this.type,
-		    					page:this.curpage
-		    				 }
-		    			 }).then(response=>{
-		    				 console.log(response.data)
-		    				 this.reply_list=response.data.list
-		    				 this.curpage=response.data.curpage
-		    				 this.totalpage=response.data.totalpage
-		    				 this.startPage=response.data.startPage
-		    				 this.endPage=response.data.endPage
-		    			 }).catch(error=>{
-		    				 console.log(error.response)
-		    			 })
-		    		 }
-			}
-		}).mount('#chartApp')
+	let replyApp=Vue.createApp({
+   	 data(){
+   		 return {
+               rno:${pno},
+               reply_list:[],
+               curpage:1,
+               totalpage:0,
+               endPage:0,
+               startPage:0,
+               types:1,
+               sessionId:'${sessionId}',
+               msg:'',
+               isReply:false,
+               upReply:false
+   		 }
+   	 },
+   	 mounted(){
+   		 this.dataRecv()
+   	 },
+   	 methods:{
+   		 replyUpdate(cno){
+   			 let msg=$('#umsg'+cno).val()
+   			 if(msg.trim()==="")
+   			 {
+   				 $('#umsg'+cno).focus()
+   				 return
+   			 }
+   			 axios.post('../comment/pitcher_update_vue.do',null,{
+    				params:{
+    					cno:cno,
+    					rno:this.rno,
+    					types:this.types,
+    					msg:msg
+    				}
+    			}).then(response=>{
+ 	   				 console.log(response.data)
+ 					 this.reply_list=response.data.list
+ 					 this.curpage=response.data.curpage
+ 					 this.totalpage=response.data.totalpage
+ 					 this.startPage=response.data.startPage
+ 					 this.endPage=response.data.endPage
+ 					$('#umsg'+cno).val("")
+ 					$('#up'+cno).hide()
+    				$('#u'+cno).text("Update")
+ 					
+ 			   }).catch(error=>{
+ 				     console.log(error.response)
+ 			   }) 
+   		 },
+   		 replyDelete(cno){
+   			axios.get('../comment/pitcher_delete_vue.do',{
+   				params:{
+   					cno:cno,
+   					rno:this.rno,
+   					types:this.types
+   				}
+   			}).then(response=>{
+	   				 console.log(response.data)
+					 this.reply_list=response.data.list
+					 this.curpage=response.data.curpage
+					 this.totalpage=response.data.totalpage
+					 this.startPage=response.data.startPage
+					 this.endPage=response.data.endPage
+					 
+			   }).catch(error=>{
+				     console.log(error.response)
+			   }) 
+   		 },
+   		
+   		 replyReplyInsert(cno){
+   			 let msg=$('#msg'+cno).val()
+   			 if(msg.trim()==="")
+   			 {
+   				 $('#msg'+cno).focus()
+   				 return
+   			 }
+   			 
+   			 axios.post('../comment/pitcher_reply_insert_vue.do',null,{
+    				params:{
+    					rno:this.rno,
+    					types:this.types,
+    					msg:msg,
+    					cno:cno
+    				}
+    			}).then(response=>{
+	   				 console.log(response.data)
+					 this.reply_list=response.data.list
+					 this.curpage=response.data.curpage
+					 this.totalpage=response.data.totalpage
+					 this.startPage=response.data.startPage
+					 this.endPage=response.data.endPage
+					 $('#msg'+cno).val('')
+					 $('#in'+cno).hide()
+					 $('#i'+cno).text("Reply")
+			   }).catch(error=>{
+				     console.log(error.response)
+			   })
+   		 },
+            replyUpdateForm(cno){
+   			$('.ins').hide()
+    			$('.ups').hide()
+    			$('.update').text('Update')
+    			$('.insert').text('Reply')
+    			if(this.upReply===false)
+    			{
+    				this.upReply=true
+    				$('#up'+cno).show()
+    			    $('#u'+cno).text("Cancel")	
+    			}
+    			else
+    			{
+    				this.upReply=false
+    				$('#up'+cno).hide()
+    				$('#u'+cno).text("Update")	
+    			}
+   		 },
+   		 
+   		 replyForm(cno){
+   			$('.ins').hide()
+   			$('.ups').hide()
+   			$('.update').text('Update')
+   			$('.insert').text('Reply')
+   			if(this.isReply===false)
+   			{
+   				this.isReply=true
+   			    $('#in'+cno).show()
+   			    $('#i'+cno).text("Cancel")
+   			    
+   			} 
+   			else
+   			{
+   				this.isReply=false
+   				$('#in'+cno).hide()
+   			    $('#i'+cno).text("Reply")
+   			}
+   		 },
+   		 replyInsert(){
+   			if(this.msg==="")
+   			{
+   				this.$refs.msg.focus()
+   				return
+   			}
+   			axios.post('../comment/pitcher_insert_vue.do',null,{
+   				params:{
+   					rno:this.rno,
+   					types:this.types,
+   					msg:this.msg
+   				}
+   			}).then(response=>{
+	   				 console.log(response.data)
+					 this.reply_list=response.data.list
+					 this.curpage=response.data.curpage
+					 this.totalpage=response.data.totalpage
+					 this.startPage=response.data.startPage
+					 this.endPage=response.data.endPage
+					 this.msg=''
+			   }).catch(error=>{
+				     console.log(error.response)
+			   })
+   		 },
+   		 dataRecv(){
+   			 axios.get('../comment/pitcher_list_vue.do',{
+   				 params:{
+   					rno:this.rno, 
+   					types:this.types,
+   					page:this.curpage,
+   				 }
+   			 }).then(response=>{
+   				 console.log(response.data)
+   				 this.reply_list=response.data.list
+   				 this.curpage=response.data.curpage
+   				 this.totalpage=response.data.totalpage
+   				 this.startPage=response.data.startPage
+   				 this.endPage=response.data.endPage
+   			 }).catch(error=>{
+   				 console.log(error.response)
+   			 })
+   		 }
+   	 }
+    }).mount('#replyApp')
 		</script>
 </body>
 </html>
