@@ -181,7 +181,7 @@ li.col-sm-4 {
                                                       <li><a href="../team/ranking.do">순위</a></li>
                                                       <li><a href="#">일자별 기록</a></li>
                                                       <li><a href="../seoul/weather.do">오늘의 날씨</a></li>
-                                                      <li><a href="../stadium/cctv.do">경기장 cctv</a></li>
+                                                      <li><a href="../stadium/cctv.do">경기장 주변 교통</a></li>
                                                    </ul>
                                                 </li>
                                              </ul>
