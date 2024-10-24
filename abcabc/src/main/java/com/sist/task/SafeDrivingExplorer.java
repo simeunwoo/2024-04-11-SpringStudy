@@ -26,7 +26,7 @@ public class SafeDrivingExplorer {
         double maxY = lat + 1;
 
         StringBuilder urlBuilder = new StringBuilder("https://openapi.its.go.kr:9443/posIncidentInfo"); // URL
-        urlBuilder.append("?" + URLEncoder.encode("apiKey", "UTF-8") + "=" + URLEncoder.encode("2052e1a7edbe45b185faaec832aa0625", "UTF-8")); /*공개키*/
+        urlBuilder.append("?" + URLEncoder.encode("apiKey", "UTF-8") + "=" + URLEncoder.encode("8cc24a9744ae41148fed6bbc7975d37f", "UTF-8")); /*공개키*/
         urlBuilder.append("&" + URLEncoder.encode("minX","UTF-8") + "=" + URLEncoder.encode("126.800000", "UTF-8")); /*최소경도영역*/
         urlBuilder.append("&" + URLEncoder.encode("maxX","UTF-8") + "=" + URLEncoder.encode("127.890000", "UTF-8")); /*최대경도영역*/
         urlBuilder.append("&" + URLEncoder.encode("minY","UTF-8") + "=" + URLEncoder.encode("34.900000", "UTF-8")); /*최소위도영역*/

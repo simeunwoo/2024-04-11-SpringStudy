@@ -26,7 +26,7 @@ public class ApiExplorer {
         double maxY = lat + 1;
 
         StringBuilder urlBuilder = new StringBuilder("https://openapi.its.go.kr:9443/eventInfo"); // URL
-        urlBuilder.append("?" + URLEncoder.encode("apiKey", "UTF-8") + "=" + URLEncoder.encode("2052e1a7edbe45b185faaec832aa0625", "UTF-8")); // 공개키
+        urlBuilder.append("?" + URLEncoder.encode("apiKey", "UTF-8") + "=" + URLEncoder.encode("8cc24a9744ae41148fed6bbc7975d37f", "UTF-8")); // 공개키
         urlBuilder.append("&" + URLEncoder.encode("type", "UTF-8") + "=" + URLEncoder.encode("all", "UTF-8")); // 도로유형
         urlBuilder.append("&" + URLEncoder.encode("eventType", "UTF-8") + "=" + URLEncoder.encode("all", "UTF-8")); // 이벤트유형
         urlBuilder.append("&" + URLEncoder.encode("minX", "UTF-8") + "=" + URLEncoder.encode(String.valueOf(minX), "UTF-8")); // 최소경도영역
