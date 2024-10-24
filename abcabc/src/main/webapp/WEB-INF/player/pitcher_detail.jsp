@@ -59,8 +59,8 @@ google.charts.load('current', {packages: ['corechart', 'bar']});
             </div>
         </div>
     </div>
-    <section class="single_blog_area section_padding_80" id="chartApp">
-        <div class="container">
+    <section class="single_blog_area section_padding_80">
+        <div class="container" id="chartApp">
             <div class="row justify-content-center">
                 <div class="col-12 col-lg-8">
                     <div class="row no-gutters">
@@ -130,7 +130,9 @@ google.charts.load('current', {packages: ['corechart', 'bar']});
                                 <td width="14%" class="text-center" style="color:red">${pvo.war }</td>
                             </tr>
                         </table></div></aside></div></div></div></div></div>
-                        
+                        	<div id="chart_div" style="width: 900px; height: 500px;"></div>
+                        	<div style="height:80px"></div>
+                        	<div id="chart2_div" style="width: 900px; height: 500px;"></div>
                         </div>
                         <div>
                         </div>
@@ -239,6 +241,188 @@ google.charts.load('current', {packages: ['corechart', 'bar']});
                             </div>
                             
    	</section>
+   	<script>
+	let chartApp=Vue.createApp({
+   	 data(){
+   		 return {
+               rno:${pno},
+               reply_list:[],
+               curpage:1,
+               totalpage:0,
+               endPage:0,
+               startPage:0,
+               types:1,
+               sessionId:'${sessionId}',
+               msg:'',
+               isReply:false,
+               upReply:false
+   		 }
+   	 },
+   	 mounted(){
+   		 this.dataRecv()
+   	 },
+   	 methods:{
+   		 replyUpdate(cno){
+   			 let msg=$('#umsg'+cno).val()
+   			 if(msg.trim()==="")
+   			 {
+   				 $('#umsg'+cno).focus()
+   				 return
+   			 }
+   			 axios.post('../comment/pitcher_update_vue.do',null,{
+    				params:{
+    					cno:cno,
+    					rno:this.rno,
+    					types:this.types,
+    					msg:msg
+    				}
+    			}).then(response=>{
+ 	   				 console.log(response.data)
+ 					 this.reply_list=response.data.list
+ 					 this.curpage=response.data.curpage
+ 					 this.totalpage=response.data.totalpage
+ 					 this.startPage=response.data.startPage
+ 					 this.endPage=response.data.endPage
+ 					$('#umsg'+cno).val("")
+ 					$('#up'+cno).hide()
+    				$('#u'+cno).text("Update")
+ 					
+ 			   }).catch(error=>{
+ 				     console.log(error.response)
+ 			   }) 
+   		 },
+   		 replyDelete(cno){
+   			axios.get('../comment/pitcher_delete_vue.do',{
+   				params:{
+   					cno:cno,
+   					rno:this.rno,
+   					types:this.types
+   				}
+   			}).then(response=>{
+	   				 console.log(response.data)
+					 this.reply_list=response.data.list
+					 this.curpage=response.data.curpage
+					 this.totalpage=response.data.totalpage
+					 this.startPage=response.data.startPage
+					 this.endPage=response.data.endPage
+					 
+			   }).catch(error=>{
+				     console.log(error.response)
+			   }) 
+   		 },
+   		
+   		 replyReplyInsert(cno){
+   			 let msg=$('#msg'+cno).val()
+   			 if(msg.trim()==="")
+   			 {
+   				 $('#msg'+cno).focus()
+   				 return
+   			 }
+   			 
+   			 axios.post('../comment/pitcher_reply_insert_vue.do',null,{
+    				params:{
+    					rno:this.rno,
+    					types:this.types,
+    					msg:msg,
+    					cno:cno
+    				}
+    			}).then(response=>{
+	   				 console.log(response.data)
+					 this.reply_list=response.data.list
+					 this.curpage=response.data.curpage
+					 this.totalpage=response.data.totalpage
+					 this.startPage=response.data.startPage
+					 this.endPage=response.data.endPage
+					 $('#msg'+cno).val('')
+					 $('#in'+cno).hide()
+					 $('#i'+cno).text("Reply")
+			   }).catch(error=>{
+				     console.log(error.response)
+			   })
+   		 },
+            replyUpdateForm(cno){
+   			$('.ins').hide()
+    			$('.ups').hide()
+    			$('.update').text('Update')
+    			$('.insert').text('Reply')
+    			if(this.upReply===false)
+    			{
+    				this.upReply=true
+    				$('#up'+cno).show()
+    			    $('#u'+cno).text("Cancel")	
+    			}
+    			else
+    			{
+    				this.upReply=false
+    				$('#up'+cno).hide()
+    				$('#u'+cno).text("Update")	
+    			}
+   		 },
+   		 
+   		 replyForm(cno){
+   			$('.ins').hide()
+   			$('.ups').hide()
+   			$('.update').text('Update')
+   			$('.insert').text('Reply')
+   			if(this.isReply===false)
+   			{
+   				this.isReply=true
+   			    $('#in'+cno).show()
+   			    $('#i'+cno).text("Cancel")
+   			    
+   			} 
+   			else
+   			{
+   				this.isReply=false
+   				$('#in'+cno).hide()
+   			    $('#i'+cno).text("Reply")
+   			}
+   		 },
+   		 replyInsert(){
+   			if(this.msg==="")
+   			{
+   				this.$refs.msg.focus()
+   				return
+   			}
+   			axios.post('../comment/pitcher_insert_vue.do',null,{
+   				params:{
+   					rno:this.rno,
+   					types:this.types,
+   					msg:this.msg
+   				}
+   			}).then(response=>{
+	   				 console.log(response.data)
+					 this.reply_list=response.data.list
+					 this.curpage=response.data.curpage
+					 this.totalpage=response.data.totalpage
+					 this.startPage=response.data.startPage
+					 this.endPage=response.data.endPage
+					 this.msg=''
+			   }).catch(error=>{
+				     console.log(error.response)
+			   })
+   		 },
+   		 dataRecv(){
+   			 axios.get('../comment/pitcher_list_vue.do',{
+   				 params:{
+   					rno:this.rno, 
+   					types:this.types,
+   					page:this.curpage,
+   				 }
+   			 }).then(response=>{
+   				 console.log(response.data)
+   				 this.reply_list=response.data.list
+   				 this.curpage=response.data.curpage
+   				 this.totalpage=response.data.totalpage
+   				 this.startPage=response.data.startPage
+   				 this.endPage=response.data.endPage
+   			 }).catch(error=>{
+   				 console.log(error.response)
+   			 })
+   		 }
+   	 }
+    }).mount('#chartApp')
+		</script>
 	<script>
 	let replyApp=Vue.createApp({
    	 data(){
