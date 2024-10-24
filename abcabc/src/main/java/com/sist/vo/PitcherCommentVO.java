@@ -22,7 +22,7 @@ TYPE                NUMBER
 @Data
 public class PitcherCommentVO {
 
-	private int cno,rno,likecount,group_id,group_step,group_tab,depth,root,types;
+	private int cno,rno,likecount,group_id,group_step,group_tab,depth,root,type;
 	private String id,name,sex,msg,dbday,mday;
 	private Date regdate,modifydate;
 }

@@ -83,22 +83,22 @@ public interface PlayerCommentMapper {
 	
 	// 수정
 	@Update("UPDATE batter_comment SET "
-			+ "msg=#{msg},modifydate=SYSDATE "
+			+ "msg=#{msg} "
 			+ "WHERE cno=#{cno}")
 	public void batterCommentUpdate(BatterCommentVO vo);
 	
 	//////////////////////////////////////////////////////////
 	
-	@Select("SELECT cno,rno,types,id,name,msg,sex,group_tab,likecount,TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS') as dbday,num "
-			+ "FROM (SELECT cno,rno,types,id,name,msg,sex,group_tab,likecount,regdate,rownum as num "
-			+ "FROM (SELECT cno,rno,types,id,name,msg,sex,group_tab,likecount,regdate "
-			+ "FROM pitcher_comment WHERE rno=#{rno} AND types=#{types} "
+	@Select("SELECT cno,rno,type,id,name,msg,sex,group_tab,likecount,TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS') as dbday,num "
+			+ "FROM (SELECT cno,rno,type,id,name,msg,sex,group_tab,likecount,regdate,rownum as num "
+			+ "FROM (SELECT cno,rno,type,id,name,msg,sex,group_tab,likecount,regdate "
+			+ "FROM pitcher_comment WHERE rno=#{rno} AND type=#{type} "
 			+ "ORDER BY group_id DESC,group_step ASC)) "
 			+ "WHERE num BETWEEN #{start} AND #{end}")
 	public List<PitcherCommentVO> pitcherCommentListData(Map map);
 	
 	@Select("SELECT CEIL(COUNT(*)/10.0) FROM pitcher_comment "
-			+ "WHERE rno=#{rno} AND types=#{types}")
+			+ "WHERE rno=#{rno} AND type=#{type}")
 	public int pitcherCommentTotalPage(Map map);
 	
 	// 댓글 입력
@@ -162,7 +162,7 @@ public interface PlayerCommentMapper {
 	
 	// 수정
 	@Update("UPDATE pitcher_comment SET "
-			+ "msg=#{msg},modifydate=SYSDATE "
+			+ "msg=#{msg} "
 			+ "WHERE cno=#{cno}")
 	public void pitcherCommentUpdate(PitcherCommentVO vo);
 }

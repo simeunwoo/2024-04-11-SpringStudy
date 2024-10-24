@@ -11,7 +11,6 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <script type="text/javascript">
 google.charts.load('current', {packages: ['corechart', 'bar']});
 </script>
@@ -218,26 +217,7 @@ google.charts.load('current', {packages: ['corechart', 'bar']});
                                         </ol>
                                     </li>
                                 </ol>
-                                <!-- Leave A Comment 문제 X -->
-                            <c:if test="${sessionScope.userId!=null }">
-	                            <div class="leave-comment-area section_padding_50 clearfix">
-	                                <div class="comment-form">
-	                                   <table class="table">
-	                                    <tr>
-	                                      <td>
-	                                       <textarea rows="4" cols="70" style="float: left" ref="msg" v-model="msg"></textarea>
-	                                       <input type=button value="댓글" style="float: left;background-color: blue;color: white;width: 80px;height:94px"
-	                                         @click="replyInsert()"
-	                                       >
-	                                       
-	                                      </td>
-	                                    </tr>
-	                                   </table>
-	                                </div>
-	                            </div>
-                            </c:if>
                             </div>
-                            
    	</section>
 	<script>
 	let replyApp=Vue.createApp({

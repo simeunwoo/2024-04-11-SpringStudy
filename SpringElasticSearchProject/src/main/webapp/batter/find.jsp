@@ -9,7 +9,7 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <style type="text/css">
 .container{
-   margin-top: 50px
+   margin-top: 50px;
 }
 .row{
    margin: 0px auto;

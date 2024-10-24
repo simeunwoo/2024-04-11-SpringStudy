@@ -51,9 +51,9 @@ public class PlayerCommentServiceImpl implements PlayerCommentService {
 	}
 
 	@Override
-	public void batterReplyDecrement(int fno) {
+	public void batterReplyDecrement(int bno) {
 		// TODO Auto-generated method stub
-		pDao.batterReplyDecrement(fno);
+		pDao.batterReplyDecrement(bno);
 	}
 
 	@Override
@@ -99,9 +99,9 @@ public class PlayerCommentServiceImpl implements PlayerCommentService {
 	}
 
 	@Override
-	public void pitcherReplyDecrement(int fno) {
+	public void pitcherReplyDecrement(int pno) {
 		// TODO Auto-generated method stub
-		pDao.pitcherReplyDecrement(fno);
+		pDao.pitcherReplyDecrement(pno);
 	}
 
 	@Override

@@ -42,7 +42,7 @@ public class PlayerCommentDAO {
 		vo.setGroup_tab(bvo.getGroup_tab()+1);
 		
 		cMapper.batterCommentGroupStepIncrement(bvo);
-		cMapper.batterCommentReplyReplyInsert(bvo);
+		cMapper.batterCommentReplyReplyInsert(vo);
 		cMapper.batterCommentDepthIncrement(cno);
 	}
 	
@@ -64,9 +64,9 @@ public class PlayerCommentDAO {
 		cMapper.batterCommentDelete(map);
 	}
 	
-	public void batterReplyDecrement(int fno)
+	public void batterReplyDecrement(int bno)
 	{
-		cMapper.batterReplyDecrement(fno);
+		cMapper.batterReplyDecrement(bno);
 	}
 	
 	public void batterCommentUpdate(BatterCommentVO vo)
@@ -104,7 +104,7 @@ public class PlayerCommentDAO {
 		vo.setGroup_tab(pvo.getGroup_tab()+1);
 		
 		cMapper.pitcherCommentGroupStepIncrement(pvo);
-		cMapper.pitcherCommentReplyReplyInsert(pvo);
+		cMapper.pitcherCommentReplyReplyInsert(vo);
 		cMapper.batterCommentDepthIncrement(cno);
 	}
 	
@@ -126,9 +126,9 @@ public class PlayerCommentDAO {
 		cMapper.pitcherCommentDelete(map);
 	}
 	
-	public void pitcherReplyDecrement(int fno)
+	public void pitcherReplyDecrement(int pno)
 	{
-		cMapper.pitcherReplyDecrement(fno);
+		cMapper.pitcherReplyDecrement(pno);
 	}
 	
 	public void pitcherCommentUpdate(PitcherCommentVO vo)
