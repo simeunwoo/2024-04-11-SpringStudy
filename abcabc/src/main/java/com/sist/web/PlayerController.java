@@ -30,12 +30,14 @@ public class PlayerController {
 	}
 	
 	@GetMapping("player/batter_detail.do")
-	public String player_batter_detail(int bno,Model model)
+	public String player_batter_detail(int bno,Model model,HttpSession session)
 	{
-		BatterVO vo=pService.batterDetailData(bno);
+		String id=(String)session.getAttribute("userId");
+		BatterVO bvo=pService.batterDetailData(bno);
 		
+		model.addAttribute("sessionId", id);
 		model.addAttribute("bno", bno);
-		model.addAttribute("vo", vo);
+		model.addAttribute("bvo", bvo);
 		
 		return "player/batter_detail";
 	}

@@ -336,7 +336,7 @@ google.charts.load('current', {packages: ['corechart', 'bar']});
                totalpage:0,
                endPage:0,
                startPage:0,
-               types:1,
+               type:1,
                sessionId:'${sessionId}',
                msg:'',
                isReply:false,
@@ -358,7 +358,7 @@ google.charts.load('current', {packages: ['corechart', 'bar']});
     				params:{
     					cno:cno,
     					rno:this.rno,
-    					types:this.types,
+    					type:this.type,
     					msg:msg
     				}
     			}).then(response=>{
@@ -381,7 +381,7 @@ google.charts.load('current', {packages: ['corechart', 'bar']});
    				params:{
    					cno:cno,
    					rno:this.rno,
-   					types:this.types
+   					type:this.type
    				}
    			}).then(response=>{
 	   				 console.log(response.data)
@@ -407,7 +407,7 @@ google.charts.load('current', {packages: ['corechart', 'bar']});
    			 axios.post('../comment/pitcher_reply_insert_vue.do',null,{
     				params:{
     					rno:this.rno,
-    					types:this.types,
+    					type:this.type,
     					msg:msg,
     					cno:cno
     				}
@@ -472,7 +472,7 @@ google.charts.load('current', {packages: ['corechart', 'bar']});
    			axios.post('../comment/pitcher_insert_vue.do',null,{
    				params:{
    					rno:this.rno,
-   					types:this.types,
+   					type:this.type,
    					msg:this.msg
    				}
    			}).then(response=>{
@@ -491,7 +491,7 @@ google.charts.load('current', {packages: ['corechart', 'bar']});
    			 axios.get('../comment/pitcher_list_vue.do',{
    				 params:{
    					rno:this.rno, 
-   					types:this.types,
+   					type:this.type,
    					page:this.curpage,
    				 }
    			 }).then(response=>{
