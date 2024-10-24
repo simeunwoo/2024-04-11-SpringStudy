@@ -91,7 +91,7 @@ google.charts.load('current', {packages: ['corechart', 'bar']});
                         <table class="table table-bordered table-hover" style="font-size:16px;margin:0 auto">
                             <tr>
                             	<td colspan="6" class="text-center">
-   									<img src="'https://statiz.sporki.com'${pvo.image }" style="width:101px;height:134px">
+   									<img src="https://statiz.sporki.com${pvo.image }" style="width:101px;height:134px">
    									&nbsp;&nbsp;<h3>${pvo.name }</h3>
    									&nbsp;<img src="${pvo.logo }" style="width:130px;height:130px">
    									&nbsp;<h3>${pvo.team }</h3>
