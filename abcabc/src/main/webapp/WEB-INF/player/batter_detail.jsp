@@ -23,6 +23,12 @@ google.charts.load('current', {packages: ['corechart', 'bar']});
 	display: block;
 	margin: 0 auto;
 }
+.bottom-align p {
+    line-height: 130px;
+    vertical-align: bottom;
+    margin: 0;
+    font-size: 17px;
+}
 </style>
 </head>
 <body>
@@ -88,10 +94,16 @@ google.charts.load('current', {packages: ['corechart', 'bar']});
                         <table class="table table-bordered table-hover" style="font-size:16px;margin:0 auto">
                             <tr>
                             	<td colspan="6" class="text-center">
-   									<img src="https://statiz.sporki.com${bvo.image }" style="width:101px;height:134px">
-   									&nbsp;&nbsp;<h3>${bvo.name }</h3>
-   									&nbsp;<img src="${bvo.logo }" style="width:130px;height:130px">
-   									&nbsp;<h3>${bvo.team }</h3>
+                            		<div class="col-12 col-sm-6">
+	                            		<img src="${bvo.logo }" style="width:130px;height:130px">
+	   									<img src="https://statiz.sporki.com${pvo.image }" style="width:101px;height:134px">
+   									</div>
+   									<div class="col-12 col-sm-4 bottom-align">
+	                            		<p>${bvo.name }</p>
+	                            	</div>
+	                            	<div class="col-12 col-sm-2 bottom-align">
+	                            		<p>${bvo.team }</p>
+                            		</div>
                             	</td>
                             </tr>
                             <tr>

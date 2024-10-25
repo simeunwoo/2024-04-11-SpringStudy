@@ -23,6 +23,12 @@ google.charts.load('current', {packages: ['corechart', 'bar']});
 	display: block;
 	margin: 0 auto;
 }
+.bottom-align p {
+    line-height: 130px;
+    vertical-align: bottom;
+    margin: 0;
+    font-size: 17px;
+}
 </style>
 </head>
 <body>
@@ -85,16 +91,21 @@ google.charts.load('current', {packages: ['corechart', 'bar']});
          <div class="container">                   
         <div class="header-top">
             <div class="row">
-                <h4>Points Table</h4>
                 <aside id="sidebar" class="left-bar">
                     <div class="feature-matchs text-center" style="text-align: center;">
                         <table class="table table-bordered table-hover" style="font-size:16px;margin:0 auto">
                             <tr>
                             	<td colspan="6" class="text-center">
-   									<img src="https://statiz.sporki.com${pvo.image }" style="width:101px;height:134px">
-   									&nbsp;&nbsp;<h3>${pvo.name }</h3>
-   									&nbsp;<img src="${pvo.logo }" style="width:130px;height:130px">
-   									&nbsp;<h3>${pvo.team }</h3>
+                            		<div class="col-12 col-sm-6">
+                            			<img src="${pvo.logo }" style="width:130px;height:130px">
+                            			<img src="https://statiz.sporki.com${pvo.image }" style="width:101px;height:134px">
+                            		</div>
+                            		<div class="col-12 col-sm-4 bottom-align">
+                            			<p>${pvo.name }</p>
+                            		</div>
+                            		<div class="col-12 col-sm-2 bottom-align">
+                            			<p>${pvo.team }</p>
+                            		</div>
                             	</td>
                             </tr>
                             <tr>
