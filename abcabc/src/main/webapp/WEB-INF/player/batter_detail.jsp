@@ -96,7 +96,7 @@ google.charts.load('current', {packages: ['corechart', 'bar']});
                             	<td colspan="6" class="text-center">
                             		<div class="col-12 col-sm-6">
 	                            		<img src="${bvo.logo }" style="width:130px;height:130px">
-	   									<img src="https://statiz.sporki.com${pvo.image }" style="width:101px;height:134px">
+	   									<img src="https://statiz.sporki.com${bvo.image }" style="width:101px;height:134px">
    									</div>
    									<div class="col-12 col-sm-4 bottom-align">
 	                            		<p>${bvo.name }</p>
