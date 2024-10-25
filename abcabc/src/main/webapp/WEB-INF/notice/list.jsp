@@ -15,7 +15,6 @@
 </head>
 <body>
 <section id="top">
-<section id="top">
          
          <div class="inner-information-text">
             <div class="container">
@@ -89,7 +88,6 @@
 			                <td class="text-center" width=10%>{{vo.no}}</td>
 			                <td width=45%>
 			                 <a :href="'../notice/detail.do?no='+vo.no">{{vo.subject}}</a>
-			                 <sup v-if="today===vo.dbday"><img src="../notice/new.gif"></sup>
 			                </td>
 			                <td class="text-center" width=15%>{{vo.name}}</td>
 			                <td class="text-center" width=20%>{{vo.dbday}}</td>
