@@ -67,10 +67,11 @@
     <div id="calendar"></div>
     </div>
     <div class="col-12 col-md-5">
+    <div style="height:80px"></div>
     <div id="a">
      <div v-if="games.length > 0">
      	<h2 class="text-center">{{ month }}월 {{ day }}일 경기 결과</h2>
-     	<div style="height:30px"></div>
+     	
         <div v-for="vo in games" :key="vo.sno" class="game-item">
             <img :src="vo.awayimage" class="team-logo">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <p class="game-result">{{ vo.away }}&nbsp;{{ vo.awayscore }}&nbsp;-&nbsp;{{ vo.homescore }}&nbsp;{{ vo.home }}</p>
