@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,9 +51,20 @@
 	white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    width: 300px;
+    width: 335px;
 }
-
+.image-player{
+	width: 130px;
+	height: 173px;
+}
+.pname{
+	font-family: '휴먼모음T';
+	font-size: 31px;
+}
+.titles{
+	font-family: '휴먼모음T';
+	font-size: 20px;	
+}
 </style>
 </head>
 <body>
@@ -347,66 +359,39 @@
          <div class="container">
             <div class="main-heading-holder">
                <div class="main-heading sytle-2">
-                  <h2>Meet Your Team</h2>
-                  <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium<br>doloremque laudantium, totam rem aperiam</p>
+                  <h2>Meet Your Player</h2>
+                  <p>KBO 선수들의 기록을 지금 확인해보세요!</p>
                </div>
             </div>
+            <section class="contant main-heading team">
             <div id="team-slider">
-               <div class="container">
-                  <div class="col-md-3">
-                     <div class="team-column style-2">
-                        <img src="../images/img-1-1.jpg" alt="">
-                        <div class="player-name">
-                           <div class="desination-2">Defender</div>
-                           <h5>Charles Wheeler</h5>
-                           <span class="player-number">12</span>
-                        </div>
-                        <div class="overlay">
-                           <div class="team-detail-hover position-center-x">
-                              <p>Lacus vulputate torquent mollis venenatis quisque suspendisse fermentum primis,</p>
-                              <ul class="social-icons style-4 style-5">
-                                 <li><a class="facebook" href="#" tabindex="0"><i class="fa fa-facebook"></i></a></li>
-                                 <li><a class="twitter" href="#" tabindex="0"><i class="fa fa-twitter"></i></a></li>
-                                 <li><a class="youtube" href="#" tabindex="0"><i class="fa fa-youtube-play"></i></a></li>
-                                 <li><a class="pinterest" href="#" tabindex="0"><i class="fa fa-pinterest-p"></i></a></li>
-                              </ul>
-                              <a class="btn blue-btn" href=" /soccer/team-detail.html" tabindex="0">View Detail</a>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-md-3">
-                     <div class="team-column style-2">
-                        <img src="../images/img-1-2.jpg" alt="">
-                        <div class="player-name">
-                           <div class="desination-2">Defender</div>
-                           <h5>Charles Wheeler</h5>
-                           <span class="player-number">12</span>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-md-3">
-                     <div class="team-column style-2">
-                        <img src="../images/img-1-3.jpg" alt="">
-                        <div class="player-name">
-                           <div class="desination-2">Defender</div>
-                           <h5>Charles Wheeler</h5>
-                           <span class="player-number">12</span>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-md-3">
-                     <div class="team-column style-2">
-                        <img src="../images/img-1-4.jpg" alt="">
-                        <div class="player-name">
-                           <div class="desination-2">Defender</div>
-                           <h5>Charles Wheeler</h5>
-                           <span class="player-number">12</span>
-                        </div>
-                     </div>
-                  </div>
-               </div>
+            
+               <div class="row">
+	         	<div class="container">
+	         	<c:forEach var="pvo" items="${pList }">
+	               <div class="col-md-3 column">
+	                  <div class="card">
+	                     <img class="image-player" src="https://statiz.sporki.com${pvo.image }">
+	                     <div style="height:10px"></div>
+	                     <div>
+	                        <p class="pname">${fn:substring(pvo.name, 0, 3)}</p>
+	                        <div style="height:17px"></div>
+	                        <p class="titles">${pvo.team }</p>
+	                        <p class="titles">${pvo.position }</p>
+	                        <p>
+	                        	<div class="center">
+	                            	<a class="button" href="../player/batter_detail.do?bno=${pvo.bno }">자세히 보기</a>
+	                        	</div>
+	                        </p>
+	                     </div>
+	                  </div>
+	               </div>
+	           </c:forEach>
+	       </div>
+	   </div>
+              
             </div>
+             </section>
          </div>
       </div>
 </body>

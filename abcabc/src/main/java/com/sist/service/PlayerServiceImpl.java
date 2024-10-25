@@ -61,6 +61,12 @@ public class PlayerServiceImpl implements PlayerService {
 		// TODO Auto-generated method stub
 		return pDao.pitcherChartData();
 	}
+
+	@Override
+	public List<BatterVO> batterListMainData() {
+		// TODO Auto-generated method stub
+		return pDao.batterListMainData();
+	}
 	
 	
 }

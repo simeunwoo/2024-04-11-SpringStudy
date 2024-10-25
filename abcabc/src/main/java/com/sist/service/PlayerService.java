@@ -13,5 +13,5 @@ public interface PlayerService {
 	public List<PitcherVO> pitcherListData(Map map);
 	public List<BatterVO> batterChartData();
 	public List<PitcherVO> pitcherChartData();
-	
+	public List<BatterVO> batterListMainData();
 }

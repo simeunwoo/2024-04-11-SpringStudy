@@ -101,4 +101,9 @@ END;
 
 	@Select("SELECT pno,name,era,war FROM pitcher")
 	public List<PitcherVO> pitcherChartData();
+	
+	@Select("Select bno,image,team,name,position "
+			+ "FROM batter "
+			+ "WHERE bno>=57 AND bno<=60")
+	public List<BatterVO> batterListMainData();
 }
