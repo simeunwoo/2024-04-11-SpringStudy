@@ -20,8 +20,6 @@ public interface PlayerMapper {
 			+ "WHERE pno=#{pno}")
 	public PitcherVO pitcherDetailData(int pno);
 	
-	@Select("SELECT CEIL(COUNT(*)/20.0) FROM batter "
-			+ "WHERE name LIKE '%'||#{fd}||'%'")
 	public int batterTotalPage(String fd);
 	
 	@Select("SELECT CEIL(COUNT(*)/20.0) FROM pitcher "

@@ -3,6 +3,9 @@
  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
  "https://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+  <settings>
+    <setting name="jdbcTypeForNull" value="VARCHAR"/>
+  </settings>
   <mappers>
     <mapper resource="com/sist/mapper/gnd-mapper.xml"/>
     <mapper resource="com/sist/mapper/player-mapper.xml"/>

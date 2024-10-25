@@ -23,9 +23,9 @@ public class PlayerRestController {
 		int end=rowSize*page;
 		
 		Map map=new HashMap();
-		map.put("start", start);
-		map.put("end", end);
-		map.put("fd", fd);
+		map.put("pStart", start);
+		map.put("pEnd", end);
+		map.put("pFd", fd);
 		
 		List<BatterVO> list=pService.batterListData(map);
 		int totalpage=pService.batterTotalPage(fd);
@@ -36,14 +36,13 @@ public class PlayerRestController {
 		if(endPage>totalpage)
 			endPage=totalpage;
 		
-		// Vue로 데이터 전송
+		map=new HashMap();
 		map.put("list", list);
 		map.put("curpage", page);
 		map.put("totalpage", totalpage);
 		map.put("startPage", startPage);
 		map.put("endPage", endPage);
 		
-		// 자바스크립트 연결 => Map을 JSON으로 => Kotlin, Flutter
 		ObjectMapper mapper=new ObjectMapper();
 		String json=mapper.writeValueAsString(map);
 		

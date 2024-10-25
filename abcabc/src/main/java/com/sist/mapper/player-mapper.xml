@@ -18,4 +18,8 @@
 		<result property="image" column="image"/>
 		<result property="avg" column="avg"/>
 	</resultMap>
+	<select id="batterTotalPage" resultType="int">
+		SELECT CEIL(COUNT(*)/20.0) FROM batter
+		WHERE name LIKE '%'||#{fd}||'%'
+	</select>
 </mapper>
