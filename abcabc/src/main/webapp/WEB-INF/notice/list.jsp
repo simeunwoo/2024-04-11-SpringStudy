@@ -11,6 +11,11 @@
 .container{
 	text-align: center;
 }
+#abc{
+	margin-top: 50px;
+	font-size: 40px;
+	font-family: '휴먼모음T';
+}
 </style>
 </head>
 <body>
@@ -31,9 +36,8 @@
         <div class="container h-100">
             <div class="row h-100 align-items-center">
                 <div class="col-12">
-                	<div style="height:50px"></div>
                     <div class="bradcumb-title text-center">
-                        <h1>공지사항</h1>
+                        <p id="abc">공 지 사 항</p>
                     </div>
                 </div>
             </div>
