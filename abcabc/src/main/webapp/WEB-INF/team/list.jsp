@@ -12,6 +12,9 @@
 	display: grid;
 	place-items: center;
 }
+#newScreenApp {
+    margin-top: 50px;
+}
 </style>
 </head>
 <body>
