@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,6 +31,62 @@ google.charts.load('current', {packages: ['corechart', 'bar']});
     vertical-align: bottom;
     margin: 0;
     font-size: 17px;
+}
+.listBtn {
+    display: flex;
+    justify-content: center; 
+    margin-top: 30px; 
+    margin-bottom: -30px; 
+}
+.listBtn .btn {
+    padding: 10px 20px;
+    background-color: #003366;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.listBtn .btn:hover {
+    background-color: #000;
+}
+.news-poster {
+        margin-bottom: 20px; 
+}
+.styled-btn {
+    background-color: #003366;
+    color: white;               
+    border-radius: 5px;       
+    border: none;              
+    transition: background-color 0.3s ease;
+}
+.styled-btn:hover {
+    background-color: #000; 
+}
+.post-people {
+    margin-bottom: 20px; 
+}
+.comment-content {
+    padding: 10px 15px;
+    border-radius: 5px; 
+}
+.post-info {
+    display: flex;  
+    align-items: start;
+}
+
+.post-info img {
+    width: 70px;
+    height: auto;
+    margin-top: -10px;
+    margin-right: 15px;
+}
+.children{
+	margin-left: 100px;
+}
+p {
+    font-size: 15px;
+    text-align: left;
+    color: #333;
+    line-height: 28px;
 }
 </style>
 </head>
@@ -154,102 +213,100 @@ google.charts.load('current', {packages: ['corechart', 'bar']});
    			<div class="col-12 col-lg-5">
                                 
 
-                                <ol>
-                                    <!-- Single Comment Area -->
-                                    <li class="single_comment_area" v-for="vo in reply_list">
-                                        <div class="comment-wrapper d-flex" v-if="vo.group_tab===0">
-                                            <!-- Comment Meta -->
-                                            <div class="comment-author">
-                                                <img :src="vo.sex==='남자'?'../player/man.png':'../player/woman.png'" alt="">
-                                            </div>
-                                            <!-- Comment Content -->
-                                            <div class="comment-content">
-                                                <span class="comment-date text-muted">{{vo.dbday}}</span>
-                                                <h5>{{vo.name}}</h5>
-                                                <p>{{vo.msg}}</p>
-                                                <button v-if="sessionId===vo.id" class="btn-xs btn-danger update" style="margin-left:2px"
-                                                  @click="replyUpdateForm(vo.cno)" :id="'u'+vo.cno">Update</button>
-                                                <button v-if="sessionId===vo.id" class="btn-xs btn-info" style="margin-left:2px"
-                                                  @click="replyDelete(vo.cno)">Delete</button>
-                                                <button class="active insert" v-if="sessionId!=''" style="margin-left:2px"
-                                                  @click="replyForm(vo.cno)" :id="'i'+vo.cno">Reply</button>
-                                                <button v-if="sessionId!==vo.id && sessionId!==''" style="margin-left:2px">Like</button>
-                                                <table class="table ins" style="display: none" :id="'in'+vo.cno">
-			                                     <tr>
-			                                      <td>
-			                                       <textarea rows="4" cols="60" style="float:left" :id="'msg'+vo.cno" ></textarea>
-			                                       <input type=button value="댓글" style="float:left;background-color:blue;color:white;width:80px;height:94px"
-			                                         @click="replyReplyInsert(vo.cno)"
-			                                       >
-			                                       </td>
-			                                    </tr>
-			                                   </table>
-			                                   <table class="table ups" style="display:none" :id="'up'+vo.cno">
-			                                    <tr>
-			                                      <td>
-			                                       <textarea rows="4" cols="60" style="float:left" :id="'umsg'+vo.cno">{{vo.msg}}</textarea>
-			                                       <input type=button value="수정" style="float:left;background-color:blue;color:white;width:80px;height:94px"
-			                                         @click="replyUpdate(vo.cno)"
-			                                       >
-			                                      </td>
-			                                    </tr>
-			                                   </table>
-			                               
-                                            </div>
-                                 
-                                        </div>
-                                        
-                                        <ol class="children" v-if="vo.group_tab===1">
-                                            <li class="single_comment_area">
-                                                <div class="comment-wrapper d-flex">
-                                                    <!-- Comment Meta -->
-                                                    <div class="comment-author">
-                                                        <img :src="vo.sex==='남자'?'../img/icon/man.png':'../img/icon/woman.png'" alt="">
-                                                    </div>
-                                                    <!-- Comment Content -->
-                                                    <div class="comment-content">
-                                                        <span class="comment-date text-muted">{{vo.dbday}}</span>
-                                                        <h5>{{vo.name}}</h5>
-                                                        <p>{{vo.msg}}</p>
-                                                        <button v-if="sessionId===vo.id" class="btn-xs btn-danger" style="margin-left:2px"
-                                                          @click="replyUpdateForm(vo.cno)" :id="'u'+vo.cno">Update</button>
-		                                                <button v-if="sessionId===vo.id" class="btn-xs btn-info" style="margin-left:2px"
-		                                                  @click="replyDelete(vo.cno)">Delete</button>
-                                                        <button v-if="sessionId!==vo.id && sessionId!==''" style="margin-left:2px">Like</button>
-                                                        <table class="table ups" style="display:none" :id="'up'+vo.cno">
-					                                    <tr>
-					                                      <td>
-					                                       <textarea rows="4" cols="45" style="float: left" :id="'umsg'+vo.cno">{{vo.msg}}</textarea>
-					                                       <input type=button value="수정" style="float: left;background-color: blue;color: white;width: 80px;height:94px"
-					                                         @click="replyUpdate(vo.cno)"
-					                                       >
-					                                      </td>
-					                                    </tr>
-					                                   </table>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ol>
-                                    </li>
-                                </ol>
-                                <!-- Leave A Comment 문제 X -->
-                            <c:if test="${sessionScope.userId!=null }">
-	                            <div class="leave-comment-area section_padding_50 clearfix">
-	                                <div class="comment-form">
-	                                   <table class="table">
-	                                    <tr>
-	                                      <td>
-	                                       <textarea rows="4" cols="70" style="float: left" ref="msg" v-model="msg"></textarea>
-	                                       <input type=button value="댓글" style="float: left;background-color: blue;color: white;width: 80px;height:94px"
-	                                         @click="replyInsert()"
-	                                       >
-	                                       
-	                                      </td>
-	                                    </tr>
-	                                   </table>
-	                                </div>
-	                            </div>
-                            </c:if></div>
+                                <div>
+                                    <div class="feature-cont">
+                       <h2>댓글</h2>
+                       <hr>
+                       <div>
+                        <div class="post-people" v-for="vo in reply_list">
+                           <div class="left-profile" v-if="vo.group_tab===0">
+							  <div class="post-info">
+							    <img src="../images/news-profile.png" alt="" style="width: 70px; height: auto;margin-top: 10px;">
+							    <div class="comment-content">
+							      <h4>{{vo.name}}</h4>
+							      <h5>{{vo.dbday}}</h5>
+							      <p>{{vo.msg}}</p>
+							      
+							      <div>
+									    <button v-if="sessionId === vo.id" class="btn-xs update styled-btn" style="margin-left: 2px" @click="replyUpdateForm(vo.cno)" :id="'u' + vo.cno">Update</button>
+									    <button v-if="sessionId === vo.id" class="btn-xs styled-btn" style="margin-left: 2px" @click="replyDelete(vo.cno)">Delete</button>
+									    <button v-if="sessionId !== ''" class="btn-xs active insert styled-btn" style="margin-left: 2px" @click="replyForm(vo.cno)" :id="'i' + vo.cno">Reply</button>
+									    <button v-if="sessionId !== vo.id && sessionId !== ''" class="btn-xs styled-btn" style="margin-left: 2px">Like</button>
+									</div>
+							      
+							      <!-- 댓글 입력 -->
+							      <table class="table ins" style="display:none" :id="'in'+vo.cno">
+							        <tr>
+							          <td>
+							            <textarea rows="3" cols="60" style="float: left" :id="'msg'+vo.cno"></textarea>
+							            <input type="button" value="댓글" style="float: left; background-color: #003366; color: white; width: 80px; height:65px" @click="replyReplyInsert(vo.cno)">
+							          </td>
+							        </tr>
+							      </table>
+							
+							      <!-- 댓글 수정 -->
+							      <table class="table ups" style="display: none" :id="'up'+vo.cno">
+							        <tr>
+							          <td>
+							            <textarea rows="3" cols="60" style="float: left" :id="'umsg'+vo.cno">{{vo.msg}}</textarea>
+							            <input type="button" value="수정" style="float: left; background-color: #003366; color: white; width: 75px; height:66px" @click="replyUpdate(vo.cno)">
+							          </td>
+							        </tr>
+							      </table>
+							    </div>
+							  </div>
+							  <span class="share"></span>
+							</div>
+                          <div class="children" v-if="vo.group_tab===1">
+                           <div class="post-people">
+                            <div class="left-profile" style="margin-bottom: -23px">
+                              <div class="post-info">
+                                 <img src="../images/news-profile.png" alt="" style="width: 70px; height: auto;margin-top: 10px;">
+                                <div class="comment-content">
+                                    <h4>{{vo.name}}</h4>
+                                    <h5>{{vo.dbday}}</h5>
+                                    <p>{{vo.msg}}</p>
+                                    <div>
+									    <button v-if="sessionId === vo.id" class="btn-xs update styled-btn" @click="replyUpdateForm(vo.cno)" :id="'u' + vo.cno">Update</button>
+									    <button v-if="sessionId === vo.id" class="btn-xs styled-btn" @click="replyDelete(vo.cno)">Delete</button>
+									    <button v-if="sessionId !== vo.id && sessionId !== ''" class="btn-xs styled-btn">Like</button>
+									</div>
+                                   <table class="table ups" style="display: none" :id="'up'+vo.cno">
+                                     <tr>
+                                      <td>
+                                       <textarea rows="3" cols="60" style="float: left" :id="'umsg'+vo.cno" >{{vo.msg}}</textarea>
+                                       <input type=button value="수정" style="float: left;background-color: #003366;color: white;width: 75px;height:66px" @click="replyUpdate(vo.cno)">
+                                       </td>
+                                    </tr>
+                                   </table>
+                                </div>
+                              </div>
+                              <span class="share"></span>
+                           </div>
+                           </div>
+                          </div>  
+                        </div>
+                       </div>
+                       
+                       <c:if test="${sessionScope.userId!=null }">
+                         <div class="feature-cont">
+                             <div class="comment-form">
+                                <table class="table">
+                                 <tr>
+                                   <td>
+                                    <textarea rows="4" cols="70" style="float: left" ref="msg" v-model="msg"></textarea>
+                                    <input type=button value="댓글" style="float: left;background-color: #003366;color: white;width: 75px;height:87px"
+                                      @click="replyInsert()">
+                                   </td>
+                                 </tr>
+                                </table>
+                             </div>
+                           </div>
+                        </c:if>
+                    </div>
+                                    
+                                </div>
+                                </div>
                             <div class="col-12 col-lg-3"></div>
                             </div>
                             
