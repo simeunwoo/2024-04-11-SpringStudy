@@ -18,15 +18,19 @@ public class MainController {
 	private ScheduleService sService;
 	@Autowired
 	private TeamService tService;
+	@Autowired
+	private NoticeService nService;
 	
 	@GetMapping("main.do")
 	public String main_main(Model model)
 	{
 		List<ScheduleVO> sList=sService.scheduleListMainData();
 		List<TeamVO> rList=tService.teamRankingMainData();
+		List<NoticeVO> nList=nService.noticeListMainData();
 		
 		model.addAttribute("sList", sList);
 		model.addAttribute("rList", rList);
+		model.addAttribute("nList", nList);
 		
 		return "main";
 	}

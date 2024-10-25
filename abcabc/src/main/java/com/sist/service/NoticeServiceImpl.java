@@ -51,18 +51,10 @@ public class NoticeServiceImpl implements NoticeService{
 		// TODO Auto-generated method stub
 		nDao.noticeUpdate(vo);
 	}
-   
-    /*
-     *   JSP => .do
-     *    |
-     *   Controller 
-     *    |
-     *   Mapper
-     *    | 
-     *   DAO
-     *    |
-     *   Service 
-     *    |
-     *   ServiceImpl
-     */
+
+	@Override
+	public List<NoticeVO> noticeListMainData() {
+		// TODO Auto-generated method stub
+		return nDao.noticeListMainData();
+	}
 }

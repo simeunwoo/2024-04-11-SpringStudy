@@ -58,4 +58,10 @@ public interface NoticeMapper {
 		 +"subject=#{subject},content=#{content} "
 		 +"WHERE no=#{no}")
   public void noticeUpdate(NoticeVO vo);
+  
+  
+  @Select("SELECT no,subject,TO_CHAR(regdate,'YYYY-MM-DD') as dbday "
+		 +"FROM notice_board "
+		 +"ORDER BY no DESC")
+  public List<NoticeVO> noticeListMainData();
 }

@@ -44,8 +44,14 @@ public class NoticeDAO {
    {
 	   return mapper.noticeUpdateData(no);
    }
+   
    public void noticeUpdate(NoticeVO vo)
    {
 	   mapper.noticeUpdate(vo);
+   }
+   
+   public List<NoticeVO> noticeListMainData()
+   {
+	   return mapper.noticeListMainData();
    }
 }

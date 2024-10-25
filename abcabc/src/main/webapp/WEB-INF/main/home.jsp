@@ -46,6 +46,12 @@
 .more:hover{
     background-color: rgba(0, 123, 255, 0.2);
 }
+#a{
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 300px;
+}
 
 </style>
 </head>
@@ -183,12 +189,24 @@
          <div class="container">
             <div class="row">
                <div class="col-lg-4 col-sm-4 col-xs-12">
+               	<h4 class="side-title">공지 사항<a href="../notice/list.do" class="more">더보기</a></h4>	
                   <aside id="sidebar" class="left-bar">
-                     <div class="banner-sidebar">
-                        <img class="img-responsive" src="../images/img-05.jpg" alt="#" />
-                        <h3>Lorem Ipsum is simply dummy text..</h3>
-                     </div>
+                  <c:forEach var="nvo" items="${nList }" varStatus="s">
+                            <c:if test="${s.index<2}">
+                     
+                        <div class="team-btw-match" id="a">
+		                           <ul>
+		                              <li><a href="../notice/detail.do?no=${nvo.no }">
+		                              &nbsp;>&nbsp;${nvo.subject }
+		                              </a>
+		                              </li>
+		                          </ul>
+                        		</div>
+                     
+                     </c:if></c:forEach>
+                     
                   </aside>
+                  <div style="height:30px"></div>
                   <h4 class="side-title">9월 28일 일정&결과<a href="../schedule/schedule.do" class="more">더보기</a></h4>
                   <aside id="sidebar" class="left-bar">
                      <div class="feature-matchs">

@@ -9,5 +9,5 @@ public interface NoticeService {
 	public void noticeDelete(int no);
 	public NoticeVO noticeUpdateData(int no);
 	public void noticeUpdate(NoticeVO vo);
-	
+	public List<NoticeVO> noticeListMainData();
 }
