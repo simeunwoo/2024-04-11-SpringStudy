@@ -225,7 +225,7 @@ p {
 							    <div class="comment-content">
 							      <h4>{{vo.name}}</h4>
 							      <h5>{{vo.dbday}}</h5>
-							      <p>{{vo.msg}}</p>
+							      <p>{{vo.msg}}</p> 
 							      
 							      <div>
 									    <button v-if="sessionId === vo.id" class="btn-xs update styled-btn" style="margin-left: 2px" @click="replyUpdateForm(vo.cno)" :id="'u' + vo.cno">Update</button>
