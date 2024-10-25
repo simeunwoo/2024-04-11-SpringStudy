@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.mapper.PlayerMapper">
+	<resultMap type="com.sist.vo.BatterVO" id="batterMap">
+		<result property="bno" column="bno"/>
+		<result property="age" column="age"/>
+		<result property="game" column="game"/>
+		<result property="h1" column="h1"/>
+		<result property="homerun" column="homerun"/>
+		<result property="rbi" column="rbi"/>
+		<result property="war" column="war"/>
+		<result property="name" column="name"/>
+		<result property="team" column="team"/>
+		<result property="position" column="position"/>
+		<result property="logo" column="logo"/>
+		<result property="image" column="image"/>
+		<result property="avg" column="avg"/>
+	</resultMap>
+	<select id="batterTotalPage" resultType="int">
+		SELECT CEIL(COUNT(*)/20.0) FROM batter
+		WHERE name LIKE '%'||#{fd}||'%'
+	</select>
+</mapper>

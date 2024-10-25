@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sist.mapper.GnDMapper">
+  <resultMap type="com.sist.vo.GnDVO" id="gndMap">
+    <result property="ino" column="ino"/>
+    <result property="image" column="image"/>
+    <result property="content" column="content"/>
+    <result property="team" column="team"/>
+  </resultMap>
+  <select id="gndTotalPage" resultType="int">
+    SELECT CEIL(COUNT(*)/6.0) FROM gnd 
+  </select>
+  <select id="gndTeamTotalPage" resultType="int" parameterType="String">
+    SELECT CEIL(COUNT(*)/6.0) FROM gnd  WHERE team LIKE '%' || #{pTeam} || '%'
+  </select>
+</mapper>
