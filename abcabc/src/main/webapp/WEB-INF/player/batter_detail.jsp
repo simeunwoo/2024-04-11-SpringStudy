@@ -82,11 +82,19 @@ google.charts.load('current', {packages: ['corechart', 'bar']});
 .children{
 	margin-left: 100px;
 }
-p {
-    font-size: 15px;
+#aaa {
+    font-size: 31px;
     text-align: left;
     color: #333;
     line-height: 28px;
+    font-family: '나눔스퀘어';
+}
+#bbb {
+    font-size: 22px;
+    text-align: left;
+    color: #333;
+    line-height: 28px;
+    font-family: '나눔스퀘어';
 }
 </style>
 </head>
@@ -153,14 +161,16 @@ p {
                             <tr>
                             	<td colspan="6" class="text-center">
                             		<div class="col-12 col-sm-6">
-	                            		<img src="${bvo.logo }" style="width:130px;height:130px">
+	                            		<img src="${bvo.logo }" style="width:130px;height:130px;margin-right:120px">
 	   									<img src="https://statiz.sporki.com${bvo.image }" style="width:101px;height:134px">
    									</div>
    									<div class="col-12 col-sm-4 bottom-align">
-	                            		<p>${bvo.name }</p>
+   										<div style="height:50px"></div>
+	                            		<p id="aaa">${bvo.name }</p>
 	                            	</div>
 	                            	<div class="col-12 col-sm-2 bottom-align">
-	                            		<p>${bvo.team }</p>
+	                            		<div style="height:53px"></div>
+	                            		<p id="bbb">${bvo.team }</p>
                             		</div>
                             	</td>
                             </tr>
@@ -306,7 +316,7 @@ p {
                             <div class="col-12 col-lg-3"></div>
                             </div>
                     
-                    </section></div>
+                    </section>
     	
 	<script>
 		let chartApp=Vue.createApp({
