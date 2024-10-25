@@ -51,7 +51,7 @@
 	white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    width: 335px;
+    width: 320px;
 }
 .image-player{
 	width: 130px;
@@ -209,7 +209,7 @@
                         <div class="team-btw-match" id="a">
 		                           <ul>
 		                              <li><a href="../notice/detail.do?no=${nvo.no }">
-		                              &nbsp;>&nbsp;${nvo.subject }
+		                              &nbsp;&nbsp;&nbsp;>&nbsp;${nvo.subject }
 		                              </a>
 		                              </li>
 		                          </ul>
