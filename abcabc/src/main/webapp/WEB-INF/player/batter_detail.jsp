@@ -33,7 +33,6 @@ google.charts.load('current', {packages: ['corechart', 'bar']});
 </head>
 <body>
 	<section id="top">
-         
          <div class="inner-information-text">
             <div class="container">
                <h3>Batter Detail</h3>
