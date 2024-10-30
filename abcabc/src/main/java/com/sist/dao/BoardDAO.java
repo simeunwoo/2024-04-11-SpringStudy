@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Update;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 @Repository
-public class BoardDAO {
+public class BoardDAO { 
    @Autowired
    private BoardMapper mapper;
 
